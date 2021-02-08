@@ -1,38 +1,53 @@
-import React, { useContext } from 'react';
-import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import AppContext from '../../context/AppContext';
-import './index.css';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-export default function CardOrder(props) {
-  const { setOrderDetails } = useContext(AppContext);
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '2px 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
-  const {
-    order,
-    index,
-  } = props;
+export default function SimpleCard() {
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
 
-  const {
-    id, deliveryAddress, deliveryNumber, totalPrice, status,
-  } = order;
-
-  setOrderDetails(order);
-  if (!order) return <h1>Loading Card Orders components</h1>;
   return (
-    <div className="oCard adminCard">
-      <Link to={ `/admin/orders/${id}` }>
-        <h4 data-testid={ `${index}-order-number` }>
-          {`Pedido ${id}`}
-        </h4>
-        <h5 data-testid={ `${index}-order-address` }>{ `${deliveryAddress}, ${deliveryNumber}` }</h5>
-        <h5 data-testid={ `${index}-order-total-value` }>{ `R$ ${totalPrice.toString().replace('.', ',')}` }</h5>
-        <span data-testid={ `${index}-order-status` }>{ status }</span>
-      </Link>
-    </div>
+    <Card className={classes.root}>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          Word of the Day
+        </Typography>
+        <Typography variant="h5" component="h2">
+          be{bull}nev{bull}o{bull}lent
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          adjective
+        </Typography>
+        <Typography variant="body2" component="p">
+          well meaning and kindly.
+          <br />
+          {'"a benevolent smile"'}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
   );
 }
-
-CardOrder.propTypes = {
-  order: propTypes.instanceOf(Object).isRequired,
-  index: propTypes.number.isRequired,
-};

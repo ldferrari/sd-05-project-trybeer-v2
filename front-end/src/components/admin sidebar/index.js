@@ -49,7 +49,7 @@ export default function PermanentDrawerLeft() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className="adminTitle">
           <Typography variant="h6" noWrap>
             Admin Perfil
           </Typography>
@@ -66,13 +66,21 @@ export default function PermanentDrawerLeft() {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          <ListItem button component={Link} to="/admin/orders">
+          <ListItem
+            button
+            data-testid="side-menu-item-orders"
+            component={Link} to="/admin/orders"
+          >
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
             <ListItemText primary='Pedidos' />
           </ListItem>
-          <ListItem button component={Link} to="/admin/profile">
+          <ListItem
+            button
+            data-testid="side-menu-item-profile"
+            component={Link} to="/admin/profile"
+          >
             <ListItemIcon>
               <FaceIcon />
             </ListItemIcon>
@@ -90,6 +98,7 @@ export default function PermanentDrawerLeft() {
         <List>
             <ListItem
               button
+              data-testid="side-menu-item-logout"
               onClick={() => localStorage.removeItem('token')}
             >
               <ListItemIcon><ExitToAppIcon /></ListItemIcon>
