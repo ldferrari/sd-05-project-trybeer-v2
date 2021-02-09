@@ -4,13 +4,16 @@ const service = require('../services/salesService');
 
 const sales = Router();
 
+const codeOk = 201;
+const codeErr = 500;
+
 sales.post('/', async (req, res) => {
   try {
     console.log(req.body);
     await service.createSale(req.body);
-    res.status(201).json({ message: 'Created' });
+    res.status(codeOk).json({ message: 'Created' });
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(codeErr).json({ message: e.message });
     console.log(e);
   }
 });
@@ -18,27 +21,27 @@ sales.post('/', async (req, res) => {
 sales.put('/', async (req, res) => {
   try {
     await service.closeSale(req.body);
-    res.status(201).json({ message: 'Closed' });
+    res.status(codeOk).json({ message: 'Closed' });
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(codeErr).json({ message: e.message });
   }
 });
 
 sales.get('/', async (req, res) => {
   try {
     const userSales = await service.getByUserId(req.query);
-    res.status(201).json(userSales);
+    res.status(codeOk).json(userSales);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(codeErr).json({ message: e.message });
   }
 });
 
 sales.get('/sales-open', async (_req, res) => {
   try {
     const allSalesOpen = await service.getAllOpen();
-    res.status(201).json(allSalesOpen);
+    res.status(codeOk).json(allSalesOpen);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(codeErr).json({ message: e.message });
   }
 });
 
