@@ -65,20 +65,23 @@
   display: flex;
   flex-flow: column;
 }
+
 .containerA {
   /* padding-left: 0.5%; */
-  align-items: center;
   align-content: center;
+  align-items: center;
   display: flex;
   flex-flow: column;
 }
-.footer{
-  align-items: center;
+
+.footer {
   align-content: center;
-  justify-content: center;
+  align-items: center;
   display: flex;
+  justify-content: center;
   flex-flow: row;
 }
+
 /* #containerB {
   align-items: center;
   align-content: center;
