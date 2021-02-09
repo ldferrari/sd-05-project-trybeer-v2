@@ -22,5 +22,6 @@ app.use('/orders', salesController);
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-const PORT = process.env.PORT || 3001;
+const port = 3001;
+const PORT = process.env.PORT || port;
 app.listen(PORT, () => console.log('Tô na escuta'));

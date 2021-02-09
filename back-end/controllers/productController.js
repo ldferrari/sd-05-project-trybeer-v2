@@ -4,6 +4,8 @@ const productService = require('../services/productService');
 const authToken = require('../middlewares/authToken');
 
 const productRouter = Router();
+const status400 = 400;
+const status200 = 200;
 
 productRouter.get(
   '/',
@@ -11,8 +13,8 @@ productRouter.get(
   rescue(async (_req, res) => {
     const products = await productService.getAllProducts();
     return products
-      ? res.status(200).json(products)
-      : res.status(400).json({
+      ? res.status(status200).json(products)
+      : res.status(status400).json({
         message: 'Not found!',
       });
   }),

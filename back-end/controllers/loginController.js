@@ -6,6 +6,8 @@ const loginService = require('../services/loginService');
 const createToken = require('../services/createToken');
 
 const loginRouter = Router();
+const status400 = 400;
+const status200 = 200;
 
 loginRouter.post(
   '/',
@@ -13,7 +15,7 @@ loginRouter.post(
     const { email, password } = req.body;
 
     const userLogin = await loginService.userLogin(email, password);
-    if (!userLogin) return res.status(400).json({ message: 'Login failed' });
+    if (!userLogin) return res.status(status400).json({ message: 'Login failed' });
 
     const payload = {
       issuer: 'post-api',
@@ -26,7 +28,7 @@ loginRouter.post(
     const token = await createToken(payload);
     const user = jwt.decode(token);
 
-    return res.status(200).json({ user, token });
+    return res.status(status200).json({ user, token });
   }),
 );
 

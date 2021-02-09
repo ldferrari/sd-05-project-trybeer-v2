@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 
 const secret = 'grupo-05';
+const status401 = 401;
 
 async function authToken(req, res, next) {
   const token = req.headers.authorization;
   if (!token) {
-    return res.status(401).json({ message: 'missing authentication token' });
+    return res.status(status401).json({ message: 'missing authentication token' });
   }
 
   try {
@@ -13,7 +14,7 @@ async function authToken(req, res, next) {
     return next();
   } catch (err) {
     console.error(err.message);
-    return res.status(401).json({ message: 'token malformed' });
+    return res.status(status401).json({ message: 'token malformed' });
   }
 }
 

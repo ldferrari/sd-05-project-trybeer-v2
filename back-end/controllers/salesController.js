@@ -5,6 +5,9 @@ const authToken = require('../middlewares/authToken');
 const salesService = require('../services/salesService');
 
 const salesRouter = Router();
+const status400 = 400;
+const status200 = 200;
+const status401 = 401;
 
 salesRouter.post(
   '/',
@@ -13,8 +16,8 @@ salesRouter.post(
 
     const newSale = await salesService.createSale(body);
     return newSale
-      ? res.status(200).json({ message: 'Order placed succesfully!' })
-      : res.status(400).json({ message: 'Order was misplaced!' });
+      ? res.status(status200).json({ message: 'Order placed succesfully!' })
+      : res.status(status400).json({ message: 'Order was misplaced!' });
   }),
 );
 
@@ -24,19 +27,19 @@ salesRouter.get(
     const userSales = await salesService.getSalesById(req.query);
 
     return userSales
-      ? res.status(200).json(userSales)
-      : res.status(400).json({ message: 'No orders found!' });
+      ? res.status(status200).json(userSales)
+      : res.status(status400).json({ message: 'No orders found!' });
   }),
 );
 
 salesRouter.get(
   '/:id',
   rescue(async (req, res) => {
-    const userSales = await salesService.getSalesById(req.query);
+    const salesById = await salesService.getSalesById(req.query);
 
-    return userSales
-      ? res.status(200).json(userSales)
-      : res.status(400).json({ message: 'No orders found!' });
+    return salesById
+      ? res.status(status200).json(salesById)
+      : res.status(status400).json({ message: 'No orders found!' });
   }),
 );
 
@@ -47,8 +50,8 @@ salesRouter.get(
     const sales = salesService.getAdminSales();
 
     return sales
-      ? res.status(200).json(sales)
-      : res.status(401).json({ message: 'Unauthorized access' });
+      ? res.status(status200).json(sales)
+      : res.status(status401).json({ message: 'Unauthorized access' });
   }),
 );
 
