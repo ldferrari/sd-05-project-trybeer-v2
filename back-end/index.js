@@ -32,7 +32,7 @@ app.use('/details', detailsController);
 app.use('/images', express.static('images'));
 
 // Chat endpoints 
-// See if not solved already by React and router
+// I guess SOLVED already by React and router
 // app.get('/chat', async (_req, res) => {
 //   const allMessages = await getMessages();
 //   res.render('index', { allMessages });
@@ -43,7 +43,8 @@ app.use('/images', express.static('images'));
 //   res.render('index', { allMessages });
 // });
 
-// IO LISTENERS for chats, Server side. For both Admin and Client(beer buyer)
+// IO LISTENERS for chats, Server side.
+// For both Admin and Client(beer buyer).
 io.on('connection', (socket) => {
   const currentUserId = socket.id;
   const defaultNickname = 'randomName';
@@ -55,8 +56,6 @@ io.on('connection', (socket) => {
   io.emit('userConnected', currentUserId, defaultNickname);
 
   socket.on('userChangedNickname', (newNickname) => {
-    // [Req4] when user changes from random nickname to chosen nickname, it is replaced
-    // refresh onlineUsers
     onlineUsers = onlineUsers.map((user) => {
       if (user.id === currentUserId) {
         const userToChange = user;
@@ -65,11 +64,9 @@ io.on('connection', (socket) => {
       }
       return user;
     });
-    // refresh also client dom
     io.emit('showChangedNickname', currentUserId, newNickname);
   });
 
-  // [Req2] 2. Receive 'message' emitted by client and emit back the formatted one
   socket.on('message', async ({ chatMessage, nickname }) => {
     const dateNow = new Date().getTime();
     const dateFormat = moment(dateNow).format('DD-MM-yyyy h:mm:ss A');
@@ -81,9 +78,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log(`User ${currentUserId} disconnected`);
     // [Req4] When user disconnects and needs to disappear from the list of online users
-    // refresh onlineUsers
     onlineUsers = onlineUsers.filter((user) => user.id !== currentUserId);
-    // refresh also client dom
     io.emit('userDisconnected', currentUserId);
   });
 });
@@ -96,3 +91,4 @@ server.listen(PORT, () => {
 // const PORT = process.env.PORT || 3001;
 // app.listen(PORT, () => console.log(`Yummy, here is ${PORT} port`));
 // here we chose server to be the one listening because it actually contains the app (see l19)
+// see if it is || 3000 or 3001? why 3001 in V1?

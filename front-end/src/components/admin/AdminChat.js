@@ -1,6 +1,7 @@
 // Componente filho da page ChatRoom: quando admin seleciona uma conversa com um cliente
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 // const { createMessage, getMessages } = require('./modelsMongoDb.messagesModel');
 // getMessagesByClient? to have allMessagesByClient data
 
@@ -17,7 +18,6 @@ function AdminChat() {
 
   return (
     <section>
-
       {/* Parte manipulada real-time com socket
       <p>
         <span data-testid="nickname" /> - <span data-testid="message-time" />
@@ -45,10 +45,11 @@ function AdminChat() {
       <button data-testid="send-message-btn" type="button" id="send" onClick={handleSend}>
         Enviar
       </button>
-      <button data-testid="back-button" type="button" onClick={handleBack}>
-        {/* redirect to admin/chat */}
-        Voltar
-      </button>
+      <Link to="/admin/chats">
+        <button data-testid="back-button" type="button">
+          Voltar
+        </button>
+      </Link>
     </section>
   );
 }
