@@ -1,7 +1,6 @@
 /* Base */
 body {
-  background: #f3f3f3;
-  padding: 20px;
+  background: hsl(0, 0%, 95%);
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -41,7 +40,6 @@ body {
 .article {
   background: #fff;
   margin: 0 0 20px;
-  padding: 20px;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(#000, 0.2);
   cursor: pointer;

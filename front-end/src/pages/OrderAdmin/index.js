@@ -1,54 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import propTypes from 'prop-types';
-// import Footer from '../../components/footer';
-import './index.css';
-import CardOrder from '../../components/CardOrders';
-import AdminSideBar from '../../components/admin sidebar';
-import { getSales } from '../../services/requestAPI';
+import React from 'react';
+import Home from './Home';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 
-const OrderAdmin = (props) => {
-  const [allOrders, setAllOrders] = useState([]);
-  const token = localStorage.getItem('token');
-  const { history } = props;
-
-  useEffect(() => {
-    if (!token) {
-      history.push('/login');
-    }
-    async function fetchProducts() {
-      try {
-        const { data } = await getSales(token);
-        setAllOrders(data);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-      return 'true';
-    }
-    fetchProducts();
-  }, [token, history]);
+function App() {
+  const theme = createMuiTheme({
+    spacing: 4,
+    palette: {
+      primary: {
+        main: '#9500ae',
+      },
+      secondary: {
+        main: '#9500ae',
+      },
+    },
+  });
 
   return (
-    <div>
-      <div className="Orders adminOrders"  /* style={ { display: 'flex', alignItems: 'stretch' } } */>
-        <AdminSideBar />
-        <div className="ordersList">
-          <h2 className="checkoutitle">Pedidos Pendentes</h2>
-          <div className="cartItems adminList">
-            {
-              allOrders
-                .map((item, index) => <CardOrder key={ item.id } order={ item } index={ index } />)
-            }
-          </div>
-        </div>
-      </div>
-      {/* <Footer /> */}
-    </div>
+    <ThemeProvider theme={theme}>
+      <Home />
+    </ThemeProvider>
   );
-};
+}
 
-export default OrderAdmin;
-
-OrderAdmin.propTypes = {
-  history: propTypes.instanceOf(Object).isRequired,
-};
+export default App;

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import propTypes from 'prop-types';
-// import Footer from '../../components/footer';
 import CardOrderDetails from '../../components/CardOrdersDetails';
 import { getSaleDetail, postStatusDelivered } from '../../services/requestAPI';
 
-import AdminSideBar from '../../components/admin sidebar';
+import AdminSideBar from '../../components/adminSidebarUI';
 
 const OrderAdminDetails = (props) => {
   const { match } = props;
