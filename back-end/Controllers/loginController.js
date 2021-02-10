@@ -21,7 +21,6 @@ login.post('/', async (req, res) => {
     if (password.length < 6) {
       return res.status(401).json({ message: 'Senha inválida.', ok: false });
     }
-    
     const findUser = await User.findOne({ where: { email } });
     // console.log(findEmail);
     if (!findUser) {

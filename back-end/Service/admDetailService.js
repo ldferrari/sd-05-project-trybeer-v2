@@ -1,6 +1,6 @@
-const model = require('../Models/admDetailModel');
+const { Sale_Product } = require('../models');
 
-const getDetails = async (saleId) => model.getDetails(saleId);
+const getDetails = async (saleId) => Sale_Product.findOne({ where: { sale_id: saleId } });
 
 module.exports = {
   getDetails,

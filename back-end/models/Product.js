@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       price: { type: DataTypes.FLOAT },
       url_image: { type: DataTypes.STRING },
     },
-    { timestamps: false }
+    { timestamps: false },
   );
   return Product;
 };

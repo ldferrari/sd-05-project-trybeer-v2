@@ -1,8 +1,6 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const Sales_Products = queryInterface.createTable('Sale_Products', {
+    const salesProducts = queryInterface.createTable('Sale_Products', {
       id: { primaryKey: true, autoIncrement: true, type: Sequelize.INTEGER, allowNull: false },
       sale_id: {
         type: Sequelize.INTEGER,
@@ -20,7 +18,7 @@ module.exports = {
       },
       quantity: { type: Sequelize.INTEGER, allowNull: false },
     });
-    return Sales_Products;
+    return salesProducts;
   },
 
   down: async (queryInterface, _Sequelize) => queryInterface.dropTable('Sale_Products', {}),

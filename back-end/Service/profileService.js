@@ -9,7 +9,7 @@ const update = async (name, email) => {
       statusCode: 401,
     };
   }
-  return User.update({ name, email }, {where: { email }}); 
+  return User.update({ name, email }, { where: { email } });
 };
 
 module.exports = {
