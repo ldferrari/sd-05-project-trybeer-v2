@@ -27,13 +27,9 @@ const checkout = async (products, deliveryAddress, deliveryNumber, id) => {
     delivery_address: deliveryAddress,
     delivery_number: deliveryNumber,
   });
-  console.log('sales===>', sales.id);
+  // console.log('sales===>', sales.id);
   const productList = products.map((product) =>
-    Sale_Product.create({
-      sale_id: sales.id,
-      product_id: product.id,
-      quantity: product.quantity,
-    })
+    Sale_Product.create({ sale_id: sales.id, product_id: product.id, quantity: product.quantity }),
   );
   const respostaLista = await Promise.all(productList);
   return {
