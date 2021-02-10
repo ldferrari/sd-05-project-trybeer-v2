@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       password: { type: DataTypes.STRING },
       role: { type: DataTypes.STRING },
     },
-    { timestamps: false }
+    { timestamps: false },
   );
   return User;
 };
