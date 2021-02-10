@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import TryBeerContext from '../context/TryBeerContext';
-import { addToCart, removeFromCart } from '../services/localStorage';
+import { addProduct, removeProduct } from '../services/helpers';
 
 function Card(props) {
   const { product, index } = props;
@@ -10,31 +10,12 @@ function Card(props) {
   const { total, setTotal } = useContext(TryBeerContext);
   const zero = 0;
   const [quantity, setQuantity] = useState(zero);
+  const addData = { quantity, setQuantity, total, setTotal, product };
+  const removeData = { quantity, setQuantity, total, setTotal, product };
 
   useEffect(() => {
     setTotal(parseFloat(localStorage.getItem('totalPrice')) || zero);
   }, [setTotal]);
-
-  const addProduct = () => {
-    if (quantity >= zero) {
-      setQuantity(quantity + 1);
-      localStorage.setItem('totalPrice', String(total + parseFloat(product.price)));
-      setTotal(total + parseFloat(product.price));
-      addToCart(product);
-    }
-  };
-
-  const removeProduct = () => {
-    if (quantity > zero) {
-      setQuantity(quantity > zero ? quantity - 1 : zero);
-      localStorage.setItem(
-        'totalPrice',
-        String(total > zero ? total - parseFloat(product.price) : zero),
-      );
-      setTotal(total > zero ? total - parseFloat(product.price) : zero);
-      removeFromCart(product);
-    }
-  };
 
   return (
     <section className="product-card">
@@ -49,19 +30,15 @@ function Card(props) {
       <button
         data-testid={ `${index}-product-minus` }
         type="button"
-        onClick={ () => removeProduct() }
+        onClick={ () => removeProduct(removeData) }
       >
         -
       </button>
-      <span
-        data-testid={ `${index}-product-qtd` }
-      >
-        {quantity}
-      </span>
+      <span data-testid={ `${index}-product-qtd` }>{quantity}</span>
       <button
         data-testid={ `${index}-product-plus` }
         type="button"
-        onClick={ () => addProduct() }
+        onClick={ () => addProduct(addData) }
       >
         +
       </button>

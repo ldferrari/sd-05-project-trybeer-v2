@@ -30,16 +30,14 @@ function getAllProducts(token) {
 
 function updateUser(name, email, token) {
   return axios
-    .put(
-      `${API_URL}/users/name`,
-      { name, email },
-      { headers: { Authorization: token } },
-    )
+    .put(`${API_URL}/users/name`, { name, email }, { headers: { Authorization: token } })
     .then((res) => res.data)
     .catch((err) => err);
 }
 
-function placeOrder(email, totalPrice, address, number, saleDate) {
+function placeOrder(orderData) {
+  const { email, totalPrice, address, number, saleDate } = orderData;
+
   return axios
     .post(`${API_URL}/orders`, {
       email,

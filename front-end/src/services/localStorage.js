@@ -1,12 +1,10 @@
 let cart = JSON.parse(localStorage.getItem('cart'));
+let alreadyExists = false;
 
 function addToCart(product) {
-  let alreadyExists = false;
-
   if (!cart) {
     cart = [];
-    product.quantity = 1;
-    cart.push(product);
+    product.quantity = 1; cart.push(product);
     localStorage.setItem('cart', JSON.stringify(cart));
   } else {
     cart.forEach((item) => {
@@ -17,8 +15,7 @@ function addToCart(product) {
       }
     });
     if (!alreadyExists) {
-      product.quantity = 1;
-      cart.push(product);
+      product.quantity = 1; cart.push(product);
       localStorage.setItem('cart', JSON.stringify(cart));
     }
   }

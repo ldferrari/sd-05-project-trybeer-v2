@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import TryBeerContext from '../context/TryBeerContext';
 import Sidebar from './Sidebar';
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+const userData = JSON.parse(localStorage.getItem('user'));
+const role = userData && userData.user && userData.user.role;
+
 export default function Header(props) {
-  const userData = JSON.parse(localStorage.getItem('user'));
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-  // const role = userData?.user?.role;
-  const role = userData && userData.user && userData.user.role;
   const [active, setActive] = useState(role === 'administrator');
   const { title } = props;
 

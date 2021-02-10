@@ -31,11 +31,13 @@ const Checkout = () => {
   const reducer = (sum, product) => sum + (+product.quantity * +product.price);
   const totalPrice = priceCart.reduce(reducer, noValue);
 
+  const orderData = { email, totalPrice, address, number, saleDate }
+
   const goToProducts = () => history.push('/products');
 
   const handleClick = (e) => {
     e.preventDefault();
-    placeOrder(email, totalPrice, streetName, houseNumber, saleDate);
+    placeOrder(orderData);
     setSuccess(!success);
     setTimeout(goToProducts, delayTime);
   };

@@ -49,7 +49,7 @@ export default function Profile() {
           disabled={ !name }
           data-testid="profile-save-btn"
           onClick={ (event) => {
-            handleClick(event, name, email, token);
+            handleClick(event);
           } }
         >
           Salvar
