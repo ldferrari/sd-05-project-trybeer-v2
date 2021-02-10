@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 // window.onload = () => {
 //   const adminSocketIo = window.io();
 
-function AdminChat() {
+function AdminChat(props) {
+  const { somestuff } = props;
   // props que permitem identificar a conversa especifica
   // por exemplo por email ou id do cliente
 
