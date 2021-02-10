@@ -1,9 +1,6 @@
-// const { Sequelize, DataTypes } = require('sequelize');
-// const sequelize = new Sequelize('sqlite::memory:');
-
 const createUsers = (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
-    name: {type: DataTypes.STRING, defaultValue: 'algum nome'},
+    name: { type: DataTypes.STRING, defaultValue: 'algum nome' },
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.STRING,
