@@ -31,64 +31,28 @@ app.use('/details', detailsController);
 
 app.use('/images', express.static('images'));
 
-// Chat endpoints 
-// I guess SOLVED already by React and router
-// app.get('/chat', async (_req, res) => {
-//   const allMessages = await getMessages();
-//   res.render('index', { allMessages });
-  // how to send it to page instead of index?
-// });
-// app.get('/admin/chats', async (_req, res) => {
-//   const allMessages = await getMessages();
-//   res.render('index', { allMessages });
-// });
+// IO LISTENERS for chats, Server side. For both Admin and Client(beer buyer).
 
-// IO LISTENERS for chats, Server side.
-// For both Admin and Client(beer buyer).
 io.on('connection', (socket) => {
   const currentUserId = socket.id;
-  const defaultNickname = 'randomName';
-
   console.log(`User ${currentUserId} connected`);
 
-  onlineUsers.unshift({ id: currentUserId, nickname: defaultNickname });
-  socket.emit('seeUserId', currentUserId);
-  io.emit('userConnected', currentUserId, defaultNickname);
-
-  socket.on('userChangedNickname', (newNickname) => {
-    onlineUsers = onlineUsers.map((user) => {
-      if (user.id === currentUserId) {
-        const userToChange = user;
-        userToChange.nickname = newNickname;
-        return userToChange;
-      }
-      return user;
-    });
-    io.emit('showChangedNickname', currentUserId, newNickname);
-  });
-
-  socket.on('message', async ({ chatMessage, nickname }) => {
+  socket.on('message', async ({ nickname, message }) => {
+    // same 'message' event for buyer and seller - seller will send "Loja" as nickname always
     const dateNow = new Date().getTime();
-    const dateFormat = moment(dateNow).format('DD-MM-yyyy h:mm:ss A');
-    const fullMessage = `${dateFormat} - ${nickname}: ${chatMessage}`;
-    await createMessage({ dateFormat, nickname, chatMessage });
-    io.emit('message', fullMessage);
+    const hourNow = moment(dateNow).format('HH:mm');
+    await createMessage({ nickname, hour: hourNow, message });
+    io.emit('showMessage', { nickname, hour, message });
   });
 
   socket.on('disconnect', () => {
     console.log(`User ${currentUserId} disconnected`);
-    // [Req4] When user disconnects and needs to disappear from the list of online users
-    onlineUsers = onlineUsers.filter((user) => user.id !== currentUserId);
-    io.emit('userDisconnected', currentUserId);
+    // Maybe list of online users will help for admin chat room, watch connect & disconnect
   });
 });
 
 // PORT LISTENER
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
 });
-// const PORT = process.env.PORT || 3001;
-// app.listen(PORT, () => console.log(`Yummy, here is ${PORT} port`));
-// here we chose server to be the one listening because it actually contains the app (see l19)
-// see if it is || 3000 or 3001? why 3001 in V1?

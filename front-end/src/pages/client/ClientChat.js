@@ -1,46 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+const io = require("socket.io-client");
 // const { createMessage, getMessages } = require('./modelsMongoDb.messagesModel');
-
-// import something to be able to make socket io work?
-// window.onload = () => {
-//   const clientSocketIo = window.io();
 
 function ClientChat() {
 
-  const handleSend = () => {};
+  const buyerSocket = io('http://localhost:3000/chat');
+  // https://socket.io/docs/v3/client-initialization/
 
-  //   // See if nickname is default or chosen by user depending on Save button
-  //   let nickname = 'randomName';
-  //   const chosenNickname = document.getElementById('nickname-input');
-  //   const nicknameBtn = document.getElementById('nickname-save');
-  //   nicknameBtn.addEventListener('click', () => {
-  //     nickname = chosenNickname.value;
-  //     clientSocketIo.emit('userChangedNickname', nickname);
-  //   });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { email } = user;
 
-  //   // [Req2] 1. User click send message
-  //   const sendBtn = document.getElementById('send');
-  //   sendBtn.addEventListener('click', () => {
-  //     const chatMessage = document.getElementById('message-input').value;
-  //     clientSocketIo.emit('message', { chatMessage, nickname });
-  //   });
+  const [buyerMessage, setBuyerMessage] = useState('');
 
-  //   // [Req2] 3. Show the formatted message on the chat div
-  //   clientSocketIo.on('message', (fullMessage) => {
-  //     const divMessages = document.getElementById('messages');
-  //     const li = document.createElement('li');
-  //     li.setAttribute('data-testid', 'message');
-  //     li.textContent = fullMessage;
-  //     divMessages.append(li);
-  //   });
+  const handleTextChange = (e) => {
+    const message = e.target.value;
+    setBuyerMessage(message);
+  }
 
-  //   // [Req4] Adapt dom everytime users change something
-  //   // being able to check if user is current user
-  //   let currentId = '';
-  //   clientSocketIo.on('seeUserId', (id) => {
-  //     currentId = id;
-  //   });
-  // };
+  const handleSend = () => {
+    // const buyerMessage = document.getElementById('message-input').value;
+    // no need for DOM now girl! you are on React
+    buyerSocket.emit('message', { email, buyerMessage });
+  };
+
+  buyerSocket.on('showMessage', ({ nickname, hour, message }) => {
+    // how to show them? manipulating DOM but now it is a complete complex div
+  });
 
   return (
     <section>
@@ -67,6 +52,7 @@ function ClientChat() {
         type="text"
         id="message-input"
         placeholder="Digite sua mensagem"
+        onChange={(e) => handleTextChange(e)}
       />
       <button data-testid="send-message" type="button" id="send" onClick={handleSend}>
         Enviar

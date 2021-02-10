@@ -1,9 +1,9 @@
 const connection = require('./connection');
 
-const createMessage = async ({ dateFormat, nickname, chatMessage }) => {
+const createMessage = async ({ nickname, hour, message }) => {
   try {
     const newMessage = await connection().then((db) =>
-      db.collection('messages').insertOne({ dateFormat, nickname, chatMessage }));
+      db.collection('messages').insertOne({ nickname, hour, message }));
     // console.log(newMessage); saw that object is inside ops array
     return newMessage.ops[0];
   } catch (err) {
