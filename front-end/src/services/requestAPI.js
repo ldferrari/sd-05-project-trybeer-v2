@@ -7,6 +7,8 @@ const config = (token) => ({
   },
 });
 
+const getMessagesById = async (id) => axios.get('http://localhost:3001/chat', {id});
+
 const postGetItems = async (token) => axios.get('http://localhost:3001/products', config(token));
 
 const getProfileInfo = async (token) => axios.get('http://localhost:3001/profile', config(token));
@@ -62,4 +64,5 @@ export {
   getSaleDetail,
   postGetTheOrder,
   postStatusDelivered,
+  getMessagesById,
 };

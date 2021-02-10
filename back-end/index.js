@@ -1,5 +1,18 @@
 const express = require('express');
 
+const http = require('http');
+const socketIO = require('socket.io');
+// https://www.npmjs.com/package/dateformat, um oferecimento de Paulo D'Andrea
+const dateFormat = require('dateformat');
+const app = express();
+const server = http.createServer(app);
+// const io = socketIO(server); 
+const io = require('socket.io')(server, {
+  cors: {
+  origin: "*",
+  },
+});
+
 const path = require('path');
 
 const cors = require('cors');
@@ -28,7 +41,7 @@ const admProfileController = require('./Controllers/admProfileController');
 
 const admDetailController = require('./Controllers/admDetailController');
 
-const app = express();
+const chatController = require('./Chat/controller/chatController');
 
 /*
   ENDPOINTS
@@ -59,8 +72,34 @@ app.use('/admin/orders', checkToken, admDetailController);
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-const PORT = 3001;
+app.use('/', chatController);
+
+/* const PORT = 3001;
 
 app.listen(PORT, () => {
   console.log(`O pai tá ON no projeto e na porta ${PORT}`);
+});
+ */
+
+const PORT = 3001;
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
+io.on("connection", (socket) => {
+  // Join a conversation
+  const { ID } = socket.handshake.query;
+  socket.join(ID);
+  
+  // Listen for new messages
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    console.log('data back===>', data);
+    io.in(ID).emit(NEW_CHAT_MESSAGE_EVENT, data);
+  });
+  
+  // Leave the room if the user closes the socket
+  // socket.on("disconnect", () => {
+  // socket.leave(roomId);
+  // });
+});
+  
+server.listen(PORT, () => {
+console.log(`O pai tá ON no projeto e na porta ${PORT}`);
 });

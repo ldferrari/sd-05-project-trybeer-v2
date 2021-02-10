@@ -4,6 +4,7 @@ import {
   Login,
   Profile,
   Checkout,
+  Chat,
   Orders,
   Products,
   Register,
@@ -26,6 +27,7 @@ const Rotas = () => (
     <Route exact path="/orders" component={ Orders } />
     <Route exact path="/orders/:id" component={ OrderDetails } />
     <Route exact path="/" component={ () => <Redirect to="/login" /> } />
+    <Route exact path="/chat" component={ Chat } />
   </Switch>
 );
 

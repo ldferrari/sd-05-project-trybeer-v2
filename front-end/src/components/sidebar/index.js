@@ -19,6 +19,11 @@ const SideBar = () => (
           Meu Perfil
         </Link>
       </li>
+      <li className="menuBtn">
+        <Link to="/chat" className="menuBtn" data-testid="side-menu-chat">
+          Conversar com a loja
+        </Link>
+      </li>
     </ul>
     <ul>
       <li className="menuBtn">
@@ -26,10 +31,10 @@ const SideBar = () => (
           to="/"
           className="menuBtn"
           data-testid="side-menu-item-logout"
-          onClick={ () => {
+          onClick={() => {
             localStorage.removeItem('token');
             localStorage.removeItem('cart');
-          } }
+          }}
         >
           Sair
         </Link>

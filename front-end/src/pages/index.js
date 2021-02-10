@@ -7,8 +7,10 @@ import OrderAdmin from './OrderAdmin';
 import OrderAdminDetails from './OrderAdminDetails';
 import ProfileAdmin from './ProfileAdmin';
 import Orders from './orders';
+import Chat from './Chat';
 
 export {
+  Chat,
   Login,
   Orders,
   Profile,

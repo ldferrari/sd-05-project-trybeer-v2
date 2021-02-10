@@ -7,7 +7,7 @@ const admDetail = Router();
 admDetail.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    console.log('id =====>', id);
+    // console.log('id =====>', id);
     const detailProducts = await service.getDetails(id);
     res.status(200).json(detailProducts);
   } catch (error) {
