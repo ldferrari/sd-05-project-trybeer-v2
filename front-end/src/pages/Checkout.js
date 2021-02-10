@@ -31,7 +31,7 @@ const Checkout = () => {
   const reducer = (sum, product) => sum + (+product.quantity * +product.price);
   const totalPrice = priceCart.reduce(reducer, noValue);
 
-  const orderData = { email, totalPrice, address, number, saleDate }
+  const orderData = { email, totalPrice, streetName, houseNumber, saleDate }
 
   const goToProducts = () => history.push('/products');
 
