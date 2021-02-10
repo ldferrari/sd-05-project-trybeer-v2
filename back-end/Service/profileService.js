@@ -1,4 +1,4 @@
-const model = require('../Models/profileModel');
+const { User } = require('../models');
 
 const update = async (name, email) => {
   if (!/^[A-Za-z \s]{12,}$/.test(name)) {
@@ -9,7 +9,7 @@ const update = async (name, email) => {
       statusCode: 401,
     };
   }
-  return model.update(name, email);
+  return User.update({ name, email }, {where: { email }}); 
 };
 
 module.exports = {

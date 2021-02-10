@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const service = require('../Service/profileService');
 
-const userModel = require('../Models/userModel');
+const { User } = require('../models');
 
 const profile = Router();
 
@@ -24,14 +24,15 @@ profile.put('/', async (req, res) => {
     return res.status(200).json({ user: { name, email } });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Algo deu errado.' });
+    // res.status(500).json({ message: 'Algo deu errado.' });
+    res.status(500).json({ message: error });
   }
 });
 
 profile.get('/', async (req, res) => {
   try {
     const { email } = req.payload;
-    const emailExists = await userModel.getByEmail(email);
+    const emailExists = await User.findOne({ where: { email } });
     delete emailExists.password;
     console.log(emailExists);
     return res.status(200).json({ user: emailExists });

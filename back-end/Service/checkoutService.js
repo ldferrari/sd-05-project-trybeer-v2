@@ -1,8 +1,6 @@
-const model = require('../Models/checkoutModel');
+const { Sale, Sale_Product } = require('../models');
 
 const checkout = async (products, deliveryAddress, deliveryNumber, id) => {
-  // const id = await userId.getById(email);
-  // const { id } = loginController.token.findUser;
   // console.log('FindUser =>', loginController.token.findUser);
   // console.log('service', products, deliveryAddress, deliveryNumber, id);
   if (!products || !deliveryAddress || !deliveryNumber) {
@@ -13,16 +11,6 @@ const checkout = async (products, deliveryAddress, deliveryNumber, id) => {
       statusCode: 401,
     };
   }
-
-  /* if (typeof quantity !== 'number') {
-    return {
-      error: true,
-      code: 'Invalid_value',
-      message: 'Informe um número para quantidade.',
-      statusCode: 401,
-    };
-  } */
-
   if (typeof deliveryNumber !== 'number') {
     return {
       error: true,
@@ -33,12 +21,18 @@ const checkout = async (products, deliveryAddress, deliveryNumber, id) => {
   }
   const total = products.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   // console.log(id);
-  const sales = await model.createSale(id, total, deliveryAddress, deliveryNumber);
+  const sales = await Sale.create({
+    userId: id,
+    total_price: total,
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
+  });
+  console.log('sales===>',sales)
   // productLista--> precisa do id da venda
-  const productList = products.map(
-    (product) => model.createProductSale(sales.insertId, product.id, product.quantity),
+  const productList = products.map((product) =>
+    Sale_Product.create({ sale_id: sales.dataValues.id, product_id: product.id, quantity: product.quantity })
   );
-  // console.log(sales.insertId);
+  console.log('passou do map', sales.insertId);
   const respostaLista = await Promise.all(productList);
   return {
     Produtos_adicionados: respostaLista.filter((e) => e.affectedRows).length,

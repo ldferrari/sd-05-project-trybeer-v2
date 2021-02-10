@@ -1,7 +1,7 @@
-const model = require('../Models/userModel');
+const { User } = require('../models');
 
 const create = async (name, email, password, role) => {
-  const emailExists = await model.getByEmail(email);
+  const emailExists = await User.findOne({ where: { email } });
   if (!name || !email || !password) {
     return {
       error: true,
@@ -10,7 +10,7 @@ const create = async (name, email, password, role) => {
       statusCode: 400,
     };
   }
-  // console.log(emailExists);
+  // console.log('duplicado ===>', emailExists);
   if (emailExists) {
     return {
       error: true,
@@ -19,7 +19,7 @@ const create = async (name, email, password, role) => {
       statusCode: 409,
     };
   }
-  return model.create(name, email, password, role);
+  return User.create({ name, email, password, role });
 };
 
 module.exports = {

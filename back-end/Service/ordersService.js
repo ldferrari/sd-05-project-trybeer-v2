@@ -1,6 +1,6 @@
-const model = require('../Models/ordersModel');
+const { Sale } = require('../models');
 
-const getOrders = async (userId) => model.getOrders(userId);
+const getOrders = async (userId) => Sale.findOne({where: { userId }});
 
 module.exports = {
   getOrders,

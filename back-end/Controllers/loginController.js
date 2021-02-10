@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const userModel = require('../Models/userModel');
+const { User } = require('../models');
 
 const emailMiddleware = require('../Middlewares/emailMiddleware');
 
@@ -21,7 +21,8 @@ login.post('/', async (req, res) => {
     if (password.length < 6) {
       return res.status(401).json({ message: 'Senha inválida.', ok: false });
     }
-    const findUser = await userModel.getByEmail(email);
+    
+    const findUser = await User.findOne({ where: { email } });
     // console.log(findEmail);
     if (!findUser) {
       return res.status(401).json({ message: 'Email não encontrado.', ok: false });
