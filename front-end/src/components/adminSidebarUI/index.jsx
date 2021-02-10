@@ -106,7 +106,6 @@ export default function PersistentDrawerLeft(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -123,10 +122,11 @@ export default function PersistentDrawerLeft(props) {
           >
             <MenuIcon />
           </IconButton>
-          { props.icon === 'inbox' ?
-            <InboxIcon className={classes.icons}/> :
-            <FaceIcon className={classes.icons}/>
-          }
+          {props.icon === 'inbox' ? (
+            <InboxIcon className={classes.icons} />
+          ) : (
+            <FaceIcon className={classes.icons} />
+          )}
           <Typography variant="h4" noWrap>
             {props.title}
           </Typography>
@@ -141,9 +141,8 @@ export default function PersistentDrawerLeft(props) {
           paper: classes.drawerPaper,
         }}
       >
-
         <div className={classes.drawerHeader}>
-          <img className={classes.logo} src='../uai2.png' alt='logo'/>
+          <img className={classes.logo} src="../uai2.png" alt="logo" />
           <div className={classes.grow}></div>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -151,49 +150,44 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          <ListItem
-            button
-            data-testid="side-menu-item-orders"
-            component={Link} to="/admin/orders"
-          >
+          <ListItem button data-testid="side-menu-item-orders" component={Link} to="/admin/orders">
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary='Pedidos' />
+            <ListItemText primary="Pedidos" />
           </ListItem>
           <ListItem
             button
             data-testid="side-menu-item-profile"
-            component={Link} to="/admin/profile"
+            component={Link}
+            to="/admin/profile"
           >
             <ListItemIcon>
               <FaceIcon />
             </ListItemIcon>
-            <ListItemText primary='Perfil'/>
+            <ListItemText primary="Perfil" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
-            <ListItemText primary='Mensagens' />
+            <ListItemText primary="Mensagens" />
           </ListItem>
-
         </List>
         <Divider />
         <List>
-            <ListItem
-              button
-              data-testid="side-menu-item-logout"
-              onClick={() => localStorage.removeItem('token')}
-            >
-              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary='Logout' />
-            </ListItem>
+          <ListItem
+            button
+            data-testid="side-menu-item-logout"
+            onClick={() => localStorage.removeItem('token')}
+          >
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
         </List>
       </Drawer>
-      <main>
-        OI
-      </main>
     </div>
   );
 }
