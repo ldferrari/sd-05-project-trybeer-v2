@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       sale_id: {
         type: DataTypes.INTEGER, foreignKey: true,
       },
-      product_id: { 
+      product_id: {
         type: DataTypes.INTEGER, foreignKey: true,
       },
       quantity: { type: DataTypes.INTEGER },
