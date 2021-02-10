@@ -1,21 +1,21 @@
 // Componente filho da page ChatRoom: quando admin seleciona uma conversa com um cliente
 
 import React from 'react';
+const io = require("socket.io-client");
 import { Link } from 'react-router-dom';
 // const { createMessage, getMessages } = require('./modelsMongoDb.messagesModel');
-// getMessagesByClient? to have allMessagesByClient data
+// getMessagesByClient to have allMessagesByClient data
 
-// import something to be able to make socket io work?
-// window.onload = () => {
-//   const adminSocketIo = window.io();
 
 function AdminChat(props) {
   const { somestuff } = props;
   // props que permitem identificar a conversa especifica
   // por exemplo por email ou id do cliente
+  const PORT = process.env.PORT || 3001;
+  const sellerSocket = io(`http://localhost:${PORT}/admin/chats`);
 
   const handleSend = () => {};
-  //   adminSocketIo.emit('something', somedata);
+  //   sellerSocketIo.emit('message', somedata);
 
   return (
     <section>

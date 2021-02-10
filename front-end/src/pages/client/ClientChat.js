@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 const io = require("socket.io-client");
 // const { createMessage, getMessages } = require('./modelsMongoDb.messagesModel');
+require('dotenv').config();
 
 function ClientChat() {
-
-  const buyerSocket = io('http://localhost:3000/chat');
+  const PORT = process.env.PORT || 3001;
+  const buyerSocket = io(`http://localhost:${PORT}/chat`);
   // https://socket.io/docs/v3/client-initialization/
 
   const user = JSON.parse(localStorage.getItem('user'));
@@ -29,13 +30,14 @@ function ClientChat() {
 
   return (
     <section>
-      {/* Parte manipulada real-time com socket
+      {/* 1. Parte manipulada real-time com socket:
       <p>
         <span data-testid="nickname" /> - <span data-testid="message-time" />
       </p>
       <div data-testid="text-message"></div> */}
-      {/* Parte passando por bd que precisa de refresh? */}
+      {/* 2. Parte passando por bd: */}
       <div>
+        {/* aqui tem que pegar as mensagens que sejam apenas deste cliente */}
         {allMessages &&
           allMessages.forEach((msg) => (
             <div>
@@ -54,7 +56,7 @@ function ClientChat() {
         placeholder="Digite sua mensagem"
         onChange={(e) => handleTextChange(e)}
       />
-      <button data-testid="send-message" type="button" id="send" onClick={handleSend}>
+      <button data-testid="send-message" type="button" id="send" onClick={handleSend()}>
         Enviar
       </button>
     </section>

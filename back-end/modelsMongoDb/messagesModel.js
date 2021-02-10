@@ -21,8 +21,7 @@ const getMessages = async () => {
   }
 };
 
-// getMessagesByClientIdOrEmail
-// ...
+// const getMessagesByClient = async (email) => {};
 
 module.exports = {
   createMessage,
