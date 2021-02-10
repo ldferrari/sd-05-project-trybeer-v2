@@ -1,4 +1,5 @@
 const model = require('../models-antigo/salesModel');
+const { sales } = require('../models')
 const usersModel = require('../models-antigo/usersModel');
 const salesProductsModel = require('../models-antigo/salesProductsModel');
 
