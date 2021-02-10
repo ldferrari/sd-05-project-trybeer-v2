@@ -1,71 +1,66 @@
-const model = require('../models/usersModel');
+const model1 = require('../models-antigo/usersModel');
+const { users } = require('../models');
+const seis = 6;
+const doze = 12;
 
 const regexName = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
 const regexEmail = /\S+@\S+\.\S+/;
 
-const createUser = async (newUser) => {
-  const { name, email, password, role } = newUser;
-
-  if (!name.match(regexName) || name.length < 12) {
+const nameFormat = (name) => {
+  if (!name.match(regexName) || name.length < doze) {
     const err = { err: { code: 404, message: 'name format invalid' } };
     throw err;
   }
+};
 
+const emailFormat = (email) => {
   if (!email.match(regexEmail)) {
     const err = { err: { code: 404, message: 'email format invalid' } };
     throw err;
   }
+};
 
-  console.log(password);
-
-  if (toString(password).length < 6) {
+const passwordFormat = (password) => {
+  if (password.length < seis) {
     const err = { err: { code: 404, message: 'password format invalid' } };
     throw err;
   }
+};
 
-  const emailExists = await model.logIn(email);
+const emailExists = async (email) => { 
+  await users.findOne({ where: { email } }); 
+  /*se essa busca não acha o email, o retorno é null. 
+  Se ele achar algum email repetido, o proprio sequelize faz um throw de erro*/
+};
 
-  if (emailExists.length > 0) {
-    return { message: 'E-mail already in database' };
-  }
-
-  const createdUser = await model.createUser(name, email, password, role);
-
-  if (!createdUser) {
-    const err = { err: { code: 401, message: 'error' } };
-    throw err;
-  }
-
-  return createdUser;
+const createUser = async (newUser) => {
+  const { name, email, password, role } = newUser;
+  nameFormat(name);
+  emailFormat(email);
+  passwordFormat(password);
+  emailExists(email);
+  const createdUser = await users.create({ name, email, password, role });
+  return createdUser.dataValues;
 };
 
 const logIn = async (email, password1) => {
-  const userFound = await model.logIn(email);
-
-  if (!userFound || userFound.length === 0) {
+  const userFound = await users.findOne({ where: { email } });
+  if (userFound === null) {
     const err = { err: { code: 404, message: 'user email do not exist' } };
     throw err;
   }
-
-  if (password1 !== userFound[0].password) {
+  const { dataValues } = userFound;
+  if (password1 !== dataValues.password) {
     const err = { err: { code: 401, message: 'password incorrect' } };
     throw err;
   }
-
-  const { id, password, ...user } = userFound[0];
-
-  // console.log(user)
+  const { id, password, ...user } = dataValues;
   return user;
 };
 
 const updateUserName = async (name, email) => {
-  const newName = await model.updateUserName(name, email);
-  const err1 = { err: { code: 404, message: 'name format invalid' } };
-  if (!name.match(regexName) || name.length < 12) throw err1;
-  if (!newName) {
-    const err = { err: { code: 404, message: 'operation fail' } };
-    throw err;
-  }
+  nameFormat(name);
+  const newName = await users.update({ name }, { where: { email } });
   return newName;
 };
 

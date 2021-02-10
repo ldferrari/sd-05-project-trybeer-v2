@@ -1,4 +1,4 @@
-const model = require('../models/productsModel.js');
+const model = require('../models-antigo/productsModel.js');
 
 const getAllProducts = async () => {
   const allProducts = await model.getAllProducts();

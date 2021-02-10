@@ -1,23 +1,20 @@
 const createProducts = (sequelize, DataTypes) => {
-  const sales = sequelize.define('sales', {
+  const products = sequelize.define('products', {
     id: { type: DataTypes.INTEGER, primaryKey: true },
-    user_id: { type: DataTypes.INTEGER, foreignKey: true },
-    total_price: DataTypes.DECIMAL(9,2),
-    delivery_address: DataTypes.STRING,
-    delivery_number: DataTypes.STRING,
-    sales_date: DataTypes.DATE,
-    status: DataTypes.STRING,
+    name: { type: DataTypes.STRING, unique: true},
+    price: DataTypes.DECIMAL(4,2),
+    url_image: { type: DataTypes.STRING, defaultValue: '' },
   },
   {
     timestamps: false,
   });
 
-  Posts.associate = (models) => {
-    Posts.belongsTo(models.Users,
-      { foreignKey: 'user_id', as: 'user' });
+  products.associate = (models) => {
+    products.hasOne(models.sales_products,
+      { foreignKey: 'product_id', as: 'product' });
   };
 
-  return sales;
+  return products;
 };
 
-module.exports = createSales;
+module.exports = createProducts;

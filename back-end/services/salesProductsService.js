@@ -1,4 +1,4 @@
-const model = require('../models/salesProductsModel');
+const model = require('../models-antigo/salesProductsModel');
 
 const getSaleDetails = async (id) => {
   const err = { err: { code: 401, message: 'error' } };

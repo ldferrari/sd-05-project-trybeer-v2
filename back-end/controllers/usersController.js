@@ -13,13 +13,17 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
+const duzentos = 200;
+const duzentos1 = 201;
+const quinhentos = 500;
+
 users.post('/login', async (req, res) => {
   try {
     console.log(req.body);
     const { email, password } = req.body;
     const user = await service.logIn(email, password);
     const token = jwt.sign({ data: user }, secret, jwtConfig);
-    return res.status(200).json({ ...user, token });
+    return res.status(duzentos).json({ ...user, token });
   } catch (e) {
     console.log(e);
     res.status(e.err.code).json({ message: e.err.message });
@@ -29,15 +33,12 @@ users.post('/login', async (req, res) => {
 users.post('/register', async (req, res) => {
   try {
     const { name, email, role } = req.body;
-    const user = await service.createUser(req.body);
-    if (user.message === 'E-mail already in database') {
-      return res.status(201).json({ message: 'E-mail already in database' });
-    }
-    const token = jwt.sign({ data: { name, email, role } }, secret, jwtConfig);
-    return res.status(201).json({ name, email, role, token });
+    const userCreated = await service.createUser(req.body);
+    const token = jwt.sign({ data: userCreated }, secret, jwtConfig);
+    return res.status(duzentos1).json({ name, email, role, token });
   } catch (e) {
     console.log(e);
-    res.status(500).json(e);
+    res.status(quinhentos).json(e);
   }
 });
 
@@ -45,10 +46,10 @@ users.put('/profile', async (req, res) => {
   try {
     const { name, email } = req.body;
     await service.updateUserName(name, email);
-    res.status(200).json({ message: 'name updated', name });
+    res.status(duzentos).json({ message: 'name updated', name });
   } catch (e) {
     console.log(e);
-    res.status(500).json(e);
+    res.status(quinhentos).json(e);
   }
 });
 

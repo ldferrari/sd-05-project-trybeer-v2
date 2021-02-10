@@ -1,6 +1,6 @@
-const model = require('../models/salesModel');
-const usersModel = require('../models/usersModel');
-const salesProductsModel = require('../models/salesProductsModel');
+const model = require('../models-antigo/salesModel');
+const usersModel = require('../models-antigo/usersModel');
+const salesProductsModel = require('../models-antigo/salesProductsModel');
 
 const createSale = async (newSale) => {
   const { email, totalPrice, address, addressNumber, saleDate, products } = newSale;
