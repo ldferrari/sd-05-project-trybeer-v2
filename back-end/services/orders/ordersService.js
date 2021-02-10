@@ -1,7 +1,7 @@
-const model = require('../models/ordersModel');
-const userService = require('./usersService');
+const model = require('../../models/sql/ordersModel');
+const userService = require('../usersService');
 
-const insertSale = async (order, email) => {
+const insertSale = (Sale) => async (order, email) => {
   const { totalPrice, deliveryAddress, deliveryNumber, cart } = order;
   if (!totalPrice || !deliveryAddress || !deliveryNumber || !email || !cart) {
     return {
@@ -11,15 +11,13 @@ const insertSale = async (order, email) => {
     };
   }
   const userID = await userService.getUserId(email);
-  const saleId = await model.insertSale(order, userID);
-  const promisesArray = [];
+  const saleId = await model.insertSale(order, userID);     
+  const promisesArray = [];                       
 
   for (let i = 0; i < cart.length; i += 1) {
     promisesArray.push(model.insertProductSale(saleId, cart[i].id, cart[i].qty));
-  }
-
+  }                      
   Promise.all(promisesArray);
-
   return { statusCode: 201, message: 'Order placed.' };
 };
 
@@ -33,9 +31,7 @@ const getOrdersByUserId = async (email) => {
       message: 'Missing email.',
     };
   }
-
   const orders = await model.getOrdersByUserId(userId);
-
   if (!orders) {
     return {
       error: true,
@@ -43,13 +39,19 @@ const getOrdersByUserId = async (email) => {
       message: 'User not found',
     };
   }
-
   return orders[0] || undefined;
 };
 
-const getSalesProducts = async (orderId) => {
-  const orders = await model.getSalesProducts(orderId);
-  return orders[0] || undefined;
+const getSalesProducts = (Sale) => async (orderId) => {
+  // console.log(Sale());
+  try {
+    const orders = await Sale.findByPk(orderId);
+    return orders;
+  } catch (e) {
+    console.error(e, 'ERROR AQUIIIIII')
+  }
+  //const orders = await model.getSalesProducts(orderId);
+  //return orders[0] || undefined;
 };
 
 const getSalesAdmin = async () => {

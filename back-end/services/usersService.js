@@ -1,4 +1,4 @@
-const model = require('../models/usersModel');
+const model = require('../models/sql/usersModel');
 
 const checkUser = async (email) => {
   const user = await model.checkUser(email);

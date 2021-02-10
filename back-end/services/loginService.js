@@ -1,4 +1,4 @@
-const model = require('../models/loginModel');
+const model = require('../models/sql/loginModel');
 
 const validateLog = async (email, password) => {
   const user = await model.validateLog(email, password);

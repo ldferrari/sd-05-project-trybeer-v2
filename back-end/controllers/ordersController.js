@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const validateJWT = require('../auth/validateJWT');
-const service = require('../services/ordersService');
+const service = require('../services/orders/ordersService');
+const ordersFactory = require('../services/orders/ordersFactory');
+const { sale } = require('../models');
 
 const orders = Router();
 
@@ -58,11 +60,18 @@ orders.put('/admin/:id', validateJWT, async (req, res) => {
 });
 
 orders.get('/:id', validateJWT, async (req, res) => {
-  const { id } = req.params;
-  const ordersProducts = await service.getSalesProducts(id);
-  if (ordersProducts.error) {
-    return res.status(ordersProducts.code).json(ordersProducts.message);
-  }
+  let { id } = req.params;
+  id = parseInt(id);
+  const model = ordersFactory().bind(this);
+  
+  const ordersProducts = await model.getSalesProducts(id);
+  
+  // const ordersProducts = await ordersService.getSalesProducts(id);
+
+
+  // if (ordersProducts.error) {
+  //   return res.status(ordersProducts.code).json(ordersProducts.message);
+  // }
   return res.status(200).json(ordersProducts);
 });
 
