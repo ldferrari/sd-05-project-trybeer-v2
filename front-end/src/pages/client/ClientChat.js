@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-const io = require("socket.io-client");
-// const { createMessage, getMessages } = require('./modelsMongoDb.messagesModel');
+import React, { useState, useEffect } from 'react';
+const io = require('socket.io-client');
+const { getMessagesByClient } = require('./modelsMongoDb.messagesModel');
 require('dotenv').config();
 
 function ClientChat() {
@@ -12,34 +12,50 @@ function ClientChat() {
   const { email } = user;
 
   const [buyerMessage, setBuyerMessage] = useState('');
+  const [msgsByClient, setMsgsByClient] = useState([]);
+
+  useEffect(async () => {
+    const messagesByClient = await getMessagesByClient(email);
+    return messagesByClient;
+  }, []);
 
   const handleTextChange = (e) => {
     const message = e.target.value;
     setBuyerMessage(message);
-  }
+  };
 
   const handleSend = () => {
-    // const buyerMessage = document.getElementById('message-input').value;
-    // no need for DOM now girl! you are on React
     buyerSocket.emit('message', { email, buyerMessage });
   };
 
+  // let msgsByClient = [];
+
   buyerSocket.on('showMessage', ({ nickname, hour, message }) => {
-    // how to show them? manipulating DOM but now it is a complete complex div
+    const divMessage = { nickname, hour, message };
+    setMsgsByClient((previousState) => [...previousState, divMessage]);
+    // OU
+    // setMsgsByClient(msgsByClient.push(divMessage));
   });
 
   return (
     <section>
-      {/* 1. Parte manipulada real-time com socket:
-      <p>
-        <span data-testid="nickname" /> - <span data-testid="message-time" />
-      </p>
-      <div data-testid="text-message"></div> */}
+      {/* 1. Parte manipulada real-time com socket */}
+      <div>
+        {msgsByClient &&
+          msgsByClient.forEach((msg) => (
+            <div>
+              <p>
+                <span data-testid="nickname">{msg.nickname}</span> -
+                <span data-testid="message-time">{msg.hour}</span>
+              </p>
+              <div data-testid="text-message">{msg.message}</div>
+            </div>
+          ))}
+      </div>
       {/* 2. Parte passando por bd: */}
       <div>
-        {/* aqui tem que pegar as mensagens que sejam apenas deste cliente */}
-        {allMessages &&
-          allMessages.forEach((msg) => (
+        {messagesByClient &&
+          messagesByClient.forEach((msg) => (
             <div>
               <p>
                 <span data-testid="nickname">{msg.nickname}</span> -
