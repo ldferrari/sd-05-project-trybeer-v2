@@ -5,15 +5,9 @@ export default function SidebarClient() {
   return (
     <section className="side-menu-container">
       <section>
-        <Link to="/products" data-testid="side-menu-item-products">
-          Meus produtos
-        </Link>
-        <Link to="/orders" data-testid="side-menu-item-my-orders">
-          Meus pedidos
-        </Link>
-        <Link to="/profile" data-testid="side-menu-item-my-profile">
-          Meu perfil
-        </Link>
+        <Link to="/products" data-testid="side-menu-item-products">Meus produtos</Link>
+        <Link to="/orders" data-testid="side-menu-item-my-orders">Meus pedidos</Link>
+        <Link to="/profile" data-testid="side-menu-item-my-profile">Meu perfil</Link>
       </section>
       <Link
         to="/login"
