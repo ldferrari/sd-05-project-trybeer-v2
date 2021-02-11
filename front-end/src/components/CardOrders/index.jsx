@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent } from '@material-ui/core';
@@ -42,28 +43,33 @@ export default function SimpleCard(props) {
 
   return (
     <Grid item lg={ 3 } md={ 4 } sm={ 6 } xs={ 12 }>
-        <Card className={ classes.root } elevation={ 3 }>
-          <CardContent>
-            <Link to={ `/admin/orders/${ id }` } className={ classes.links }>
-              <Typography
-                style={ { fontWeight: 600 } }
-                data-testid={ `${ index }-order-number` }
-                gutterBottom variant="h5" color="textPrimary"
-              >
-                { `Pedido ${ id }` }
-              </Typography>
-              <Typography data-testid={ `${ index }-order-address` } display="block" variant="body2" color="textSecondary">
-              { `${ deliveryAddress }, ${ deliveryNumber }` }
-              </Typography>
-              <Typography data-testid={ `${ index }-order-total-value` } variant="body2" color="textSecondary">
-                { `R$ ${ totalPrice.toString().replace('.', ',') }` }
-              </Typography>
-              <Typography data-testid={ `${ index }-order-status` } variant="h6" color="body1">
-                { status }
-              </Typography>
-            </Link>
-          </CardContent>
-        </Card>
+      <Card className={ classes.root } elevation={ 3 }>
+        <CardContent>
+          <Link to={ `/admin/orders/${id}` } className={ classes.links }>
+            <Typography
+              style={ { fontWeight: 600 } }
+              data-testid={ `${index}-order-number` }
+              gutterBottom variant="h5" color="textPrimary"
+            >
+              { `Pedido ${id}` }
+            </Typography>
+            <Typography data-testid={ `${index}-order-address` } display="block" variant="body2" color="textSecondary">
+              { `${deliveryAddress}, ${deliveryNumber}` }
+            </Typography>
+            <Typography data-testid={ `${index}-order-total-value` } variant="body2" color="textSecondary">
+              { `R$ ${totalPrice.toString().replace('.', ',')}` }
+            </Typography>
+            <Typography data-testid={ `${index}-order-status` } variant="h6" color="body1">
+              { status }
+            </Typography>
+          </Link>
+        </CardContent>
+      </Card>
     </Grid>
   );
 }
+
+SimpleCard.propTypes = {
+  order: propTypes.instanceOf(Object).isRequired,
+  index: propTypes.number.isRequired,
+};

@@ -3,12 +3,14 @@ import { makeStyles, Box, Grid } from '@material-ui/core';
 import AdminSideBar from '../../components/adminSidebarUI';
 import { getSales } from '../../services/requestAPI';
 import CardOrder from '../../components/CardOrders';
+import propTypes from 'prop-types';
 
+const [two] = [2];
 const useStyles = makeStyles((theme) => ({
   root: {
     background: '#f3f6cf',
     height: '100vh',
-    padding: theme.spacing(2),
+    padding: theme.spacing(two),
     backgroundColor: theme.palette.background.dark,
   },
   listItemText: {
@@ -47,13 +49,13 @@ const Home = (props) => {
   }, [token, history]);
 
   return (
-    <div className={classes.root}>
+    <div className={ classes.root }>
       <Box display="flex">
         <AdminSideBar title="Ordens Pendentes" icon="inbox" />
-        <Box p={4} mt={14}>
-          <Grid container spacing={4}>
+        <Box p={ 4 } mt={ 14 }>
+          <Grid container spacing={ 4 }>
             {allOrders.map((item, index) => (
-              <CardOrder key={item.id} order={item} index={index} />
+              <CardOrder key={ item.id } order={ item } index={ index } />
             ))}
           </Grid>
         </Box>
@@ -63,3 +65,7 @@ const Home = (props) => {
 };
 
 export default Home;
+
+Home.propTypes = {
+  history: propTypes.instanceOf(Object).isRequired,
+};

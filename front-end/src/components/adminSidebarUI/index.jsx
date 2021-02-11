@@ -22,7 +22,7 @@ import FaceIcon from '@material-ui/icons/Face';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const drawerWidth = 240;
-const num = [0,1,2,3];
+const [zero, um, dois, tres] = [0, 1, 2, 3];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,14 +43,14 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(num[2]),
+    marginRight: theme.spacing(dois),
   },
   hide: {
     display: 'none',
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: num[0],
+    flexShrink: zero,
   },
   drawerPaper: {
     width: drawerWidth,
@@ -58,14 +58,14 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(num[0], num[1]),
+    padding: theme.spacing(zero, um),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
   content: {
-    flexGrow: num[1],
-    padding: theme.spacing(num[3]),
+    flexGrow: um,
+    padding: theme.spacing(tres),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -103,7 +103,7 @@ export default function PersistentDrawerLeft(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const { icon, title } = props;
   return (
     <div className={ classes.root }>
       <CssBaseline />
@@ -123,28 +123,26 @@ export default function PersistentDrawerLeft(props) {
           >
             <MenuIcon />
           </IconButton>
-          { props.icon === 'inbox' ? (
+          { icon === 'inbox' ? (
             <InboxIcon className={ classes.icons } />
           ) : (
             <FaceIcon className={ classes.icons } />
           ) }
           <Typography variant="h4" noWrap>
-            { props.title }
+            { title }
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
-        className={classes.drawer}
+        className={ classes.drawer }
         variant="persistent"
         anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
+        open={ open }
+        classes={ { paper: classes.drawerPaper } }
       >
         <div className={ classes.drawerHeader }>
           <img className={ classes.logo } src="../uai2.png" alt="logo" />
-          <div className={ classes.grow }></div>
+          <div className={ classes.grow } />
           <IconButton onClick={ handleDrawerClose }>
             { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
           </IconButton>

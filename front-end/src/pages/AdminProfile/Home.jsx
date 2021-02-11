@@ -83,17 +83,18 @@ const PerfilAdmin = () => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={name}
+          title={ name }
           subheader="September 14, 2016"
         />
         <CardMedia
-          className={classes.media}
+          className={ classes.media }
           image="https://www.thispersondoesnotexist.com/image"
           title="Paella dish"
         />
         <CardContent>
           <Typography data-testid="profile-email" variant="h5" color="textSecondary" component="p">
-            Email: { email }
+            Email:
+            { email }
           </Typography>
         </CardContent>
       </Card>

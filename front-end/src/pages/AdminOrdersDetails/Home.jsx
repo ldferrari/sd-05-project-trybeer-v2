@@ -1,7 +1,3 @@
-import CardOrderDetail from './CardOrderDetail';
-import AdminSideBar from '../../components/adminSidebarUI';
-import { getSaleDetail, postStatusDelivered } from '../../services/requestAPI';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
@@ -16,7 +12,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import propTypes from 'prop-types';
 import { Redirect, useParams } from 'react-router-dom';
 
+import CardOrderDetail from './CardOrderDetail';
+import AdminSideBar from '../../components/adminSidebarUI';
+import { getSaleDetail, postStatusDelivered } from '../../services/requestAPI';
+
 const two = 2;
+const zero = 0;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     background: '#f3f6cf',
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HomeAdminOrderDetail = (props) => {
   const classes = useStyles();
-  let { id } = useParams();
+  const { id } = useParams();
 
   const [delivered, setDelivered] = useState(false);
   const [sale, setsale] = useState([]);
@@ -44,8 +46,6 @@ const HomeAdminOrderDetail = (props) => {
 
   const token = localStorage.getItem('token');
   const { history } = props;
-  const zero = 0;
-  const two = 2;
   async function fetchSale() {
     try {
       const { data } = await getSaleDetail(token, id);
@@ -90,16 +90,16 @@ const HomeAdminOrderDetail = (props) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={ `Pedido ${ id }` }
+          title={ `Pedido ${id}` }
           data-testid="order-number"
           subheader="September 14, 2016"
         />
         <CardContent>
           {falha}
           <Typography data-testid="order-status" variant="h5" color="primary" component="p">
-            { `${ sale.length ? delivered : '' }` }
+            { `${sale.length ? delivered : ''}` }
           </Typography>
-          <Typography className={classes.span}>
+          <Typography className={ classes.span }>
             {sale.map((item, index) => (
               <CardOrderDetail key={ item.name } item={ item } index={ index } />
             ))}
