@@ -2,27 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import AppContext from '../../context/AppContext';
 
-const CartButton = (props) => {
-  const { cart } = useContext(AppContext);
-  const [cartBtn, setCartBtn] = useState(false);
+function sumCartFunction(cart) {
   const zero = 0;
-  const dois = 2;
-  const cartSum = cart
-    .reduce((acc, cv) => acc + cv.price * cv.quantity, zero)
-    .toFixed(dois);
+  return cart
+  .reduce((acc, cv) => acc + cv.price * cv.quantity, zero)
+  .toFixed(dois);
+}
 
-  useEffect(() => {
-    if (cartSum > zero) {
-      return setCartBtn(true);
-    }
-    return setCartBtn(false);
-  },
-  [cartSum]);
-
-  /* if (!cartBtn) {
-    return null;
-  } */
-
+function ButtonCheckout(cartBtn,props, cartSum) {
   return (
     <button
       type="button"
@@ -36,7 +23,22 @@ const CartButton = (props) => {
         {`R$ ${cartSum.toString().replace('.', ',')}`}
       </p>
     </button>
-  );
+  )
+}
+
+const CartButton = (props) => {
+  const { cart } = useContext(AppContext);
+  const [cartBtn, setCartBtn] = useState(false);
+  const zero = 0;
+  const cartSum = sumCartFunction(cart);
+  useEffect(() => {
+    if (cartSum > zero) {
+      return setCartBtn(true);
+    }
+    return setCartBtn(false);
+  },
+  [cartSum]);
+  return (ButtonCheckout(cartBtn,props, cartSum));
 };
 
 export default CartButton;
