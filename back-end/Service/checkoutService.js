@@ -20,7 +20,7 @@ const checkout = async (products, deliveryAddress, deliveryNumber, id) => {
     };
   }
   const total = products.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
-  console.log("service.checkout", products, deliveryAddress, deliveryNumber, id);
+  // console.log('service.checkout', products, deliveryAddress, deliveryNumber, id);
   const sales = await Sale.create({
     userId: id,
     total_price: total,

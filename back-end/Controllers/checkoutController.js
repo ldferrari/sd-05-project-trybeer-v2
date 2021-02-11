@@ -16,7 +16,7 @@ checkout.post('/', async (req, res) => {
     const { products, userData } = req.body;
     const { deliveryAddress, deliveryNumber } = userData;
     const { id } = req.payload;
-    console.log("checkController==========>", req.payload)
+    console.log('checkController==========>', req.payload)
     const order = await service.checkout(
       products,
       deliveryAddress,
