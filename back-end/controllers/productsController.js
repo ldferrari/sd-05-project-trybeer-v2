@@ -3,6 +3,8 @@ const { Router } = require('express');
 const service = require('../services/productsServices.js');
 
 const products = Router();
+const codeOk = 200;
+const codeErr = 500;
 
 const duzentos = 200;
 const quinhentos = 500;
