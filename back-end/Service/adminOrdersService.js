@@ -2,7 +2,7 @@ const model = require('../Models/adminOrdersModel');
 
 const getAdminOrders = async () => model.getAdminOrders();
 
-const changeStatus = async (id) => {
+const changeStatus = async (estado, id) => {
   if (!id) {
     return {
       error: true,
@@ -11,7 +11,7 @@ const changeStatus = async (id) => {
       statusCode: 401,
     };
   }
-  return model.changeStatus(id);
+  return model.changeStatus(estado, id);
 };
 
 module.exports = {

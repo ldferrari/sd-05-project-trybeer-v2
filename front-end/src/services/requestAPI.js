@@ -46,8 +46,9 @@ const postGetOrders = async (token) => axios.get('http://localhost:3001/orders',
 
 const postGetTheOrder = async (token, id) => axios.get(`http://localhost:3001/orders/${id}`, config(token));
 
-const postStatusDelivered = async (token, id) => axios.put('http://localhost:3001/admin/orders', {
+const postStatusDelivered = async (token, id, estado) => axios.put('http://localhost:3001/admin/orders', {
   id,
+  estado,
 }, config(token));
 
 export {

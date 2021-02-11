@@ -18,6 +18,7 @@ import { getSaleDetail, postStatusDelivered } from '../../services/requestAPI';
 
 const two = 2;
 const zero = 0;
+const statusArr = ['Pendente', 'Preparando'];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +47,7 @@ const HomeAdminOrderDetail = (props) => {
 
   const token = localStorage.getItem('token');
   const { history } = props;
+
   async function fetchSale() {
     try {
       const { data } = await getSaleDetail(token, id);
@@ -68,8 +70,9 @@ const HomeAdminOrderDetail = (props) => {
     memoFetch();
   }, [history, memoFetch]);
 
-  const handleSubmit = async () => {
-    const ok = await postStatusDelivered(token, id);
+  const handleSubmit = async (e, estado) => {
+    e.preventDefault();
+    const ok = await postStatusDelivered(token, id, estado);
     if (!ok.data.message) {
       return fetchSale();
     }
@@ -112,11 +115,23 @@ const HomeAdminOrderDetail = (props) => {
           </Typography>
           {delivered === 'Pendente' && (
             <Button
-              data-testid="mark-as-delivered-btn"
-              onClick={ handleSubmit }
+              data-testid="mark-as-prepared-btn"
+              onClick={ (e) => handleSubmit(e, 'Preparando') }
               variant="contained"
               startIcon={ <SaveIcon /> }
               color="secondary"
+            >
+              Preparar pedido
+            </Button>
+          )}
+          { statusArr.includes(delivered) && (
+            <Button
+              style={ { marginLeft: '5px' } }
+              data-testid="mark-as-delivered-btn"
+              onClick={ (e) => handleSubmit(e, 'Entregue') }
+              variant="contained"
+              startIcon={ <SaveIcon /> }
+              color="primary"
             >
               Marcar como entregue
             </Button>
