@@ -64,7 +64,7 @@ jobs:
           SCHEMA: 'Trybeer'
           DB_NAME: 'Trybeer'
           # GITHUB_USER: ${{ github.actor }} 
-          GITHUB_USER: 'juliettebeaudet'
+          GITHUB_USER: 'jorgelky'
       - name: Store evaluation step
         uses: betrybe/store-evaluation-action@v2
         with:

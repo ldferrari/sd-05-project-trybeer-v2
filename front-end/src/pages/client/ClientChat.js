@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 const io = require('socket.io-client');
-const { getMessagesByClient } = require('./modelsMongoDb.messagesModel');
+const { getMessagesByClient } = require('../../../../back-end/modelsMongoDb/messagesModel');
 require('dotenv').config();
 
 function ClientChat() {
@@ -53,7 +53,7 @@ function ClientChat() {
           ))}
       </div>
       {/* 2. Parte passando por bd: */}
-      <div>
+      {/* <div>
         {messagesByClient &&
           messagesByClient.forEach((msg) => (
             <div>
@@ -64,7 +64,7 @@ function ClientChat() {
               <div data-testid="text-message">{msg.message}</div>
             </div>
           ))}
-      </div>
+      </div> */}
       <input
         data-testid="message-input"
         type="text"
