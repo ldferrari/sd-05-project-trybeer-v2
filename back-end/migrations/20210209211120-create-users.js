@@ -18,14 +18,6 @@ module.exports = {
         unique: true,
         type: Sequelize.STRING,
       },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      role: {
-        allowNull: false,
-        type: Sequelize.STRING
-      }
     });
     return usersTable;
   },
