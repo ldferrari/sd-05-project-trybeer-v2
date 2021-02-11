@@ -1,26 +1,25 @@
-const model = require('../models/productsModel.js');
+const { products } = require('../models');
 
 const getAllProducts = async () => {
-  const allProducts = await model.getAllProducts();
+  const allProducts = await products.findAll();
   const err = { err: { code: 404, message: 'Not found' } };
 
-  if (!allProducts) throw err;
+  if (!allProducts) return err;
 
   return allProducts;
 };
 
 const getById = async (body) => {
   const { id } = body;
-  const err = { err: { code: 404, message: 'Error' } };
+  const err = { err: { code: 404, message: 'Id not found' } };
 
-  if (!id) throw err;
+  if (!id) return err;
 
-  const product = await model.getById(id);
-  const err2 = { err: { code: 404, message: 'Error' } };
+  const product = await products.findOne({ where: { id } });
 
-  if (!product) throw err2;
+  if (!product) return err;
 
-  return product[0];
+  return product;
 };
 
 module.exports = {

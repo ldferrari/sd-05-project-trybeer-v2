@@ -1,18 +1,9 @@
-const model = require('../models/salesProductsModel');
+const { sales_products } = require('../models');
 
 const getSaleDetails = async (id) => {
-  const err = { err: { code: 401, message: 'error' } };
-  if (!id) {
-    throw err;
-  }
-
-  const saleDetails = await model.getSaleDetails(id);
-
-  if (!saleDetails) {
-    throw err;
-  }
-
-  return saleDetails[0];
+  if (!id) return { err: { code: 401, message: 'id not found' } };
+  const saleDetails = await sales_products.findAll({ where: { sale_id: id } });
+  return saleDetails;
 };
 
 module.exports = {

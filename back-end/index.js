@@ -53,7 +53,8 @@ io.on('connection', (socket) => {
 });
 
 // PORT LISTENER
-const PORT = process.env.PORT || 3001;
+const tresMilUm = 3001;
+const PORT = process.env.PORT || tresMilUm;
 server.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
 });

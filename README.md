@@ -22,7 +22,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com/betrybe/sd-05-project-trybeer-v2.git`.
+  * `git clone https://github.com/tryber/sd-05-project-trybeer-v2.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-05-project-trybeer-v2`
 
@@ -120,7 +120,7 @@ Você pode ler mais sobre os atributos que serão utilizados para testes [neste 
 
 ### Data de Entrega
 
-O projeto tem até a seguinte data: `DD/MM/YYYY - 14:00h`. Para ser entregue a avaliação final.
+O projeto tem até a seguinte data: `26/02/2021 - 14:00h`. Para ser entregue a avaliação final.
 
 ---
 
@@ -202,7 +202,7 @@ OBS: O valor da variável `GITHUB_USER` deverá ser o mesmo nome do seu usuário
 
 3 - Passo
 
-No arquivo `sd-05-project-trybeer-v2/.github/workflows/main.yml` altere a linha 45 para incluir o nome de usuário utilizado no passo anterior.
+No arquivo `sd-05-project-trybeer-v2/.github/workflows/main.yml` altere a linha 66 para incluir o nome de usuário utilizado no passo anterior.
 
 antes:
 ```
@@ -539,7 +539,7 @@ OBS: Haverá um arquivo de conexão com o mongodb já pronto no caminho `sd-05-p
 
 **[Será validado que ao enviar mensagem e listado a hora do envio da mensagem]**
 
-**[Será validado que é possivel voltar pra tela de `admin/chat` através do botão voltar]**
+**[Será validado que é possivel voltar pra tela de `admin/chats` através do botão voltar]**
 
 **[Será validado que é possivel enviar mensagem para o cliente e a mensagem poderá ser visualizada pelo cliente]**
 
