@@ -31,7 +31,7 @@ const Chat = (props) => {
       setNewMessage(data);
     }
     fetchOldMessages();
-  }, [props, id, token]);
+  }, [props, id, token, messages]);
 
   const now = new Date();
   // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
