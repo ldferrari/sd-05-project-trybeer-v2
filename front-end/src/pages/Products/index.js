@@ -9,33 +9,39 @@ import CartButton from '../../components/cartButton';
 import { postGetItems } from '../../services/requestAPI';
 import AppContext from '../../context/AppContext';
 
+function inUseEffect(setProducts) {
+  async function fetchProducts() {
+    const { data } = await postGetItems(localStorage.getItem('token'));
+    setProducts(data);
+  }
+  fetchProducts();
+}
+
+function ProductList(theProducts) {
+  return (
+    <div className="productList">
+      {theProducts.map((product) => (
+        <Card key={ product.id } product={ product } />
+      ))}
+      ,
+    </div>
+  );
+}
+
 const Products = (props) => {
   const { history } = props;
   const [theProducts, setProducts] = useState([]);
   const { alertCompraFinalizada, setAlertCompraFinalizada } = useContext(AppContext);
-  // const theToken = localStorage.getItem('token');
-
   useEffect(() => {
-    async function fetchProducts() {
-      const { data } = await postGetItems(localStorage.getItem('token'));
-      setProducts(data);
-    }
-    fetchProducts();
+    inUseEffect(setProducts);
     return () => setAlertCompraFinalizada('');
   }, [setAlertCompraFinalizada]);
-
-  if (!localStorage.getItem('token')) {
-    return <Redirect to="/login" />;
-  }
-
+  if (!localStorage.getItem('token')) { return <Redirect to="/login" />; }
   return (
     <div className="Products">
       <Header>TryBeer</Header>
-      <div className="productList">
-        { theProducts.map((product) => <Card key={ product.id } product={ product } />) }
-        ,
-      </div>
-      <span>{ alertCompraFinalizada }</span>
+      {ProductList(theProducts)}
+      <span>{alertCompraFinalizada}</span>
       <CartButton history={ history } />
       <Footer />
     </div>

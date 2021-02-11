@@ -9,7 +9,7 @@ import OrderItem from '../../components/orderItems';
 import { postGetTheOrder } from '../../services/requestAPI';
 import AppContext from '../../context/AppContext';
 
-function inUseEffect(props, setOrder) {
+function inUseEffect(props, setOrder, id) {
   const { history } = props;
   const token = localStorage.getItem('token');
   if (!token) {
@@ -46,7 +46,7 @@ function pedidoFunction(orderHere, cartSum) {
     <div className="pedido">
       <div className="legenda">
         {['QUANTIDADE', 'PRODUTO', 'PREÇO', 'TOTAL'].map((e) => (
-          <p>{ e }</p>
+          <p key={ e }>{ e }</p>
         ))}
       </div>
       <div className="cartItems">
@@ -68,7 +68,7 @@ export default function OrderDetails(props) {
   const { id } = useParams();
   const cartSum = cartSumFunction(orderHere);
   useEffect(() => {
-    inUseEffect(props, setOrder);
+    inUseEffect(props, setOrder, id);
   }, [props, id]);
 
   return (

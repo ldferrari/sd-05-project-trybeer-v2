@@ -5,25 +5,26 @@ import AdminSideBar from '../../components/admin sidebar';
 import './index.css';
 import { getProfileInfo } from '../../services/requestAPI';
 
+function inUseEffect(setName, setEmail) {
+  async function asyncMe() {
+    const token = localStorage.getItem('token');
+    const {
+      data: { user },
+    } = await getProfileInfo(token);
+    setName(user.name);
+    setEmail(user.email);
+  }
+  asyncMe();
+}
+
 const PerfilAdmin = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  useEffect(() => {
-    async function asyncMe() {
-      const token = localStorage.getItem('token');
-      const {
-        data: { user },
-      } = await getProfileInfo(token);
-      setName(user.name);
-      setEmail(user.email);
-    }
-    asyncMe();
-  }, []);
+  useEffect(() => { inUseEffect(setName, setEmail) }, []);
 
   if (!localStorage.getItem('token')) {
     return <Redirect to="/login" />;
   }
-
   return (
     <div className="App">
       <AdminSideBar />

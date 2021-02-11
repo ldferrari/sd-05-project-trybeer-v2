@@ -9,111 +9,130 @@ import { postLogin } from '../../services/requestAPI';
 
 const saveToken = (token) => localStorage.setItem('token', token);
 
-const Login = (props) => {
-  const [validEmail, setValidEmail] = useState(false);
-  const [validPassword, setValidPassword] = useState(false);
+const timeAlert = 3500;
+function handleSubmitFunction({ props, email, password, setValidEmail, setAlertLogin }) {
+  return async (e) => {
+    e.preventDefault();
+    try {
+      const { token, role } = await postLogin({ email, password });
+      saveToken(token);
+      if (role === 'administrator') { return props.history.push('/admin/orders'); }
+      if (role === 'client') { return props.history.push('/products'); }
+      setValidEmail(true);
+      return setValidEmail(false);
+    } catch (error) {
+      console.log(error);
+      setAlertLogin('Email e/ou password incorretos');
+      setTimeout(() => { setAlertLogin(''); }, timeAlert);
+      return false;
+    }
+  };
+}
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [alertLogin, setAlertLogin] = useState('');
-  const validationEmail = (value) => (/[A-Za-z0-9]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(value)
+function validations(setValidEmail, setValidPassword) {
+  const validationEmail = (value) => (/[A-Za-z0-9]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/
+    .test(value)
     ? setValidEmail(true)
     : setValidEmail(false));
 
   const validationPassword = (value) => {
     const minLength = 6;
-    return value.length >= minLength ? setValidPassword(true) : setValidPassword(false);
+    return (value.length >= minLength ? setValidPassword(true) : setValidPassword(false));
   };
+  return { validationEmail, validationPassword };
+}
 
-  useEffect(() => {
-    console.log('------------LOGIN PAGE-------------');
-  }, []);
-  useEffect(() => {
-    validationEmail(email);
-  }, [email]);
+function InputName(email, setEmail) {
+  return (
+    <fieldset className="noDecor">
+      <label htmlFor="email">
+        Email:
+        <input
+          type="email"
+          name="email"
+          className="inputLogin"
+          onChange={ ({ target: { value } }) => setEmail(value) }
+          data-testid="email-input"
+          value={ email }
+        />
+      </label>
+    </fieldset>
+  );
+}
 
-  useEffect(() => {
-    validationPassword(password);
-  }, [password]);
+function InputPassword(password, setPassword) {
+  return (
+    <fieldset className="noDecor">
+      <label htmlFor="password">
+        Senha:
+        <input
+          type="password"
+          name="password"
+          className="inputLogin"
+          onChange={ ({ target: { value } }) => setPassword(value) }
+          data-testid="password-input"
+          value={ password }
+        />
+      </label>
+    </fieldset>
+  );
+}
+function InputButtonSingIn() {
+  return (
+    <button data-testid="no-account-btn" type="button" className="semConta">
+      <Link to="/register" className="semConta">
+        Ainda não tenho conta
+      </Link>
+    </button>
+  );
+}
+function InputButtonLogIn(validEmail, validPassword, handleSubmit) {
+  return (
+    <button
+      type="submit"
+      disabled={ !(validEmail && validPassword) }
+      onClick={ handleSubmit }
+      className={ validEmail && validPassword ? 'loginBtn' : '' }
+      data-testid="signin-btn"
+    >
+      ENTRAR
+    </button>
+  );
+}
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let token;
-    let role;
-    try {
-      const user = await postLogin({ email, password });
-      token = user.token;
-      role = user.role;
-    } catch (error) {
-      console.log(error);
-      setAlertLogin('Email e/ou password incorretos');
-      const timeAlert = 3500;
-      setTimeout(() => {
-        setAlertLogin('');
-      }, timeAlert);
-      return false;
-    }
-    /* if (timer) {
-      clearTimeout(timer);
-    } */
-    saveToken(token);
-    if (role === 'administrator') {
-      props.history.push('/admin/orders');
-    } else if (role === 'client') {
-      props.history.push('/products');
-    } else {
-      setValidEmail(true);
-      setValidEmail(false);
-    }
-    return true;
-  };
+function Render1(param) {
+  const { email, setEmail, password, setPassword } = param;
+  const { alertLogin, validEmail, validPassword, handleSubmit } = param;
   return (
     <div className="loginpage">
       <img src={ logo } className="logo" alt="logo" />
       <form className="column-login">
-        <fieldset className="noDecor">
-          <label htmlFor="email">
-            Email:
-            <input
-              type="email"
-              name="email"
-              className="inputLogin"
-              onChange={ ({ target: { value } }) => setEmail(value) }
-              data-testid="email-input"
-              value={ email }
-            />
-          </label>
-        </fieldset>
-        <fieldset className="noDecor">
-          <label htmlFor="password">
-            Senha:
-            <input
-              type="password"
-              name="password"
-              className="inputLogin"
-              onChange={ ({ target: { value } }) => setPassword(value) }
-              data-testid="password-input"
-              value={ password }
-            />
-          </label>
-        </fieldset>
+        {InputName(email, setEmail)}
+        {InputPassword(password, setPassword)}
         <span className="email-alert">{alertLogin}</span>
-        <button data-testid="no-account-btn" type="button" className="semConta">
-          <Link to="/register" className="semConta">Ainda não tenho conta</Link>
-        </button>
-        <button
-          type="submit"
-          disabled={ !(validEmail && validPassword) }
-          onClick={ handleSubmit }
-          className={ (validEmail && validPassword) ? 'loginBtn' : '' }
-          data-testid="signin-btn"
-        >
-          ENTRAR
-        </button>
+        {InputButtonSingIn()}
+        {InputButtonLogIn(validEmail, validPassword, handleSubmit)}
       </form>
       {/* <Footer /> */}
     </div>
   );
+}
+const Login = (props) => {
+  const [validEmail, setValidEmail] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [alertLogin, setAlertLogin] = useState('');
+  const { validationEmail, validationPassword } = validations(
+    setValidEmail, setValidPassword,
+  );
+  const obj1 = { props, email, password, setValidEmail, setAlertLogin };
+  useEffect(() => { validationEmail(email); }, [email]);
+  useEffect(() => { validationPassword(password); }, [password]);
+  const handleSubmit = handleSubmitFunction({ ...obj1 });
+  const obj2 = { email, setEmail, password, setPassword, alertLogin };
+  const obj3 = { validEmail, validPassword, handleSubmit };
+  return Render1({ ...obj2, ...obj3 });
 };
 
 export default Login;
