@@ -5,7 +5,7 @@ import TryBeerContext from './TryBeerContext';
 const cartStored = JSON.parse(localStorage.getItem('cart'));
 const noValue = 1;
 
-const setHooks = () => {
+const Provider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -19,11 +19,6 @@ const setHooks = () => {
   const [emailAlreadyExists, setEmailAlreadyExists] = useState('');
   const [success, setSuccess] = useState(false);
   const [cartItems, setCartItems] = useState(cartStored || []);
-}
-
-const Provider = ({ children }) => {
-  setHooks();
-  
 
   const contextValue = { email,
     setEmail,
