@@ -1,4 +1,6 @@
 'use strict';
+const nove = 9;
+const dois = 2;
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
