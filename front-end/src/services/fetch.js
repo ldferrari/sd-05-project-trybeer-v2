@@ -101,7 +101,7 @@ export const createNewSale = (
 };
 
 /*
-Encerrar pedido / alterar status do pedido de Pendente para Entregue
+Encerrar pedido / alterar status do pedido de Preparando para Entregue
 
 Params:
 
@@ -110,7 +110,24 @@ Params:
 */
 export const closeSale = (id) => {
   const closedSale = axios
-    .put(`${API_URL}/checkout`, { id })
+    .put(`${API_URL}/checkout/close`, { id })
+    .then((response) => response.data)
+    .catch((err) => err);
+  return closedSale;
+};
+
+
+/*
+Preparar pedido / alterar status do pedido de Pendente para Preparando
+
+Params:
+
+- id da venda
+
+*/
+export const changeSale = (id) => {
+  const closedSale = axios
+    .put(`${API_URL}/checkout/preparing`, { id })
     .then((response) => response.data)
     .catch((err) => err);
   return closedSale;
