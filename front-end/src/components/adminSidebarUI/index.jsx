@@ -22,6 +22,7 @@ import FaceIcon from '@material-ui/icons/Face';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const drawerWidth = 240;
+const num = [0,1,2,3];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,14 +43,14 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(num[2]),
   },
   hide: {
     display: 'none',
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: num[0],
   },
   drawerPaper: {
     width: drawerWidth,
@@ -57,14 +58,14 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(num[0], num[1]),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+    flexGrow: num[1],
+    padding: theme.spacing(num[3]),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -104,31 +105,31 @@ export default function PersistentDrawerLeft(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={ classes.root }>
       <CssBaseline />
       <AppBar
         position="fixed"
-        className={clsx(classes.appBar, {
+        className={ clsx(classes.appBar, {
           [classes.appBarShift]: open,
-        })}
+        }) }
       >
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={ handleDrawerOpen }
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={ clsx(classes.menuButton, open && classes.hide) }
           >
             <MenuIcon />
           </IconButton>
-          {props.icon === 'inbox' ? (
-            <InboxIcon className={classes.icons} />
+          { props.icon === 'inbox' ? (
+            <InboxIcon className={ classes.icons } />
           ) : (
-            <FaceIcon className={classes.icons} />
-          )}
+            <FaceIcon className={ classes.icons } />
+          ) }
           <Typography variant="h4" noWrap>
-            {props.title}
+            { props.title }
           </Typography>
         </Toolbar>
       </AppBar>
@@ -141,16 +142,16 @@ export default function PersistentDrawerLeft(props) {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
-          <img className={classes.logo} src="../uai2.png" alt="logo" />
-          <div className={classes.grow}></div>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+        <div className={ classes.drawerHeader }>
+          <img className={ classes.logo } src="../uai2.png" alt="logo" />
+          <div className={ classes.grow }></div>
+          <IconButton onClick={ handleDrawerClose }>
+            { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
           </IconButton>
         </div>
         <Divider />
         <List>
-          <ListItem button data-testid="side-menu-item-orders" component={Link} to="/admin/orders">
+          <ListItem button data-testid="side-menu-item-orders" component={ Link } to="/admin/orders">
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
@@ -159,7 +160,7 @@ export default function PersistentDrawerLeft(props) {
           <ListItem
             button
             data-testid="side-menu-item-profile"
-            component={Link}
+            component={ Link }
             to="/admin/profile"
           >
             <ListItemIcon>
@@ -179,7 +180,7 @@ export default function PersistentDrawerLeft(props) {
           <ListItem
             button
             data-testid="side-menu-item-logout"
-            onClick={() => localStorage.removeItem('token')}
+            onClick={ () => localStorage.removeItem('token') }
           >
             <ListItemIcon>
               <ExitToAppIcon />

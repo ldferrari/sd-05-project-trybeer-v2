@@ -1,5 +1,3 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
 import CardOrderDetail from './CardOrderDetail';
 import AdminSideBar from '../../components/adminSidebarUI';
 import { getSaleDetail, postStatusDelivered } from '../../services/requestAPI';
@@ -14,11 +12,16 @@ import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SaveIcon from '@material-ui/icons/Save';
 
+import React, { useEffect, useState, useCallback } from 'react';
+import propTypes from 'prop-types';
+import { Redirect, useParams } from 'react-router-dom';
+
+const two = 2;
 const useStyles = makeStyles((theme) => ({
   root: {
     background: '#f3f6cf',
     height: '100vh',
-    padding: theme.spacing(2),
+    padding: theme.spacing(two),
     backgroundColor: theme.palette.background.dark,
   },
   card: {
@@ -78,27 +81,27 @@ const HomeAdminOrderDetail = (props) => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={ classes.root }>
       <AdminSideBar title="Ordem Detalhada" icon="inbox" />
-      <Card className={classes.card} elevation={3}>
+      <Card className={ classes.card } elevation={ 3 }>
         <CardHeader
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
-          title={`Pedido ${id}`}
+          title={ `Pedido ${ id }` }
           data-testid="order-number"
           subheader="September 14, 2016"
         />
         <CardContent>
           {falha}
           <Typography data-testid="order-status" variant="h5" color="primary" component="p">
-            {`${sale.length ? delivered : ''}`}
+            { `${ sale.length ? delivered : '' }` }
           </Typography>
           <Typography className={classes.span}>
             {sale.map((item, index) => (
-              <CardOrderDetail key={item.name} item={item} index={index} />
+              <CardOrderDetail key={ item.name } item={ item } index={ index } />
             ))}
           </Typography>
           <Typography data-testid="order-total-value" variant="h5" color="primary" component="p">
@@ -110,9 +113,9 @@ const HomeAdminOrderDetail = (props) => {
           {delivered === 'Pendente' && (
             <Button
               data-testid="mark-as-delivered-btn"
-              onClick={handleSubmit}
+              onClick={ handleSubmit }
               variant="contained"
-              startIcon={<SaveIcon />}
+              startIcon={ <SaveIcon /> }
               color="secondary"
             >
               Marcar como entregue
@@ -125,3 +128,7 @@ const HomeAdminOrderDetail = (props) => {
 };
 
 export default HomeAdminOrderDetail;
+
+HomeAdminOrderDetail.propTypes = {
+  history: propTypes.instanceOf(Object).isRequired,
+};

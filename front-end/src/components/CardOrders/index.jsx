@@ -41,24 +41,24 @@ export default function SimpleCard(props) {
   if (!order) return <h1>Loading Card Orders components</h1>;
 
   return (
-    <Grid item lg={3} md={4} sm={6} xs={12}>
-        <Card className={classes.root} elevation={3}>
+    <Grid item lg={ 3 } md={ 4 } sm={ 6 } xs={ 12 }>
+        <Card className={ classes.root } elevation={ 3 }>
           <CardContent>
-            <Link to={ `/admin/orders/${id}` } className={classes.links}>
+            <Link to={ `/admin/orders/${ id }` } className={ classes.links }>
               <Typography
-                style={{ fontWeight: 600 }}
-                data-testid={ `${index}-order-number` }
+                style={ { fontWeight: 600 } }
+                data-testid={ `${ index }-order-number` }
                 gutterBottom variant="h5" color="textPrimary"
               >
-                {`Pedido ${id}`}
+                { `Pedido ${ id }` }
               </Typography>
-              <Typography data-testid={ `${index}-order-address` } display="block" variant="body2" color="textSecondary">
-              { `${deliveryAddress}, ${deliveryNumber}` }
+              <Typography data-testid={ `${ index }-order-address` } display="block" variant="body2" color="textSecondary">
+              { `${ deliveryAddress }, ${ deliveryNumber }` }
               </Typography>
-              <Typography data-testid={ `${index}-order-total-value` } variant="body2" color="textSecondary">
-                { `R$ ${totalPrice.toString().replace('.', ',')}` }
+              <Typography data-testid={ `${ index }-order-total-value` } variant="body2" color="textSecondary">
+                { `R$ ${ totalPrice.toString().replace('.', ',') }` }
               </Typography>
-              <Typography data-testid={ `${index}-order-status` } variant="h6" color="body1">
+              <Typography data-testid={ `${ index }-order-status` } variant="h6" color="body1">
                 { status }
               </Typography>
             </Link>

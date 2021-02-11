@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import AdminSideBar from '../../components/adminSidebarUI';
-import { getProfileInfo } from '../../services/requestAPI';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -15,6 +12,10 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import AdminSideBar from '../../components/adminSidebarUI';
+import { getProfileInfo } from '../../services/requestAPI';
+
+const two = 2;
 const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 345,
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     background: '#f3f6cf',
     height: '100vh',
-    padding: theme.spacing(2),
+    padding: theme.spacing(two),
     backgroundColor: theme.palette.background.dark,
   },
   media: {
@@ -68,13 +69,13 @@ const PerfilAdmin = () => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={ classes.root }>
       <AdminSideBar title="Perfil" icon="face" />
-      <Card className={classes.card} elevation={3}>
+      <Card className={ classes.card } elevation={ 3 }>
         <CardHeader
           avatar={
-            <Avatar data-testid="profile-name" aria-label="recipe" className={classes.avatar}>
-              {name[0]}
+            <Avatar data-testid="profile-name" aria-label="recipe" className={ classes.avatar }>
+              { name[0] }
             </Avatar>
           }
           action={
@@ -92,7 +93,7 @@ const PerfilAdmin = () => {
         />
         <CardContent>
           <Typography data-testid="profile-email" variant="h5" color="textSecondary" component="p">
-            Email: {email}
+            Email: { email }
           </Typography>
         </CardContent>
       </Card>
