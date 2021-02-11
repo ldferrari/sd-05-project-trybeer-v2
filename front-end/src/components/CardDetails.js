@@ -1,38 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { addProduct, removeProduct } from '../services/helpers';
+import CardDetailsButtons from './CardDetailsButtons';
 
 export default function CardDetails(props) {
   const { index, product, quantity, addData, removeData } = props;
+  const reais = product.price.replace('.', ',');
 
   return (
     <section className="product-card">
-      <img
-        data-testid={ `${index}-product-img` }
-        src={ product.url_image }
-        alt="Beer"
-        width="100px"
-      />
+      <img data-testid={ `${index}-product-img` } src={ product.url_image } alt="Beer" />
       <h3 data-testid={ `${index}-product-name` }>{product.name}</h3>
-      <span data-testid={ `${index}-product-price` }>
-        {`R$ ${product.price.replace('.', ',')}`}
-      </span>
-      <button
-        data-testid={ `${index}-product-minus` }
-        type="button"
-        onClick={ () => removeProduct(removeData) }
-      >
-        -
-      </button>
-      <span data-testid={ `${index}-product-qtd` }>{quantity}</span>
-      <button
-        data-testid={ `${index}-product-plus` }
-        type="button"
-        onClick={ () => addProduct(addData) }
-      >
-        +
-      </button>
+      <span data-testid={ `${index}-product-price` }>{`R$ ${reais}`}</span>
+      <CardDetailsButtons
+        index={ index }
+        quantity={ quantity }
+        addData={ addData }
+        removeData={ removeData }
+      />
     </section>
   );
 }
