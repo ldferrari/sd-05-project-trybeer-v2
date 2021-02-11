@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TryBeerContext from './TryBeerContext';
 
-const Provider = ({ children }) => {
-  const noValue = 1;
+const cartStored = JSON.parse(localStorage.getItem('cart'));
+const noValue = 1;
+
+const setHooks = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -14,9 +16,16 @@ const Provider = ({ children }) => {
   const [streetName, setStreetName] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
   const [total, setTotal] = useState('');
+  const [emailAlreadyExists, setEmailAlreadyExists] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [cartItems, setCartItems] = useState(cartStored || []);
+}
 
-  const contextValue = {
-    email,
+const Provider = ({ children }) => {
+  setHooks();
+  
+
+  const contextValue = { email,
     setEmail,
     password,
     setPassword,
@@ -26,16 +35,22 @@ const Provider = ({ children }) => {
     setChecked,
     productsList,
     setProductList,
-    role,
-    setRole,
     quantity,
     setQuantity,
-    streetName,
-    setStreetName,
-    houseNumber,
-    setHouseNumber,
     total,
     setTotal,
+    streetName,
+    setStreetName,
+    role,
+    setRole,
+    emailAlreadyExists,
+    setEmailAlreadyExists,
+    houseNumber,
+    setHouseNumber,
+    success,
+    setSuccess,
+    cartItems,
+    setCartItems,
   };
 
   return (
