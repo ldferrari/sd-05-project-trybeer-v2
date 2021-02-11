@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import '../../css/OrderCard.css';
 
 export default function OrderCard({ order, index }) {
-  let date = order.sale_date;
+  let date = order.sales_date;
   const zero = 0;
   const ten = 10;
   date = date.substring(zero, ten);

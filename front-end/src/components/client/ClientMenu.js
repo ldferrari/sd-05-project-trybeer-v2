@@ -41,7 +41,12 @@ function ClientMenu(props) {
             <Link className="btn-side" data-testid="side-menu-item-my-profile" to="/profile">
               Meu Perfil
             </Link>
-            <Link className="btn-side" data-testid="side-menu-item-logout" to="/login">
+            <Link
+              className="btn-side"
+              data-testid="side-menu-item-logout"
+              to="/login"
+              onClick={ () => localStorage.clear() }
+            >
               Sair
             </Link>
           </div>
