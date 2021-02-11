@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Box, Grid } from '@material-ui/core';
+import propTypes from 'prop-types';
 import AdminSideBar from '../../components/adminSidebarUI';
 import { getSales } from '../../services/requestAPI';
 import CardOrder from '../../components/CardOrders';
-import propTypes from 'prop-types';
 
-const [two] = [2];
+const two = 2;
 const useStyles = makeStyles((theme) => ({
   root: {
     background: '#f3f6cf',

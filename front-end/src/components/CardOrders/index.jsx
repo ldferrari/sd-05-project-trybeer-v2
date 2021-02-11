@@ -49,7 +49,9 @@ export default function SimpleCard(props) {
             <Typography
               style={ { fontWeight: 600 } }
               data-testid={ `${index}-order-number` }
-              gutterBottom variant="h5" color="textPrimary"
+              gutterBottom
+              variant="h5"
+              color="textPrimary"
             >
               { `Pedido ${id}` }
             </Typography>

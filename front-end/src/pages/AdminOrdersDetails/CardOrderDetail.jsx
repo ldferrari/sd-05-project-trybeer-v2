@@ -17,7 +17,7 @@ export default function CardOrderDetails(props) {
       <span data-testid={ `${index}-order-unit-price` } style={ { marginRight: 4 } }>
         { `(R$ ${item.price.toString().replace('.', ',')})` }
       </span>
-      <span data-testid={ `${ index }-product-total-value` } style={ { marginRight: 4 } }>
+      <span data-testid={ `${index}-product-total-value` } style={ { marginRight: 4 } }>
         { `R$ ${(item.price * item.quantity).toFixed(two).replace('.', ',')}` }
       </span>
     </div>

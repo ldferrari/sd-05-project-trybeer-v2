@@ -1,5 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
+import propTypes from 'prop-types';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,7 +24,9 @@ import FaceIcon from '@material-ui/icons/Face';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const drawerWidth = 240;
-const [zero, um, dois, tres] = [0, 1, 2, 3];
+const two = 2;
+const zero = 0;
+const three = 3;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,14 +47,14 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(dois),
+    marginRight: theme.spacing(two),
   },
   hide: {
     display: 'none',
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: zero,
+    flexShrink: 0,
   },
   drawerPaper: {
     width: drawerWidth,
@@ -58,14 +62,14 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(zero, um),
+    padding: theme.spacing(zero, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
   content: {
-    flexGrow: um,
-    padding: theme.spacing(tres),
+    flexGrow: 1,
+    padding: theme.spacing(three),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -91,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft(props) {
+export default function AdminSidebarUI(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -190,3 +194,8 @@ export default function PersistentDrawerLeft(props) {
     </div>
   );
 }
+
+AdminSidebarUI.propTypes = {
+  icon: propTypes.instanceOf(Object).isRequired,
+  title: propTypes.number.isRequired,
+};
