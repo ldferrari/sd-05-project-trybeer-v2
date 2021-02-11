@@ -1,4 +1,4 @@
-const { sales, users } = require('../models');
+const { sales, users, sales_products } = require('../models');
 
 const checkTotalPrice = (totalPrice) => {
   if (totalPrice > 0) {
@@ -51,7 +51,6 @@ const checkLogin = async (email) => {
   return id;
 };
 
-
 const checkAll = async (email, totalPrice, address, addressNumber) => {
   email = checkEmail(email);
   if (email.err) return email;
@@ -74,105 +73,67 @@ const getDados = async (email, totalPrice, address, addressNumber, saleDate) => 
   return { user_id, sales_date, ...dados };
 };
 
-/*
-const checkCreatedSale = (createdSale) => {
-  if (!createdSale.dataValues) {
-    const err = { err: { code: 401, message: 'error' } };
-    throw err;
-  }
-  return;
+const createSalesProducts = async (products, sale_id) => {
+  products.forEach(async (product) => {
+    const product_id = product.id;
+    const quantity = product.quantity;
+    await sales_products.create({ sale_id, product_id, quantity });
+  });
 };
-*/
 
 const createSale = async ({ email, totalPrice, address, addressNumber, saleDate, products }) => {
   const dados = await getDados(email, totalPrice, address, addressNumber, saleDate);
   if (dados.err) return dados;
   const { user_id, sales_date, total_price, delivery_address, delivery_number } = dados;
   const createdSale = await sales.create({ user_id, total_price, delivery_address, delivery_number, sales_date, status: 'Pendente' });
-  console.log(createdSale.dataValues);
-  /* checkCreatedSale(createdSale);
-
-
-  const insertedId = createdSale[0].insertId;
-
-  products.forEach(async (product) => {
-    await salesProductsModel.createSalesProducts(insertedId,
-      product.product_id || product.id, product.quantity);
-  });
-  */
-
-
+  // checkCreatedSale(createdSale);
+  const sale_id = createdSale.dataValues.id;
+  await createSalesProducts(products, sale_id);
   return createdSale;
 };
 
 const closeSale = async (body) => {
   const { id } = body;
+  if (!id) return { err: { code: 404, message: 'sale id is invalid' } };
+  const result = await sales.update({ status: 'Entregue' }, { where: { id } } );
+  if (result[0] === 0) return { err: { code: 404, message: 'sale id is invalid' } };
+  return result;
+};
 
-  if (!id) {
-    const err = { err: { code: 404, message: 'sale id is invalid' } };
-    throw err;
-  }
-
-  return model.closeSale(id);
+const changeStatusSale = async (body) => {
+  const { id } = body;
+  if (!id) return { err: { code: 404, message: 'sale id is invalid' } };
+  const result = await sales.update({ status: 'Preparando' }, { where: { id } } );
+  if (result[0] === 0) return { err: { code: 404, message: 'sale id is invalid' } };
+  return result;
 };
 
 const getByUserId = async (body) => {
   const { email } = body;
-
-  if (!email) {
-    const err = { err: { code: 404, message: 'email is invalid' } };
-    throw err;
-  }
-
-  const userFound = await usersModel.logIn(email);
-  const { id } = userFound[0];
-
-  const userSales = await model.getByUserId(id);
-
-  if (!userSales) {
-    const err = { err: { code: 404, message: 'error' } };
-    throw err;
-  }
-
-  return userSales[0];
+  if (!email) return { err: { code: 404, message: 'email is invalid' } };
+  const id = await checkLogin(email);
+  if (id.err) return id;
+  const userSales = await sales.findAll({ where: { user_id: id } });
+  return userSales;
 };
 
 const getAllOpen = async () => {
-  const allSalesOpen = await model.getAllOpen();
-
-  if (!allSalesOpen) {
-    const err = { err: { code: 404, message: 'error' } };
-    throw err;
-  }
-
-  return allSalesOpen[0];
+  const allSalesOpen = await sales.findAll({ where: { status: 'Pendente' } });
+  if (!allSalesOpen) return { err: { code: 404, message: 'error' } };
+  return allSalesOpen;
 };
 
 const getAllSales = async () => {
-  const allSales = await model.getAll();
-
-  if (!allSales) {
-    const err = { err: { code: 404, message: 'error' } };
-    throw err;
-  }
-
-  return allSales[0];
+  const allSales = await sales.findAll();
+  if (!allSales) return { err: { code: 404, message: 'error' } };
+  return allSales;
 };
 
 const getSaleById = async (id) => {
-  if (!id) {
-    const err = { err: { code: 404, message: 'invalid id' } };
-    throw err;
-  }
-
-  const sale = await model.getSaleById(id);
-
-  if (!sale) {
-    const err = { err: { code: 404, message: 'sale not found' } };
-    throw err;
-  }
-
-  return sale[0];
+  if (!id) return { err: { code: 404, message: 'invalid id' } };
+  const sale = await sales.findOne({ where: { id } });
+  if (!sale) return { err: { code: 404, message: 'sale not found' } };
+  return sale;
 };
 
 module.exports = {
@@ -182,4 +143,5 @@ module.exports = {
   getAllOpen,
   getAllSales,
   getSaleById,
+  changeStatusSale,
 };

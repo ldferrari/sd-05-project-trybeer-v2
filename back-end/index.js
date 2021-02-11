@@ -23,5 +23,7 @@ app.use('/details', detailsController);
 
 app.use('/images', express.static('images'));
 
-const PORT = process.env.PORT || 3001;
+const tresMilUm = 3001;
+
+const PORT = process.env.PORT || tresMilUm;
 app.listen(PORT, () => console.log(`Yummy, here is ${PORT} port`));

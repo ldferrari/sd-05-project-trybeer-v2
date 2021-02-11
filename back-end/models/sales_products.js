@@ -2,7 +2,7 @@ const createSalesProducts = (sequelize, DataTypes) => {
   const salesProducts = sequelize.define('sales_products', {
     sale_id: { type: DataTypes.INTEGER, foreignKey: true },
     product_id: { type: DataTypes.INTEGER, foreignKey: true },
-    quantity: DataTypes.STRING,
+    quantity: DataTypes.INTEGER,
   },
   {
     timestamps: false,
