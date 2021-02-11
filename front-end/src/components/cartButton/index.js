@@ -4,12 +4,13 @@ import AppContext from '../../context/AppContext';
 
 function sumCartFunction(cart) {
   const zero = 0;
+  const dois = 2;
   return cart
-  .reduce((acc, cv) => acc + cv.price * cv.quantity, zero)
-  .toFixed(dois);
+    .reduce((acc, cv) => acc + cv.price * cv.quantity, zero)
+    .toFixed(dois);
 }
 
-function ButtonCheckout(cartBtn,props, cartSum) {
+function ButtonCheckout(cartBtn, props, cartSum) {
   return (
     <button
       type="button"
@@ -23,7 +24,7 @@ function ButtonCheckout(cartBtn,props, cartSum) {
         {`R$ ${cartSum.toString().replace('.', ',')}`}
       </p>
     </button>
-  )
+  );
 }
 
 const CartButton = (props) => {
@@ -38,7 +39,7 @@ const CartButton = (props) => {
     return setCartBtn(false);
   },
   [cartSum]);
-  return (ButtonCheckout(cartBtn,props, cartSum));
+  return (ButtonCheckout(cartBtn, props, cartSum));
 };
 
 export default CartButton;
