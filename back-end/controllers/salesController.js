@@ -6,8 +6,8 @@ const sales = Router();
 
 sales.post('/', async (req, res) => {
   try {
-    console.log(req.body);
-    await service.createSale(req.body);
+    const result = await service.createSale(req.body);
+    if (result.err) return res.status(result.err.code).json(result);
     res.status(201).json({ message: 'Created' });
   } catch (e) {
     res.status(500).json({ message: e.message });

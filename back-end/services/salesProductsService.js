@@ -1,4 +1,4 @@
-const model = require('../models-antigo/salesProductsModel');
+const { sales_products } = require('../models');
 
 const getSaleDetails = async (id) => {
   const err = { err: { code: 401, message: 'error' } };
@@ -6,13 +6,13 @@ const getSaleDetails = async (id) => {
     throw err;
   }
 
-  const saleDetails = await model.getSaleDetails(id);
+  const saleDetails = await sales_products.findOne({ where: { id } });
 
   if (!saleDetails) {
     throw err;
   }
 
-  return saleDetails[0];
+  return saleDetails;
 };
 
 module.exports = {

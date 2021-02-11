@@ -1,54 +1,97 @@
-const model = require('../models-antigo/salesModel');
-const { sales } = require('../models')
-const usersModel = require('../models-antigo/usersModel');
-const salesProductsModel = require('../models-antigo/salesProductsModel');
+const { sales, users } = require('../models');
 
-const createSale = async (newSale) => {
-  const { email, totalPrice, address, addressNumber, saleDate, products } = newSale;
-  console.log(newSale);
-  if (totalPrice <= 0) {
-    const err = { err: { code: 404, message: 'total price is invalid' } };
-    throw err;
+const checkTotalPrice = (totalPrice) => {
+  if (totalPrice > 0) {
+    return totalPrice;
   }
+  const err = { err: { code: 404, message: 'total price is invalid' } };
+  return err;
+};
 
+const checkAddress = (address) => {
   if (typeof address !== 'string' || !address.length) {
     const err = { err: { code: 404, message: 'address is invalid' } };
-    throw err;
+    return err;
   }
+  return address;
+};
 
+const checkAddressNumber = (addressNumber) => {
   if (!addressNumber) {
     const err = { err: { code: 404, message: 'address number is invalid' } };
-    throw err;
+    return err;
   }
+  return addressNumber;
+};
 
-  if (!saleDate) {
-    const err = { err: { code: 404, message: 'date is invalid' } };
-    throw err;
-  }
-
-  const dateArray = saleDate.split('/');
-  const dataValidFormat = new Date(dateArray[2], dateArray[1] - 1, dateArray[0]);
-
+const checkEmail = (email) => {
   if (!email) {
     const err = { err: { code: 404, message: 'email is invalid' } };
-    throw err;
+    return err;
   }
+  return email;
+};
 
-  const userFound = await usersModel.logIn(email);
-  const { id } = userFound[0];
+const checkSaleDate = (saleDate) => {
+  if (!saleDate) {
+    const err = { err: { code: 404, message: 'date is invalid' } };
+    return err;
+  }
+  const dateArray = saleDate.split('/');
+  return new Date(dateArray[2], dateArray[1] - 1, dateArray[0]);
+};
 
-  const createdSale = await model.createSale(
-    id,
-    totalPrice,
-    address,
-    addressNumber,
-    dataValidFormat,
-  );
+const checkLogin = async (email) => {
+  const userFound = await users.findOne({ where: { email } });
+  if (!userFound) {
+    const err = { err: { code: 404, message: 'user not found' } };
+    return err;
+  }
+  const { id } = userFound;
+  return id;
+};
 
-  if (!createdSale) {
+
+const checkAll = async (email, totalPrice, address, addressNumber) => {
+  email = checkEmail(email);
+  if (email.err) return email;
+  const total_price = checkTotalPrice(totalPrice);
+  if (total_price.err) return total_price;
+  const delivery_address = checkAddress(address);
+  if (delivery_address.err) return delivery_address;
+  const delivery_number = checkAddressNumber(addressNumber);
+  if (delivery_number.err) return delivery_number;
+  return { email, total_price, delivery_address, delivery_number };
+};
+
+const getDados = async (email, totalPrice, address, addressNumber, saleDate) => {
+  const dados = await checkAll(email, totalPrice, address, addressNumber);
+  if (dados.err) return dados;
+  const sales_date = checkSaleDate(saleDate);
+  if (sales_date.err) return sales_date;
+  const user_id = await checkLogin(email);
+  if (user_id.err) return user_id;
+  return { user_id, sales_date, ...dados };
+};
+
+/*
+const checkCreatedSale = (createdSale) => {
+  if (!createdSale.dataValues) {
     const err = { err: { code: 401, message: 'error' } };
     throw err;
   }
+  return;
+};
+*/
+
+const createSale = async ({ email, totalPrice, address, addressNumber, saleDate, products }) => {
+  const dados = await getDados(email, totalPrice, address, addressNumber, saleDate);
+  if (dados.err) return dados;
+  const { user_id, sales_date, total_price, delivery_address, delivery_number } = dados;
+  const createdSale = await sales.create({ user_id, total_price, delivery_address, delivery_number, sales_date, status: 'Pendente' });
+  console.log(createdSale.dataValues);
+  /* checkCreatedSale(createdSale);
+
 
   const insertedId = createdSale[0].insertId;
 
@@ -56,6 +99,8 @@ const createSale = async (newSale) => {
     await salesProductsModel.createSalesProducts(insertedId,
       product.product_id || product.id, product.quantity);
   });
+  */
+
 
   return createdSale;
 };

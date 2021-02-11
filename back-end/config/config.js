@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 
 module.exports = {
@@ -8,6 +7,7 @@ module.exports = {
     'database': process.env.SCHEMA, 
     'host': process.env.HOSTNAME,
     'dialect': 'mysql',
+    'logging': true,
   },
   'test': {
     'username': process.env.MYSQL_USER,
@@ -15,6 +15,7 @@ module.exports = {
     'database': process.env.SCHEMA,
     'host': process.env.HOSTNAME,
     'dialect': 'mysql',
+    'logging': true,
   },
   'production': {
     'username': process.env.MYSQL_USER,
@@ -22,5 +23,6 @@ module.exports = {
     'database': process.env.SCHEMA,
     'host': process.env.HOSTNAME,
     'dialect': 'mysql',
+    'logging': false,
   },
 };
