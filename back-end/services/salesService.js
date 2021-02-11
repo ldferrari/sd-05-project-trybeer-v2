@@ -1,7 +1,11 @@
 const { sales, users, sales_products } = require('../models');
 
+const zero = 0;
+
+const erro = { err: { code: 404, message: 'sale id is invalid' } };
+
 const checkTotalPrice = (totalPrice) => {
-  if (totalPrice > 0) {
+  if (totalPrice > zero) {
     return totalPrice;
   }
   const err = { err: { code: 404, message: 'total price is invalid' } };
@@ -63,7 +67,8 @@ const checkAll = async (email, totalPrice, address, addressNumber) => {
   return { email, total_price, delivery_address, delivery_number };
 };
 
-const getDados = async (email, totalPrice, address, addressNumber, saleDate) => {
+const getDados = async (date) => {
+  const { email, totalPrice, address, addressNumber, saleDate } = date;
   const dados = await checkAll(email, totalPrice, address, addressNumber);
   if (dados.err) return dados;
   const sales_date = checkSaleDate(saleDate);
@@ -81,12 +86,19 @@ const createSalesProducts = async (products, sale_id) => {
   });
 };
 
-const createSale = async ({ email, totalPrice, address, addressNumber, saleDate, products }) => {
-  const dados = await getDados(email, totalPrice, address, addressNumber, saleDate);
+const createSale = async (body) => {
+  const {email, totalPrice, address, addressNumber, saleDate, products } = body;
+  const dados = await getDados({ email, totalPrice, address, addressNumber, saleDate });
   if (dados.err) return dados;
   const { user_id, sales_date, total_price, delivery_address, delivery_number } = dados;
-  const createdSale = await sales.create({ user_id, total_price, delivery_address, delivery_number, sales_date, status: 'Pendente' });
-  // checkCreatedSale(createdSale);
+  const createdSale = await sales.create({
+    user_id,
+    total_price,
+    delivery_address,
+    delivery_number,
+    sales_date,
+    status: 'Pendente'
+  });
   const sale_id = createdSale.dataValues.id;
   await createSalesProducts(products, sale_id);
   return createdSale;
@@ -94,17 +106,17 @@ const createSale = async ({ email, totalPrice, address, addressNumber, saleDate,
 
 const closeSale = async (body) => {
   const { id } = body;
-  if (!id) return { err: { code: 404, message: 'sale id is invalid' } };
+  if (!id) return erro;
   const result = await sales.update({ status: 'Entregue' }, { where: { id } } );
-  if (result[0] === 0) return { err: { code: 404, message: 'sale id is invalid' } };
+  if (result[0] === zero) return erro;
   return result;
 };
 
 const changeStatusSale = async (body) => {
   const { id } = body;
-  if (!id) return { err: { code: 404, message: 'sale id is invalid' } };
+  if (!id) return erro;
   const result = await sales.update({ status: 'Preparando' }, { where: { id } } );
-  if (result[0] === 0) return { err: { code: 404, message: 'sale id is invalid' } };
+  if (result[0] === zero) return erro;
   return result;
 };
 
