@@ -20,27 +20,17 @@ function Provider({ children }) {
   const [globalData, setGlobalData] = useState({});
   const [orderDetails, setOrderDetails] = useState([]);
   const [alertCompraFinalizada, setAlertCompraFinalizada] = useState('');
-
   useEffect(() => { setCart(initialCard); }, []);
   useEffect(() => { updateCard(cart); }, [cart]);
-
-  const contextValue = {
-    userName,
-    setUserName,
-    nomeProfile,
-    setNomeProfile,
-    emailProfile,
-    setEmailProfile,
-    cart,
-    setCart,
-    orderDetails,
-    setOrderDetails,
-    globalData,
-    setGlobalData,
-    alertCompraFinalizada,
-    setAlertCompraFinalizada,
+  const contxt1 = {
+    userName, setUserName, nomeProfile, setNomeProfile, emailProfile, setEmailProfile,
   };
-  return <AppContext.Provider value={ contextValue }>{ children }</AppContext.Provider>;
+  const contxt2 = {
+    cart, setCart, orderDetails, setOrderDetails, globalData, setGlobalData,
+  };
+  const contxt3 = { alertCompraFinalizada, setAlertCompraFinalizada };
+  Object.assign(contxt1, contxt2, contxt3);
+  return <AppContext.Provider value={ contxt1 }>{ children }</AppContext.Provider>;
 }
 
 export default Provider;
