@@ -31,7 +31,7 @@ export default function OrderDetails(props) {
   const [date, setDate] = useState('');
   const [total, setTotal] = useState(zero);
   const data = { setDate, setTotal, setOrders };
-  useEffect(() => { fetchAndSetData(data); }, [email]);
+  useEffect(() => { fetchAndSetData(data); }, [data]);
 
   if (!token) return <Redirect to="/login" />;
   return (

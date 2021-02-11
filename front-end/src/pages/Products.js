@@ -17,7 +17,7 @@ const Products = () => {
   useEffect(() => {
     getAllProducts(token).then((products) => setProductList(products))
       .catch((err) => err);
-  }, [setProductList, token]);
+  }, [setProductList]);
 
   if (!token) return <Redirect to="/login" />;
   return (
