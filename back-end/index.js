@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
 
   // Listen for new messages
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
-    console.log('data back===>', data);
+    // console.log('data back===>', data);
     io.in(ID).emit(NEW_CHAT_MESSAGE_EVENT, data);
   });
 

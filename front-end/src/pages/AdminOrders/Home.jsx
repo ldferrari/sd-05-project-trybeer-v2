@@ -48,13 +48,14 @@ const Home = (props) => {
     fetchProducts();
   }, [token, history]);
 
+  console.log("admin hoooome=========>", allOrders);
   return (
     <div className={ classes.root }>
       <Box display="flex">
         <AdminSideBar title="Ordens Pendentes" icon="inbox" />
         <Box p={ 4 } mt={ 14 }>
           <Grid container spacing={ 4 }>
-            {allOrders.map((item, index) => (
+            {allOrders.length && allOrders.map((item, index) => (
               <CardOrder key={ item.id } order={ item } index={ index } />
             ))}
           </Grid>

@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import Home from './Home';
 
-function App() {
+function App(props) {
   const theme = createMuiTheme({
     spacing: 4,
     palette: {
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <ThemeProvider theme={ theme }>
-      <Home />
+      <Home history={props.history} />
     </ThemeProvider>
   );
 }
