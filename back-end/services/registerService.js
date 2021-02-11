@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 
-const userModel = require('../models/userModel');
+const { users } = require('../models');
 const createToken = require('./createToken');
 
 const length = 6;
 
 const createUser = async (name, email, password, role) => {
-  const thisEmailAlreadyExists = await userModel.getByEmail(email);
+  const thisEmailAlreadyExists = await users.findOne({ where: { email } });
 
   if (thisEmailAlreadyExists) {
     throw new Error('invalid_email');
@@ -18,7 +18,7 @@ const createUser = async (name, email, password, role) => {
 
   const payload = { issuer: 'post-api', audience: 'identity', name, email, role };
 
-  await userModel.createUser(name, email, password, role);
+  await users.create({ name, email, password, role });
 
   const token = await createToken(payload);
   const user = jwt.decode(token);

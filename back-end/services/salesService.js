@@ -1,5 +1,4 @@
-const salesModel = require('../models/salesModel');
-const userModel = require('../models/userModel');
+const { users, sales } = require('../models');
 
 async function createSale(newSale) {
   const { email, totalPrice, address, number, saleDate } = newSale;
@@ -8,10 +7,18 @@ async function createSale(newSale) {
     throw new Error({ code: 404, message: 'Missing information' });
   }
 
-  const user = await userModel.getByEmail(email);
-  const { id } = user;
+  const user = await users.findOne({ where: { email } });
+  const { id } = user.dataValues;
+  console.log(user);
 
-  const addNewSale = salesModel.createSale(id, totalPrice, address, number, saleDate);
+  const addNewSale = await sales.create({
+    user_id: id,
+    total_price: totalPrice,
+    delivery_address: address,
+    delivery_number: number,
+    sale_date: saleDate,
+  });
+
   return addNewSale;
 }
 
@@ -20,19 +27,19 @@ async function getSalesById(body) {
 
   if (!email) throw new Error({ code: 404, message: 'E-mail is invalid' });
 
-  const user = await userModel.getByEmail(email);
+  const user = await users.findOne({ where: { email } });
   const { id } = user;
 
-  const sales = await salesModel.getSalesById(id);
+  const sale = await sales.findOne({ where: { id } });
 
-  if (!sales) throw new Error({ code: 404, message: 'User has placed no orders yet' });
+  if (!sale) throw new Error({ code: 404, message: 'User has placed no orders yet' });
 
-  return sales[0];
+  return sale.dataValues;
 }
 
 async function getAdminSales() {
-  const sales = await salesModel.getAdminSales();
-  return sales[0];
+  const sales = await sales.findAll();
+  return sales;
 }
 
 module.exports = { createSale, getSalesById, getAdminSales };

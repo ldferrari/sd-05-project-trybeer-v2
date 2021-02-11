@@ -1,5 +1,6 @@
-const userModel = require('../models/userModel');
+const { users } = require('../models');
 
-const updateUser = async (editName, email) => userModel.updateUser(editName, email);
+const updateUser = async (editName, email) =>
+  users.update({ editName, email }, { where: { name: editName, email } });
 
 module.exports = { updateUser };

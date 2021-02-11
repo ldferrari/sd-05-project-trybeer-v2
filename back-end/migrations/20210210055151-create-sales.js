@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
       },
       user_id: { type: Sequelize.INTEGER, allowNull: false },
-      total_price: { type: Sequelize.STRING, allowNull: false },
+      total_price: { type: Sequelize.FLOAT, allowNull: false },
       delivery_address: { type: Sequelize.STRING, allowNull: false },
       delivery_number: { type: Sequelize.STRING, allowNull: false },
       sale_date: { type: Sequelize.DATE, allowNull: false },
