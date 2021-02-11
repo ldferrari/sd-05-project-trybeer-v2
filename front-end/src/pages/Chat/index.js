@@ -1,18 +1,19 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react'; //useContext
+import propTypes from 'prop-types';
 import { getMessagesById } from '../../services/requestAPI';
 import { verifyToken } from '../../services/webTokenMiddleware';
-import propTypes from 'prop-types';
 import AppContext from '../../context/AppContext';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import useChat from '../../components/useChat';
+
 const dateFormat = require('dateformat');
 
 const Chat = (props) => {
   // const { email } = useContext(AppContext);
   const token = localStorage.getItem('token');
   const payload = verifyToken(token);
-  const { email, id } = payload; 
+  const { email, id } = payload;
   // console.log('payload=====>', payload);
   // console.log('email===>', email);
   // const { Id } = props; // pega id do link/requisição/jwt
@@ -30,15 +31,15 @@ const Chat = (props) => {
       setNewMessage(data);
     }
     fetchOldMessages();
-  }, [props]);
+  }, [props, id, token]);
 
   const now = new Date();
   // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
   const time = dateFormat(now, 'HH:mm:ss');
 
   const handleNewMessageChange = (event) => {
-    setNewMessage({ message: event.target.value, time: time, nome: email });
-    //precisa colocar a const time e o email além da msg ou faz isso pelo "server?" webchat fiz no server...
+    setNewMessage({ message: event.target.value, time, nome: email });
+    // precisa colocar a const time e o email além da msg ou faz isso pelo "server?"
   };
 
   const handleSendMessage = () => {
@@ -54,12 +55,12 @@ const Chat = (props) => {
         <ul className="messages-list">
           {messages.map((message, i) => (
             <li
-              key={i}
-              className={`message-item ${
+              key={ `${message.time}-${i}` }
+              className={ `message-item ${
                 message.ownedByCurrentUser ? 'my-message' : 'received-message' // CSS!
-              }`}
+              }` }
             >
-              <p data-testid="nickname">{message.nome}</p> {/*//=>precisa ser o email! */}
+              <p data-testid="nickname">{message.nome}</p>
               <p data-testid="message-time">{message.time}</p>
               <h2 data-testid="text-message">{message.message}</h2>
             </li>
@@ -69,13 +70,14 @@ const Chat = (props) => {
       <input
         type="text"
         data-testid="message-input"
-        value={newMessage.message}
-        onChange={handleNewMessageChange}
+        value={ newMessage.message }
+        onChange={ handleNewMessageChange }
         placeholder="Digite..."
         className="new-message-input-field"
       />
       <button
-        onClick={handleSendMessage}
+        type="button"
+        onClick={ handleSendMessage }
         className="send-message-button"
         data-testid="send-message"
       >

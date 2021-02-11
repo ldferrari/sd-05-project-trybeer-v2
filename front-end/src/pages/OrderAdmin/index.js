@@ -30,7 +30,7 @@ const OrderAdmin = (props) => {
 
   return (
     <div>
-      <div className="Orders adminOrders"  /* style={ { display: 'flex', alignItems: 'stretch' } } */>
+      <div className="Orders adminOrders">
         <AdminSideBar />
         <div className="ordersList">
           <h2 className="checkoutitle">Pedidos Pendentes</h2>

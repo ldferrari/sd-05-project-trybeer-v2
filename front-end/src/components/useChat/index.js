@@ -20,7 +20,7 @@ const useChat = (ID) => {
         ...message,
         ownedByCurrentUser: message.senderId === socketRef.current.id,
       };
-      setMessages((messages) => [...messages, incomingMessage]);
+      setMessages(() => [...messages, incomingMessage]); // não precisa de (messages)?
     });
     // Destroys the socket reference
     // when the connection is closed
