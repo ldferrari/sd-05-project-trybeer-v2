@@ -17,19 +17,19 @@ function ClientMenu(props) {
     }
   }
 
-  const left = (click) ? '0' : '-40%';
-  const display = (click) ? 'block' : 'none';
+  const left = click ? '0' : '-40%';
+  const display = click ? 'block' : 'none';
 
   return (
     <header className="menu-superior">
       <label className="top-hamburguer" data-testid="top-hamburguer" htmlFor="check">
         &#9776;
-        <input type="checkbox" id="check" onChange={ () => openClose() } />
+        <input type="checkbox" id="check" onChange={() => openClose()} />
       </label>
       <h1 className="top-title" data-testid="top-title">
         {title}
       </h1>
-      <div className="side-menu-container" style={ { left, display } }>
+      <div className="side-menu-container" style={{ left, display }}>
         <nav className="side-menu">
           <div className="btn-menu">
             <Link className="btn-side" data-testid="side-menu-item-products" to="/products">
@@ -43,6 +43,9 @@ function ClientMenu(props) {
             </Link>
             <Link className="btn-side" data-testid="side-menu-item-logout" to="/login">
               Sair
+            </Link>
+            <Link className="btn-side" data-testid="side-menu-chat" to="/chat">
+              Conversar com a loja
             </Link>
           </div>
         </nav>

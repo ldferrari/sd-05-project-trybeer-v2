@@ -19,7 +19,7 @@
 	padding: 15px;
 	position: fixed;
 	transition:color linear 1s;
-	z-index: 1;
+	z-index: 3;
 }
 
 .top-title {

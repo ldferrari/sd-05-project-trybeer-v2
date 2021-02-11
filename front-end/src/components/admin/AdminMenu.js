@@ -13,11 +13,14 @@ function AdminMenu() {
         <Link className="btn-side" data-testid="side-menu-item-profile" to="/admin/profile">
           Perfil
         </Link>
+        <Link className="btn-side" data-testid="side-menu-item-chat" to="/admin/chats">
+          Perfil
+        </Link>
         <Link
           className="btn-side"
           data-testid="side-menu-item-logout"
           to="/login"
-          onClick={ () => localStorage.clear() }
+          onClick={() => localStorage.clear()}
         >
           Sair
         </Link>
