@@ -35,7 +35,7 @@ const Chat = (props) => {
 
   const now = new Date();
   // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
-  const time = dateFormat(now, 'HH:mm:ss');
+  const time = dateFormat(now, 'HH:mm');
 
   const handleNewMessageChange = (event) => {
     setNewMessage({ message: event.target.value, time, nome: email });
