@@ -7,9 +7,9 @@ const getAdminOrders = async () => {
   return orders;
 };
 
-const changeStatus = async (saleId) => {
+const changeStatus = async (estado, saleId) => {
   const [status] = await connection.execute(
-    'UPDATE sales SET status = "Entregue" WHERE id = ?;', [saleId],
+    'UPDATE sales SET status = ? WHERE id = ?;', [estado, saleId],
   );
   return status;
 };
