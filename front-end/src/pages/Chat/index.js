@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'; //useContext
+import React, { useEffect, useState } from 'react'; // useContext
 import propTypes from 'prop-types';
 import { getMessagesById } from '../../services/requestAPI';
 import { verifyToken } from '../../services/webTokenMiddleware';
-import AppContext from '../../context/AppContext';
+// import AppContext from '../../context/AppContext';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import useChat from '../../components/useChat';
@@ -53,9 +53,9 @@ const Chat = (props) => {
       <h1 className="">{email}</h1>
       <div className="messages-container">
         <ul className="messages-list">
-          {messages.map((message, i) => (
+          {messages.map((message) => (
             <li
-              key={ `${message.time}-${i}` }
+              key={ `${message.time}-${message.message}` }
               className={ `message-item ${
                 message.ownedByCurrentUser ? 'my-message' : 'received-message' // CSS!
               }` }

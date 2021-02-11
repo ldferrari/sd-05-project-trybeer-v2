@@ -2,7 +2,7 @@ const connection = require('./connection');
 
 const getConversation = async (idUser) => connection()
   .then((db) => db.collection(idUser).find()
-  .toArray());
+    .toArray());
 
 const getAllConversations = async () => connection().then((db) => db.getCollectionNames());
 
