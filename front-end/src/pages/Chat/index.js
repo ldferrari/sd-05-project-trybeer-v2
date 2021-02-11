@@ -21,18 +21,17 @@ const Chat = (props) => {
   const [newMessage, setNewMessage] = useState(''); // Message to be sent
   // =>const [theOrders, setOrders] = useState([]);
 
-  async function fetchOldMessages() {
-    const { data } = await getMessagesById(id);
-    setNewMessage(data);
-  };
-
   useEffect(() => {
     const { history } = props;
     if (!token) {
       history.push('/login');
     }
+    async function fetchOldMessages() {
+      const { data } = await getMessagesById(id);
+      setNewMessage(data);
+    }
     fetchOldMessages();
-  }, [props, token]);
+  }, [props, id, token]);
 
   const now = new Date();
   // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
