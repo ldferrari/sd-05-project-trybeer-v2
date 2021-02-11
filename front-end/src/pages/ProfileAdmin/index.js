@@ -11,7 +11,9 @@ const PerfilAdmin = () => {
   useEffect(() => {
     async function asyncMe() {
       const token = localStorage.getItem('token');
-      const { data: { user } } = await getProfileInfo(token);
+      const {
+        data: { user },
+      } = await getProfileInfo(token);
       setName(user.name);
       setEmail(user.email);
     }
@@ -26,15 +28,15 @@ const PerfilAdmin = () => {
     <div className="App">
       <AdminSideBar />
       <div className="adminData">
-      <h3 data-testid="profile-name">
-        Nome:
-        {name}
-      </h3>
-      <h3 data-testid="profile-email">
-        Email:
-        {email}
-      </h3>
-    </div>
+        <h3 data-testid="profile-name">
+          Nome:
+          {name}
+        </h3>
+        <h3 data-testid="profile-email">
+          Email:
+          {email}
+        </h3>
+      </div>
     </div>
   );
 };

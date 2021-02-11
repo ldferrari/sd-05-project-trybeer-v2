@@ -30,15 +30,16 @@ const OrderAdmin = (props) => {
 
   return (
     <div>
-      <div className="Orders adminOrders"  /* style={ { display: 'flex', alignItems: 'stretch' } } */>
+      <div
+        className="Orders adminOrders" /* style={ { display: 'flex', alignItems: 'stretch' } } */
+      >
         <AdminSideBar />
         <div className="ordersList">
           <h2 className="checkoutitle">Pedidos Pendentes</h2>
           <div className="cartItems adminList">
-            {
-              allOrders
-                .map((item, index) => <CardOrder key={ item.id } order={ item } index={ index } />)
-            }
+            {allOrders.map((item, index) => (
+              <CardOrder key={ item.id } order={ item } index={ index } />
+            ))}
           </div>
         </div>
       </div>
