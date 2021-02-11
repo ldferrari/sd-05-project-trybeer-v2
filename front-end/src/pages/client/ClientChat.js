@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 const io = require('socket.io-client');
-const { getMessagesByClient } = require('../../../../back-end/modelsMongoDb/messagesModel');
+const { getMessagesByClient } = require('../../services/fetchMongo');
 require('dotenv').config();
 
 function ClientChat() {
