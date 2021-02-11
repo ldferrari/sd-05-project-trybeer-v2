@@ -7,7 +7,7 @@ const orders = Router();
 orders.get('/', async (req, res) => {
   try {
     const { id } = req.payload;
-    console.log('id ==>', id);
+    // console.log('id ==>', id);
     const ordersProducts = await service.getOrders(id);
     res.status(200).json(ordersProducts);
   } catch (error) {
