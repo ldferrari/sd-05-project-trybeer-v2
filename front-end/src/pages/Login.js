@@ -5,8 +5,6 @@ import { checkEmail, checkPassword } from '../services/checkUserData';
 import TrybeerContext from '../context/TrybeerContext';
 import { login } from '../services/fetch';
 
-import SqlBtn from '../components/sqlBtn';
-
 function inputEmail(handleEmailChange) {
   return (
     <div className="login-input">
@@ -83,7 +81,6 @@ function Login({ history }) {
           Ainda não tenho conta
         </button>
       </Link>
-      <SqlBtn />
     </div>
   );
 }
