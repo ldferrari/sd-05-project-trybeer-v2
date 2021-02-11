@@ -18,6 +18,7 @@ function ClientChat() {
     const messagesByClient = await getMessagesByClient(email);
     return messagesByClient;
   }, []);
+  // talvez [email]
 
   const handleTextChange = (e) => {
     const message = e.target.value;

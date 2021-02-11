@@ -11,16 +11,15 @@ const createMessage = async ({ nickname, hour, message }) => {
   }
 };
 
-// probably will never use
-// const getMessages = async () => {
-//   try {
-//     const allMessages = await connection().then((db) =>
-//       db.collection('messages').find().toArray());
-//     return allMessages;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+const getMessages = async () => {
+  try {
+    const allMessages = await connection().then((db) =>
+      db.collection('messages').find().toArray());
+    return allMessages;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const getMessagesByClient = async (email) => {
   try {
@@ -34,6 +33,6 @@ const getMessagesByClient = async (email) => {
 
 module.exports = {
   createMessage,
-  // getMessages,
+  getMessages,
   getMessagesByClient,
 };
