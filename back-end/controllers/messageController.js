@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const moment = require('moment');
-const { getMessages, createMessage } = require('../models/messagesModel');
+const { getMessages, createMessage } = require('../models/modelsMongo/messagesModel');
 
 const chat = Router();
 const codeOk = 200;

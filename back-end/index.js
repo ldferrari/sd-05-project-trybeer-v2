@@ -9,7 +9,7 @@ const productsController = require('./controllers/productsController');
 const salesController = require('./controllers/salesController');
 const detailsController = require('./controllers/salesProductsController');
 const chatController = require('./controllers/messageController');
-const { createMessage } = require('./modelsMongoDb.messagesModel');
+const { createMessage } = require('./models/modelsMongo/messagesModel');
 
 const app = express();
 

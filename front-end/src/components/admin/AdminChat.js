@@ -1,8 +1,8 @@
 // Componente filho da page ChatRoom: quando admin seleciona uma conversa com um cliente
 
-import React from 'react';
-const io = require("socket.io-client");
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+const io = require("socket.io-client");
 const { getMessagesByClient } = require('../../services/fetchMongo');
 require('dotenv').config();
 
@@ -12,9 +12,11 @@ function AdminChat(props) {
   const PORT = process.env.PORT || 3001;
   const sellerSocket = io(`http://localhost:${PORT}/admin/chats`);
 
+  const [messagesByClient, setMessagesByClient] = useState('')
+
   useEffect(async () => {
-    const messagesByClient = await getMessagesByClient(email);
-    return messagesByClient;
+    const msgByClient = await getMessagesByClient(email);
+    setMessagesByClient((messagesByClient) => [...messagesByClient, msgByClient]);
   }, []);
 
   const handleSend = () => {};
@@ -39,8 +41,8 @@ function AdminChat(props) {
       </div> */}
       {/* 2. Parte passando por bd: */}
       <div>
-        {allMessagesByClient &&
-          allMessagesByClient.forEach((msg) => (
+        {messagesByClient &&
+          messagesByClient.forEach((msg) => (
             <div>
               <p>
                 <span data-testid="nickname">{msg.nickname}</span> -

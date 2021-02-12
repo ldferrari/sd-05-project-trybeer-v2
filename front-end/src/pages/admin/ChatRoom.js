@@ -1,15 +1,16 @@
-import React from 'react';
-const { getAllMessages } = require('../../services/fetchMongo');
+import React, { useEffect, useState } from 'react';
+// import { all } from 'sequelize/types/lib/operators'; ?
 import AdminChat from '../../components/admin/AdminChat';
+const { getAllMessages } = require('../../services/fetchMongo');
 
 function ChatRoom() {
   // const [clickChat, setClickChat] = useState();
-  // not included yet in context
+  const [allChats, setAllChats] = useState('');
   // idea would be to have setClickChat(false) on the back button in AdminChat
 
   useEffect(async () => {
-    const allChats = await getAllMessages();
-    return allChats;
+    const getAllChats = await getAllMessages();
+    setAllChats((allChats) => [...allChats, getAllChats]);
   }, []);
 
   const handleClickChat = (emailClient) => { 
