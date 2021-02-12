@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
-// import { withRouter } from 'react-router-dom';
 import RegisterContext from '../context/RegisterContext';
 import SellCheckbox from '../components/register/SellCheckbox';
 import InputName from '../components/register/InputName';
@@ -20,9 +18,9 @@ function Register() {
       </div>
       <ClickRegister />
       {emailExists ? <div>E-mail already in database.</div> : null}
+      {/* does not work, give 500 error in backend */}
     </div>
   );
 }
 
-// export default withRouter(Register);
 export default Register;
