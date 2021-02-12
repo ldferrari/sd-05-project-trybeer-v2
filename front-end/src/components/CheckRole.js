@@ -13,11 +13,6 @@ const CheckRole = ({ setRole, role }) => {
 export default CheckRole;
 
 CheckRole.propTypes = {
-  role: PropTypes.string,
-  setRole: PropTypes.func,
-};
-
-CheckRole.defaultProps = {
-  role: 'client',
-  setRole: PropTypes.func,
+  role: PropTypes.string.isRequired,
+  setRole: PropTypes.func.isRequired,
 };
