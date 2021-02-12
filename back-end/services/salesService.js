@@ -9,7 +9,6 @@ async function createSale(newSale) {
 
   const user = await users.findOne({ where: { email } });
   const { id } = user.dataValues;
-  console.log(user);
 
   const addNewSale = await sales.create({
     user_id: id,
@@ -28,13 +27,13 @@ async function getSalesById(body) {
   if (!email) throw new Error({ code: 404, message: 'E-mail is invalid' });
 
   const user = await users.findOne({ where: { email } });
-  const { id } = user;
+  const { id } = user.dataValues;
 
-  const sale = await sales.findOne({ where: { id } });
+  const sale = await sales.findAll({ where: { user_id: id } });
 
   if (!sale) throw new Error({ code: 404, message: 'User has placed no orders yet' });
 
-  return sale.dataValues;
+  return sale;
 }
 
 async function getAdminSales() {
