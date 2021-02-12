@@ -5,13 +5,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import TrybeerProvider from './context/TrybeerProvider';
 import RegisterProvider from './context/RegisterProvider';
+import CheckoutProvider from './context/CheckoutProvider';
 
 ReactDOM.render(
   <TrybeerProvider>
     <RegisterProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <CheckoutProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </CheckoutProvider>
     </RegisterProvider>
   </TrybeerProvider>,
   document.getElementById('root'),
