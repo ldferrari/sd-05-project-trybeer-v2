@@ -8,19 +8,15 @@ import OrderCard from '../../components/client/OrderCard';
 function Orders() {
   const [orders, setOrders] = useState([]);
   const [isLogged, setIsLogged] = useState(true);
-
   useEffect(() => {
     const user = getUser();
-
     if (!user) {
       setIsLogged(false);
     } else {
       getUserSales(user.email).then((response) => setOrders(response));
     }
   }, []);
-
   if (!isLogged) return <Redirect to="/login" />;
-
   return (
     <div>
       <ClientMenu title="Meus Pedidos" />
