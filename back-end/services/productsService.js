@@ -1,8 +1,8 @@
-const model = require('../models/sql/productsModel');
+const { product: model } = require('../models');
 
 const getAll = async () => {
-  const products = await model.getProducts();
-  return products[0];
+  const products = await model.findAll();
+  return products;
 };
 // const getProductById = async (productId) => {
 //   if (!productId) {
@@ -14,7 +14,7 @@ const getAll = async () => {
 //   }
 //   const product = await model.getProductById(productId);
 
-// }
+// };
 module.exports = {
   getAll,
 };

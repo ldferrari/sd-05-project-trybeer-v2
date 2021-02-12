@@ -5,7 +5,6 @@ import { getProducts } from '../services/api';
 import Context from '../context/Context';
 import './css/products.css';
 
-
 const Products = () => {
   const {
     beers,
@@ -79,7 +78,8 @@ const Products = () => {
     <div className="background">
       <Header>Products</Header>
       <div className="corpo">
-        <button className="verCarrinho" disabled={ !cartBtn } type="submit" data-testid="checkout-bottom-btn">
+        <button className="verCarrinho" disabled={ !cartBtn }
+        type="submit" data-testid="checkout-bottom-btn">
           <Link to="/checkout">
             Ver Carrinho
           </Link>
@@ -97,7 +97,8 @@ const Products = () => {
               />
               <p className="product-info">
                 <h3 data-testid={ `${index}-product-name` }>{element.name}</h3>
-                <span data-testid={ `${index}-product-price` }>{`R$ ${element.price.replace('.', ',')}`}</span>
+                <span data-testid={ `${index}-product-price` }>
+                  {`R$ ${String(element.price).replace('.', ',')}`}</span>
               </p>
             </div>
             <div className="action-buttons">

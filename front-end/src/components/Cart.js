@@ -37,7 +37,7 @@ const Cart = () => {
           <div data-testid={ `${index}-product-name` }>{ product.name }</div>
           <div data-testid={ `${index}-product-qtd-input` }>{ product.qty }</div>
           <div data-testid={ `${index}-product-unit-price` }>
-            {`(R$ ${product.price.replace('.', ',')} un)` }
+            {`(R$ ${product.price.toFixed(two).replace('.', ',')} un)` }
           </div>
           <div data-testid={ `${index}-product-total-value` }>
             {`R$ ${(product.price * product.qty).toFixed(two).replace('.', ',')}`}

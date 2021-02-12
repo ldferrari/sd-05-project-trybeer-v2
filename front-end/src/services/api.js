@@ -1,5 +1,11 @@
 const url = 'http://localhost:3001';
 
+const headers = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+}
+
 export const checkUser = async (email, password) => {
   const myInit = {
     method: 'POST',
@@ -26,7 +32,8 @@ export const registerUser = async (userData) => {
     mode: 'cors',
     body: JSON.stringify(userData),
   };
-  const response = await fetch(`${url}/users/register`, registerReq).then((res) => res.json());
+  const response = await fetch(`${url}/users/register`, registerReq)
+    .then((res) => res.json());
   return response || undefined;
 };
 
@@ -58,7 +65,8 @@ export const updateUserName = async (userData, token) => {
     mode: 'cors',
     body: JSON.stringify(userData),
   };
-  const response = await fetch(`${url}/users/update`, updateReq).then((res) => res.json());
+  const response = await fetch(`${url}/users/update`, updateReq)
+    .then((res) => res.json());
   return response || undefined;
 };
 
@@ -90,7 +98,8 @@ export const orderPlaced = async (order, email, token) => {
     mode: 'cors',
     body: JSON.stringify({ email, order }),
   };
-  const response = await fetch(`${url}/orders/insert`, registerReq).then((res) => res.json());
+  const response = await fetch(`${url}/orders/insert`, registerReq)
+    .then((res) => res.json());
   return response || undefined;
 };
 
@@ -139,7 +148,8 @@ export const getOrdersAdmin = async (role, token) => {
     },
     mode: 'cors',
   };
-  const response = await fetch(`${url}/orders/admin`, request).then((orders) => orders.json());
+  const response = await fetch(`${url}/orders/admin`, request)
+    .then((orders) => orders.json());
   return response || undefined;
 };
 

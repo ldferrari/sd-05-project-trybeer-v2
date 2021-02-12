@@ -5,7 +5,7 @@ import { getOrders } from '../services/api';
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
-
+  const two = 2;
   useEffect(() => {
     const email = (localStorage.getItem('email') || '');
     const token = (localStorage.getItem('token') || '');
@@ -28,9 +28,11 @@ export default function Orders() {
               <span data-testid={ `${index}-order-number` }>
                 {`Pedido ${order.id}`}
               </span>
-              <span data-testid={ `${index}-order-date` }>{formatDate(order.sale_date)}</span>
+              <span data-testid={ `${index}-order-date` }>
+                {formatDate(order.sale_date)}
+              </span>
               <span data-testid={ `${index}-order-total-value` }>
-                {`R$ ${order.total_price.replace('.', ',')}`}
+                {`R$ ${order.total_price.toFixed(two).replace('.', ',')}`}
               </span>
             </div>
           </li>

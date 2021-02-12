@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const validateJWT = require('../auth/validateJWT');
-const service = require('../services/orders/ordersService');
-const ordersFactory = require('../services/orders/ordersFactory');
-const { sale } = require('../models');
+const service = require('../services/ordersService');
+const httpStatusCode = require('../statusCode');
 
 const orders = Router();
 
@@ -14,16 +13,16 @@ orders.get('/', validateJWT, async (req, res) => {
     return res.status(sale.statusCode).json(sale.message);
   }
 
-  return res.status(200).json(sale);
+  return res.status(httpStatusCode.ok).json(sale);
 });
 
 orders.get('/admin', validateJWT, async (req, res) => {
   const { role } = req.headers;
   if (role !== 'administrator') {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(httpStatusCode.unauthorized).json({ message: 'Unauthorized' });
   }
   const sales = await service.getSalesAdmin();
-  return res.status(200).json(sales);
+  return res.status(httpStatusCode.ok).json(sales);
 });
 
 orders.post('/insert', validateJWT, async (req, res) => {
@@ -38,13 +37,13 @@ orders.get('/admin/:id', validateJWT, async (req, res) => {
   const { id } = req.params;
   const { role } = req.headers;
   if (role !== 'administrator') {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(httpStatusCode.unauthorized).json({ message: 'Unauthorized' });
   }
   const ordersProducts = await service.getSalesProducts(id);
   if (ordersProducts.error) {
     return res.status(ordersProducts.code).json(ordersProducts.message);
   }
-  return res.status(200).json(ordersProducts);
+  return res.status(httpStatusCode.ok).json(ordersProducts);
 });
 
 orders.put('/admin/:id', validateJWT, async (req, res) => {
@@ -52,27 +51,19 @@ orders.put('/admin/:id', validateJWT, async (req, res) => {
   const { role } = req.headers;
 
   if (role !== 'administrator') {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(httpStatusCode.unauthorized).json({ message: 'Unauthorized' });
   }
 
   await service.updateOrderStatus(id);
-  return res.status(200).json({ message: 'Order updated' });
+  return res.status(httpStatusCode.ok).json({ message: 'Order updated' });
 });
 
 orders.get('/:id', validateJWT, async (req, res) => {
   let { id } = req.params;
-  id = parseInt(id);
-  const model = ordersFactory().bind(this);
   
-  const ordersProducts = await model.getSalesProducts(id);
+  const ordersProducts = await service.getSalesProducts(id);
   
-  // const ordersProducts = await ordersService.getSalesProducts(id);
-
-
-  // if (ordersProducts.error) {
-  //   return res.status(ordersProducts.code).json(ordersProducts.message);
-  // }
-  return res.status(200).json(ordersProducts);
+  return res.status(httpStatusCode.ok).json(ordersProducts);
 });
 
 module.exports = orders;

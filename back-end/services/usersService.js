@@ -1,8 +1,9 @@
-const model = require('../models/sql/usersModel');
+// const model = require('../models/sql/usersModel');
+const { user: model } = require('../models');
 
 const checkUser = async (email) => {
-  const user = await model.checkUser(email);
-  if (user[0][0] !== undefined) {
+  const user = await model.findOne({ where: { email }});
+  if (user !== null) {
     return {
       error: true,
       statusCode: 409,
@@ -24,29 +25,33 @@ const createUser = async (name, email, password, checkbox) => {
     };
   }
   const role = checkbox ? 'administrator' : 'client';
-  await model.createUser(name, email, password, role);
+  await model.create({name, email, password, role});
   return role;
 };
 
 const updateUser = async (newName, email) => {
-  await model.updateUser(newName, email);
+  await model.update({ name: newName }, {
+    where: {
+      email
+    }
+  });
 };
 
 const getUserByEmail = async (email) => {
-  const user = await model.checkUser(email);
-  return user[0][0].name || undefined;
+  const user = await model.findOne({ where: { email } });
+  return user.dataValues.name;
 };
 
 const getUserId = async (email) => {
-  const user = await model.checkUser(email);
-  if (!user) {
+  const user = await model.findOne({where: { email }});
+  if (user === null) {
     return {
       error: true,
       statusCode: 400,
       message: 'User not found',
     };
   }
-  return user[0][0].id || undefined;
+  return user.dataValues.id;
 };
 
 module.exports = {

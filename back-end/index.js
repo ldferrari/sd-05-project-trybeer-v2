@@ -10,6 +10,8 @@ const orders = require('./controllers/ordersController');
 // require('dotenv').config({ path: `${__dirname}/../.env` });
 require('dotenv').config();
 
+const portBackEnd = 3001;
+
 const app = express();
 
 app.use(cors());
@@ -24,6 +26,6 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || portBackEnd;
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

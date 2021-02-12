@@ -1,12 +1,7 @@
-import React, { useState, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React from 'react';
 
-import Context from '../context/Context';
-import { registerUser } from '../services/api';
 import { validateRegister } from '../services/validateRegister';
-import logo from '../images/logo.png';
-import './css/register.css';
-// import Form from '..components/Form';
+import Input from './Input';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import {
@@ -17,15 +12,19 @@ import {
   bRegister,
 } from '../components/data/registerData.json';
 
-async function handleReg(userToRegister, setDesignetedRoute, userEmail) {
+async function handleRegister(userToRegister, setDesignetedRoute, userEmail) {
+
   if (!validateRegister(userToRegister)) return setDesignetedRoute(undefined);
+
   const response = await registerUser(userToRegister);
+
   if (response.message) {
     const labelEmail = document.querySelector('#lblEmail');
     const alreadyExists = document.createElement('span');
     alreadyExists.innerHTML = 'E-mail already in database.';
     return labelEmail.appendChild(alreadyExists);
   }
+
   localStorage.setItem('role', response.role);
   localStorage.setItem('token', response.token);
   localStorage.setItem('email', userEmail);
@@ -33,51 +32,40 @@ async function handleReg(userToRegister, setDesignetedRoute, userEmail) {
     ? setDesignetedRoute('/products')
     : setDesignetedRoute('/admin/orders');
 }
-const Register = () => {
+
+const handleSubmit = (userData, e) => {
+  e.preventDefault();
+  return handleRegister()
+};
+
+const userData = {
+  name: userName,
+  email: userEmail,
+  password,
+  checkbox: seller,
+};
+
+const Form = (props) => {
+  // const { userData } = props;
+  // const registerContext = React.useContext(Context);
   const { userName, userEmail, seller, password } = useContext(
     Context
   );
   const [designatedRoute, setDesignetedRoute] = useState(undefined);
-  const userData = {
-    name: userName,
-    email: userEmail,
-    password,
-    checkbox: seller,
-  };
-
-  const handleRegister = async (userReg,e) => {
-    e.preventDefault();
-    console.log("OIIIIIIIIIIIIIi");
-    handleReg(userReg, setDesignetedRoute, userEmail);
-  };
-
   return (
-    <div className="register">
-      <img src={ logo } alt="logo" className="logo" />
-      { designatedRoute !== undefined ? <Redirect to={ designatedRoute } /> : null}
-      <form id="register-form">
+    <form id="register-form">
         <Input i={ iName } />
         <Input i={ iEmail } />
         <Input i={ iPassword } />
         <Input i={ iCheckbox } />
         <div className="buttons">
-          <Button b={bRegister} disabled={!validateRegister(userData)} onClick={(e)=> handleRegister(userData,e)}/>
-          {/* <button
-            type="submit"
-            data-testid="signup-btn"
-            disabled={!validateRegister(userData)}
-            onClick={(e) => handleRegister(userData, e)}
-            className="user-register"
-          >
-            Cadastrar
-          </button> */}
+          <Button b={bRegister} disabled={!validateRegister(userData)} onClick={(e) => handleSubmit(userData, e)}/>
           <button type="button" className="btn-return">
             <Link to="/login">Voltar</Link>
           </button>
         </div>
       </form>
-    </div>
-  );
+  )
 };
 
-export default Register;
+export default Form;

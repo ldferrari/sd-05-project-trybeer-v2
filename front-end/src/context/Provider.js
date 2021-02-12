@@ -5,7 +5,9 @@ import Context from './Context';
 function Provider({ children }) {
   const zero = 0;
   const [userName, setUserName] = useState([]);
+  const [password, setPassword] = useState('');
   const [userEmail, setUserEmail] = useState([]);
+  const [seller, setSeller] = useState(false);
   const [beers, setBeers] = useState([]);
   const [total, setTotal] = useState(zero);
   const [cart, setCart] = useState([]);
@@ -15,6 +17,10 @@ function Provider({ children }) {
     setUserName,
     userEmail,
     setUserEmail,
+    password,
+    setPassword,
+    seller,
+    setSeller,
     beers,
     setBeers,
     total,

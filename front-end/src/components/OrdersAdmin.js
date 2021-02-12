@@ -16,7 +16,9 @@ const OrdersAdmin = () => {
           <Link to={ `/admin/orders/${order.id}` } key={ order.id }>
             <div>
               <span data-testid={ `${index}-order-number` }>{`Pedido ${order.id}`}</span>
-              <span data-testid={ `${index}-order-address` }>{`${order.delivery_address}, ${order.delivery_number}`}</span>
+              <span data-testid={ `${index}-order-address` }>
+                {`${order.delivery_address}, ${order.delivery_number}`}
+              </span>
               <span data-testid={ `${index}-order-total-value` }>
                 {`R$ ${order.total_price.replace('.', ',')}`}
               </span>

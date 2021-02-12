@@ -1,9 +1,9 @@
-const model = require('../models/sql/loginModel');
+const { user: model } = require('../models');
 
 const validateLog = async (email, password) => {
-  const user = await model.validateLog(email, password);
+  const user = await model.findOne({ where: {email, password } });
 
-  if (user === undefined) {
+  if (user === null) {
     return {
       error: true,
       code: 'invalid_info',

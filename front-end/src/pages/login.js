@@ -32,14 +32,14 @@ const Login = () => {
       setUserName(userRole.name);
     }
     switch (userRole.role) {
-      case 'client':
-        setDesignetedRoute('/products');
-        break;
-      case 'administrator':
-        setDesignetedRoute('/admin/orders');
-        break;
-      default:
-        break;
+    case 'client':
+      setDesignetedRoute('/products');
+      break;
+    case 'administrator':
+      setDesignetedRoute('/admin/orders');
+      break;
+    default:
+      break;
     }
   };
 
@@ -74,11 +74,15 @@ const Login = () => {
           >
             ENTRAR
           </button>
-          {designatedRoute !== undefined ? <Redirect to={ designatedRoute } /> : null}
-          <button type="submit" data-testid="no-account-btn" className="btn-register">
-            <Link to="/register">
-              Ainda não tenho conta
-            </Link>
+          {designatedRoute !== undefined ? (
+            <Redirect to={ designatedRoute } />
+          ) : null}
+          <button
+            type="submit"
+            data-testid="no-account-btn"
+            className="btn-register"
+          >
+            <Link to="/register">Ainda não tenho conta</Link>
           </button>
         </div>
       </div>

@@ -1,16 +1,19 @@
 const { Router } = require('express');
 const service = require('../services/productsService');
 const validateJWT = require('../auth/validateJWT');
+const httpStatusCode = require('../statusCode');
 
 const products = Router();
+const zero = 0;
 
 products.get('/', validateJWT, async (req, res) => {
   const product = await service.getAll();
   // product.forEach((el) => el.qty = 0);
-  for (let i = 0; i < product.length; i += 1) {
-    product[i].qty = 0;
+  for (let i = zero; i < product.length; i += 1) {
+    product[i].dataValues.qty = 0;
   }
-  return res.status(200).json(product);
+  // console.log seja lovado
+  return res.status(httpStatusCode.ok).json(product);
 });
 
 module.exports = products;

@@ -20,8 +20,8 @@ const OrderDetails = (props) => {
   useEffect(() => {
     const token = (localStorage.getItem('token') || '');
     getOrderById(token, id).then((orders) => {
-      setTotalP(orders[0].total_price);
-      setDataSale(orders[0].sale_date);
+      setTotalP(orders.total_price);
+      setDataSale(orders.sale_date);
       return setProducts(orders);
     });
   }, []);
@@ -48,7 +48,8 @@ const OrderDetails = (props) => {
             <td data-testid={ `${index}-product-name` }>{product.name}</td>
             <td>{ `R$ ${product.price}` }</td>
             <td data-testid={ `${index}-product-qtd` }>{product.quantity}</td>
-            <td data-testid={ `${index}-product-total-value` }>{`R$ ${(product.price * product.quantity).toFixed(two).replace('.', ',')}`}</td>
+            <td data-testid={ `${index}-product-total-value` }>
+              {`R$ ${(product.price * product.quantity).toFixed(two).replace('.', ',')}`}</td>
           </tr>
         ))}
       </table>
