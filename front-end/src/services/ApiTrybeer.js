@@ -36,14 +36,14 @@ function updateUser(name, email, token) {
 }
 
 function placeOrder(orderData) {
-  const { email, totalPrice, address, number, saleDate } = orderData;
+  const { email, totalPrice, streetName, houseNumber, saleDate } = orderData;
 
   return axios
     .post(`${API_URL}/orders`, {
       email,
       totalPrice,
-      address,
-      number,
+      address: streetName,
+      number: houseNumber,
       saleDate,
     })
     .then((res) => res.data)

@@ -1,11 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import TryBeerContext from '../context/TryBeerContext';
-
-export default function ProfileEmailInput({ role }) {
-  const { email } = useContext(TryBeerContext);
-
+export default function ProfileEmailInput({ role, email }) {
   return (
     <section>
       <label htmlFor="email" data-testid="profile-email">
@@ -24,4 +20,5 @@ export default function ProfileEmailInput({ role }) {
 
 ProfileEmailInput.propTypes = {
   role: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
