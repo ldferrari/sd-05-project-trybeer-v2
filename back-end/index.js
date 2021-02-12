@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const multer = require('multer');
-const upload = multer({ dest: 'uploads' })
+const path = require('path');
+// const multer = require('multer');
+// const upload = multer({ dest: 'uploads' })
 const userController = require('./controllers/users.controller');
 const productsController = require('./controllers/products.controller');
 const salesController = require('./controllers/sales.controller');

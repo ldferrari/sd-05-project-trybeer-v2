@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
-const rescue = require('express-rescue');
+const rescue = require('express');
 const jwt = require('../auth/jwt.auth');
-const userModel = require('../models2/user.model');
+// const userModel = require('../models2/user.model');
 const {
   findUserbyEmailAndPassword,
   findUserById,
