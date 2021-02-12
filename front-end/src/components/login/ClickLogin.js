@@ -17,8 +17,8 @@ function ClickLogin({ history }) {
     <button
       type="button"
       data-testid="signin-btn"
-      disabled={!(checkedEmail && checkedPassword)}
-      onClick={() => login(email, password).then((result) => handleResult(result))}
+      disabled={ !(checkedEmail && checkedPassword) }
+      onClick={ () => login(email, password).then((result) => handleResult(result)) }
     >
       ENTRAR
     </button>

@@ -20,7 +20,7 @@ function InputEmail() {
       <input
         type="email"
         data-testid="email-input"
-        onChange={(e) => handleEmailChange(e)}
+        onChange={ (e) => handleEmailChange(e) }
       />
     </div>
   );

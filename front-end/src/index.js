@@ -6,14 +6,13 @@ import * as serviceWorker from './serviceWorker';
 import TrybeerProvider from './context/TrybeerProvider';
 import RegisterProvider from './context/RegisterProvider';
 
-
 ReactDOM.render(
   <TrybeerProvider>
     <RegisterProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </RegisterProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </RegisterProvider>
   </TrybeerProvider>,
   document.getElementById('root'),
 );

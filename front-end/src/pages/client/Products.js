@@ -11,7 +11,7 @@ function cards(dataProducts) {
   return (
     <div className="productCards">
       {dataProducts.map((product, index) => (
-        <EachProduct product={product} index={index} key={product} />
+        <EachProduct product={ product } index={ index } key={ product } />
       ))}
     </div>
   );
@@ -20,11 +20,11 @@ function cards(dataProducts) {
 function seeCart(totalPrice) {
   return (
     <Link to="/checkout">
-      <button type="button" data-testid="checkout-bottom-btn" disabled={!totalPrice}>
+      <button type="button" data-testid="checkout-bottom-btn" disabled={ !totalPrice }>
         Ver Carrinho
         <p data-testid="checkout-bottom-btn-value">
           {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
-            totalPrice
+            totalPrice,
           )}
         </p>
       </button>

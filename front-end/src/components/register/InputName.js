@@ -16,7 +16,7 @@ function InputName() {
   return (
     <section>
       <div>Nome</div>
-      <input data-testid="signup-name" type="text" onChange={(e) => handleNameChange(e)} />
+      <input data-testid="signup-name" type="text" onChange={ (e) => handleNameChange(e) } />
     </section>
   );
 }

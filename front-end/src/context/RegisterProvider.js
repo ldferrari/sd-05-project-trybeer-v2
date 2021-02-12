@@ -16,7 +16,7 @@ const RegisterProvider = ({ children }) => {
     checkedPassword,
     setCheckedPassword,
     emailExists,
-    setEmailExists
+    setEmailExists,
   };
 
   return (

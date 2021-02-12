@@ -6,9 +6,9 @@ import TrybeerContext from '../context/TrybeerContext';
 function productInfo(index, item, quantity) {
   return (
     <div>
-      <p data-testid={`${index}-product-qtd-input`}>{quantity}</p>
-      <p data-testid={`${index}-product-name`}>{item.name}</p>
-      <p data-testid={`${index}-product-total-value`}>
+      <p data-testid={ `${index}-product-qtd-input` }>{ quantity }</p>
+      <p data-testid={ `${index}-product-name` }>{ item.name }</p>
+      <p data-testid={ `${index}-product-total-value` }>
         {new Intl.NumberFormat('pt-BR', {
           style: 'currency',
           currency: 'BRL',
@@ -20,12 +20,13 @@ function productInfo(index, item, quantity) {
 
 function unitPrice(index, item) {
   return (
-    <p data-testid={`${index}-product-unit-price`}>
+    <p data-testid={ `${index}-product-unit-price` }>
       (
       {new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
-      }).format(item.price)}{' '}
+      }).format(item.price)}
+      {' '}
       un)
     </p>
   );
@@ -35,8 +36,8 @@ function btnLess(index, decreaseQuantity) {
   return (
     <button
       type="button"
-      data-testid={`${index}-removal-button`}
-      onClick={() => decreaseQuantity()}
+      data-testid={ `${index}-removal-button` }
+      onClick={ () => decreaseQuantity() }
     >
       -
     </button>

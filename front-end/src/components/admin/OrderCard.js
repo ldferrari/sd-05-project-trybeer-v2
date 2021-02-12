@@ -5,15 +5,15 @@ import '../../css/OrderCard.css';
 
 function linkOrder(order, index) {
   return (
-    <Link className="order-link" to={`/admin/orders/${order.id}`}>
-      <span data-testid={`${index}-order-number`}>{`Pedido ${order.id}`}</span>
-      <p data-testid={`${index}-order-address`}>
-        {`${order.delivery_address}, ${order.delivery_number}`}
+    <Link className="order-link" to={ `/admin/orders/${order.id}` }>
+      <span data-testid={ `${index}-order-number` }>{ `Pedido ${order.id}` }</span>
+      <p data-testid={ `${index}-order-address` }>
+        { `${order.delivery_address}, ${order.delivery_number}` }
       </p>
-      <span data-testid={`${index}-order-total-value`}>
-        {`R$ ${order.total_price.replace('.', ',')}`}
+      <span data-testid={ `${index}-order-total-value` }>
+        { `R$ ${order.total_price.replace('.', ',')}` }
       </span>
-      <p data-testid={`${index}-order-status`}>{order.status}</p>
+      <p data-testid={ `${index}-order-status` }>{ order.status }</p>
     </Link>
   );
 }

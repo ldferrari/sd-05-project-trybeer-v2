@@ -21,7 +21,7 @@ function InputPassword() {
         type="password"
         data-testid="password-input"
         name="password"
-        onChange={(e) => handlePasswordChange(e)}
+        onChange={ (e) => handlePasswordChange(e) }
       />
     </div>
   );

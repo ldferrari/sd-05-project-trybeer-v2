@@ -15,11 +15,11 @@ function InputPassword() {
   };
   return (
     <section>
-     <div>Senha</div>
+      <div>Senha</div>
       <input
         data-testid="signup-password"
         type="password"
-        onChange={(e) => handlePasswordChange(e)}
+        onChange={ (e) => handlePasswordChange(e) }
       />
     </section>
   );

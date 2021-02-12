@@ -12,13 +12,13 @@ function renderDetails(saleNumber, saleDetails, totalPrice) {
       <AdminMenu />
       <div>
         {orderNumber(saleNumber)}
-        <OrderStatus id={saleNumber} />
+        <OrderStatus id={ saleNumber } />
       </div>
       <div>
         {details(saleDetails)}
         {total(totalPrice)}
       </div>
-      <BtnStatus id={saleNumber} />
+      <BtnStatus id={ saleNumber } />
     </div>
   );
 }
@@ -33,7 +33,7 @@ function details(saleDetails) {
   return (
     <ul>
       {saleDetails.map((sale, index) => (
-        <AdminProductsList key={sale.id} sale={sale} index={index} />
+        <AdminProductsList key={ sale.id } sale={ sale } index={ index } />
       ))}
     </ul>
   );
@@ -57,7 +57,7 @@ function AdminOrdersDetails() {
     const arrPath = window.location.pathname.split('/');
     const id = arrPath[3];
     getSaleDetails(id).then(
-      (response) => setSaleNumber(response[0].sale_id) || setSaleDetails(response)
+      (response) => setSaleNumber(response[0].sale_id) || setSaleDetails(response),
     );
   }, []);
 

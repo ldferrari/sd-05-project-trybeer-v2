@@ -10,7 +10,7 @@ function SellCheckbox() {
         data-testid="signup-seller"
         type="checkbox"
         id="vender"
-        onClick={() => setAdmin(true)}
+        onClick={ () => setAdmin(true) }
       />
       Quero Vender
     </label>
