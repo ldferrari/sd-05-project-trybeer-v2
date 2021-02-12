@@ -100,6 +100,20 @@ export const createNewSale = (
   return newSale;
 };
 
+// export const createNewSale = (
+//   email,
+//   info
+// ) => {
+//   const { totalPrice, street, houseNum, date, products } = info;
+//   const newSale = axios
+//     .post(`${API_URL}/checkout`, {
+//       email, totalPrice, street, houseNum, date, products,
+//     })
+//     .then((response) => response.data)
+//     .catch((err) => err);
+//   return newSale;
+// };
+
 /*
 Encerrar pedido / alterar status do pedido de Preparando para Entregue
 

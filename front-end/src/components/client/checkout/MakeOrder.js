@@ -3,23 +3,20 @@ import CheckoutContext from '../../../context/CheckoutContext';
 import TrybeerContext from '../../../context/TrybeerContext';
 import { createNewSale } from '../../../services/fetch';
 
-function finishOrder(user, totalPrice, street, houseNum, date, products, handleResult) {
+function finishOrder(totalPrice, street, houseNum, handleResult) {
+  const user = JSON.parse(localStorage.getItem('user'));
   const initialState = 0;
+  const products = JSON.parse(localStorage.getItem('cart'));
+  const month = new Date().getMonth() === initialState ? '01' : new Date().getMonth();
+  const date = `${new Date().getDate()}/${month}/${new Date().getFullYear()}`;
+  // const allInfo = { totalPrice, street, houseNum, date, products };
   return (
     <button
       type="button"
-      data-testid="checkout-finish-btn"
-      disabled={totalPrice === initialState || houseNum === initialState || street === ''}
-      onClick={() => {
-        createNewSale(
-          user.email,
-          totalPrice,
-          street,
-          houseNum,
-          date,
-          products
-        ).then((result) => handleResult(result));
-      }}
+      disabled={ totalPrice === initialState || houseNum === initialState || street === '' }
+      onClick={ () => {
+        createNewSale(user.email, totalPrice, street, houseNum, date, products).then((result) => handleResult(result));
+      } }
     >
       Finalizar pedido
     </button>
@@ -27,15 +24,8 @@ function finishOrder(user, totalPrice, street, houseNum, date, products, handleR
 }
 
 function MakeOrder() {
-  const { totalPrice, houseNum, street } = useContext(TrybeerContext);
-  const { setStatusSale } = useContext(CheckoutContext);
-  const user = JSON.parse(localStorage.getItem('user'));
-  const products = JSON.parse(localStorage.getItem('cart'));
-  const day = new Date().getDate();
-  const zero = 0;
-  const month = new Date().getMonth() === zero ? '01' : new Date().getMonth();
-  const year = new Date().getFullYear();
-  const date = `${day}/${month}/${year}`;
+  const { totalPrice } = useContext(TrybeerContext);
+  const { setStatusSale, houseNum, street } = useContext(CheckoutContext);
   const handleResult = (result) => {
     const time = 1000;
     if (result.message === 'Created') {
@@ -47,7 +37,7 @@ function MakeOrder() {
   };
   return (
     <section>
-      {finishOrder(user, totalPrice, street, houseNum, date, products, handleResult)}
+      {finishOrder(totalPrice, street, houseNum, handleResult)}
       <div id="sucess" />
     </section>
   );

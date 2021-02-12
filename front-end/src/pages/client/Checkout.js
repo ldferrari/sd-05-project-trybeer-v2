@@ -13,7 +13,7 @@ function showProducts(totalPrice) {
   const products = JSON.parse(localStorage.getItem('cart'));
   return (
     <section>
-       {!totalPrice && <h2>Não há produtos no carrinho</h2>}
+      {!totalPrice && <h2>Não há produtos no carrinho</h2>}
       {totalPrice && (
         <div className="orders-list">
           { products.map((item, index) => (
@@ -22,19 +22,28 @@ function showProducts(totalPrice) {
         </div>
       )}
     </section>
-  )
+  );
 }
 
 function showTotal(totalPrice) {
   return (
     <p data-testid="order-total-value">
-        Total:
-        {' '}
-        {new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(totalPrice)}
+      Total:
+      {' '}
+      {new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(totalPrice)}
     </p>
+  );
+}
+
+function showAddress() {
+  return (
+    <div className="address">
+      <StreetInput />
+      <HouseInput />
+    </div>
   );
 }
 
@@ -51,10 +60,7 @@ function Checkout() {
       <h3>Produtos</h3>
       { showProducts(totalPrice) }
       { showTotal(totalPrice) }
-      <div className="address">
-        <StreetInput />
-        <HouseInput />
-      </div>
+      { showAddress() }
       <MakeOrder />
       {statusSale && <Redirect to="/products" />}
       {!isLogged && <Redirect to="/login" />}

@@ -13,7 +13,7 @@ const CheckoutProvider = ({ children }) => {
     houseNum,
     setHouseNum,
     statusSale,
-    setStatusSale
+    setStatusSale,
   };
   return (
     <CheckoutContext.Provider value={ context }>{children}</CheckoutContext.Provider>
