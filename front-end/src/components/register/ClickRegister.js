@@ -20,7 +20,8 @@ function registerBtn(checkedName, checkedEmail, checkedPassword, handleClickRegi
 
 function ClickRegister({ history }) {
   const { name, email, password, admin } = useContext(TrybeerContext);
-  const { checkedName, checkedEmail, checkedPassword, setEmailExists } = useContext(RegisterContext);
+  const { checkedName, checkedEmail } = useContext(RegisterContext);
+  const { checkedPassword, setEmailExists } = useContext(RegisterContext);
   const handleResult = async (result) => {
     console.log('in handleResult');
     if (result.message === 'E-mail already in database') setEmailExists(true);

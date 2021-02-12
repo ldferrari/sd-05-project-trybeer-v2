@@ -4,16 +4,7 @@ import RegisterContext from '../../context/RegisterContext';
 import { checkPassword } from '../../services/checkUserData';
 // import PropTypes from 'prop-types';
 
-function InputPassword() {
-  const { setPassword } = useContext(TrybeerContext);
-  const { checkedPassword, setCheckedPassword } = useContext(RegisterContext);
-  const handlePasswordChange = (e) => {
-    setCheckedPassword(checkPassword(e.target.value));
-    if (!checkedPassword) {
-      console.log('password has to have 6 caracteres');
-    }
-    return setPassword(e.target.value);
-  };
+function seeInput(handlePasswordChange) {
   return (
     <div className="login-input">
       <p>Senha</p>
@@ -25,6 +16,19 @@ function InputPassword() {
       />
     </div>
   );
+}
+
+function InputPassword() {
+  const { setPassword } = useContext(TrybeerContext);
+  const { checkedPassword, setCheckedPassword } = useContext(RegisterContext);
+  const handlePasswordChange = (e) => {
+    setCheckedPassword(checkPassword(e.target.value));
+    if (!checkedPassword) {
+      console.log('password has to have 6 caracteres');
+    }
+    return setPassword(e.target.value);
+  };
+  return seeInput(handlePasswordChange);
 }
 
 export default InputPassword;

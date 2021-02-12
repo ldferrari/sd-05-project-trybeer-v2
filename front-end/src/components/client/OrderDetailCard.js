@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { getProductById } from '../../services/fetch';
 
 function itemQuantity(index, item) {
-  return (<p data-testid={ `${index}-product-qtd` }>
-    {item.quantity}
-    {' '}
-    -
-    {' '}
-          </p>);
+  return (
+    <p data-testid={ `${index}-product-qtd` }>
+      {item.quantity}
+      {' '}
+      -
+      {' '}
+    </p>
+  );
 }
 
 export default function OrderCard({ item, index }) {

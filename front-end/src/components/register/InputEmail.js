@@ -16,7 +16,11 @@ function InputEmail() {
   return (
     <section>
       <div>Email</div>
-      <input data-testid="signup-email" type="text" onChange={ (e) => handleEmailChange(e) } />
+      <input
+        data-testid="signup-email"
+        type="text"
+        onChange={ (e) => handleEmailChange(e) }
+      />
     </section>
   );
 }
