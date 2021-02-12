@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import TrybeerContext from '../../context/TrybeerContext';
 import RegisterContext from '../../context/RegisterContext';
 import { createUser } from '../../services/fetch';
+import { roleRedirect } from '../../services/register';
 
 function registerBtn(checkedName, checkedEmail, checkedPassword, handleClickRegister) {
   return (
@@ -20,20 +21,23 @@ function registerBtn(checkedName, checkedEmail, checkedPassword, handleClickRegi
 
 function ClickRegister({ history }) {
   const { name, email, password, admin } = useContext(TrybeerContext);
-  const { checkedName, checkedEmail } = useContext(RegisterContext);
-  const { checkedPassword, setEmailExists } = useContext(RegisterContext);
+  const { checkedName, checkedEmail, checkedPassword } = useContext(RegisterContext);
+  const [emailExists, setEmailExists] = useState(false);
   const handleResult = async (result) => {
-    console.log('in handleResult');
     if (result.message === 'E-mail already in database') setEmailExists(true);
     localStorage.setItem('user', JSON.stringify(result));
-    if (result.role === 'administrator') history.push('/admin/orders');
-    if (result.role === 'client') history.push('/products');
+    roleRedirect(result, history);
   };
   const handleClickRegister = async () => {
     const role = admin ? 'administrator' : 'client';
     await createUser(name, email, password, role).then((result) => handleResult(result));
   };
-  return registerBtn(checkedName, checkedEmail, checkedPassword, handleClickRegister);
+  return (
+    <div>
+      {registerBtn(checkedName, checkedEmail, checkedPassword, handleClickRegister)}
+      {emailExists ? <div>E-mail already in database.</div> : null}
+    </div>
+  );
 }
 
 export default withRouter(ClickRegister);

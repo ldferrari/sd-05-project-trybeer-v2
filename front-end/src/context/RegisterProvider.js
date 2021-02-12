@@ -6,8 +6,6 @@ const RegisterProvider = ({ children }) => {
   const [checkedName, setCheckedName] = useState(false);
   const [checkedEmail, setCheckedEmail] = useState(false);
   const [checkedPassword, setCheckedPassword] = useState(false);
-  const [emailExists, setEmailExists] = useState(false);
-
   const context = {
     checkedName,
     setCheckedName,
@@ -15,10 +13,7 @@ const RegisterProvider = ({ children }) => {
     setCheckedEmail,
     checkedPassword,
     setCheckedPassword,
-    emailExists,
-    setEmailExists,
   };
-
   return (
     <RegisterContext.Provider value={ context }>
       {children}
