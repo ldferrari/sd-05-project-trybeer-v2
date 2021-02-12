@@ -27,3 +27,11 @@ export const getAllMessages = () => {
     .then((response) => response.data);
   return messages;
 };
+
+/*
+Cria uma mensagem no banco
+*/
+
+export const createMessage = (email, content) => {
+  axios.post(`${API_URL}/chat`, { email, content });
+}

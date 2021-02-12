@@ -8,6 +8,7 @@ const usersController = require('./controllers/usersController');
 const productsController = require('./controllers/productsController');
 const salesController = require('./controllers/salesController');
 const detailsController = require('./controllers/salesProductsController');
+const chatController = require('./controllers/messageController');
 const { createMessage } = require('./modelsMongoDb.messagesModel');
 
 const app = express();
@@ -28,6 +29,8 @@ app.use('/products', productsController);
 app.use('/checkout', salesController);
 
 app.use('/details', detailsController);
+
+app.use('/chat', chatController);
 
 app.use('/images', express.static('images'));
 
