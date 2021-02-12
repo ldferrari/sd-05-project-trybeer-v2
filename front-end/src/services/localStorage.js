@@ -1,5 +1,11 @@
 export const getUser = () => JSON.parse(localStorage.getItem('user'));
 
+const saveProductsMorePart2 = (product, list) => {
+  product.quantity = 1;
+  list.push(product);
+  localStorage.setItem('cart', JSON.stringify(list));
+};
+
 export const saveProductsMore = (product) => {
   let encontrei = false;
   let list = JSON.parse(localStorage.getItem('cart'));
@@ -15,11 +21,8 @@ export const saveProductsMore = (product) => {
         localStorage.setItem('cart', JSON.stringify(list));
         encontrei = true;
       }
-    });
-    if (!encontrei) {
-      product.quantity = 1;
-      list.push(product);
-      localStorage.setItem('cart', JSON.stringify(list));
+    }); if (!encontrei) {
+      saveProductsMorePart2(product, list);
     }
   }
 };
