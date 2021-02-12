@@ -9,7 +9,6 @@ export default function OrderCard({ order, index }) {
   const ten = 10;
   date = date.substring(zero, ten);
   date = date.split('-');
-
   return (
     <div className="order-card" data-testid={ `${index}-order-card-container` }>
       <Link className="order-link" to={ `/orders/${order.id}` }>

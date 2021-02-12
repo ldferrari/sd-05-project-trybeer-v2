@@ -10,7 +10,7 @@ function EachProduct(props) {
   const { totalPrice, setTotalPrice } = useContext(TrybeerContext);
 
   const oneLess = async () => {
-    if (!(countProduct <= initialCount)) {
+    if (countProduct > initialCount) {
       setCountProduct(countProduct - 1);
       setTotalPrice(totalPrice - product.price);
       saveProductsLess(product);

@@ -116,7 +116,6 @@ export const closeSale = (id) => {
   return closedSale;
 };
 
-
 /*
 Preparar pedido / alterar status do pedido de Pendente para Preparando
 
