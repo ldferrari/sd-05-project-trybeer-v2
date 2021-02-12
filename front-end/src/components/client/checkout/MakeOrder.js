@@ -9,11 +9,10 @@ function finishOrder(totalPrice, street, houseNum, handleResult) {
   const products = JSON.parse(localStorage.getItem('cart'));
   const month = new Date().getMonth() === initialState ? '01' : new Date().getMonth();
   const date = `${new Date().getDate()}/${month}/${new Date().getFullYear()}`;
-  // const allInfo = { totalPrice, street, houseNum, date, products };
   return (
     <button
       type="button"
-      disabled={ totalPrice === initialState || houseNum === initialState || street === '' }
+      disabled={ totalPrice === initialState || houseNum === initialState || !street }
       onClick={ () => {
         createNewSale(user.email, totalPrice, street, houseNum, date, products).then((result) => handleResult(result));
       } }
@@ -22,6 +21,8 @@ function finishOrder(totalPrice, street, houseNum, handleResult) {
     </button>
   );
 }
+// const allInfo = { totalPrice, street, houseNum, date, products };
+// createNewSale(user.email, allInfo).then((result) => handleResult(result));
 
 function MakeOrder() {
   const { totalPrice } = useContext(TrybeerContext);
