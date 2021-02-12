@@ -49,7 +49,7 @@ const productCard = (cartItems, setCartItems) => (
   <>
     {cartItems.map((item, index) => (
       <>
-        <img src={item.url_image} loading={"lazy"} alt={item.name} height={"200"}/>
+        <img src={ item.url_image } loading="lazy" alt={ item.name } height="200" />
         <h5 data-testid={ `${index}-product-qtd-input` }>{item.quantity}</h5>
         <h5 data-testid={ `${index}-product-name` }>{item.name}</h5>
         <h5 data-testid={ `${index}-product-total-value` }>
