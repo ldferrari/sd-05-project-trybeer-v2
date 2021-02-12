@@ -42,7 +42,7 @@ export default function SimpleCard(props) {
   if (!msg) return <h1 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h1>;
 
   return (
-    <Grid item lg={ 3 } md={ 4 } sm={ 6 } xs={ 12 }>
+    <Grid item lg={ 6 } md={ 6 } sm={ 12 } xs={ 12 }>
       <Card className={ classes.root } elevation={ 3 } data-testid="containerChat">
         <CardContent>
           <Link to={ `/admin/chat/${email}` } className={ classes.links }>
