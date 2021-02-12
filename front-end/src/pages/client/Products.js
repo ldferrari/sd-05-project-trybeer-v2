@@ -50,8 +50,6 @@ function Products() {
   );
 }
 
-{
-  /* fonte sobre currency https://developer.mozilla.org/en-US/docs/Web/Java/Reference/Global_Objects/Intl/NumberFormat/NumberFormat */
-}
+// currency https://developer.mozilla.org/en-US/docs/Web/Java/Reference/Global_Objects/Intl/NumberFormat/NumberFormat
 
 export default Products;
