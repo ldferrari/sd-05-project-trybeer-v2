@@ -4,61 +4,78 @@ const service = require('../services/salesService');
 
 const sales = Router();
 
+const duzentosUm = 201;
+const quinhentos = 500;
+
 sales.post('/', async (req, res) => {
   try {
-    console.log(req.body);
-    await service.createSale(req.body);
-    res.status(201).json({ message: 'Created' });
+    const result = await service.createSale(req.body);
+    if (result.err) return res.status(result.err.code).json(result);
+    res.status(duzentosUm).json({ message: 'Created' });
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(quinhentos).json({ message: e.message });
     console.log(e);
   }
 });
 
-sales.put('/', async (req, res) => {
+sales.put('/preparing', async (req, res) => {
   try {
-    await service.closeSale(req.body);
-    res.status(201).json({ message: 'Closed' });
+    const result = await service.changeStatusSale(req.body);
+    if (result.err) return res.status(result.err.code).json(result);
+    res.status(duzentosUm).json({ message: 'Preparando pedido' });
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(quinhentos).json({ message: e.message });
+  }
+});
+
+sales.put('/close', async (req, res) => {
+  try {
+    const result = await service.closeSale(req.body);
+    if (result.err) return res.status(result.err.code).json(result);
+    res.status(duzentosUm).json({ message: 'Closed' });
+  } catch (e) {
+    res.status(quinhentos).json({ message: e.message });
   }
 });
 
 sales.get('/', async (req, res) => {
   try {
     const userSales = await service.getByUserId(req.query);
-    res.status(201).json(userSales);
+    if (userSales.err) return res.status(userSales.err.code).json(userSales);
+    res.status(duzentosUm).json(userSales);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(quinhentos).json({ message: e.message });
   }
 });
 
 sales.get('/sales-open', async (_req, res) => {
   try {
     const allSalesOpen = await service.getAllOpen();
-    res.status(201).json(allSalesOpen);
+    if (allSalesOpen.err) return res.status(allSalesOpen.err.code).json(allSalesOpen);
+    res.status(duzentosUm).json(allSalesOpen);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(quinhentos).json({ message: e.message });
   }
 });
 
 sales.get('/all-sales', async (_req, res) => {
   try {
     const allSales = await service.getAllSales();
-    res.status(201).json(allSales);
+    if (allSales.err) return res.status(allSales.err.code).json(allSales);
+    res.status(duzentosUm).json(allSales);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(quinhentos).json({ message: e.message });
   }
 });
 
-sales.get('/:id', async (req, res) => {
+sales.get('/id', async (req, res) => {
   try {
     const { id } = req.query;
     const sale = await service.getSaleById(id);
-    console.log(sale);
-    res.status(201).json(sale);
+    if (sale.err) return res.status(sale.err.code).json(sale);
+    res.status(duzentosUm).json(sale);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    res.status(quinhentos).json({ message: e.message });
   }
 });
 
