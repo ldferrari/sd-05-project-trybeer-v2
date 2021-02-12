@@ -8,8 +8,12 @@ import AdminOrderDetail from './AdminOrdersDetails';
 import AdminProfile from './AdminProfile';
 import Orders from './orders';
 import Chat from './Chat';
+import AdminChats from './AdminChats';
+import AdminChatDetail from './AdminChatDetail';
 
 export {
+  AdminChatDetail,
+  AdminChats,
   Chat,
   Login,
   Orders,

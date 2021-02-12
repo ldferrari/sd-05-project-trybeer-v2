@@ -9,6 +9,8 @@ import {
   Products,
   Register,
   AdminOrderDetail,
+  AdminChats,
+  AdminChatDetail,
 } from './pages';
 import OrderDetails from './pages/orderDetails';
 import AdminOrders from './pages/AdminOrders';
@@ -28,6 +30,8 @@ const Rotas = () => (
     <Route exact path="/orders/:id" component={ OrderDetails } />
     <Route exact path="/" component={ () => <Redirect to="/login" /> } />
     <Route exact path="/chat" component={ Chat } />
+    <Route exact path="/admin/chats" component={ AdminChats } />
+    <Route exact path="/admin/chat/:email" component={ AdminChatDetail } />
   </Switch>
 );
 
