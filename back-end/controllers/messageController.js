@@ -7,7 +7,7 @@ const codeOk = 200;
 const codeErr = 500;
 const errMessage = 'algo deu errado :(';
 
-chat.get('/', async (res, res) => {
+chat.get('/', async (_req, res) => {
   try {
     const allMessages = await getMessages();
     res.status(codeOk).json(allMessages);
