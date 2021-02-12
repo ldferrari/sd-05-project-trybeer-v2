@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Box, Grid } from '@material-ui/core';
 import propTypes from 'prop-types';
 import AdminSideBar from '../../components/adminSidebarUI';
-// import { getAllMessages } from '../../services/requestAPI';
+import { getAllMessages } from '../../services/requestAPI';
 import CardMessage from '../../components/CardMessages';
 
 const two = 2;
@@ -27,32 +27,32 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = (props) => {
   const classes = useStyles();
-  // const [allMessages, setAllMessages] = useState([]);
+  const [allMessages, setAllMessages] = useState([]);
   const token = localStorage.getItem('token');
   const { history } = props;
 
-const allMessages = [
-  {email: 'zambelli@zambs.com', time: '17:20'},
-  {email: 'hugao@hugos.com', time: '16:20'},
-];
+// const allMessages = [
+//   {email: 'zambelli@zambs.com', time: '17:20'},
+//   {email: 'hugao@hugos.com', time: '16:20'},
+// ];
 
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     history.push('/login');
-  //   }
-  //   async function fetchMessages() {
-  //     try {
-  //       const { data } = await getAllMessages();
-  //       setAllMessages(data);
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //     return 'true';
-  //   }
-  //   fetchMessages();
-  // }, [token, history]);
+  useEffect(() => {
+    if (!token) {
+      history.push('/login');
+    }
+    async function fetchMessages() {
+      try {
+        const { data } = await getAllMessages(localStorage.getItem('token'));
+        setAllMessages(data);
+        console.log('ADMIN ALL CHATS ===>', data);
+      } catch (error) {
+        console.log(error);
+      }
+      return 'true';
+    }
+    fetchMessages();
+  }, [token, history]);
 
   console.log('admin Chat=========>', allMessages);
   return (

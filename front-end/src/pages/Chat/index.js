@@ -7,7 +7,7 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import useChat from '../../components/useChat';
 
-const dateFormat = require('dateformat');
+
 
 const Chat = (props) => {
   // const { email } = useContext(AppContext);
@@ -17,32 +17,38 @@ const Chat = (props) => {
   // console.log('payload=====>', payload);
   // console.log('email===>', email);
   // const { Id } = props; // pega id do link/requisição/jwt
-  const { messages, sendMessage } = useChat(email); // Creates a websocket and manages messaging
+  const { messages, sendMessage, setHistory } = useChat(email); // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = useState(''); // Message to be sent
   // =>const [theOrders, setOrders] = useState([]);
 
   useEffect(() => {
     const { history } = props;
-    if (!token) {
+    if (!localStorage.getItem('token')) {
       history.push('/login');
     }
     async function fetchOldMessages() {
-      const { data } = await getMessagesById(id);
+      const { data } = await getMessagesById(localStorage.getItem('token'), id);
+      console.log(data);
+      if(data.code) return false;
+      setHistory(data.map(({ time, nome, message })=>({time,nome,message})))
       setNewMessage(data);
     }
     fetchOldMessages();
-  }, [props, id, token]);
+  }, [props, id]);
 
-  const now = new Date();
-  // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
-  const time = dateFormat(now, 'HH:mm');
-
+  
   const handleNewMessageChange = (event) => {
+    const dateFormat = require('dateformat');
+    const now = new Date();
+    // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
+    const time = dateFormat(now, 'HH:MM');
+    console.log(now,time)
     setNewMessage({ message: event.target.value, time, nome: email });
     // precisa colocar a const time e o email além da msg ou faz isso pelo "server?"
   };
 
   const handleSendMessage = () => {
+    console.log('MANDNOD MENSAGEM')
     sendMessage(newMessage);
     // setNewMessage('');
     newMessage.message = '';

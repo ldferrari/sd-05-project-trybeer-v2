@@ -2,6 +2,7 @@ const { verifyToken } = require('./webTokenMiddleware');
 
 const checkToken = async (req, res, next) => {
   const { authorization } = req.headers;
+  console.log('AQUI TA O TOKEN', req)
   if (!authorization) {
     return res.status(401).json({ message: 'No autorization.' });
   }

@@ -7,9 +7,19 @@ const config = (token) => ({
   },
 });
 
-const getAllMessages = async () => axios.get('http://localhost:3001/admin/chats');
+const configWithId = (token, id) => ({
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: token,
+    id
+  },
+});
 
-const getMessagesById = async (id) => axios.get('http://localhost:3001/chat', { id });
+const getAllMessages = async (token) => axios.get('http://localhost:3001/admin/chats', config(token));
+
+const getMessagesById = async (token, id) => {
+  console.log('request ===>', id, token)
+  return axios.get('http://localhost:3001/chat', configWithId(token, id))};
 
 const postGetItems = async (token) => axios.get('http://localhost:3001/products', config(token));
 

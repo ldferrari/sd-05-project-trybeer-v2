@@ -6,9 +6,12 @@ const chatController = Router();
 
 chatController.get('/chat', async (req, res) => {
   try {
-    const { id } = req.payload;
-    // console.log('id =====>', id);
-    const conversation = await service.getConversation(id);
+    const { email } = req.headers;
+    const {role, email: emailToken} = req.payload;
+    const collection = role==='client'? emailToken: email;
+    console.log('Back===>',role, emailToken, email)
+    const conversation = await service.getConversation(collection);
+    console.log('conversation =====>', conversation);
     res.status(200).json(conversation);
   } catch (error) {
     console.error(error);
@@ -58,7 +61,7 @@ chatController.get('/admin/chat', async (req, res) => {
   try {
     const { id } = req.payload;
     // console.log('id =====>', id);
-    const conversation = await service.insertMessage(id);
+    const conversation = await service.insertMessage(id, {});
     res.status(200).json(conversation);
   } catch (error) {
     console.error(error);
@@ -66,5 +69,18 @@ chatController.get('/admin/chat', async (req, res) => {
     // res.status(500).json({ message: error });
   }
 }); */
+
+chatController.put('/chats/index', async (req, res) => {
+  try {
+    const { id } = req.payload;
+    // console.log('id =====>', id);
+    const conversation = await service.updateChats(id, );
+    res.status(200).json(conversation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Algo deu errado.' });
+    // res.status(500).json({ message: error });
+  }
+});
 
 module.exports = chatController;

@@ -45,6 +45,9 @@ const admDetailController = require('./Controllers/admDetailController');
 const chatController = require('./Chat/controller/chatController');
 const { use } = require('./Controllers/adminOrdersController');
 
+
+const service = require('./Chat/service/chatService');
+
 /*
   ENDPOINTS
 */
@@ -74,7 +77,7 @@ app.use('/admin/orders', checkToken, admDetailController);
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/', chatController);
+app.use('/', checkToken, chatController);
 
 /* const PORT = 3001;
 
@@ -93,6 +96,9 @@ io.on('connection', (socket) => {
   // Listen for new messages
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
     // console.log('data back===>', data);
+    service.insertMessage(ID, data);
+    // service.updateChats(ID, data).then(console.log);
+    // service.updateChats(ID,data)
     io.in(ID).emit(NEW_CHAT_MESSAGE_EVENT, data);
   });
 
