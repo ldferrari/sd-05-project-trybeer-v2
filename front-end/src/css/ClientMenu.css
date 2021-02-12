@@ -19,7 +19,7 @@
 	padding: 15px;
 	position: fixed;
 	transition:color linear 1s;
-	z-index: 1;
+	z-index: 3;
 }
 
 .top-title {
@@ -30,7 +30,7 @@
 	line-height: 25px;
 }
 
-.side-menu-container {
+.menu-container {
 	background: blue;
 	height:100%;
   left: -40%;
