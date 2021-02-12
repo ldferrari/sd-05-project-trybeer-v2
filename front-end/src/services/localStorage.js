@@ -1,6 +1,6 @@
 export const getUser = () => JSON.parse(localStorage.getItem('user'));
 
-const saveProductsMorePart2 = () => {
+const saveProductsMorePart2 = (product, list) => {
   product.quantity = 1;
   list.push(product);
   localStorage.setItem('cart', JSON.stringify(list));
@@ -22,7 +22,7 @@ export const saveProductsMore = (product) => {
         encontrei = true;
       }
     }); if (!encontrei) {
-      saveProductsMorePart2();
+      saveProductsMorePart2(product, list);
     }
   }
 };
