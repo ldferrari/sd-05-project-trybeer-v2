@@ -3,13 +3,17 @@ import Profile from './Profile';
 import Checkout from './Checkout';
 import Products from './Products';
 import Register from './Register';
-import OrderAdmin from './OrderAdmin';
-import OrderAdminDetails from './OrderAdminDetails';
-import ProfileAdmin from './ProfileAdmin';
+import AdminOrders from './AdminOrders';
+import AdminOrderDetail from './AdminOrdersDetails';
+import AdminProfile from './AdminProfile';
 import Orders from './orders';
 import Chat from './Chat';
+import AdminChats from './AdminChats';
+import AdminChatDetail from './AdminChatDetail';
 
 export {
+  AdminChatDetail,
+  AdminChats,
   Chat,
   Login,
   Orders,
@@ -17,7 +21,7 @@ export {
   Checkout,
   Products,
   Register,
-  OrderAdmin,
-  ProfileAdmin,
-  OrderAdminDetails,
+  AdminOrders,
+  AdminProfile,
+  AdminOrderDetail,
 };

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'; // useContext
 import propTypes from 'prop-types';
 import { getMessagesById } from '../../services/requestAPI';
-import { verifyToken } from '../../services/webTokenMiddleware';
+// import { verifyToken } from '../../services/webTokenMiddleware';
 // import AppContext from '../../context/AppContext';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
-import useChat from '../../components/useChat';
+// import Header from '../../components/header';
+// import Footer from '../../components/footer';
+import useChat from '../useChat';
+import { Link } from 'react-router-dom';
 
 const dateFormat = require('dateformat');
 
-const Chat = (props) => {
+const AdminChatConversation = (props) => {
+  const { email } = props;
   // const { email } = useContext(AppContext);
-  const token = localStorage.getItem('token');
-  const payload = verifyToken(token);
-  const { email, id } = payload;
+  // const token = localStorage.getItem('token');
+  // const payload = verifyToken(token);
+  // const { email, id } = payload;
   // console.log('payload=====>', payload);
   // console.log('email===>', email);
   // const { Id } = props; // pega id do link/requisição/jwt
@@ -22,23 +24,23 @@ const Chat = (props) => {
   // =>const [theOrders, setOrders] = useState([]);
 
   useEffect(() => {
-    const { history } = props;
-    if (!token) {
-      history.push('/login');
-    }
+    // const { history } = props;
+    // if (!token) {
+    //  history.push('/login');
+    //}
     async function fetchOldMessages() {
-      const { data } = await getMessagesById(id);
+      const { data } = await getMessagesById(email);
       setNewMessage(data);
     }
     fetchOldMessages();
-  }, [props, id, token]);
+  }, [email]);
 
   const now = new Date();
   // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
   const time = dateFormat(now, 'HH:mm');
 
   const handleNewMessageChange = (event) => {
-    setNewMessage({ message: event.target.value, time, nome: email });
+    setNewMessage({ message: event.target.value, time, nome: 'Loja' });
     // precisa colocar a const time e o email além da msg ou faz isso pelo "server?"
   };
 
@@ -49,8 +51,10 @@ const Chat = (props) => {
   };
   return (
     <div className="">
-      <Header>Conversar com o lodjinha</Header>
       <h1 className="">{email}</h1>
+      <Link to="/admin/chats" data-testid="back-button">
+          Voltar
+        </Link>
       <div className="messages-container">
         <ul className="messages-list">
           {messages.map((message) => (
@@ -83,13 +87,12 @@ const Chat = (props) => {
       >
         ENVIAR
       </button>
-      <Footer />
     </div>
   );
 };
 
-export default Chat;
+export default AdminChatConversation;
 
-Chat.propTypes = {
+AdminChatConversation.propTypes = {
   history: propTypes.instanceOf(Object).isRequired,
 };
