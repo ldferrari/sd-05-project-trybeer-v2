@@ -1,10 +1,10 @@
 const url = 'http://localhost:3001';
 
-const headers = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-}
+// const headers = {
+//   Accept: 'application/json',
+//   'Content-Type': 'application/json',
+//   'Access-Control-Allow-Origin': '*',
+// }
 
 export const checkUser = async (email, password) => {
   const myInit = {

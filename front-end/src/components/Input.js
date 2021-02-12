@@ -27,7 +27,7 @@ const Input = (props) => {
   // const { inputText, setInputText } = React.useState('');
   const inputContext = React.useContext(Context);
   return (
-    <label htmlFor={ name } id= { `lbl${label}` } >
+    <label htmlFor={ name } id={ `lbl${label}` }>
       {label}
       <input
         name={ name }
