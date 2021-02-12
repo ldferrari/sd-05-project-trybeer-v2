@@ -29,6 +29,7 @@
     "@mysql/xdevapi": "^8.0.20",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
+    "eslint": "^7.19.0",
     "mongodb": "^3.6.2",
     "mysql2": "^2.1.0",
     "prop-types": "^15.7.2",
