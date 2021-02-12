@@ -42,6 +42,7 @@ const admProfileController = require('./Controllers/admProfileController');
 const admDetailController = require('./Controllers/admDetailController');
 
 const chatController = require('./Chat/controller/chatController');
+const { use } = require('./Controllers/adminOrdersController');
 
 /*
   ENDPOINTS
@@ -103,3 +104,36 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
 console.log(`O pai tá ON no projeto e na porta ${PORT}`);
 });
+
+
+// testando o chat pelo postman com o banco no mongodb
+
+const meuChat = express();
+meuChat.use(bodyParser.json());
+const model = require('./Chat/model/chatModel');
+
+meuChat.get('/', async (req, res) => {
+  const teste = await model.getAllConversations();
+  res.status(200).json(teste);
+});
+
+
+meuChat.post('/', async (req, res) => {
+  try {
+    // console.log('req.body.p===>', req.body.p);
+    const teste = await model.insertMessage(req.body.collection, {...req.body.p});
+    res.status(200).json(teste);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error });
+  }
+});
+
+meuChat.listen(3002, () => {
+  console.log('chat na 3002');
+});
+
+
+
+

@@ -13,7 +13,7 @@ const createToken = (payload) => jwt.sign(payload, secret, jwtConfig);
 
 const verifyToken = (token) => {
   const payload = jwt.verify(token, secret);
-  console.log('payload.id====>',payload.id);
+  // console.log('payload.id====>',payload.id);
   return payload;
 };
 

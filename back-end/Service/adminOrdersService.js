@@ -1,6 +1,6 @@
-const { User, Sales } = require('../models');
+const { Sale } = require('../models');
 
-const getAdminOrders = async () => User.findAll();
+const getAdminOrders = async () => Sale.findAll();
 
 const changeStatus = async (id) => {
   if (!id) {
@@ -11,7 +11,7 @@ const changeStatus = async (id) => {
       statusCode: 401,
     };
   }
-  return Sales.update({ where: { salesId: id } });
+  return Sale.update({ where: { id } });
 };
 
 module.exports = {
