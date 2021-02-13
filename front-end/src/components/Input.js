@@ -24,7 +24,6 @@ const handleChange = (field, inputContext) => {
 
 const Input = (props) => {
   const { i: { label, name, type, dataT, minLength, isReq } } = props;
-  // const { inputText, setInputText } = React.useState('');
   const inputContext = React.useContext(Context);
   return (
     <label htmlFor={ name } id={ `lbl${label}` }>

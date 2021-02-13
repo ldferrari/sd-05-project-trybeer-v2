@@ -1,4 +1,4 @@
-const { sale: model, sale_product: salesProductsModel } = require('../models');
+const { sale: model, sale_product: salesProductsModel, product: m2 } = require('../models');
 const userService = require('./usersService');
 const moment = require('moment');
 // const pending = 'Pendente';
@@ -48,7 +48,10 @@ const getOrdersByUserId = async (email) => {
 };
 
 const getSalesProducts = async (orderId) => {
-  const orders = await model.findByPk(orderId);
+  const orders = await model.findAll({
+    where: {id: orderId}, include: [
+      { model: salesProductsModel, include: [{ model: m2 }]}
+    ]});
   return orders;
 };
 

@@ -1,0 +1,17 @@
+{
+  "iEmail": {
+    "label": "Email",
+    "name": "email",
+    "type": "text",
+    "dataT": "email-input",
+    "isReq": true
+  },
+  "iPassword" : {
+    "label": "Senha",
+    "name": "password",
+    "type": "password",
+    "dataT": "password-input",
+    "minLength": "6",
+    "required": true
+  }
+}
