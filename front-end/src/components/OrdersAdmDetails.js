@@ -8,11 +8,16 @@ const OrdersAdminDetails = (props) => {
   const two = 2;
   const { match: { params: { id } } } = props;
   const [order, setOrder] = useState([]);
+  const [totalPrice, setTotalPrice] = useState([]);
   const [status, setStatus] = useState('Pendente');
   const { role, token } = localStorage;
 
   useEffect(() => {
-    getAdmOrderById(role, id, token).then((sale) => setOrder(sale));
+    getAdmOrderById(role, id, token)
+    .then((sale) => {
+      setTotalPrice(sale[0].total_price);
+      setOrder(sale[0].sale_products);
+    });
   }, []);
 
   const handleClick = () => {
@@ -33,19 +38,19 @@ const OrdersAdminDetails = (props) => {
           <th>Quantity</th>
           <th>Total price</th>
         </tr>
-        {order.map((product, index) => (
-          <tr key={ product.name }>
-            <td data-testid={ `${index}-product-name` }>{product.name}</td>
+        {order.map((p, index) => (
+          <tr key={ p.product.name }>
+            <td data-testid={ `${index}-product-name` }>{p.product.name}</td>
             <td data-testid={ `${index}-order-unit-price` }>
-              { `(R$ ${product.price.replace('.', ',')})` }</td>
-            <td data-testid={ `${index}-product-qtd` }>{product.quantity}</td>
+              { `(R$ ${String(p.product.price).replace('.', ',')})` }</td>
+            <td data-testid={ `${index}-product-qtd` }>{p.quantity}</td>
             <td data-testid={ `${index}-product-total-value` }>
-              {`R$ ${(product.price * product.quantity).toFixed(two).replace('.', ',')}`}</td>
+              {`R$ ${(p.product.price * p.quantity).toFixed(two).replace('.', ',')}`}</td>
           </tr>
         ))}
       </table>
       <p data-testid="order-total-value">
-        {order[0] ? `R$ ${String(order[0].total_price).replace('.', ',')}` : zero}</p>
+        {totalPrice ? `R$ ${String(totalPrice).replace('.', ',')}` : zero}</p>
       {status === 'Pendente' ? 
         <button type="button" data-testid="mark-as-delivered-btn" 
           onClick={ handleClick }>Marcar como entregue

@@ -20,9 +20,9 @@ const OrderDetails = (props) => {
   useEffect(() => {
     const token = (localStorage.getItem('token') || '');
     getOrderById(token, id).then((orders) => {
-      setTotalP(orders.total_price);
-      setDataSale(orders.sale_date);
-      return setProducts(orders);
+      setTotalP(orders[0].total_price);
+      setDataSale(orders[0].sale_date);
+      return setProducts(orders[0].sale_products);
     });
   }, []);
 
@@ -43,13 +43,13 @@ const OrderDetails = (props) => {
           <th>Quantity</th>
           <th>Total price</th>
         </tr>
-        {products.map((product, index) => (
-          <tr key={ product.name }>
-            <td data-testid={ `${index}-product-name` }>{product.name}</td>
-            <td>{ `R$ ${product.price}` }</td>
-            <td data-testid={ `${index}-product-qtd` }>{product.quantity}</td>
+        {products.map((p, index) => (
+          <tr key={ p.product.name }>
+            <td data-testid={ `${index}-product-name` }>{p.product.name}</td>
+            <td>{ `R$ ${p.product.price}` }</td>
+            <td data-testid={ `${index}-product-qtd` }>{p.quantity}</td>
             <td data-testid={ `${index}-product-total-value` }>
-              {`R$ ${(product.price * product.quantity).toFixed(two).replace('.', ',')}`}</td>
+              {`R$ ${(p.product.price * p.quantity).toFixed(two).replace('.', ',')}`}</td>
           </tr>
         ))}
       </table>

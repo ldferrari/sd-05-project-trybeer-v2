@@ -20,7 +20,7 @@ const OrdersAdmin = () => {
                 {`${order.delivery_address}, ${order.delivery_number}`}
               </span>
               <span data-testid={ `${index}-order-total-value` }>
-                {`R$ ${order.total_price.replace('.', ',')}`}
+                {`R$ ${String(order.total_price).replace('.', ',')}`}
               </span>
               <span data-testid={ `${index}-order-status` }>{order.status}</span>
             </div>
