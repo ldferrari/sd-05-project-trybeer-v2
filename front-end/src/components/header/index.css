@@ -32,7 +32,7 @@
 }
 
 .sideBar {
-  background-image: url('../../images/menuBg.jpg');
+  background-image: url('../../images/oldpapertexture.jpg');
   background-size: cover;
   color: black;
   float: left;
@@ -43,9 +43,9 @@
   /* position: fixed; */
   padding: 2%;
   position: absolute;
-  text-decoration: none;
+  /* text-decoration: none; */
   /* transform: translateX(-30rem); */
-  width: 17%;
+  width: 25%;
   z-index: 1;
 }
 /* .sideBar.open {
@@ -69,10 +69,15 @@ Link {
   padding: 2%;
 }
 
+.menuBorder {
+  padding: 2%;
+  border-style: solid;
+  border:brown;
+}
 @media screen and ( min-width : 300px ) and ( max-width : 569px ) {
 
   .sideBar {
-    width: 57%;;
+    width: 63%;;
   }
 
 }

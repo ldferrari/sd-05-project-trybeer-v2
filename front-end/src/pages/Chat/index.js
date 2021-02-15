@@ -7,7 +7,7 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import useChat from '../../components/useChat';
 
-
+import './index.css';
 
 const Chat = (props) => {
   // const { email } = useContext(AppContext);
@@ -55,20 +55,20 @@ const Chat = (props) => {
   };
   return (
     <div className="">
-      <Header>Conversar com o lodjinha</Header>
-      <h1 className="">{email}</h1>
+      <Header>CHAT</Header>
+      <h3 className="title">{email}</h3>
       <div className="messages-container">
         <ul className="messages-list">
           {messages.map((message) => (
             <li
               key={ `${message.time}-${message.message}` }
               className={ `message-item ${
-                message.ownedByCurrentUser ? 'my-message' : 'received-message' // CSS!
+                message.nome === email ? 'my-message' : 'received-message' // CSS!
               }` }
             >
-              <p data-testid="nickname">{message.nome}</p>
-              <p data-testid="message-time">{message.time}</p>
-              <h2 data-testid="text-message">{message.message}</h2>
+              <p data-testid="nickname" className="message-name">{message.nome}</p>
+              <p data-testid="message-time" className="message-time">{message.time}</p>
+              <h4 data-testid="text-message" className="message-body">{message.message}</h4>
             </li>
           ))}
         </ul>

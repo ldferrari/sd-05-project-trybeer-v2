@@ -8,6 +8,8 @@ import { getMessagesById } from '../../services/requestAPI';
 import useChat from '../useChat';
 import { Link } from 'react-router-dom';
 
+import './index.css';
+
 const dateFormat = require('dateformat');
 
 const AdminChatConversation = (props) => {
@@ -53,7 +55,7 @@ const AdminChatConversation = (props) => {
   };
   return (
     <div className="">
-      <h1 className="">{email}</h1>
+      <h1 className="">{`Conversa com: ${email}`}</h1>
       <Link to="/admin/chats" data-testid="back-button">
           Voltar
         </Link>
@@ -63,12 +65,12 @@ const AdminChatConversation = (props) => {
             <li
               key={ `${message.time}-${message.message}` }
               className={ `message-item ${
-                message.ownedByCurrentUser ? 'my-message' : 'received-message' // CSS!
+                message.nome === 'Loja' ? 'my-message' : 'received-message' // CSS!
               }` }
             >
-              <p data-testid="nickname">{message.nome}</p>
-              <p data-testid="message-time">{message.time}</p>
-              <h2 data-testid="text-message">{message.message}</h2>
+              <p data-testid="nickname" className="message-name">{message.nome}</p>
+              <p data-testid="message-time" className="message-time">{message.time}</p>
+              <h2 data-testid="text-message" className="message-body">{message.message}</h2>
             </li>
           ))}
         </ul>
@@ -84,7 +86,7 @@ const AdminChatConversation = (props) => {
       <button
         type="button"
         onClick={ handleSendMessage }
-        className="send-message-button"
+        className="send-message-button admin-send-btn"
         data-testid="send-message"
       >
         ENVIAR

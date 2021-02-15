@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const SideBar = () => (
-  <aside className="sideBar side-menu-container">
+  <aside className="sideBar menuBorder">
+    <div className="menuBorder">
+    <h2>MENU:</h2>
     <ul>
       <li className="menuBtn">
         <Link className="menuBtn" to="/products" data-testid="side-menu-item-products">
@@ -40,6 +42,7 @@ const SideBar = () => (
         </Link>
       </li>
     </ul>
+    </div>
   </aside>
 );
 
