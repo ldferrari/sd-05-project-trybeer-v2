@@ -34,7 +34,7 @@ profile.get('/', async (req, res) => {
     const { email } = req.payload;
     const emailExists = await User.findOne({ where: { email } });
     delete emailExists.password;
-    console.log(emailExists);
+    // console.log(emailExists);
     return res.status(200).json({ user: emailExists });
   } catch (error) {
     console.error(error);

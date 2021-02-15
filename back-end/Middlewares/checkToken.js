@@ -2,7 +2,7 @@ const { verifyToken } = require('./webTokenMiddleware');
 
 const checkToken = async (req, res, next) => {
   const { authorization } = req.headers;
-  console.log('AQUI TA O TOKEN', req)
+  // console.log('AQUI TA O TOKEN', req);
   if (!authorization) {
     return res.status(401).json({ message: 'No autorization.' });
   }
@@ -10,7 +10,7 @@ const checkToken = async (req, res, next) => {
     return res.status(400).json({ message: 'Operação não autorizada' });
   } */
   try {
-    console.log('authorization', authorization);
+    // console.log('authorization', authorization);
     const payload = await verifyToken(authorization);
     req.payload = payload;
     // os outros middlewares conseguem ter acesso ao payload.

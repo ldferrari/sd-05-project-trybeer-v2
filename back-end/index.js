@@ -115,7 +115,7 @@ server.listen(PORT, () => {
 
 // testando o chat pelo postman com o banco no mongodb
 
-const meuChat = express();
+/* const meuChat = express();
 meuChat.use(bodyParser.json());
 const model = require('./Chat/model/chatModel');
 
@@ -139,7 +139,7 @@ meuChat.post('/', async (req, res) => {
 
 meuChat.listen(3002, () => {
   console.log('chat na 3002');
-});
+}); */
 
 
 

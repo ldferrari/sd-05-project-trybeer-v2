@@ -9,9 +9,9 @@ chatController.get('/chat', async (req, res) => {
     const { email } = req.headers;
     const {role, email: emailToken} = req.payload;
     const collection = role==='client'? emailToken: email;
-    console.log('Back===>',role, emailToken, email)
+    // console.log('Back===>',role, emailToken, email);
     const conversation = await service.getConversation(collection);
-    console.log('conversation =====>', conversation);
+    // console.log('conversation =====>', conversation);
     res.status(200).json(conversation);
   } catch (error) {
     console.error(error);
