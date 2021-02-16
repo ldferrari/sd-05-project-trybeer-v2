@@ -17,6 +17,20 @@ const ClientProvider = ({ children }) => {
   const [street, setStreet] = useState('');
   const [streetNumber, setStreetNumber] = useState('');
   const [purchaseDone, setPurchaseDone] = useState(false);
+  const [isNameValid, setNameValid] = useState(false);
+  const [isEmailValid, setEmailValid] = useState(false);
+  console.log(isEmailValid);
+  const [isPasswordValid, setPasswordValid] = useState(false);
+  const [isEmailRegistered, setEmailRegistered] = useState(false);
+  const [isFetched, setIsFetched] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({
+    id: '',
+    name: '',
+    email: '',
+    password: '',
+    role: 'client',
+  });
   const context = {
     email,
     setEmail,
@@ -36,6 +50,20 @@ const ClientProvider = ({ children }) => {
     setStreetNumber,
     purchaseDone,
     setPurchaseDone,
+    isNameValid,
+    setNameValid,
+    isEmailValid,
+    setEmailValid,
+    isPasswordValid,
+    setPasswordValid,
+    isEmailRegistered,
+    setEmailRegistered,
+    isFetched,
+    setIsFetched,
+    loggedIn,
+    setLoggedIn,
+    userData,
+    setUserData,
   };
   return <ClientContext.Provider value={ context }>{children}</ClientContext.Provider>;
 };

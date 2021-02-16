@@ -3,6 +3,7 @@ import '../../css/admin/menuAdm.css';
 import ButtonPedidos from '../general/ButtonPedidos';
 import ButtonPerfil from '../general/ButtonPerfil';
 import ButtonLogin from '../general/ButtonLogin';
+import ButtonChat from '../general/ButtonChat';
 
 export default function MenuAdm() {
   return (
@@ -12,6 +13,7 @@ export default function MenuAdm() {
         <div className="menuButtonAdm">
           <ButtonPedidos />
           <ButtonPerfil />
+          <ButtonChat />
         </div>
         <div className="menuButtonAdm textCenter">
           <ButtonLogin />

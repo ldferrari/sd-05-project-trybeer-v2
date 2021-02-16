@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { ClientContext } from '../../context/client/ClientProvider';
 import validateName from '../../services/general/validateName';
 import validateEmail from '../../services/general/validateEmail';
 import validatePassword from '../../services/general/validatePassword';
@@ -7,72 +8,71 @@ import fetchUserData from '../../services/general/fetchUserData';
 import fetchLoginData from '../../services/general/fetchLoginData';
 import '../../css/registerPage.css';
 
-export default function RegisterPage() {
-  const [isNameValid, setNameValid] = useState(false);
-  const [isEmailValid, setEmailValid] = useState(false);
-  const [isPasswordValid, setPasswordValid] = useState(false);
-  const [isEmailRegistered, setEmailRegistered] = useState(false);
-  const [isFetched, setIsFetched] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({
-    id: '',
-    name: '',
-    email: '',
-    password: '',
-    role: 'client',
-  });
+const checked = (setUserData, userData) => {
+  console.log('cheguei no checked')
+  const isChecked = document.getElementById('want-to-sell').checked;
+  if (isChecked) {
+    setUserData({ ...userData, role: 'administrator' });
+  } else {
+    setUserData({ ...userData, role: 'client' });
+  }
+  console.log(isChecked, 'isChecked')
+};
 
-  const checked = () => {
-    const isChecked = document.getElementById('want-to-sell').checked;
-    if (isChecked) {
-      setUserData({ ...userData, role: 'administrator' });
-    } else {
-      setUserData({ ...userData, role: 'client' });
-    }
-  };
+const setLocalStorage = async (userData, setLoggedIn) => {
+  const userWithToken = await fetchLoginData(userData);
+  localStorage.setItem('token', userWithToken.token);
+  localStorage.setItem(
+    'user',
+    JSON.stringify({
+      id: userWithToken.id,
+      email: userData.email,
+      role: userData.role,
+      name: userData.name,
+    }),
+  );
+  setLoggedIn(true);
+};
 
-  const setLocalStorage = async (user) => {
-    const userWithToken = await fetchLoginData(userData);
-    localStorage.setItem('token', userWithToken.token);
-    localStorage.setItem(
-      'user',
-      JSON.stringify({
-        id: userWithToken.id,
-        email: user.email,
-        role: user.role,
-        name: user.name,
-      }),
-    );
-    setLoggedIn(true);
-  };
+const isUserRegistered = async (estados) => {
+  const { isFetched, setIsFetched, setEmailRegistered, isEmailRegistered, userData} = estados
 
-  const isUserRegistered = async (user) => {
-    if (isFetched) setIsFetched(false);
-    const { message, role } = await fetchUserData(user);
-    setIsFetched(true);
-    if (isEmailRegistered) {
-      setEmailRegistered(false);
-    }
-    if (message === 'E-mail already in database.') {
-      setEmailRegistered(true);
-    }
-    if (message === 'ok' && role === 'client') {
-      setEmailRegistered(false);
-    }
-    if (message === 'ok' && role === 'administrator') {
-      setEmailRegistered(false);
-    }
-  };
+  if (isFetched) setIsFetched(false);
+  const { message, role } = await fetchUserData(userData);
+  setIsFetched(true);
+  if (isEmailRegistered) {
+    setEmailRegistered(false);
+  }
+  if (message === 'E-mail already in database.') {
+    setEmailRegistered(true);
+  }
+  if (message === 'ok' && role === 'client') {
+    setEmailRegistered(false);
+  }
+  if (message === 'ok' && role === 'administrator') {
+    setEmailRegistered(false);
+  }
+};
 
+const redirectRole = (userData, setLoggedIn, isEmailRegistered, isFetched, props) => {
+  console.log(userData)
   if (isFetched && !isEmailRegistered && userData.role === 'client') {
-    setLocalStorage(userData);
-    return loggedIn && <Redirect to="/products" />;
+    setLocalStorage(userData, setLoggedIn);
+    return props.history.push('/products');
   }
-
+  
   if (isFetched && !isEmailRegistered && userData.role === 'administrator') {
-    setLocalStorage(userData);
-    return <Redirect to="/admin/orders" />;
+    setLocalStorage(userData, setLoggedIn);
+    return props.history.push('/admin/orders');
   }
+}
+
+export default function RegisterPage(props) {
+  const { isNameValid, setNameValid, isEmailValid, setEmailValid } = useContext(ClientContext);
+  const { isPasswordValid, setPasswordValid, isEmailRegistered } = useContext(ClientContext);
+  const { setEmailRegistered, isFetched, setIsFetched } = useContext(ClientContext);
+  const { loggedIn, setLoggedIn, userData, setUserData } = useContext(ClientContext);
+  const estados = { isFetched, setIsFetched, setEmailRegistered, isEmailRegistered, userData };
 
   return (
     <div className="allRegistro">
@@ -113,7 +113,11 @@ export default function RegisterPage() {
               }) }
             />
           </label>
-          { isEmailRegistered ? <div className="alradyDB">E-mail already in database.</div> : false }
+          {
+            isEmailRegistered
+              ? <div className="alradyDB">E-mail already in database.</div>
+              : false
+          }
         </div>
         <div>
           <label htmlFor="password" className="labelRegistro">
@@ -141,7 +145,7 @@ export default function RegisterPage() {
               data-testid="signup-seller"
               className="inputCheckRegistro"
               onChange={ () => {
-                checked();
+                checked(setUserData, userData);
               } }
             />
             Quero Vender
@@ -152,7 +156,10 @@ export default function RegisterPage() {
             type="button"
             data-testid="signup-btn"
             className="cadastrar"
-            onClick={ () => isUserRegistered(userData) }
+            onClick={ () => {
+              isUserRegistered(estados);
+              redirectRole(userData, setLoggedIn, isEmailRegistered, isFetched, props)
+            } }
             disabled={ !isNameValid || !isEmailValid || !isPasswordValid }
           >
             Cadastrar

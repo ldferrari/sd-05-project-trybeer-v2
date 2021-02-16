@@ -12,6 +12,8 @@ import ClientProfilePage from './pages/client/ClientProfilePage';
 import './css/client/app.css';
 import ClientDetailsOrderPage from './pages/client/ClientDetailsOrderPage';
 import AdminSaleDetailsPage from './pages/admin/AdminSaleDetailsPage';
+import ClientChatPage from './pages/client/ClientChatPage';
+import AdminChatPage from './pages/admin/AdminChatPage';
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
         />
         <Route path="/admin/orders" component={ AdminOrderPage } />
         <Route path="/admin/profile" component={ AdminProfilePage } />
+        <Route path="/admin/chats" component={ AdminChatPage } />
         <Route path="/login" component={ LoginPage } />
         <Route path="/register" component={ RegisterPage } />
         <Route path="/products" component={ ClientProductPage } />
@@ -39,6 +42,7 @@ function App() {
         />
         <Route path="/orders" component={ ClientMeusPedidos } />
         <Route path="/checkout" component={ ClientCheckoutPage } />
+        <Route path="/chat" component={ ClientChatPage } />
         <Route path="/" component={ () => <Redirect to="/login" /> } />
       </Switch>
     </div>
