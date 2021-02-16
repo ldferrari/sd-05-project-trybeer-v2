@@ -34,7 +34,12 @@ const Checkout = (props) => {
   useEffect(() => {
     const el = document.getElementById('compra-finalizada');
     if (el && el.innerHTML !== '') {
-      history.push('/products');
+      const tempoEspera = 1000
+      setTimeout(() => {
+        if (history.location.pathname==='/checkout') {
+          history.push('/products');
+        }
+      }, tempoEspera);
     }
   }, [alertCompraFinalizada, history]);
 
