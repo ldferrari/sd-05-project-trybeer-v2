@@ -34,9 +34,9 @@ const Checkout = (props) => {
   useEffect(() => {
     const el = document.getElementById('compra-finalizada');
     if (el && el.innerHTML !== '') {
-      const tempoEspera = 1000
+      const tempoEspera = 1000;
       setTimeout(() => {
-        if (history.location.pathname==='/checkout') {
+        if (history.location.pathname === '/checkout') {
           history.push('/products');
         }
       }, tempoEspera);
