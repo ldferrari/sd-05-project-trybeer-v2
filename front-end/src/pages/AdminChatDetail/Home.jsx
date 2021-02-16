@@ -1,6 +1,6 @@
 import React from 'react'; // { useState, useEffect }
 import { makeStyles, Box, Grid } from '@material-ui/core';
-// import propTypes from 'prop-types';
+import propTypes from 'prop-types';
 import AdminSideBar from '../../components/adminSidebarUI';
 // import { getAllMessages } from '../../services/requestAPI';
 import AdminChatConversation from '../../components/AdminChatConversation';
@@ -48,6 +48,6 @@ const Home = (props) => {
 
 export default Home;
 
-// Home.propTypes = {
-//  history: propTypes.instanceOf(Object).isRequired,
-// };
+Home.propTypes = {
+  email: propTypes.string.isRequired,
+};

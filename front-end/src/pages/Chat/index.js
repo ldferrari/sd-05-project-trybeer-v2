@@ -6,7 +6,7 @@ import { verifyToken } from '../../services/webTokenMiddleware';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import useChat from '../../components/useChat';
-
+const dateFormat = require('dateformat');
 import './index.css';
 
 const Chat = (props) => {
@@ -17,7 +17,7 @@ const Chat = (props) => {
   // console.log('payload=====>', payload);
   // console.log('email===>', email);
   // const { Id } = props; // pega id do link/requisição/jwt
-  const { messages, sendMessage, setHistory } = useChat(email); 
+  const { messages, sendMessage, setHistory } = useChat(email);
   // Creates a websocket and manages messaging;
   const [newMessage, setNewMessage] = useState(''); // Message to be sent
   // =>const [theOrders, setOrders] = useState([]);
@@ -36,10 +36,9 @@ const Chat = (props) => {
       return true;
     }
     fetchOldMessages();
-  }, [props, id]);
+  }, [props, id, setHistory]);
 
   const handleNewMessageChange = (event) => {
-    const dateFormat = require('dateformat');
     const now = new Date();
     // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
     const time = dateFormat(now, 'HH:MM');

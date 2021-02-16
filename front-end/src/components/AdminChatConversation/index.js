@@ -98,4 +98,5 @@ export default AdminChatConversation;
 
 AdminChatConversation.propTypes = {
   history: propTypes.instanceOf(Object).isRequired,
+  email: propTypes.string.isRequired,
 };
