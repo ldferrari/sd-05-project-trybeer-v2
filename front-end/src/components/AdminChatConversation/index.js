@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'; // useContext
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getMessagesById } from '../../services/requestAPI';
 // import { verifyToken } from '../../services/webTokenMiddleware';
 // import AppContext from '../../context/AppContext';
 // import Header from '../../components/header';
 // import Footer from '../../components/footer';
 import useChat from '../useChat';
-import { Link } from 'react-router-dom';
 
 import './index.css';
 
@@ -21,25 +21,26 @@ const AdminChatConversation = (props) => {
   // console.log('payload=====>', payload);
   // console.log('email===>', email);
   // const { Id } = props; // pega id do link/requisição/jwt
-  const { messages, sendMessage, setHistory } = useChat(email); // Creates a websocket and manages messaging
+  const { messages, sendMessage, setHistory } = useChat(email);
+  // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = useState(''); // Message to be sent
   // =>const [theOrders, setOrders] = useState([]);
   useEffect(() => {
     const { history } = props;
     if (!localStorage.getItem('token')) {
-     history.push('/login');
+      history.push('/login');
     }
     async function fetchOldMessages() {
       const { data } = await getMessagesById(localStorage.getItem('token'), email);
       // console.log(data);
-      if(data.code) return false;
-      setHistory(data.map(({ time, nome, message })=>({time,nome,message})))
+      if (data.code) return false;
+      setHistory(data.map(({ time, nome, message }) => ({ time, nome, message })));
       setNewMessage(data);
+      return true;
     }
     fetchOldMessages();
-  }, [props]);
+  }, [props, email, setHistory]);
 
-  
   const handleNewMessageChange = (event) => {
     const now = new Date();
     // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
@@ -56,9 +57,7 @@ const AdminChatConversation = (props) => {
   return (
     <div className="">
       <h1 className="">{`Conversa com: ${email}`}</h1>
-      <Link to="/admin/chats" data-testid="back-button">
-          Voltar
-        </Link>
+      <Link to="/admin/chats" data-testid="back-button">Voltar</Link>
       <div className="messages-container">
         <ul className="messages-list">
           {messages.map((message) => (

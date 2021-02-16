@@ -16,8 +16,7 @@ function App(props) {
     },
   });
   const { history } = props;
-  const { email } = props.match.params
-
+  const { match: { params: { email } } } = props;
   return (
     <ThemeProvider theme={ theme }>
       <Home history={ history } email={ email } />
@@ -29,4 +28,5 @@ export default App;
 
 App.propTypes = {
   history: propTypes.instanceOf(Object).isRequired,
+  match: propTypes.instanceOf(Object).isRequired,
 };
