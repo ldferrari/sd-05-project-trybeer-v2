@@ -35,7 +35,11 @@ export default function SimpleCard(props) {
   } = props;
 
   const {
-    id, delivery_address, delivery_number, total_price, status,
+    id,
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
+    total_price: totalPrice,
+    status,
   } = order;
 
   setOrderDetails(order);
@@ -56,10 +60,10 @@ export default function SimpleCard(props) {
               { `Pedido ${id}` }
             </Typography>
             <Typography data-testid={ `${index}-order-address` } display="block" variant="body2" color="textSecondary">
-              { `${delivery_address}, ${delivery_number}` }
+              { `${deliveryAddress}, ${deliveryNumber}` }
             </Typography>
             <Typography data-testid={ `${index}-order-total-value` } variant="body2" color="textSecondary">
-              { `R$ ${total_price.toString().replace('.', ',')}` }
+              { `R$ ${totalPrice.toString().replace('.', ',')}` }
             </Typography>
             <Typography data-testid={ `${index}-order-status` } variant="h6" color="body1">
               { status }
