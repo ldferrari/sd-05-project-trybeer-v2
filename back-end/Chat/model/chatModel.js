@@ -12,9 +12,11 @@ const insertMessage = async (idUser, conversation) => {
 };
 
 const lastConversation = async (colletion) => {
-  return connection().then((db) => db.collection(colletion).find().sort({ _id:-1 }).limit(1).toArray());
+  return connection().then((db) => db.collection(colletion).find()
+  .sort({ _id: -1 })
+  .limit(1)
+  .toArray());
 };
-
 
 module.exports = {
   getConversation,
