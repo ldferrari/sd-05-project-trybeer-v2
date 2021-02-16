@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SaveIcon from '@material-ui/icons/Save';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState/*, useCallback */ } from 'react';
 import propTypes from 'prop-types';
 import { Redirect, useParams } from 'react-router-dom';
 
@@ -67,10 +67,10 @@ const HomeAdminOrderDetail = (props) => {
     }
     console.log('HomeAdminOrderDetail');
     fetchSale();
-  }, [/* history, memoFetch */]);
+  }, [history, /* memoFetch */ fetchSale]);
 
   const handleSubmit = async (statusAtual) => {
-    const ok = await postStatusDelivered(token, id, statusAtual );
+    const ok = await postStatusDelivered(token, id, statusAtual);
     if (!ok.data.message) {
       return fetchSale();
     }
@@ -83,7 +83,7 @@ const HomeAdminOrderDetail = (props) => {
 
   return (
     <div className={ classes.root }>
-      <AdminSideBar title="Ordem Detalhada" icon="inbox" history={history} />
+      <AdminSideBar title="Ordem Detalhada" icon="inbox" history={ history } />
       <Card className={ classes.card } elevation={ 3 }>
         <CardHeader
           action={

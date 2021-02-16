@@ -41,7 +41,7 @@ export default function SimpleCard(props) {
     total_price: totalPrice,
     status,
   } = order;
-
+  const dois = 2;
   setOrderDetails(order);
   if (!order) return <h1>Loading Card Orders components</h1>;
 
@@ -63,7 +63,7 @@ export default function SimpleCard(props) {
               { `${deliveryAddress}, ${deliveryNumber}` }
             </Typography>
             <Typography data-testid={ `${index}-order-total-value` } variant="body2" color="textSecondary">
-              { `R$ ${totalPrice.toFixed(2).replace('.', ',')}` }
+              { `R$ ${totalPrice.toFixed(dois).replace('.', ',')}` }
             </Typography>
             <Typography data-testid={ `${index}-order-status` } variant="h6" color="body1">
               { status }

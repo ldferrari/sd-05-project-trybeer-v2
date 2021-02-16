@@ -206,4 +206,5 @@ export default function AdminSidebarUI(props) {
 AdminSidebarUI.propTypes = {
   icon: propTypes.instanceOf(Object).isRequired,
   title: propTypes.number.isRequired,
+  history: propTypes.instanceOf(Object).isRequired,
 };

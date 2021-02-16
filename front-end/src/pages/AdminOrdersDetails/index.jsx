@@ -1,4 +1,5 @@
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import propTypes from 'prop-types';
 import React from 'react';
 import Home from './Home';
 
@@ -17,9 +18,13 @@ function App(props) {
 
   return (
     <ThemeProvider theme={ theme }>
-      <Home history={props.history} />
+      <Home history={ props.history } />
     </ThemeProvider>
   );
 }
 
 export default App;
+
+App.propTypes = {
+  history: propTypes.instanceOf(Object).isRequired,
+};
