@@ -175,11 +175,11 @@ export default function AdminSidebarUI(props) {
             data-testid="side-menu-item-chat"
             component={ Link }
             to="/admin/chats"
-            >
+          >
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
-            <ListItemText primary="Conversas"/>
+            <ListItemText primary="Conversas" />
           </ListItem>
         </List>
         <Divider />

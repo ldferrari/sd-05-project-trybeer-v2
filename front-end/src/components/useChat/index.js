@@ -7,7 +7,7 @@ const SOCKET_SERVER_URL = 'http://localhost:3001'; // mesma do server!
 const useChat = (ID) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const socketRef = useRef();
-  const setHistory = (arr) => setMessages([...arr,...messages])
+  const setHistory = (arr) => setMessages([...arr, ...messages]);
   useEffect(() => {
     // Creates a WebSocket connection
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
