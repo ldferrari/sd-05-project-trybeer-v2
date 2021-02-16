@@ -48,7 +48,7 @@ const HomeAdminOrderDetail = (props) => {
   const { history } = props;
   async function fetchSale() {
     try {
-      const { data } = await getSaleDetail(token, id);
+      const { data } = await getSaleDetail(token, id, sale.length ? sale[0].status : '');
       setsale(data);
       if (data.length > zero) {
         setDelivered(data[0].status);
@@ -59,17 +59,18 @@ const HomeAdminOrderDetail = (props) => {
     return 'true';
   }
 
-  const memoFetch = useCallback(fetchSale, [token, id]);
+  // const memoFetch = useCallback(fetchSale, [token, id]);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       history.push('/login');
     }
-    memoFetch();
-  }, [history, memoFetch]);
+    console.log('HomeAdminOrderDetail');
+    fetchSale();
+  }, [/* history, memoFetch */]);
 
-  const handleSubmit = async () => {
-    const ok = await postStatusDelivered(token, id);
+  const handleSubmit = async (statusAtual) => {
+    const ok = await postStatusDelivered(token, id, statusAtual );
     if (!ok.data.message) {
       return fetchSale();
     }
@@ -82,7 +83,7 @@ const HomeAdminOrderDetail = (props) => {
 
   return (
     <div className={ classes.root }>
-      <AdminSideBar title="Ordem Detalhada" icon="inbox" />
+      <AdminSideBar title="Ordem Detalhada" icon="inbox" history={history} />
       <Card className={ classes.card } elevation={ 3 }>
         <CardHeader
           action={
@@ -112,13 +113,24 @@ const HomeAdminOrderDetail = (props) => {
           </Typography>
           {delivered === 'Pendente' && (
             <Button
-              data-testid="mark-as-delivered-btn"
-              onClick={ handleSubmit }
+              data-testid="mark-as-prepared-btn"
+              onClick={ () => handleSubmit('Pendente') }
               variant="contained"
               startIcon={ <SaveIcon /> }
               color="secondary"
             >
-              Marcar como entregue
+              Marcar como Preparando
+            </Button>
+          )}
+          {(delivered === 'Preparando' || delivered === 'Pendente') && (
+            <Button
+              data-testid="mark-as-delivered-btn"
+              onClick={ () => handleSubmit('Preparando') }
+              variant="contained"
+              startIcon={ <SaveIcon /> }
+              color="secondary"
+            >
+              Marcar como Entregue
             </Button>
           )}
         </CardContent>

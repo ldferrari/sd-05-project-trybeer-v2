@@ -24,7 +24,6 @@ const Orders = (props) => {
     }
     fetchOrders();
   }, [props]);
-
   return (
     <div className="orders">
       <Header>Meus Pedidos</Header>

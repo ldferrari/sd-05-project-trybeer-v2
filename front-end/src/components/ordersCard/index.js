@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
 // import AppContext from '../../context/AppContext';
 import './index.css';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,8 @@ import AppContext from '../../context/AppContext';
 
 const OrderCard = (props) => {
   const { order, index } = props;
-  const { id, sale_date: saleDate } = order;
+  const dois = 2;
+  const { id, sale_date: saleDate, status } = order;
   const { setGlobalData } = useContext(AppContext);
   useEffect(() => {
     setGlobalData((state) => ({ ...state, [id]: saleDate }));
@@ -24,10 +26,13 @@ const OrderCard = (props) => {
           { `Pedido ${id}` }
         </p>
         <p data-testid={ `${index}-order-date` }>
-          { saleDate }
+          { dateFormat(saleDate, 'dd/mm') }
         </p>
         <p data-testid={ `${index}-order-total-value` }>
-          { `R$ ${order.total_price.toString().replace('.', ',')}` }
+          { `R$ ${order.total_price.toFixed(dois).replace('.', ',')}` }
+        </p>
+        <p>
+          { status }
         </p>
       </Link>
     </div>
@@ -41,6 +46,7 @@ OrderCard.propTypes = {
     id: PropTypes.number,
     sale_date: PropTypes.string,
     total_price: PropTypes.string,
+    status: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

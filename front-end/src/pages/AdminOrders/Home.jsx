@@ -48,7 +48,6 @@ const Home = (props) => {
     fetchProducts();
   }, [token, history]);
 
-  // console.log('admin hoooome=========>', allOrders);
   return (
     <div className={ classes.root }>
       <Box display="flex">

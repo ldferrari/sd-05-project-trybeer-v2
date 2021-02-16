@@ -107,7 +107,7 @@ export default function AdminSidebarUI(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const { icon, title } = props;
+  const { icon, title, history } = props;
   return (
     <div className={ classes.root }>
       <CssBaseline />
@@ -187,7 +187,10 @@ export default function AdminSidebarUI(props) {
           <ListItem
             button
             data-testid="side-menu-item-logout"
-            onClick={ () => localStorage.removeItem('token') }
+            onClick={ () => {
+              localStorage.removeItem('token');
+              history.push('/login');
+            } }
           >
             <ListItemIcon>
               <ExitToAppIcon />

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import propTypes from 'prop-types';
+import dateFormat from 'dateformat';
 import './index.css';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -17,7 +18,6 @@ export default function OrderDetails(props) {
 
   const zero = 0;
   const dois = 2;
-  console.log('orderHere===>', orderHere);
   const cartSum = orderHere
     .reduce((acc, cv) => acc + cv.price * cv.quantity, zero)
     .toFixed(dois);
@@ -44,7 +44,7 @@ export default function OrderDetails(props) {
           { `Pedido ${id}` }
         </h4>
         <h4 data-testid="order-date" className="orderTitle">
-          { globalData[id] }
+          { dateFormat(globalData[id], 'dd/mm') }
         </h4>
       </div>
       <div className="pedido">

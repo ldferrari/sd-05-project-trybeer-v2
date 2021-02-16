@@ -63,7 +63,7 @@ export default function SimpleCard(props) {
               { `${deliveryAddress}, ${deliveryNumber}` }
             </Typography>
             <Typography data-testid={ `${index}-order-total-value` } variant="body2" color="textSecondary">
-              { `R$ ${totalPrice.toString().replace('.', ',')}` }
+              { `R$ ${totalPrice.toFixed(2).replace('.', ',')}` }
             </Typography>
             <Typography data-testid={ `${index}-order-status` } variant="h6" color="body1">
               { status }

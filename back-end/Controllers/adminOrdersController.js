@@ -16,8 +16,8 @@ adminOrder.get('/', async (req, res) => {
 
 adminOrder.put('/', async (req, res) => {
   try {
-    const { id } = req.body;
-    const changeDelivered = await service.changeStatus(id);
+    const { id, status } = req.body;
+    const changeDelivered = await service.changeStatus(id, status);
     if (changeDelivered.error) {
       return res.status(changeDelivered.statusCode).json({ message: changeDelivered.message });
     }
