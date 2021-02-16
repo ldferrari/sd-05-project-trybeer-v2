@@ -11,8 +11,8 @@ const insertMessage = async (idUser, conversation) => {
   return connection().then((db) => db.collection(idUser).insertOne({ nome, time, message }));
 };
 
-const lastConversation = async (colletion) =>
-  connection().then((db) => db.collection(colletion).find()
+const lastConversation = async (colletion) => connection()
+  .then((db) => db.collection(colletion).find()
     .sort({ _id: -1 })
     .limit(1)
     .toArray());

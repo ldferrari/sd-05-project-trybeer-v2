@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'; // useContext
 import propTypes from 'prop-types';
+import dateFormat from 'dateformat';
 import { getMessagesById } from '../../services/requestAPI';
 import { verifyToken } from '../../services/webTokenMiddleware';
 // import AppContext from '../../context/AppContext';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import useChat from '../../components/useChat';
-const dateFormat = require('dateformat');
+
 import './index.css';
 
 const Chat = (props) => {
