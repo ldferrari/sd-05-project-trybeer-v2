@@ -15,10 +15,10 @@ function App(props) {
       },
     },
   });
-
+  const { history } = props;
   return (
     <ThemeProvider theme={ theme }>
-      <Home history={ props.history } />
+      <Home history={ history } />
     </ThemeProvider>
   );
 }

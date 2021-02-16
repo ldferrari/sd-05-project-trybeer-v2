@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SaveIcon from '@material-ui/icons/Save';
 
-import React, { useEffect, useState/*, useCallback */ } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import propTypes from 'prop-types';
 import { Redirect, useParams } from 'react-router-dom';
 
@@ -59,15 +59,15 @@ const HomeAdminOrderDetail = (props) => {
     return 'true';
   }
 
-  // const memoFetch = useCallback(fetchSale, [token, id]);
+  const memoFetch = useCallback(fetchSale, [token, id]);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       history.push('/login');
     }
     console.log('HomeAdminOrderDetail');
-    fetchSale();
-  }, [history, /* memoFetch */ fetchSale]);
+    memoFetch();
+  }, [history, memoFetch ]);
 
   const handleSubmit = async (statusAtual) => {
     const ok = await postStatusDelivered(token, id, statusAtual);
