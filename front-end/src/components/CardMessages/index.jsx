@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react'; // { useContext }
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import AppContext from '../../context/AppContext';
+// import AppContext from '../../context/AppContext';
 
 const useStyles = makeStyles({
   root: {
@@ -31,11 +31,10 @@ export default function SimpleCard(props) {
   const classes = useStyles();
   const {
     msg,
-    index,
   } = props;
 
   const {
-    email, time
+    email, time,
   } = msg;
 
   // setOrderDetails(order);

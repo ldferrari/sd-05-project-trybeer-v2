@@ -11,7 +11,7 @@ const configWithId = (token, id) => ({
   headers: {
     'Content-Type': 'application/json',
     Authorization: token,
-    id
+    id,
   },
 });
 
