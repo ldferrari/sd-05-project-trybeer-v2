@@ -54,7 +54,7 @@ const HomeAdminOrderDetail = (props) => {
         setDelivered(data[0].status);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     return 'true';
   }

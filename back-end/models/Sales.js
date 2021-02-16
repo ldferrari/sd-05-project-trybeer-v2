@@ -17,9 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     Sale.belongsTo(models.User,
       { foreignKey: 'userId', as: 'user' });
   };
+
+  // Nova Associação N:M
   /* Sale.associate = (models) => {
-    Sale.hasTo(models.Product,
-      { foreignKey: 'productId', as: 'user' });
+    Sale.belongsToMany(models.Product,
+      { through: models.Sale_Product, foreignKey: 'sale_id', as: 'sales' });
   }; */
   return Sale;
 };

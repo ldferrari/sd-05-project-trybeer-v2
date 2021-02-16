@@ -17,9 +17,8 @@ const configWithId = (token, id) => ({
 
 const getAllMessages = async (token) => axios.get('http://localhost:3001/admin/chats', config(token));
 
-const getMessagesById = async (token, id) => {
-  console.log('request ===>', id, token)
-  return axios.get('http://localhost:3001/chat', configWithId(token, id))};
+const getMessagesById = async (token, id) => axios
+  .get('http://localhost:3001/chat', configWithId(token, id));
 
 const postGetItems = async (token) => axios.get('http://localhost:3001/products', config(token));
 

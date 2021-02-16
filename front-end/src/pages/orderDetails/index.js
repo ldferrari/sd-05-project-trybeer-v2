@@ -17,6 +17,7 @@ export default function OrderDetails(props) {
 
   const zero = 0;
   const dois = 2;
+  console.log('orderHere===>', orderHere);
   const cartSum = orderHere
     .reduce((acc, cv) => acc + cv.price * cv.quantity, zero)
     .toFixed(dois);

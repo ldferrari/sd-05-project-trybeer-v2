@@ -39,16 +39,16 @@ const Home = (props) => {
       try {
         const { data } = await getSales(token);
         setAllOrders(data);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
       return 'true';
     }
     fetchProducts();
   }, [token, history]);
 
-  console.log('admin hoooome=========>', allOrders);
+  // console.log('admin hoooome=========>', allOrders);
   return (
     <div className={ classes.root }>
       <Box display="flex">

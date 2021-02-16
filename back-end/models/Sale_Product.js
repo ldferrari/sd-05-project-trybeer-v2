@@ -13,12 +13,20 @@ module.exports = (sequelize, DataTypes) => {
     { timestamps: false },
   );
   saleProduct.associate = (models) => {
-    saleProduct.hasMany(models.Product,
+    saleProduct.belongsTo(models.Product,
       { foreignKey: 'product_id', as: 'productId' });
   };
   saleProduct.associate = (models) => {
     saleProduct.belongsTo(models.Sale,
       { foreignKey: 'sale_id', as: 'saleId' });
   };
+  /* saleProduct.associate = (models) => {
+    saleProduct.belongsTo(models.Product,
+      { foreignKey: 'product_id' });
+  };
+  saleProduct.associate = (models) => {
+    saleProduct.belongsTo(models.Sale,
+      { foreignKey: 'sale_id', as: 'sale' });
+  }; */
   return saleProduct;
 };

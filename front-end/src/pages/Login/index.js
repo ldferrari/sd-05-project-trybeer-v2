@@ -26,7 +26,7 @@ const Login = (props) => {
   };
 
   useEffect(() => {
-    console.log('------------LOGIN PAGE-------------');
+    // console.log('------------LOGIN PAGE-------------');
   }, []);
   useEffect(() => {
     validationEmail(email);
@@ -45,7 +45,7 @@ const Login = (props) => {
       token = user.token;
       role = user.role;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setAlertLogin('Email e/ou password incorretos');
       const timeAlert = 3500;
       setTimeout(() => {

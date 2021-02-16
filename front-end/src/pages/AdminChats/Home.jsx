@@ -45,7 +45,7 @@ const Home = (props) => {
       try {
         const { data } = await getAllMessages(localStorage.getItem('token'));
         setAllMessages(data);
-        console.log('ADMIN ALL CHATS ===>', data);
+        // console.log('ADMIN ALL CHATS ===>', data);
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +54,7 @@ const Home = (props) => {
     fetchMessages();
   }, [token, history]);
 
-  console.log('admin Chat=========>', allMessages);
+  // console.log('admin Chat=========>', allMessages);
   return (
     <div className={ classes.root }>
       <Box display="flex">

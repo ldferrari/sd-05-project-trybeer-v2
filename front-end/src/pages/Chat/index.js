@@ -28,7 +28,7 @@ const Chat = (props) => {
     }
     async function fetchOldMessages() {
       const { data } = await getMessagesById(localStorage.getItem('token'), id);
-      console.log(data);
+      // console.log(data);
       if(data.code) return false;
       setHistory(data.map(({ time, nome, message })=>({time,nome,message})))
       setNewMessage(data);
@@ -42,13 +42,13 @@ const Chat = (props) => {
     const now = new Date();
     // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
     const time = dateFormat(now, 'HH:MM');
-    console.log(now,time)
+    // console.log(now,time);
     setNewMessage({ message: event.target.value, time, nome: email });
     // precisa colocar a const time e o email além da msg ou faz isso pelo "server?"
   };
 
   const handleSendMessage = () => {
-    console.log('MANDNOD MENSAGEM')
+    // console.log('MANDNOD MENSAGEM');
     sendMessage(newMessage);
     // setNewMessage('');
     newMessage.message = '';

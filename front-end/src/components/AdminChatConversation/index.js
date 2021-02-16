@@ -31,7 +31,7 @@ const AdminChatConversation = (props) => {
     }
     async function fetchOldMessages() {
       const { data } = await getMessagesById(localStorage.getItem('token'), email);
-      console.log(data);
+      // console.log(data);
       if(data.code) return false;
       setHistory(data.map(({ time, nome, message })=>({time,nome,message})))
       setNewMessage(data);
