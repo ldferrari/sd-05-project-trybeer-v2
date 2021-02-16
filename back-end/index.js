@@ -43,8 +43,6 @@ const admProfileController = require('./Controllers/admProfileController');
 const admDetailController = require('./Controllers/admDetailController');
 
 const chatController = require('./Chat/controller/chatController');
-const { use } = require('./Controllers/adminOrdersController');
-
 
 const service = require('./Chat/service/chatService');
 
@@ -112,7 +110,6 @@ server.listen(PORT, () => {
   console.log(`O pai tá ON no projeto e na porta ${PORT}`);
 });
 
-
 // testando o chat pelo postman com o banco no mongodb
 
 /* const meuChat = express();
@@ -123,14 +120,11 @@ meuChat.get('/', async (req, res) => {
   const teste = await model.getAllConversations();
   res.status(200).json(teste);
 });
-
-
 meuChat.post('/', async (req, res) => {
   try {
     // console.log('req.body.p===>', req.body.p);
     const teste = await model.insertMessage(req.body.collection, {...req.body.p});
     res.status(200).json(teste);
-    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error });
@@ -140,7 +134,3 @@ meuChat.post('/', async (req, res) => {
 meuChat.listen(3002, () => {
   console.log('chat na 3002');
 }); */
-
-
-
-

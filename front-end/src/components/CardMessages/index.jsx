@@ -66,5 +66,4 @@ export default function SimpleCard(props) {
 
 SimpleCard.propTypes = {
   msg: propTypes.instanceOf(Object).isRequired,
-  index: propTypes.number.isRequired,
 };

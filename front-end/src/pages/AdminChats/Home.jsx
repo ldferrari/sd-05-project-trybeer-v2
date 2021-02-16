@@ -31,11 +31,10 @@ const Home = (props) => {
   const token = localStorage.getItem('token');
   const { history } = props;
 
-// const allMessages = [
-//   {email: 'zambelli@zambs.com', time: '17:20'},
-//   {email: 'hugao@hugos.com', time: '16:20'},
-// ];
-
+  // const allMessages = [
+  //   {email: 'zambelli@zambs.com', time: '17:20'},
+  //   {email: 'hugao@hugos.com', time: '16:20'},
+  // ];
 
   useEffect(() => {
     if (!token) {
@@ -60,8 +59,8 @@ const Home = (props) => {
       <Box display="flex">
         <AdminSideBar title="Conversas" icon="inbox" />
         <Box p={ 4 } mt={ 14 }>
-          {!allMessages && 
-          <h1 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h1>}
+          {!allMessages
+            && <h1 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h1>}
           <Grid container spacing={ 4 }>
             {allMessages.length && allMessages.map((msg, index) => (
               <CardMessage key={ msg.name } msg={ msg } index={ index } />

@@ -17,7 +17,8 @@ const Chat = (props) => {
   // console.log('payload=====>', payload);
   // console.log('email===>', email);
   // const { Id } = props; // pega id do link/requisição/jwt
-  const { messages, sendMessage, setHistory } = useChat(email); // Creates a websocket and manages messaging
+  const { messages, sendMessage, setHistory } = useChat(email); 
+  // Creates a websocket and manages messaging;
   const [newMessage, setNewMessage] = useState(''); // Message to be sent
   // =>const [theOrders, setOrders] = useState([]);
 
@@ -29,14 +30,14 @@ const Chat = (props) => {
     async function fetchOldMessages() {
       const { data } = await getMessagesById(localStorage.getItem('token'), id);
       // console.log(data);
-      if(data.code) return false;
-      setHistory(data.map(({ time, nome, message })=>({time,nome,message})))
+      if (data.code) return false;
+      setHistory(data.map(({ time, nome, message }) => ({ time, nome, message })));
       setNewMessage(data);
+      return true;
     }
     fetchOldMessages();
   }, [props, id]);
 
-  
   const handleNewMessageChange = (event) => {
     const dateFormat = require('dateformat');
     const now = new Date();

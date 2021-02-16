@@ -37,8 +37,8 @@ const Home = (props) => {
       <Box display="flex">
         <AdminSideBar title="Conversas" icon="inbox" />
         <Box p={ 4 } mt={ 14 }>
-          <Grid container spacing={ 4 }> 
-            <AdminChatConversation email={ email }/>
+          <Grid container spacing={ 4 }>
+            <AdminChatConversation email={ email } />
           </Grid>
         </Box>
       </Box>
