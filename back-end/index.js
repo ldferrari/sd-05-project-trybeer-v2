@@ -77,13 +77,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/', checkToken, chatController);
 
-/* const PORT = 3001;
-
-app.listen(PORT, () => {
-  console.log(`O pai tá ON no projeto e na porta ${PORT}`);
-});
- */
-
 const PORT = 3001;
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage';
 io.on('connection', (socket) => {

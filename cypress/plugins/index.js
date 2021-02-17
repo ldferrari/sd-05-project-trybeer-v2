@@ -19,14 +19,14 @@ require('dotenv').config();
 
 const deleteMessages = async (collection) => {
   // original
-  // const db = await connection();
-  // await db.collection(collection).deleteMany({});
+  const db = await connection();
+  await db.collection(collection).deleteMany({});
 
   // alternativa para nosso projeto
-  const collections = await connection().then((db) => db.listCollections().toArray())
-  console.log(collections);
-  const arrCollections = collections.map((c) =>connection().then((db) => db.collection(c.name).drop()));
-  await Promise.all(arrCollections);
+  // const collections = await connection().then((db) => db.listCollections().toArray())
+  // console.log(collections);
+  // const arrCollections = collections.map((c) =>connection().then((db) => db.collection(c.name).drop()));
+  // await Promise.all(arrCollections);
 };
 
 module.exports = (on, config) => {
