@@ -67,7 +67,7 @@ const HomeAdminOrderDetail = (props) => {
     }
     console.log('HomeAdminOrderDetail');
     memoFetch();
-  }, [history, memoFetch ]);
+  }, [history, memoFetch]);
 
   const handleSubmit = async (statusAtual) => {
     const ok = await postStatusDelivered(token, id, statusAtual);
