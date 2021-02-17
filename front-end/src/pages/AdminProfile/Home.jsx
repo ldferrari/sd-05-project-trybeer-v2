@@ -47,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PerfilAdmin = () => {
+const PerfilAdmin = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const classes = useStyles();
-
+  const { history } = props;
   useEffect(() => {
     async function asyncMe() {
       const token = localStorage.getItem('token');
@@ -70,7 +70,7 @@ const PerfilAdmin = () => {
 
   return (
     <div className={ classes.root }>
-      <AdminSideBar title="Perfil" icon="face" />
+      <AdminSideBar title="Perfil" icon="face" history={ history }/>
       <Card className={ classes.card } elevation={ 3 }>
         <CardHeader
           avatar={

@@ -37,7 +37,7 @@ const Chat = (props) => {
       return true;
     }
     fetchOldMessages();
-  }, [props, id, setHistory]);
+  }, [props, id, /*setHistory */]);
 
   const handleNewMessageChange = (event) => {
     const now = new Date();

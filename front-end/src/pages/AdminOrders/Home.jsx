@@ -51,7 +51,7 @@ const Home = (props) => {
   return (
     <div className={ classes.root }>
       <Box display="flex">
-        <AdminSideBar title="Ordens Pendentes" icon="inbox" />
+        <AdminSideBar title="Ordens Pendentes" icon="inbox" history={ history }/>
         <Box p={ 4 } mt={ 14 }>
           <Grid container spacing={ 4 }>
             {allOrders.length && allOrders.map((item, index) => (

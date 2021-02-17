@@ -51,18 +51,18 @@ const Home = (props) => {
       return 'true';
     }
     fetchMessages();
-  }, [token, history]);
+  }, [/* token, history */]);
 
-  // console.log('admin Chat=========>', allMessages);
+  console.log('admin Chat=========>', allMessages);
   return (
     <div className={ classes.root }>
       <Box display="flex">
-        <AdminSideBar title="Conversas" icon="inbox" />
+        <AdminSideBar title="Conversas" icon="inbox" history={ history } />
         <Box p={ 4 } mt={ 14 }>
-          {!allMessages
+          {(!allMessages || !allMessages.length)
             && <h1 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h1>}
           <Grid container spacing={ 4 }>
-            {allMessages.length && allMessages.map((msg, index) => (
+            {allMessages.length > 0 && allMessages.map((msg, index) => (
               <CardMessage key={ msg.name } msg={ msg } index={ index } />
             ))}
           </Grid>

@@ -30,15 +30,15 @@ const Home = (props) => {
   // const [allMessages, setAllMessages] = useState([]);
   // const token = localStorage.getItem('token');
   // const { history } = props;
-  const { email } = props;
+  const { email, history } = props;
 
   return (
     <div className={ classes.root }>
       <Box display="flex">
-        <AdminSideBar title="Conversas" icon="inbox" />
+        <AdminSideBar title="Conversas" icon="inbox" history={ history } />
         <Box p={ 4 } mt={ 14 }>
           <Grid container spacing={ 4 }>
-            <AdminChatConversation email={ email } />
+            <AdminChatConversation email={ email } history={ history } />
           </Grid>
         </Box>
       </Box>
