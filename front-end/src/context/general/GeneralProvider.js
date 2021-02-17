@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import GeneralContext from './GeneralContext';
 
 const GeneralProvider = ({ children }) => {
+  const [nameEqual, setNameEqual] = useState(true);
+  const [apiSuccess, setApiSuccess] = useState(false);
   const [initialUser] = useState({
     email: '',
     password: '',
@@ -19,6 +21,10 @@ const GeneralProvider = ({ children }) => {
     initialUser,
     userData,
     setUserData,
+    nameEqual,
+    setNameEqual,
+    apiSuccess,
+    setApiSuccess,
   };
   return <GeneralContext.Provider value={ context }>{children}</GeneralContext.Provider>;
 };
