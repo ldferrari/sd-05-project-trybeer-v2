@@ -56,7 +56,7 @@ const AdminChatConversation = (props) => {
   };
   return (
     <div className="">
-      <h1 className="">{`Conversa com: ${email}`}</h1>
+      <h1 className="" data-testid="profile-name">{`Conversa com: ${email}`}</h1>
       <Link to="/admin/chats" data-testid="back-button">Voltar</Link>
       <div className="messages-container">
         <ul className="messages-list">
