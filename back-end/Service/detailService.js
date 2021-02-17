@@ -6,7 +6,7 @@ const getDetails = async (saleId) => {
   // include: [{ model: Product, as: 'productData', attributes: ['id', 'name', 'price'] }],
   });
   const saidaStatus = await Sale.findOne({ where: { id: saleId },
-      // include: [{ model: Product, as: 'productData', attributes: ['id', 'name', 'price'] }],
+    // include: [{ model: Product, as: 'productData', attributes: ['id', 'name', 'price'] }],
   });
   const listaProdutos = await Product.findAll();
   const objProduto = listaProdutos.reduce((a, c) => ({ ...a, ...{ [c.id]: c } }), {});

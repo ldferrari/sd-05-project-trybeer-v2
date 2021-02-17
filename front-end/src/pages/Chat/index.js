@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; // useContext
+import React, { useCallback, useEffect, useState } from 'react'; // useContext
 import propTypes from 'prop-types';
 import dateFormat from 'dateformat';
 import { getMessagesById } from '../../services/requestAPI';
@@ -22,7 +22,7 @@ const Chat = (props) => {
   // Creates a websocket and manages messaging;
   const [newMessage, setNewMessage] = useState(''); // Message to be sent
   // =>const [theOrders, setOrders] = useState([]);
-
+  const setHistoryCallback = useCallback(setHistory, []);
   useEffect(() => {
     const { history } = props;
     if (!localStorage.getItem('token')) {
@@ -30,14 +30,13 @@ const Chat = (props) => {
     }
     async function fetchOldMessages() {
       const { data } = await getMessagesById(localStorage.getItem('token'), id);
-      // console.log(data);
       if (data.code) return false;
-      setHistory(data.map(({ time, nome, message }) => ({ time, nome, message })));
+      setHistoryCallback(data.map(({ time, nome, message }) => ({ time, nome, message })));
       setNewMessage(data);
       return true;
     }
     fetchOldMessages();
-  }, [props, id, /*setHistory */]);
+  }, [props, id, setHistoryCallback]);
 
   const handleNewMessageChange = (event) => {
     const now = new Date();

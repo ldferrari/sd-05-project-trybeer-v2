@@ -27,7 +27,7 @@ const useChat = (ID) => {
     return () => {
       socketRef.current.disconnect();
     };
-  }, [/* ID */ messages]);
+  }, [ID, messages]);
 
   // Sends a message to the server that
   // forwards it to all users in the same room
