@@ -25,6 +25,7 @@ const deleteMessages = async (collection) => {
 module.exports = (on, config) => {
   on('task', {
     deleteCollection(collection) {
+      console.log('DELETANDO MONGO', collection)
        return new Promise((resolve) => {
         deleteMessages(collection);
         resolve('');

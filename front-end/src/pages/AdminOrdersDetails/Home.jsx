@@ -119,7 +119,7 @@ const HomeAdminOrderDetail = (props) => {
               startIcon={ <SaveIcon /> }
               color="secondary"
             >
-              Marcar como Preparando
+              Preparar pedido
             </Button>
           )}
           {(delivered === 'Preparando' || delivered === 'Pendente') && (
@@ -130,7 +130,7 @@ const HomeAdminOrderDetail = (props) => {
               startIcon={ <SaveIcon /> }
               color="secondary"
             >
-              Marcar como Entregue
+              Marcar como entregue
             </Button>
           )}
         </CardContent>

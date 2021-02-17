@@ -30,6 +30,7 @@ export default function OrderDetails(props) {
     }
     async function fetchOrder() {
       const temp = await postGetTheOrder(token, id);
+      console.log(temp);
       const { data } = temp;
       setOrder(data);
     }
@@ -43,6 +44,7 @@ export default function OrderDetails(props) {
         <h4 data-testid="order-number" className="orderTitle">
           { `Pedido ${id}` }
         </h4>
+        <h4>{`Status: ${orderHere.length ? orderHere[0].status : '-'}` }</h4>
         <h4 data-testid="order-date" className="orderTitle">
           { dateFormat(globalData[id], 'dd/mm') }
         </h4>
