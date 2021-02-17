@@ -19,9 +19,9 @@ const ClientProvider = ({ children }) => {
   const [purchaseDone, setPurchaseDone] = useState(false);
   const [isNameValid, setNameValid] = useState(false);
   const [isEmailValid, setEmailValid] = useState(false);
-  console.log(isEmailValid);
   const [isPasswordValid, setPasswordValid] = useState(false);
   const [isEmailRegistered, setEmailRegistered] = useState(false);
+  console.log(isEmailRegistered, 'isEmailRegistered')
   const [isFetched, setIsFetched] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({
