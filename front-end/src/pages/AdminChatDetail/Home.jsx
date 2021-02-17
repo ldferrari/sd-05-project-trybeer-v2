@@ -50,4 +50,5 @@ export default Home;
 
 Home.propTypes = {
   email: propTypes.string.isRequired,
+  history: propTypes.string.isRequired,
 };

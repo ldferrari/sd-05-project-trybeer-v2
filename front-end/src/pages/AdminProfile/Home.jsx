@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -70,7 +71,7 @@ const PerfilAdmin = (props) => {
 
   return (
     <div className={ classes.root }>
-      <AdminSideBar title="Perfil" icon="face" history={ history }/>
+      <AdminSideBar title="Perfil" icon="face" history={ history } />
       <Card className={ classes.card } elevation={ 3 }>
         <CardHeader
           avatar={
@@ -103,3 +104,7 @@ const PerfilAdmin = (props) => {
 };
 
 export default PerfilAdmin;
+
+PerfilAdmin.propTypes = {
+  history: propTypes.instanceOf(Object).isRequired,
+};
