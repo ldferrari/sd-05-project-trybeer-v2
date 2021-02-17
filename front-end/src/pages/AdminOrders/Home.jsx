@@ -5,6 +5,7 @@ import AdminSideBar from '../../components/adminSidebarUI';
 import { getSales } from '../../services/requestAPI';
 import CardOrder from '../../components/CardOrders';
 
+// teste
 const two = 2;
 const useStyles = makeStyles((theme) => ({
   root: {
