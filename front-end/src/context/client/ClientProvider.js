@@ -1,43 +1,29 @@
-import React, { useState, createContext } from 'react';
+import React, { useContext, createContext } from 'react';
 import PropTypes from 'prop-types';
-// import ClientContext from './ClientContext';
+import { CContext1 } from './ClientProvider1';
+import { CContext2 } from './ClientProvider2';
+import { CContext3 } from './ClientProvider3';
+import { CContext4 } from './ClientProvider4';
 
 export const ClientContext = createContext();
 
-const initialQuantity = 0;
-
 const ClientProvider = ({ children }) => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState(localStorage.getItem('cart') || initialQuantity);
-  const [cartItens, setCartItens] = useState(JSON
-    .parse(localStorage.getItem('cart itens')) || []);
-  const [redirect, setRedirect] = useState(false);
-  const [street, setStreet] = useState('');
-  const [streetNumber, setStreetNumber] = useState('');
-  const [purchaseDone, setPurchaseDone] = useState(false);
-  const context = {
-    email,
-    setEmail,
-    name,
-    setName,
-    products,
-    setProducts,
-    cart,
-    setCart,
-    cartItens,
-    setCartItens,
-    redirect,
-    setRedirect,
-    street,
-    setStreet,
-    streetNumber,
-    setStreetNumber,
-    purchaseDone,
-    setPurchaseDone,
-  };
-  return <ClientContext.Provider value={ context }>{children}</ClientContext.Provider>;
+  const CliContext1 = useContext(CContext1);
+  const CliContext2 = useContext(CContext2);
+  const CliContext3 = useContext(CContext3);
+  const CliContext4 = useContext(CContext4);
+  return (
+    <ClientContext.Provider
+      value={ {
+        ...CliContext1,
+        ...CliContext2,
+        ...CliContext3,
+        ...CliContext4,
+      } }
+    >
+      {children}
+    </ClientContext.Provider>
+  );
 };
 
 export default ClientProvider;

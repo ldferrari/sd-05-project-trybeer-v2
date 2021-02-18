@@ -13,6 +13,6 @@ export default function ClientDOMapStatus(props) {
 }
 
 ClientDOMapStatus.propTypes = {
-  product: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
 };
