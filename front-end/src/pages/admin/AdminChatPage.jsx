@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import ChatListCard from '../../components/admin/ChatListCard';
 import MenuAdm from '../../components/admin/MenuAdm';
-import { AdminContext } from '../../context/admin/AdminProvider';
 import fetchLastClientMessages from '../../services/admin/fetchLastClientMessages';
 
 const validateToken = () => {
@@ -33,7 +32,6 @@ const mapChatList = (({ _id, lastMessage }, index) => (<ChatListCard
 />));
 
 export default function AdminChatPage() {
-  const { clientChatNickName, setClientChatNickName } = useContext(AdminContext);
   const [chats, setChats] = useState([]);
   useEffect(() => fetchMess(setChats), []);
   validateToken();

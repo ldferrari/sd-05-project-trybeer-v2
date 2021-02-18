@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import RegisterPage from './pages/general/RegisterPage';
+// import RegisterPage from './pages/general/RegisterPage';
 import ClientProductPage from './pages/client/ClientProductPage';
 import LoginPage from './pages/general/LoginPage';
 import AdminProfilePage from './pages/admin/AdminProfilePage';
@@ -13,7 +13,6 @@ import './css/client/app.css';
 import ClientDetailsOrderPage from './pages/client/ClientDetailsOrderPage';
 import AdminSaleDetailsPage from './pages/admin/AdminSaleDetailsPage';
 import ClientChatPage from './pages/client/ClientChatPage';
-import AdminChatCardsPage from './pages/admin/AdminChatCardsPage';
 import AdminChatPage from './pages/admin/AdminChatPage';
 import GeneralProvider from './context/general/GeneralProvider';
 import GeneralProvider1 from './context/general/GeneralProvider1';
@@ -45,10 +44,10 @@ function App() {
                 />
                 <Route path="/admin/orders" component={ AdminOrderPage } />
                 <Route path="/admin/profile" component={ AdminProfilePage } />
-                <Route path="/admin/chats" component={ AdminChatCardsPage } />
+                <Route path="/admin/chats" component={ AdminChatPage } />
                 <Route path="/admin/chat" component={ AdminChatPage } />
                 <Route path="/login" component={ LoginPage } />
-                <Route path="/register" component={ RegisterPage } />
+                {/* <Route path="/register" component={ RegisterPage } /> */}
                 <Route path="/products" component={ ClientProductPage } />
                 <Route path="/profile" component={ ClientProfilePage } />
                 <Route
