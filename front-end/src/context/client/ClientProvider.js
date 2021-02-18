@@ -1,6 +1,5 @@
 import React, { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
-// import ClientContext from './ClientContext';
 
 export const ClientContext = createContext();
 
@@ -17,11 +16,10 @@ const ClientProvider = ({ children }) => {
   const [street, setStreet] = useState('');
   const [streetNumber, setStreetNumber] = useState('');
   const [purchaseDone, setPurchaseDone] = useState(false);
-  const [isNameValid, setNameValid] = useState(false);
   const [isEmailValid, setEmailValid] = useState(false);
+  const [isNameValid, setNameValid] = useState(false);
   const [isPasswordValid, setPasswordValid] = useState(false);
   const [isEmailRegistered, setEmailRegistered] = useState(false);
-  console.log(isEmailRegistered, 'isEmailRegistered')
   const [isFetched, setIsFetched] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({
