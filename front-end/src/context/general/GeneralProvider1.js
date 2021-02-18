@@ -1,28 +1,27 @@
 import React, { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-const GeneralContext1 = createContext();
-export { GeneralContext1 };
+export const GContext1 = createContext();
 
 const GeneralProvider1 = ({ children }) => {
   const [initialUser] = useState({
     email: '',
     password: '',
     role: '',
-    name: ''
+    name: '',
   });
   const [userData, setUserData] = useState({
     email: '',
     password: '',
     role: '',
-    name: ''
+    name: '',
   });
   const context = {
     initialUser,
     userData,
     setUserData,
   };
-  return <GeneralContext1.Provider value={ context }>{children}</GeneralContext1.Provider>;
+  return <GContext1.Provider value={ context }>{children}</GContext1.Provider>;
 };
 
 export default GeneralProvider1;

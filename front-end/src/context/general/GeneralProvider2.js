@@ -1,8 +1,7 @@
 import React, { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-const GeneralContext2 = createContext();
-export { GeneralContext2 };
+export const GContext2 = createContext();
 
 const GeneralProvider2 = ({ children }) => {
   const [nameEqual, setNameEqual] = useState(true);
@@ -13,7 +12,7 @@ const GeneralProvider2 = ({ children }) => {
     apiSuccess,
     setApiSuccess,
   };
-  return <GeneralContext2.Provider value={ context }>{children}</GeneralContext2.Provider>;
+  return <GContext2.Provider value={ context }>{children}</GContext2.Provider>;
 };
 
 export default GeneralProvider2;

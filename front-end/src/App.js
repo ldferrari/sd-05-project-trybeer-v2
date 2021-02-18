@@ -17,7 +17,11 @@ import AdminChatPage from './pages/admin/AdminChatPage';
 import GeneralProvider from './context/general/GeneralProvider';
 import GeneralProvider1 from './context/general/GeneralProvider1';
 import GeneralProvider2 from './context/general/GeneralProvider2';
-import ContextProvider from './context/client/ClientProvider';
+import ClientProvider from './context/client/ClientProvider';
+import ClientProvider1 from './context/client/ClientProvider1';
+import ClientProvider2 from './context/client/ClientProvider2';
+import ClientProvider3 from './context/client/ClientProvider3';
+import ClientProvider4 from './context/client/ClientProvider4';
 
 function App() {
   return (
@@ -25,7 +29,11 @@ function App() {
       <GeneralProvider2>
         <GeneralProvider1>
           <GeneralProvider>
-            <ContextProvider>
+            <ClientProvider4>
+            <ClientProvider3>
+            <ClientProvider2>
+            <ClientProvider1>
+            <ClientProvider>
               <Switch>
                 <Route
                   path="/admin/orders/:id"
@@ -53,7 +61,11 @@ function App() {
                 <Route path="/chat" component={ ClientChatPage } />
                 <Route path="/" component={ () => <Redirect to="/login" /> } />
               </Switch>
-            </ContextProvider>
+              </ClientProvider>
+              </ClientProvider1>
+              </ClientProvider2>
+              </ClientProvider3>
+            </ClientProvider4>
           </GeneralProvider>
         </GeneralProvider1>
       </GeneralProvider2>
