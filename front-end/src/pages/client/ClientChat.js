@@ -15,7 +15,8 @@ function ClientChat() {
   const [msgsByClient, setMsgsByClient] = useState([]);
 
   // useEffect(async () => {
-    
+    // const messagesByClient = await getMessagesByClient(email);
+    // return messagesByClient;
   // }, []);
   // talvez [email]
 
@@ -25,9 +26,9 @@ function ClientChat() {
   };
 
   const handleSend = async () => {
-    const messagesByClient = await getMessagesByClient(email);
+    // const messagesByClient = await getMessagesByClient(email);
     buyerSocket.emit('message', { email, buyerMessage });
-    return messagesByClient;
+    // return messagesByClient;
   };
 
   // let msgsByClient = [];
@@ -35,9 +36,10 @@ function ClientChat() {
   buyerSocket.on('showMessage', ({ email, hour, buyerMessage }) => {
     const divMessage = { email, hour, buyerMessage };
     console.log(divMessage);
-    setMsgsByClient((previousState) => [...previousState, divMessage]);
+    // setMsgsByClient((previousState) => [...previousState, divMessage]);
     // OU
-    // setMsgsByClient(msgsByClient.push(divMessage));
+    setMsgsByClient(msgsByClient.push(divMessage));
+    console.log(msgsByClient);
   });
 
   return (
@@ -48,10 +50,10 @@ function ClientChat() {
           msgsByClient.forEach((msg) => (
             <div>
               <p>
-                <span data-testid="nickname">{msg.nickname}</span> -
+                <span data-testid="nickname">{msg.email}</span> -
                 <span data-testid="message-time">{msg.hour}</span>
               </p>
-              <div data-testid="text-message">{msg.message}</div>
+              <div data-testid="text-message">{msg.buyerMessage}</div>
             </div>
           ))}
       </div>
@@ -75,7 +77,7 @@ function ClientChat() {
         placeholder="Digite sua mensagem"
         onChange={(e) => handleTextChange(e)}
       />
-      <button data-testid="send-message" type="button" id="send" onClick={handleSend()}>
+      <button data-testid="send-message" type="button" id="send" onClick={() => handleSend()}>
         Enviar
       </button>
     </section>
