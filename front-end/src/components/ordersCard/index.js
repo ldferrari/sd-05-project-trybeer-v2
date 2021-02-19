@@ -14,6 +14,16 @@ const OrderCard = (props) => {
   useEffect(() => {
     setGlobalData((state) => ({ ...state, [id]: saleDate }));
   }, [id, saleDate, setGlobalData]);
+  const selectColor = () => {
+    switch (status) {
+      case 'Preparando':
+        return 'preparando';
+      case 'Entregue':
+        return 'entregue';
+      default:
+        return 'pendente';
+    }
+  }
   return (
     <div className="oCard">
       <Link
@@ -31,7 +41,7 @@ const OrderCard = (props) => {
         <p data-testid={ `${index}-order-total-value` }>
           { `R$ ${order.total_price.toFixed(dois).replace('.', ',')}` }
         </p>
-        <p>
+        <p className={selectColor()}>
           { status }
         </p>
       </Link>

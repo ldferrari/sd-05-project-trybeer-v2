@@ -37,19 +37,34 @@ export default function OrderDetails(props) {
     fetchOrder();
   }, [props, id]);
 
+  const status = orderHere.length ? orderHere[0].status : '-';
+  const selectColor = () => {
+    switch (status) {
+      case 'Preparando':
+        return 'preparando';
+      case 'Entregue':
+        return 'entregue';
+      default:
+        return 'pendente';
+    }
+  }
   return (
     <div className="orderDetailsPage">
       <Header>Detalhes de Pedido</Header>
-      <div className="detailsHeader">
-        <h4 data-testid="order-number" className="orderTitle">
-          { `Pedido ${id}` }
-        </h4>
-        <h4>{`Status: ${orderHere.length ? orderHere[0].status : '-'}` }</h4>
-        <h4 data-testid="order-date" className="orderTitle">
-          { dateFormat(globalData[id], 'dd/mm') }
-        </h4>
-      </div>
-      <div className="pedido">
+      <div className="details-main-content">
+        <div className="detailsHeader">
+          <div className="details-header-status">
+              <h4 className="orderTitle">{`Status: `}<span className={selectColor()}>{`${status}`}</span> </h4>
+              <h4 data-testid="order-date" className="orderTitle">
+                { dateFormat(globalData[id], 'dd/mm') }
+              </h4>
+            </div>
+            <h4 data-testid="order-number" className="orderTitle">
+              { `Pedido ${id}` }
+            </h4>
+          </div>
+          
+        <div className="pedido">
         <div className="legenda">
           <p>QUANTIDADE</p>
           <p>PRODUTO</p>
@@ -65,6 +80,7 @@ export default function OrderDetails(props) {
         <p data-testid="order-total-value" className="total">
           { `TOTAL: R$ ${cartSum.toString().replace('.', ',')}` }
         </p>
+      </div>
       </div>
       <Footer />
     </div>

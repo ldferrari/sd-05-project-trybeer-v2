@@ -2,6 +2,8 @@
   background-image: url('../../images/mobBG.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .productList {

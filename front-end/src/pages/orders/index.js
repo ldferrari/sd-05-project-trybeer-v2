@@ -27,10 +27,12 @@ const Orders = (props) => {
   return (
     <div className="orders">
       <Header>Meus Pedidos</Header>
-      <div className="ordersList">
-        { theOrders.map((order, index) => (
-          <OrderCard key={ order.id } order={ order } index={ index } />
-        )) }
+      <div className="orders-list-father">
+        <div className="ordersList">
+          { theOrders.map((order, index) => (
+            <OrderCard key={ order.id } order={ order } index={ index } />
+            )) }
+        </div>
       </div>
       <Footer />
     </div>

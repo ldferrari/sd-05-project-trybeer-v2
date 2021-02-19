@@ -85,26 +85,29 @@ const Checkout = (props) => {
       { Number(cartSum) === zero ? <h1>Não há produtos no carrinho</h1> : null }
       <div className="deliveryForm">
         <h2 className="checkoutitle">Endereço de entrega:</h2>
-        <div className="inputs">
-          <h4>Rua</h4>
-          <input
-            data-testid="checkout-street-input"
-            type="text"
-            name="rua"
-            onChange={ ({ target: { value } }) => setRua(value) }
-            /* value={ rua } */
-          />
-        </div>
-        <div className="inputs">
-          <h4>Número</h4>
-          <input
-            data-testid="checkout-house-number-input"
-            type="number"
-            name="numero"
-            onChange={ ({ target: { value } }) => setNumero(Number(value)) }
-            /* value={ numero } */
-          />
-        </div>
+          <div className="checkout-forms-inputs">
+            <div className="inputs input-rua">
+              <h4>Rua</h4>
+
+              <input
+                data-testid="checkout-street-input"
+                type="text"
+                name="rua"
+                onChange={ ({ target: { value } }) => setRua(value) }
+                /* value={ rua } */
+              />
+            </div>
+            <div className="inputs input-numero">
+              <h4>Número</h4>
+              <input
+                data-testid="checkout-house-number-input"
+                type="number"
+                name="numero"
+                onChange={ ({ target: { value } }) => setNumero(Number(value)) }
+                /* value={ numero } */
+              />
+            </div>
+          </div>
       </div>
       <button
         // type="button"

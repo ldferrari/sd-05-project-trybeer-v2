@@ -54,7 +54,7 @@ const Chat = (props) => {
     newMessage.message = '';
   };
   return (
-    <div className="">
+    <div className="chat-page">
       <Header>CHAT</Header>
       <h3 className="title">{email}</h3>
       <div className="messages-container">
@@ -73,22 +73,25 @@ const Chat = (props) => {
           ))}
         </ul>
       </div>
-      <input
-        type="text"
-        data-testid="message-input"
-        value={ newMessage.message }
-        onChange={ handleNewMessageChange }
-        placeholder="Digite..."
-        className="new-message-input-field"
-      />
-      <button
-        type="button"
-        onClick={ handleSendMessage }
-        className="send-message-button"
-        data-testid="send-message"
-      >
-        ENVIAR
-      </button>
+      <div>
+        <input
+          type="text"
+          data-testid="message-input"
+          value={ newMessage.message }
+          onChange={ handleNewMessageChange }
+          placeholder="Digite..."
+          className="new-message-input-field"
+        />
+        <button
+          type="button"
+          onClick={ handleSendMessage }
+          className="send-message-button"
+          data-testid="send-message"
+        >
+          ENVIAR
+        </button>
+      </div>
+      
       <Footer />
     </div>
   );

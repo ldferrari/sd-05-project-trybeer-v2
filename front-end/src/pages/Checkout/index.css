@@ -1,3 +1,11 @@
+.Checkout {
+  overflow-y: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .legenda {
   font-weight: bold;
   display: flex;
@@ -21,6 +29,29 @@
   margin-left: 2%;
   margin-right: 2%;
   padding: 2%;
+  
+
+}
+.input-rua {
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  width: 70%;
+}
+.input-rua input{
+  width: 100%;
+  line-height: 1.5rem;
+}
+
+.input-numero {
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  width: 30%;
+}
+.input-numero input {
+  width: 100%;
+  line-height: 1.5rem;
 }
 
 .finishBtn {
@@ -48,6 +79,10 @@
   margin: 3%;
   border-radius: 5px;
   padding-bottom: 3%;
+}
+
+.checkout-forms-inputs {
+  display: flex;
 }
 
 @media screen and ( min-width : 300px ) and ( max-width : 569px ) {
