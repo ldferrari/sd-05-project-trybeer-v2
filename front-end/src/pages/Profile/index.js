@@ -55,8 +55,9 @@ const Perfil = () => {
   return (
     <div className="ProfilePage">
       <Header>Meu Perfil</Header>
-      <h2 data-testid="top-title">Meu perfil</h2>
-      <div className="form">
+      <div className="profile-main-content"> 
+        <h2 data-testid="top-title">Meu perfil</h2>
+        <div className="form">
         <p>Nome:</p>
         <input
           type="text"
@@ -76,15 +77,16 @@ const Perfil = () => {
           readOnly
         />
         <span className="update-alert">{alertUpdate}</span>
-        <button
-          type="submit"
-          data-testid="profile-save-btn"
-          disabled={ !(validName) }
-          className={ (validName) ? 'ready loginBtn' : '' }
-          onClick={ handleSubmit }
-        >
-          Salvar
-        </button>
+      </div>
+      <button
+        type="button"
+        data-testid="profile-save-btn"
+        disabled={ !(validName) }
+        className={ (validName) ? 'ready loginBtn' : '' }
+        onClick={ handleSubmit }
+      >
+        Salvar
+      </button>
       </div>
       <Footer />
     </div>
