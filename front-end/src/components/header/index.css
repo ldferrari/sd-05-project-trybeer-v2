@@ -32,9 +32,14 @@
 }
 
 .sideBar {
-  background-image: url('../../images/oldpapertexture.jpg');
-  background-size: cover;
-  color: black;
+  /* background-image: url('../../images/oldpapertexture.jpg'); */
+  background-image: url('../../images/—Pngtree—red\ recipe\ background\ picture_1191495.jpg') ; /* cardapio */
+  /* background-size: cover; */
+  width: 100%;
+  /* cardapio */
+  background-size:100% 100%;
+  box-shadow: 0 0 8px 8px black inset;
+  /* -------  */
   float: left;
   /* display: flex;
   flex-direction: column; */
@@ -70,10 +75,26 @@ Link {
 }
 
 .menuBorder {
-  padding: 2%;
+  padding: 0;
+  margin: 0;
+  padding: 0 2%;
   border-style: solid;
   border:brown;
+  /* ----cardapio-abaixo--- */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 85vh;
 }
+.menuBorder div {
+  
+  padding: 14vh 0 11vh 15%;
+}
+.menuBorder div ul{
+  margin: 0;
+  padding: 0;
+}
+/* ----cardapio-acima--- */
 @media screen and ( min-width : 300px ) and ( max-width : 569px ) {
 
   .sideBar {
