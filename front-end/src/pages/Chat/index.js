@@ -38,6 +38,11 @@ const Chat = (props) => {
     fetchOldMessages();
   }, [props, id, setHistoryCallback]);
 
+  useEffect(() => {
+    const conteudo = document.getElementsByClassName('messages-container');
+    conteudo[0].scrollTop=conteudo[0].scrollHeight
+  }, [messages])
+
   const handleNewMessageChange = (event) => {
     const now = new Date();
     // não precisa const date = dateFormat(now, 'dd-mm-yyyy');
@@ -53,6 +58,12 @@ const Chat = (props) => {
     // setNewMessage('');
     newMessage.message = '';
   };
+
+  const handleEnter = (e) => {
+    if (e.keyCode == 13) {
+      handleSendMessage();
+    }
+  }
   return (
     <div className="chat-page">
       <Header>CHAT</Header>
@@ -66,8 +77,10 @@ const Chat = (props) => {
                 message.nome === email ? 'my-message' : 'received-message' // CSS!
               }` }
             >
-              <p data-testid="nickname" className="message-name">{message.nome}</p>
-              <p data-testid="message-time" className="message-time">{message.time}</p>
+              <div className="message-owner-time">
+                <p data-testid="nickname" className="message-name">{message.nome}</p>
+                <p data-testid="message-time" className="message-time">{message.time}</p>
+              </div>
               <h4 data-testid="text-message" className="message-body">{message.message}</h4>
             </li>
           ))}
@@ -79,6 +92,7 @@ const Chat = (props) => {
           data-testid="message-input"
           value={ newMessage.message }
           onChange={ handleNewMessageChange }
+          onKeyUp={handleEnter}
           placeholder="Digite..."
           className="new-message-input-field"
         />

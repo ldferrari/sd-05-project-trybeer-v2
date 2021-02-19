@@ -56,15 +56,21 @@
   flex-wrap: wrap;
 }
 
+.message-owner-time {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .message-name {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: auto;
 }
 .message-time {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: auto;
   text-align: right;
 }
 
