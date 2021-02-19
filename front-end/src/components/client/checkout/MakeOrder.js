@@ -12,6 +12,7 @@ function finishOrder(totalPrice, street, houseNum, handleResult) {
   return (
     <button
       type="button"
+      data-testid="checkout-finish-btn"
       disabled={ totalPrice === initialState || houseNum === initialState || !street }
       onClick={ () => {
         createNewSale(user.email, totalPrice, street, houseNum, date, products).then((result) => handleResult(result));

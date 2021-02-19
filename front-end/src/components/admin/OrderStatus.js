@@ -7,7 +7,7 @@ export default function OrderStatus({ id }) {
   const { status, setStatus } = useContext(TrybeerContext);
 
   useEffect(() => {
-    getSaleById(id).then((response) => setStatus(response[0].status));
+    getSaleById(id).then((response) => setStatus(response.status));
   }, [id, setStatus]);
 
   if (!status) return <div>Carregando...</div>;

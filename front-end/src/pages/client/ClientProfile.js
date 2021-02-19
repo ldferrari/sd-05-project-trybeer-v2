@@ -53,9 +53,10 @@ const saveInStorage = (name, email, token, role) => {
 };
 
 const user = JSON.parse(localStorage.getItem('user'));
-const { name, email, token, role } = user;
 
 function ClientProfile() {
+  const { name, email, token, role } = user;
+
   const [name1, setName1] = useState(name);
   const [checkedName, setcheckedName] = useState(false);
   // const { setName } = useContext(TrybeerProvider);
