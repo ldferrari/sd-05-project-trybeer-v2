@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 const io = require('socket.io-client');
 const { getMessagesByClient } = require('../../services/fetchMongo');
 require('dotenv').config();
 
 function ClientChat() {
   const PORT = process.env.PORT || 3001;
-  const buyerSocket = io(`http://localhost:${PORT}/chat`);
+  const buyerSocket = io(`http://localhost:${PORT}`);
   // https://socket.io/docs/v3/client-initialization/
 
   const user = JSON.parse(localStorage.getItem('user'));
@@ -14,10 +14,9 @@ function ClientChat() {
   const [buyerMessage, setBuyerMessage] = useState('');
   const [msgsByClient, setMsgsByClient] = useState([]);
 
-  useEffect(async () => {
-    const messagesByClient = await getMessagesByClient(email);
-    return messagesByClient;
-  }, []);
+  // useEffect(async () => {
+    
+  // }, []);
   // talvez [email]
 
   const handleTextChange = (e) => {
@@ -25,14 +24,17 @@ function ClientChat() {
     setBuyerMessage(message);
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
+    const messagesByClient = await getMessagesByClient(email);
     buyerSocket.emit('message', { email, buyerMessage });
+    return messagesByClient;
   };
 
   // let msgsByClient = [];
 
-  buyerSocket.on('showMessage', ({ nickname, hour, message }) => {
-    const divMessage = { nickname, hour, message };
+  buyerSocket.on('showMessage', ({ email, hour, buyerMessage }) => {
+    const divMessage = { email, hour, buyerMessage };
+    console.log(divMessage);
     setMsgsByClient((previousState) => [...previousState, divMessage]);
     // OU
     // setMsgsByClient(msgsByClient.push(divMessage));
