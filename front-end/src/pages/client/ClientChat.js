@@ -15,8 +15,8 @@ function ClientChat() {
   const [msgsByClient, setMsgsByClient] = useState([]);
 
   // useEffect(async () => {
-    // const messagesByClient = await getMessagesByClient(email);
-    // return messagesByClient;
+  //   const messagesByClient = await getMessagesByClient(email);
+  //   return messagesByClient;
   // }, []);
   // talvez [email]
 
@@ -26,20 +26,20 @@ function ClientChat() {
   };
 
   const handleSend = async () => {
-    // const messagesByClient = await getMessagesByClient(email);
     buyerSocket.emit('message', { email, buyerMessage });
-    // return messagesByClient;
   };
 
-  // let msgsByClient = [];
-
-  buyerSocket.on('showMessage', ({ email, hour, buyerMessage }) => {
+  buyerSocket.on('showMessage', async ({ email, hour, buyerMessage }) => {
     const divMessage = { email, hour, buyerMessage };
     console.log(divMessage);
     // setMsgsByClient((previousState) => [...previousState, divMessage]);
     // OU
     setMsgsByClient(msgsByClient.push(divMessage));
     console.log(msgsByClient);
+    // BD has to be fetched here
+    const messagesByClient = await getMessagesByClient(email);
+    // // return messagesByClient;
+    setMsgsByClient(messagesByClient);
   });
 
   return (
