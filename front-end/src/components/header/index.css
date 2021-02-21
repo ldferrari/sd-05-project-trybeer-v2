@@ -87,15 +87,30 @@ Link {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 85vh;
+  height: 88vh;
 }
 .menuBorder div {
   
-  padding: 14vh 0 11vh 15%;
+  padding: 16vh 8% 7vh 8%;
+  /* margin-right: 1%; */
+  color: yellow;
 }
+
+.menuBorder h2 {
+  text-align: center;
+}
+
+.menuBorder div .ExitBtn{
+  text-align: center;
+}
+
 .menuBorder div ul{
   margin: 0;
-  padding: 0;
+  padding: 1em;
+  text-align: justify;
+}
+.menuBorder div ul li a{
+  color: yellow;
 }
 /* ----cardapio-acima--- */
 @media screen and ( min-width : 300px ) and ( max-width : 569px ) {

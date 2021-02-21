@@ -9,8 +9,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding-bottom: 30%;
-  padding-top: 7%;
+  /* padding-bottom: 30%;
+  padding-top: 7%; */
 }
 
 .registerTitle {
@@ -46,6 +46,26 @@
   width: 100%;
 }
 
+.column-register > button[type=submit] {
+  margin-left:  3%;
+  margin-right:  3%;
+  /* width: 51%; */
+
+  border: none;
+  border-radius: 5px;
+  
+  font-size: x-large;
+  text-align: center;
+  text-decoration: none;
+  padding: 5%;
+  margin-left: 2%;
+  cursor: pointer;
+
+}
+
+.checkbox #seller {
+  vertical-align: middle;
+}
 /*  * {
   margin: 0;
   padding: 0;
