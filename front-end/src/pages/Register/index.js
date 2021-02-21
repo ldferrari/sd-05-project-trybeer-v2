@@ -20,7 +20,7 @@ const Register = (props) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const validationName = (value) => (/^[A-Za-z \s]{12,}$/.test(value) ? setValidName(true) : setValidName(false));
-  const validationEmail = (value) => (/[A-Za-z0-9]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(value)
+  const validationEmail = (value) => (/[A-Za-z0-9À-ī]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(value)
     ? setValidEmail(true)
     : setValidEmail(false));
 
