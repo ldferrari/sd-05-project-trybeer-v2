@@ -77,6 +77,23 @@
   /* position:fixed */
  }
 
+ .column-login > button[type=submit] {
+  margin-left:  3%;
+  margin-right:  3%;
+  /* width: 51%; */
+
+  border: none;
+  border-radius: 5px;
+  
+  font-size: x-large;
+  text-align: center;
+  text-decoration: none;
+  padding: 5%;
+  margin-left: 2%;
+  cursor: pointer;
+
+}
+
  .email-alert {
    color: red;
  }
@@ -100,12 +117,29 @@
     width: 73%;;
   }
 
-  .loginBtn {
+  .column-login .loginBtn {
     width: 51%;
   }
   .semConta {
     margin-left: 0;
     padding-left: 0;
+  }
+
+  .column-login > button[type=submit] {
+    margin-left:  unset;
+    margin-right:  unset;
+    width: 51%;
+
+    border: none;
+    border-radius: 5px;
+    
+    font-size: x-large;
+    text-align: center;
+    text-decoration: none;
+    padding: 5%;
+    margin-left: 2%;
+    cursor: pointer;
+
   }
 
 }

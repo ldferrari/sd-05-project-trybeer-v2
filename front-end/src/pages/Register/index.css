@@ -20,6 +20,11 @@
   font-size: xx-large;
 }
 
+.column-register {
+  display: flex;
+  flex-direction: column;
+}
+
 .column-register label {
   color:white;
   font-family: 'Permanent Marker', cursive;
@@ -35,6 +40,10 @@
 
 .column-register fieldset {
   border: none;
+}
+
+.register-inputs {
+  width: 100%;
 }
 
 /*  * {
