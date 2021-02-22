@@ -17,7 +17,7 @@ function itemQuantity(index, item) {
 export default function OrderCard({ item, index }) {
   const [productDetail, setProductDetail] = useState([]);
   useEffect(() => {
-    getProductById(item.product_id).then((result) => setProductDetail(...result));
+    getProductById(item.product_id).then((result) => setProductDetail(result));
   }, [item.product_id]);
   const handlePrice = (price) => price.replace('.', ',');
 

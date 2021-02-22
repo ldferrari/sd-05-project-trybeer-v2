@@ -25,7 +25,7 @@ function AdminMenu() {
         <Link className="btn-side" data-testid="side-menu-item-chat" to="/admin/chats">
           Conversas
         </Link>
-        {sair}
+        {sair()}
       </nav>
     </div>
   );

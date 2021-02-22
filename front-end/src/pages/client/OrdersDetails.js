@@ -37,7 +37,7 @@ function OrdersDetails({ location: { pathname } }) {
     const array = separateString(pathname, '/');
     // console.log(array[2]);
     // setOrderId(array[2]);
-    getSaleById(array[2]).then((result) => setOrderInfo(...result));
+    getSaleById(array[2]).then((result) => setOrderInfo(result));
     getSaleDetails(array[2]).then((result) => setProductsDetails(result));
   }, [pathname]);
 
