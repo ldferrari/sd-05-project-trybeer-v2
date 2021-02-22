@@ -34,10 +34,10 @@ const Home = (props) => {
 
   return (
     <div className={ classes.root }>
-      <Box display="flex">
+      <Box display="flex" height={ 1 }>
         <AdminSideBar title="Conversas" icon="inbox" history={ history } />
-        <Box p={ 4 } mt={ 14 }>
-          <Grid container spacing={ 4 }>
+        <Box p={ 0 } mt={ 0 } paulo="" width="100%">
+          <Grid container spacing={ 0 }>
             <AdminChatConversation email={ email } history={ history } />
           </Grid>
         </Box>

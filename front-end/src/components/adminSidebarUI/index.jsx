@@ -143,9 +143,10 @@ export default function AdminSidebarUI(props) {
         anchor="left"
         open={ open }
         classes={ { paper: classes.drawerPaper } }
+        height="100%"
       >
         <div className={ classes.drawerHeader }>
-          <img className={ classes.logo } src="../uai2.png" alt="logo" />
+          <img className={ classes.logo } src="../../uai2.png" alt="logo" />
           <div className={ classes.grow } />
           <IconButton onClick={ handleDrawerClose }>
             { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
