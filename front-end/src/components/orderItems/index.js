@@ -7,16 +7,16 @@ const OrderItem = (props) => {
 
   const two = 2;
   return (
-    <div className="cartItem" key={ item.name }>
-      <p data-testid={ `${index}-product-qtd` }>{ item.quantity }</p>
-      <p data-testid={ `${index}-product-name` }>{ item.name }</p>
-      <p data-testid={ `${index}-product-unit-price` }>
+    <tr className="cartItem" key={ item.name }>
+      <td className="qty" data-testid={ `${index}-product-qtd` }>{ item.quantity }</td>
+      <td className="name" data-testid={ `${index}-product-name` }>{ item.name }</td>
+      <td className="unit-price" data-testid={ `${index}-product-unit-price` }>
         {`(R$ ${item.price.toString().replace('.', ',')} un)`}
-      </p>
-      <p data-testid={ `${index}-product-total-value` }>
+      </td>
+      <td className="total-product" data-testid={ `${index}-product-total-value` }>
         { `R$ ${(item.price * item.quantity).toFixed(two).replace('.', ',')}` }
-      </p>
-    </div>
+      </td>
+    </tr>
   );
 };
 
