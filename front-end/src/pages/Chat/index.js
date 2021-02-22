@@ -40,8 +40,8 @@ const Chat = (props) => {
 
   useEffect(() => {
     const conteudo = document.getElementsByClassName('messages-container');
-    conteudo[0].scrollTop=conteudo[0].scrollHeight
-  }, [messages])
+    conteudo[0].scrollTop = conteudo[0].scrollHeight;
+  }, [messages]);
 
   const handleNewMessageChange = (event) => {
     const now = new Date();
@@ -60,10 +60,11 @@ const Chat = (props) => {
   };
 
   const handleEnter = (e) => {
-    if (e.keyCode == 13) {
+    const enterKey = 13;
+    if (e.keyCode === enterKey) {
       handleSendMessage();
     }
-  }
+  };
   return (
     <div className="chat-page">
       <Header>CHAT</Header>
@@ -86,13 +87,13 @@ const Chat = (props) => {
           ))}
         </ul>
       </div>
-      <div>
+      <div className="chat-input-buttom">
         <input
           type="text"
           data-testid="message-input"
           value={ newMessage.message }
           onChange={ handleNewMessageChange }
-          onKeyUp={handleEnter}
+          onKeyUp={ handleEnter }
           placeholder="Digite..."
           className="new-message-input-field"
         />
@@ -105,7 +106,6 @@ const Chat = (props) => {
           ENVIAR
         </button>
       </div>
-      
       <Footer />
     </div>
   );
