@@ -65,19 +65,26 @@ const Checkout = (props) => {
       <span id="compra-finalizada">{ alertCompraFinalizada }</span>
       <div className="pedido">
         <h2 className="checkoutitle">Produtos no carrinho:</h2>
-        <div className="legenda">
-          <p>QUANTIDADE</p>
-          <p>PRODUTO</p>
-          <p>PREÇO</p>
-          <p>TOTAL</p>
-          <p>EXCLUIR  </p>
-        </div>
-        <div className="cartItems">
+        <table className="cartItems">
+          <tr className="legenda cartItem">
+            <th className="qty">QUANTIDADE</th>
+            <th className="name">PRODUTO</th>
+            <th className="unit-price">PREÇO</th>
+            <th className="total-product">TOTAL</th>
+            <th className="button">EXCLUIR</th>
+          </tr>
+          <tr className="legenda-small cartItem">
+            <th className="qty">QTD</th>
+            <th className="name">PROD</th>
+            <th className="unit-price">R$/Un</th>
+            <th className="total-product">R$</th>
+            <th className="button"> </th>
+          </tr>
           {
-          cartHere
-            .map((item, index) => <CartItem key={ item.id } item={ item } index={ index } />)
+            cartHere
+              .map((item, index) => <CartItem key={ item.id } item={ item } index={ index } />)
           }
-        </div>
+        </table>
       </div>
       <p data-testid="order-total-value" className="total">
         { `TOTAL: R$ ${cartSum.toString().replace('.', ',')}` }
@@ -85,29 +92,29 @@ const Checkout = (props) => {
       { Number(cartSum) === zero ? <h1>Não há produtos no carrinho</h1> : null }
       <div className="deliveryForm">
         <h2 className="checkoutitle">Endereço de entrega:</h2>
-          <div className="checkout-forms-inputs">
-            <div className="inputs input-rua">
-              <h4>Rua</h4>
+        <div className="checkout-forms-inputs">
+          <div className="inputs input-rua">
+            <h4>Rua</h4>
 
-              <input
-                data-testid="checkout-street-input"
-                type="text"
-                name="rua"
-                onChange={ ({ target: { value } }) => setRua(value) }
-                /* value={ rua } */
-              />
-            </div>
-            <div className="inputs input-numero">
-              <h4>Número</h4>
-              <input
-                data-testid="checkout-house-number-input"
-                type="number"
-                name="numero"
-                onChange={ ({ target: { value } }) => setNumero(Number(value)) }
-                /* value={ numero } */
-              />
-            </div>
+            <input
+              data-testid="checkout-street-input"
+              type="text"
+              name="rua"
+              onChange={ ({ target: { value } }) => setRua(value) }
+              /* value={ rua } */
+            />
           </div>
+          <div className="inputs input-numero">
+            <h4>Número</h4>
+            <input
+              data-testid="checkout-house-number-input"
+              type="number"
+              name="numero"
+              onChange={ ({ target: { value } }) => setNumero(Number(value)) }
+              /* value={ numero } */
+            />
+          </div>
+        </div>
       </div>
       <button
         // type="button"

@@ -25,23 +25,28 @@ const CartItem = (props) => {
   };
 
   return (
-    <div className="cartItem" key={ item.name }>
-      <p data-testid={ `${index}-product-qtd-input` }>{ exists.quantity ? exists.quantity : zero }</p>
-      <p data-testid={ `${index}-product-name` }>{ item.name }</p>
-      <p data-testid={ `${index}-product-unit-price` }>
-        {`(R$ ${item.price.toString().replace('.', ',')} un)`}
-      </p>
-      <p data-testid={ `${index}-product-total-value` }>
-        { `R$ ${(item.price * item.quantity).toFixed(two).replace('.', ',')}` }
-      </p>
-      <button
-        type="button"
-        data-testid={ `${index}-removal-button` }
-        onClick={ () => exclude() }
-      >
-        X
-      </button>
-    </div>
+    <tr className="cartItem" key={ item.name }>
+      <td className="qty" data-testid={ `${index}-product-qtd-input` }>{ exists.quantity ? exists.quantity : zero }</td>
+      <td className="name" data-testid={ `${index}-product-name` }>{ item.name }</td>
+      <td className="unit-price" data-testid={ `${index}-product-unit-price` }>
+        <span className="legenda">(R$ </span>
+        {`${item.price.toFixed(two).replace('.', ',')}`}
+        <span className="legenda">un)</span>
+      </td>
+      <td className="total-product" data-testid={ `${index}-product-total-value` }>
+        <span className="legenda">R$ </span>
+        {`${(item.price * item.quantity).toFixed(two).replace('.', ',')}` }
+      </td>
+      <td className="button">
+        <button
+          type="button"
+          data-testid={ `${index}-removal-button` }
+          onClick={ () => exclude() }
+        >
+          X
+        </button>
+      </td>
+    </tr>
   );
 };
 
