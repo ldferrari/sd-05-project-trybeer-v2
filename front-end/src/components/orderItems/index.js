@@ -4,7 +4,6 @@ import './index.css';
 
 const OrderItem = (props) => {
   const { item, index } = props;
-
   const two = 2;
   return (
     <tr className="cartItem" key={ item.name }>

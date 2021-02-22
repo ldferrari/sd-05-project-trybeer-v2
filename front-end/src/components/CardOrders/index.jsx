@@ -46,7 +46,7 @@ export default function SimpleCard(props) {
   if (!order) return <h1>Loading Card Orders components</h1>;
 
   return (
-    <Grid item lg={ 6 } md={ 4 } sm={ 6 } xs={ 12 }>
+    <Grid item lg={ 6 } md={ 6 } sm={ 6 } xs={ 12 }>
       <Card className={ classes.root } elevation={ 3 }>
         <CardContent>
           <Link to={ `/admin/orders/${id}` } className={ classes.links }>

@@ -9,6 +9,7 @@ detail.get('/:id', async (req, res) => {
     // const { id } = req.payload;
     const { id } = req.params;
     const detailProducts = await service.getDetails(id);
+    console.log('detailProducts', detailProducts)
     res.status(200).json(detailProducts);
   } catch (error) {
     console.error(error);
