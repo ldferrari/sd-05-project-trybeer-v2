@@ -19,6 +19,7 @@ export default function OrderCard({ order, index }) {
           { `R$ ${(order.total_price).replace('.', ',')}` }
         </p>
         <p data-testid={ `${index}-order-date` }>{`${date[2]}/${date[1]}` }</p>
+        <p data-testid={ `${index}-order-status` }>{ order.status }</p>
       </Link>
     </div>
   );
