@@ -49,12 +49,12 @@ io.on('connection', (socket) => {
   console.log(`User ${currentUserId} connected`);
 
   // ver logica de requisito bônus webchat para pegar email e diferenciar conversa por cliente
-  socket.on('message', async ({ email, buyerMessage }) => {
+  socket.on('message', async ({ email, message }) => {
     // same 'message' event for buyer and seller - seller will send "Loja" as nickname always
     const dateNow = new Date().getTime();
     const hour = moment(dateNow).format('HH:mm');
-    await createMessage({ email, hour, buyerMessage });
-    io.emit('showMessage', { email, hour, buyerMessage });
+    await createMessage({ email, hour, message });
+    io.emit('showMessage', { email, hour, message });
   });
 
   socket.on('disconnect', () => {

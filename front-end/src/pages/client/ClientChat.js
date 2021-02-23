@@ -1,23 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 const io = require('socket.io-client');
 const { getMessagesByClient } = require('../../services/fetchMongo');
 require('dotenv').config();
+const PORT = process.env.PORT || 3001;
+const buyerSocket = io(`http://localhost:${PORT}`);
+  // https://socket.io/docs/v3/client-initialization/
+
+const renderMessages = (list) => (
+  <div>
+        { list &&
+        list.map((msg) => (
+            <div>
+              <p>
+                <span data-testid="nickname">{msg.email}</span> -
+                <span data-testid="message-time">{msg.hour}</span>
+              </p>
+              <div data-testid="text-message">{msg.message}</div>
+            </div>
+          ))}
+      </div>
+)
 
 function ClientChat() {
-  const PORT = process.env.PORT || 3001;
-  const buyerSocket = io(`http://localhost:${PORT}`);
-  // https://socket.io/docs/v3/client-initialization/
 
   const user = JSON.parse(localStorage.getItem('user'));
   const { email } = user;
 
   const [buyerMessage, setBuyerMessage] = useState('');
-  const [msgsByClient, setMsgsByClient] = useState([]);
+  const [msgsByClient, setMsgsByClient] = useState('');
 
-  // useEffect(async () => {
-    // const messagesByClient = await getMessagesByClient(email);
-    // return messagesByClient;
-  // }, []);
+  useEffect(async () => {
+    const messagesByClient = await getMessagesByClient(email);
+    setMsgsByClient(messagesByClient);
+  }, []);
+  useEffect(() => {
+    buyerSocket.on('showMessage', ({ email, hour, message }) => {
+      const divMessage = { email, hour, message };
+      setMsgsByClient((previousState) => [...previousState, divMessage]);
+    });
+  }, []);
+
   // talvez [email]
 
   const handleTextChange = (e) => {
@@ -27,36 +49,17 @@ function ClientChat() {
 
   const handleSend = async () => {
     // const messagesByClient = await getMessagesByClient(email);
-    buyerSocket.emit('message', { email, buyerMessage });
+    buyerSocket.emit('message', { email, message: buyerMessage });
     // return messagesByClient;
   };
 
   // let msgsByClient = [];
 
-  buyerSocket.on('showMessage', ({ email, hour, buyerMessage }) => {
-    const divMessage = { email, hour, buyerMessage };
-    console.log(divMessage);
-    // setMsgsByClient((previousState) => [...previousState, divMessage]);
-    // OU
-    setMsgsByClient(msgsByClient.push(divMessage));
-    console.log(msgsByClient);
-  });
 
   return (
     <section>
       {/* 1. Parte manipulada real-time com socket */}
-      <div>
-        {msgsByClient &&
-          msgsByClient.forEach((msg) => (
-            <div>
-              <p>
-                <span data-testid="nickname">{msg.email}</span> -
-                <span data-testid="message-time">{msg.hour}</span>
-              </p>
-              <div data-testid="text-message">{msg.buyerMessage}</div>
-            </div>
-          ))}
-      </div>
+      {renderMessages(msgsByClient)}
       {/* 2. Parte passando por bd: */}
       {/* <div>
         {messagesByClient &&
