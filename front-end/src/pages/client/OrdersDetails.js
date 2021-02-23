@@ -48,11 +48,10 @@ function OrdersDetails({ location: { pathname } }) {
       <ClientMenu title="Detalhes de Pedido" data-testid="top-title" />
       {/* {console.log(orderInfo)} */}
       <div data-testid="order-number">
-        Pedido
-        {' '}
-        {orderInfo.id}
+        {`Pedido ${orderInfo.id}`}        
       </div>
       <div data-testid="order-date">{getDate(orderInfo.sale_date)}</div>
+      <p>{orderInfo.status}</p>
       <div>
         {productsDetails.map((item, index) => (
           <OrderDetailCard key={ item } item={ item } index={ index } />

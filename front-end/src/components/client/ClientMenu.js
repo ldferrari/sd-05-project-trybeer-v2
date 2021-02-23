@@ -7,7 +7,7 @@ function hamburger(openClose) {
   return (
     <label className="top-hamburguer" data-testid="top-hamburguer" htmlFor="check">
       &#9776;
-      <input type="checkbox" id="check" onChange={ () => openClose() } />
+      <input type="checkbox" id="check" onChange={() => openClose()} />
     </label>
   );
 }
@@ -23,18 +23,18 @@ function menuTitle(title) {
 function nav() {
   return (
     <nav className="side-menu">
-     <Link className="btn-side" data-testid="side-menu-item-products" to="/products">
-              Produtos
-            </Link>
-            <Link className="btn-side" data-testid="side-menu-item-my-orders" to="/orders">
-              Meus Pedidos
-            </Link>
-            <Link className="btn-side" data-testid="side-menu-item-my-profile" to="/profile">
-              Meu Perfil
-            </Link>
-            <Link className="btn-side" data-testid="side-menu-item-logout" to="/login">
-              Sair
-            </Link>
+      <Link className="btn-side" data-testid="side-menu-item-products" to="/products">
+        Produtos
+      </Link>
+      <Link className="btn-side" data-testid="side-menu-item-my-orders" to="/orders">
+        Meus Pedidos
+      </Link>
+      <Link className="btn-side" data-testid="side-menu-item-my-profile" to="/profile">
+        Meu Perfil
+      </Link>
+      <Link className="btn-side" data-testid="side-menu-item-logout" to="/login" onClick={() => localStorage.clear()}>
+        Sair
+      </Link>
       <Link className="btn-side btn-menu" data-testid="side-menu-chat" to="/chat">
         Conversar com a loja
       </Link>
@@ -58,7 +58,7 @@ function ClientMenu(props) {
     <header className="menu-superior">
       {hamburger(openClose)}
       {menuTitle(title)}
-      <div className="menu-container" style={ { left, display } }>{nav()}</div>
+      <div className="menu-container" style={{ left, display }}>{nav()}</div>
     </header>
   );
 }

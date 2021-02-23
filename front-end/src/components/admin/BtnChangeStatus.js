@@ -16,14 +16,14 @@ export default function BtnStatus({ id }) {
         onClick={() => closeSale(id).then(setStatus('Entregue'))}
       >
         Marcar como entregue
-    </button>
+      </button>
       <button
         type="button"
         data-testid="mark-as-prepared-btn"
         onClick={() => changeSale(id).then(setStatus('Preparando'))}
       >
         Preparar pedido
-  </button>
+      </button>
     </div>
   );
 }
