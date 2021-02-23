@@ -10,22 +10,21 @@ export default function BtnStatus({ id }) {
 
   return (
     <div>
-
-    <button
-      type="button"
-      data-testid="mark-as-delivered-btn"
-      onClick={ () => closeSale(id).then(setStatus('Entregue')) }
+      <button
+        type="button"
+        data-testid="mark-as-delivered-btn"
+        onClick={() => closeSale(id).then(setStatus('Entregue'))}
       >
-      Marcar como entregue
+        Marcar como entregue
     </button>
-    <button
-    type="button"
-    data-testid="mark-as-prepared-btn"
-    onClick={ () => changeSale(id).then(setStatus('Preparando')) }
-    >
-      Preparar Pedido
+      <button
+        type="button"
+        data-testid="mark-as-prepared-btn"
+        onClick={() => changeSale(id).then(setStatus('Preparando'))}
+      >
+        Preparar pedido
   </button>
-  </div>
+    </div>
   );
 }
 
