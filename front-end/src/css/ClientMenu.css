@@ -1,69 +1,69 @@
 .menu-superior {
-	background: blue;
-	position: fixed;
-	top: 0;
-	width: 100%;
+		background: blue;
+		position: fixed;
+		top: 0;
+		width: 100%;
 }
 
 .linter {
-	display: none;
+		display: none;
 }
 
 .top-hamburguer {
-	align-self: center;
-	background: blue;
-	color: white;
-	display: inline-block;
-	font-size: 25px;
-	padding: 15px;
-	position: fixed;
-	transition: color linear 1s;
-	z-index: 1;
+		align-self: center;
+		background: blue;
+		color: white;
+		display: inline-block;
+		font-size: 25px;
+		padding: 15px;
+		position: fixed;
+		transition: color linear 1s;
+		z-index: 1;
 }
 
 .top-title {
-	color: white;
-	font-family: 'Courier New', Courier, monospace;
-	font-size: 25px;
-	line-height: 25px;
-	text-align: center;
+		color: white;
+		font-family: Arial;
+		font-size: 25px;
+		line-height: 25px;
+		text-align: center;
 }
 
 .menu-container {
-	background: blue;
-	display: none;
-  height: 100%;
-  left: -40%;
-	position: fixed;
-	transition: all 1s linear;
-	width: 20%;
+		background: blue;
+		display: none;
+  	height: 100%;
+  	left: -40%;
+		position: fixed;
+		transition: all 1s linear;
+		width: 20%;
 }
 
 .side-menu {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	justify-content: space-around;
+    display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: space-around;
 }
 
 .btn-menu {
-	display: flex;
-	flex-direction: column;
+		display: flex;
+		flex-direction: column;
 }
 
 nav a {
-	text-decoration: none;
+		text-decoration: none;
 }
 
 .btn-side {
-	background: purple;
-	border-radius: 5px;
-	color: white;
-	font-size: 25px;
-	margin: 5%;
-	padding: 5%;
+		background: purple;
+		border-radius: 5px;
+		color: white;
+		font-size: 25px;
+		margin: 5%;
+		padding: 5%;
 }
 
 .btn-side:hover {
-	background: blue;
+background: blue;
 }
