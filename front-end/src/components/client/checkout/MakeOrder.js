@@ -18,9 +18,9 @@ function finishOrder(totalPrice, street, houseNum, handleResult) {
         createNewSale({
           email: user.email,
           totalPrice,
-          street,
-          houseNum,
-          date,
+          address: street,
+          addressNumber: houseNum,
+          saleDate: date,
           products,
         }).then((result) => handleResult(result));
       } }

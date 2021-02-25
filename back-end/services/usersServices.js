@@ -1,4 +1,3 @@
-const model1 = require('../models-antigo/usersModel');
 const { users } = require('../models');
 const seis = 6;
 const doze = 12;
