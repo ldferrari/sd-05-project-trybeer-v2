@@ -1,8 +1,8 @@
 .menu-superior {
 	background: blue;
 	position: fixed;
-	top:0;
-	width:100%;
+	top: 0;
+	width: 100%;
 }
 
 #check {
@@ -11,14 +11,14 @@
 
 .top-hamburguer {
 	align-self: center;
-	background:blue;
-	box-shadow:0px;
+	background: blue;
+	box-shadow: 0px;
 	color: white;
-	display:inline-block;
+	display: inline-block;
 	font-size: 25px;
 	padding: 15px;
 	position: fixed;
-	transition:color linear 1s;
+	transition: color linear 1s;
 	z-index: 1;
 }
 
@@ -33,10 +33,10 @@
 .menu-container {
 	background: blue;
 	display: none;
-  height:100%;
+  height: 100%;
   left: -40%;
 	position: fixed;
-	transition:all 1s linear;
+	transition: all 1s linear;
 	width: 20%;
 }
 
@@ -58,8 +58,8 @@ nav a {
 
 .btn-side {
 	background: purple;
-	border-radius:5px;
-	color:rgb(255, 255, 255);
+	border-radius: 5px;
+	color: rgb(255, 255, 255);
 	font-size: 25px;
 	margin: 5%;
 	padding: 5%;
