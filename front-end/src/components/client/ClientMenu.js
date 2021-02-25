@@ -7,7 +7,7 @@ function hamburger(openClose) {
   return (
     <label className="top-hamburguer" data-testid="top-hamburguer" htmlFor="check">
       &#9776;
-      <input type="checkbox" id="check" onChange={ () => openClose() } />
+      <input type="checkbox" id="check" className="linter" onChange={ () => openClose() } />
     </label>
   );
 }

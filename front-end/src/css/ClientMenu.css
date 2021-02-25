@@ -5,14 +5,13 @@
 	width: 100%;
 }
 
-#check {
+.linter {
 	display: none;
 }
 
 .top-hamburguer {
 	align-self: center;
 	background: blue;
-	box-shadow: 0px;
 	color: white;
 	display: inline-block;
 	font-size: 25px;
@@ -24,7 +23,7 @@
 
 .top-title {
 	color: white;
-	font-family: Roboto;
+	font-family: 'Courier New', Courier, monospace;
 	font-size: 25px;
 	line-height: 25px;
 	text-align: center;
@@ -59,7 +58,7 @@ nav a {
 .btn-side {
 	background: purple;
 	border-radius: 5px;
-	color: rgb(255, 255, 255);
+	color: white;
 	font-size: 25px;
 	margin: 5%;
 	padding: 5%;
