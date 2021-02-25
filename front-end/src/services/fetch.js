@@ -83,14 +83,14 @@ Params:
 -  products -- Array de objetos -> [{product_id: 1, quantity, 1}, {product_id: 2, quantity: 3}]
 
 */
-export const createNewSale = (
+export const createNewSale = ({
   email,
   totalPrice,
   address,
   addressNumber,
   saleDate,
   products,
-) => {
+}) => {
   const newSale = axios
     .post(`${API_URL}/checkout`, {
       email, totalPrice, address, addressNumber, saleDate, products,

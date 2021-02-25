@@ -31,13 +31,25 @@ function ClientMenu(props) {
       <div className="side-menu-container" style={ { left, display } }>
         <nav className="side-menu">
           <div className="btn-menu">
-            <Link className="btn-side" data-testid="side-menu-item-products" to="/products">
+            <Link
+              className="btn-side"
+              data-testid="side-menu-item-products"
+              to="/products"
+            >
               Produtos
             </Link>
-            <Link className="btn-side" data-testid="side-menu-item-my-orders" to="/orders">
+            <Link
+              className="btn-side"
+              data-testid="side-menu-item-my-orders"
+              to="/orders"
+            >
               Meus Pedidos
             </Link>
-            <Link className="btn-side" data-testid="side-menu-item-my-profile" to="/profile">
+            <Link
+              className="btn-side"
+              data-testid="side-menu-item-my-profile"
+              to="/profile"
+            >
               Meu Perfil
             </Link>
             <Link className="btn-side" data-testid="side-menu-item-logout" to="/login">

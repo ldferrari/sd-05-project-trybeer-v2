@@ -86,7 +86,17 @@ function EachProduct(props) {
     saveProductsMore(product);
     localStorage.setItem('totalPrice', totalPrice + Number(product.price));
   };
-  return (<div>{renderAll({ index, product, callback1: oneLess, callback2: oneMore, countProduct })}</div>);
+  return (
+    <div>
+      {renderAll({
+        index,
+        product,
+        callback1: oneLess,
+        callback2: oneMore,
+        countProduct,
+      })}
+    </div>
+  );
 }
 
 EachProduct.propTypes = {

@@ -20,7 +20,13 @@ function AdminMenu() {
     <div className="admin-side-bar-container">
       <h2>TryBeer</h2>
       <nav>
-        <Link className="btn-side" to="/admin/orders" data-testid="side-menu-item-orders">Pedidos</Link>
+        <Link
+          className="btn-side"
+          to="/admin/orders"
+          data-testid="side-menu-item-orders"
+        >
+          Pedidos
+        </Link>
         <Link className="btn-side" to="/admin/profile">Perfil</Link>
         <Link className="btn-side" data-testid="side-menu-item-chat" to="/admin/chats">
           Conversas

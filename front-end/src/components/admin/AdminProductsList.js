@@ -11,7 +11,7 @@ export default function AdminProductsList({ sale, index }) {
     const initialPrice = 0;
     setTotalPrice(initialPrice);
     getProductById(sale.product_id)
-      .then((r) => setProduct(r) || setTotalPrice((cur) => cur + (r.price) * sale.quantity));
+      .then((r) => setProduct(r) || setTotalPrice((c) => c + (r.price) * sale.quantity));
   }, [sale.product_id, sale.quantity, setTotalPrice]);
 
   const two = 2;

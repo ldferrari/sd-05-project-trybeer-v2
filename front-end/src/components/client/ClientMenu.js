@@ -7,7 +7,7 @@ function hamburger(openClose) {
   return (
     <label className="top-hamburguer" data-testid="top-hamburguer" htmlFor="check">
       &#9776;
-      <input type="checkbox" id="check" onChange={() => openClose()} />
+      <input type="checkbox" id="check" onChange={ () => openClose() } />
     </label>
   );
 }
@@ -32,7 +32,12 @@ function nav() {
       <Link className="btn-side" data-testid="side-menu-item-my-profile" to="/profile">
         Meu Perfil
       </Link>
-      <Link className="btn-side" data-testid="side-menu-item-logout" to="/login" onClick={() => localStorage.clear()}>
+      <Link
+        className="btn-side"
+        data-testid="side-menu-item-logout"
+        to="/login"
+        onClick={ () => localStorage.clear() }
+      >
         Sair
       </Link>
       <Link className="btn-side btn-menu" data-testid="side-menu-chat" to="/chat">
@@ -58,7 +63,7 @@ function ClientMenu(props) {
     <header className="menu-superior">
       {hamburger(openClose)}
       {menuTitle(title)}
-      <div className="menu-container" style={{ left, display }}>{nav()}</div>
+      <div className="menu-container" style={ { left, display } }>{nav()}</div>
     </header>
   );
 }
