@@ -1,4 +1,4 @@
-.menu-superior{
+.menu-superior {
 	background: blue;
 	position: fixed;
 	top:0;
@@ -23,18 +23,18 @@
 }
 
 .top-title {
-	text-align: center;
 	color: white;
 	font-family: Roboto;
 	font-size: 25px;
 	line-height: 25px;
+	text-align: center;
 }
 
 .menu-container {
 	background: blue;
-	height:100%;
+	display: none;
+  height:100%;
   left: -40%;
-  display: none;
 	position: fixed;
 	transition:all 1s linear;
 	width: 20%;
@@ -52,7 +52,7 @@
 	flex-direction: column;
 }
 
-nav a{
+nav a {
 	text-decoration: none;
 }
 
@@ -65,6 +65,6 @@ nav a{
 	padding: 5%;
 }
 
-.btn-side:hover{
+.btn-side:hover {
 	background: blue;
 }

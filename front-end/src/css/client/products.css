@@ -1,12 +1,10 @@
-/* minimum css so as to visualize better the /products page */
-
 .productCards {
   display: flex;
 }
 
 .eachCard {
   border: 2px solid black;
-  margin: 5px 5px;
+  margin: 5px;
 }
 
 .controlQty {
