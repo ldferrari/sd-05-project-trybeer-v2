@@ -8,6 +8,7 @@ export default function SidebarClient() {
         <Link to="/products" data-testid="side-menu-item-products">Meus produtos</Link>
         <Link to="/orders" data-testid="side-menu-item-my-orders">Meus pedidos</Link>
         <Link to="/profile" data-testid="side-menu-item-my-profile">Meu perfil</Link>
+        <Link to="/chat" data-testid="side-menu-chat">Conversar com a loja</Link>
       </section>
       <Link
         to="/login"

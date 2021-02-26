@@ -7,6 +7,7 @@ export default function SidebarAdmin() {
       <section>
         <Link to="/admin/orders" data-testid="side-menu-item-orders">Pedidos</Link>
         <Link to="/admin/profile" data-testid="side-menu-item-profile">Perfil</Link>
+        <Link to="/admin/chats" data-testid="side-menu-item-chat">Conversas</Link>
       </section>
       <Link
         to="/login"
