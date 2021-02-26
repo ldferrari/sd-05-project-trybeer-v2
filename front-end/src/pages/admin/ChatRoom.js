@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { all } from 'sequelize/types/lib/operators'; ?
 import AdminMenu from '../../components/admin/AdminMenu';
 import AdminChat from '../../components/admin/AdminChat';
@@ -47,20 +47,19 @@ function ChatRoom() {
         <h2>Conversas</h2>
         {console.log(conversa)}
         {allChats.map((chat, index) => (
-          <div key={ index } data-testid="containerChat">
-            <button
-              type="button"
-              data-testid="top-hamburguer"
-              id="send"
-              onClick={ () => setEmail(chat.email) || setConversa(true) }
-            >
-              <p data-testid="profile-name">{chat.email}</p>
-              <p data-testid="last-message">
-                {`Última mensagem às ${chat.hour}`}
-              </p>
-            </button>
-          </div>
-
+          <Link
+            key={ index }
+            data-testid="containerChat"
+            to="/admin/chat"
+            type="button"
+            id="send"
+            onClick={ () => setEmail(chat.email) || setConversa(true) }
+          >
+            <p data-testid="profile-name">{chat.email}</p>
+            <p data-testid="last-message">
+              {`Última mensagem às ${chat.hour}`}
+            </p>
+          </Link>
         ))}
       </section>
     );
