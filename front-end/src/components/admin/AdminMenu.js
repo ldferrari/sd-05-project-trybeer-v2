@@ -1,15 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/ClientMenu.css';
-
-function hamburger(openClose) {
-  return (
-    <label className="top-hamburguer" data-testid="top-hamburguer" htmlFor="check">
-      &#9776;
-      <input type="checkbox" id="check" className="l" onChange={ () => openClose() } />
-    </label>
-  );
-}
 
 function sair() {
   return (
@@ -24,7 +15,7 @@ function sair() {
   );
 }
 
-function nav() {
+function AdminMenu() {
   return (
     <div
       className="admin-side-bar-container"
@@ -46,25 +37,6 @@ function nav() {
         {sair()}
       </nav>
     </div>
-  );
-}
-
-function AdminMenu() {
-  const [click, setClick] = useState(false);
-  function openClose() {
-    if (document.getElementById('check').checked) {
-      setClick(true);
-    } else {
-      setClick(false);
-    }
-  }
-  const left = click ? '0' : '-40%';
-  const display = click ? 'block' : 'none';
-  return (
-    <header className="menu-superior">
-      {hamburger(openClose)}
-      <div className="menu-container" style={ { left, display } }>{nav()}</div>
-    </header>
   );
 }
 

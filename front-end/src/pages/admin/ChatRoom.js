@@ -33,9 +33,8 @@ function ChatRoom() {
   if (!allChats || allChats.length < 1) {
     return (
       <section>
-        <Menu />
-        <h2>Conversas</h2>
         <AdminMenu />
+        <h2>Conversas</h2>
         <h3 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h3>
       </section>
     );
