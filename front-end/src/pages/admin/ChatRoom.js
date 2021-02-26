@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 // import { all } from 'sequelize/types/lib/operators'; ?
-import Menu from '../../components/admin/AdminMenu';
+import AdminMenu from '../../components/admin/AdminMenu';
 import AdminChat from '../../components/admin/AdminChat';
 
 const { getAllMessages } = require('../../services/fetchMongo');
@@ -24,7 +24,7 @@ function ChatRoom() {
   if (conversa) {
     return (
       <div>
-        <Menu />
+        <AdminMenu />
         <AdminChat email={ email } />
       </div>
     );
@@ -33,7 +33,7 @@ function ChatRoom() {
   if (!allChats || allChats.length < 1) {
     return (
       <section>
-        <Menu />
+        <AdminMenu />
         <h2>Conversas</h2>
         <h3 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h3>
       </section>
@@ -43,7 +43,7 @@ function ChatRoom() {
   if (allChats.length > 0) {
     return (
       <section>
-        <Menu />
+        <AdminMenu />
         <h2>Conversas</h2>
         {console.log(conversa)}
         {allChats.map((chat, index) => (
