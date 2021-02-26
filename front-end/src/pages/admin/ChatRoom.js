@@ -12,41 +12,45 @@ function ChatRoom() {
   useEffect(() => {
     async function fetchData() {
       const getAllChats = await getAllMessages();
-      setAllChats((cur) => [...cur, getAllChats]);
+      console.log(getAllChats);
+      setAllChats(getAllChats);
     }
     fetchData();
   }, []);
 
   const handleClickChat = () => <AdminChat />;
 
-  return (
-    <section>
-      {/* {!clickChat && (
-        <div> */}
-      <h2>Conversas</h2>
-      {!allChats
-      && <h3 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h3>}
-      {allChats
-        && allChats.forEach((chat) => (
-          <button
-            data-testid="containerChat"
-            type="button"
-            id="send"
-            onClick={ () => handleClickChat() }
-          >
-            <p data-testid="profile-name">{chat.nickname}</p>
-            <p data-testid="last-message">
-              Última mensagem às
-              {chat.hour}
-            </p>
-          </button>
+  if (!allChats || allChats.length < 1) {
+    return (
+      <section>
+        <h2>Conversas</h2>
+        <h3 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h3>
+      </section>
+    );
+  }
+
+  if (allChats.length > 0) {
+    return (
+      <section>
+        <h2>Conversas</h2>
+        {allChats.map((chat, index) => (
+          <div key={ index }>
+            <button
+              data-testid="containerChat"
+              type="button"
+              id="send"
+              onClick={ () => handleClickChat() }
+            >
+              <p data-testid="profile-name">{chat.email}</p>
+              <p data-testid="last-message">
+                {`Última mensagem às ${chat.hour}`}
+              </p>
+            </button>
+          </div>
         ))}
-      {/* // </div> */}
-      {/* )} */}
-      {/* {clickChat && <AdminChat allProps />}; */}
-      {/* problem to pass props */}
-    </section>
-  );
+      </section>
+    );
+  }
 }
 
 export default ChatRoom;

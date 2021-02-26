@@ -21,7 +21,7 @@ chat.post('/', async (req, _res) => {
     const { email, content } = req.body;
     const dateNow = new Date().getTime();
     const hour = moment(dateNow).format('HH:mm');
-    createMessage({ email, hour, content });
+    await createMessage({ email, hour, content });
   } catch (_e) {
     res.status(codeErr).send(errMessage);
   }

@@ -24,7 +24,7 @@ Sem param
 
 export const getAllMessages = () => {
   const messages = axios
-    .get(`${API_URL}/admin/chats`, {})
+    .get(`${API_URL}/chat`, {})
     .then((response) => response.data);
   return messages;
 };
