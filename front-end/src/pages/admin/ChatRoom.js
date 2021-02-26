@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { all } from 'sequelize/types/lib/operators'; ?
 import AdminChat from '../../components/admin/AdminChat';
+
 const { getAllMessages } = require('../../services/fetchMongo');
 
 function ChatRoom() {
@@ -11,35 +12,36 @@ function ChatRoom() {
   useEffect(() => {
     async function fetchData() {
       const getAllChats = await getAllMessages();
-      setAllChats((allChats) => [...allChats, getAllChats]);
+      setAllChats((cur) => [...cur, getAllChats]);
     }
     fetchData();
   }, []);
 
-  const handleClickChat = (emailClient) => { 
-    // setClickChat(true);
-    return <AdminChat emailClient />;
-  };
+  const handleClickChat = () => <AdminChat />;
 
   return (
     <section>
       {/* {!clickChat && (
         <div> */}
-          <h2>Conversas</h2>
-          {!allChats && <h3 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h3>}
-          {allChats &&
-            allChats.forEach((chat) => (
-              <button
-                data-testid="containerChat"
-                type="button"
-                id="send"
-                onClick={() => handleClickChat(chat.nickname)}
-              >
-                <p data-testid="profile-name">{chat.nickname}</p>
-                <p data-testid="last-message">Última mensagem às {chat.hour}</p>
-              </button>
-            ))}
-        {/* // </div> */}
+      <h2>Conversas</h2>
+      {!allChats
+      && <h3 data-testid="text-for-no-conversation">Nenhuma conversa por aqui</h3>}
+      {allChats
+        && allChats.forEach((chat) => (
+          <button
+            data-testid="containerChat"
+            type="button"
+            id="send"
+            onClick={ () => handleClickChat() }
+          >
+            <p data-testid="profile-name">{chat.nickname}</p>
+            <p data-testid="last-message">
+              Última mensagem às
+              {chat.hour}
+            </p>
+          </button>
+        ))}
+      {/* // </div> */}
       {/* )} */}
       {/* {clickChat && <AdminChat allProps />}; */}
       {/* problem to pass props */}

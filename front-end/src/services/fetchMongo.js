@@ -1,14 +1,15 @@
 import axios from 'axios';
+
 require('dotenv').config();
 
-  const PORT = process.env.PORT || 3001;
-  const API_URL = `http://localhost:${PORT}`
+const tresMilUm = 3001;
 
+const PORT = process.env.PORT || tresMilUm;
+const API_URL = `http://localhost:${PORT}`;
 /*
 Busca a lista de mensagens onde o email é o do cliente
 Param: email
 */
-
 export const getMessagesByClient = (email) => {
   const messages = axios
     .get(`${API_URL}/chat`, { email })
@@ -34,4 +35,4 @@ Cria uma mensagem no banco
 
 export const createMessage = (email, content) => {
   axios.post(`${API_URL}/chat`, { email, content });
-}
+};
