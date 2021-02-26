@@ -1,70 +1,69 @@
-.menu-superior{
-	background: blue;
-	position: fixed;
-	top:0;
-	width:100%;
+.menu-superior {
+  background: blue;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-#check {
-	display: none;
+.l {
+  display: none;
 }
 
 .top-hamburguer {
-	align-self: center;
-	background:blue;
-	box-shadow:0px;
-	color: white;
-	display:inline-block;
-	font-size: 25px;
-	padding: 15px;
-	position: fixed;
-	transition:color linear 1s;
-	z-index: 3;
+  align-self: center;
+  background: blue;
+  color: white;
+  display: inline-block;
+  font-size: 25px;
+  padding: 15px;
+  position: fixed;
+  transition: color linear 1s;
+  z-index: 1;
 }
 
 .top-title {
-	text-align: center;
-	color: white;
-	font-family: Roboto;
-	font-size: 25px;
-	line-height: 25px;
+  color: white;
+  font-family: Arial , Helvetica , sans-serif;
+  font-size: 25px;
+  line-height: 25px;
+  text-align: center;
 }
 
 .menu-container {
-	background: blue;
-	height:100%;
-  left: -40%;
+  background: blue;
   display: none;
-	position: fixed;
-	transition:all 1s linear;
-	width: 20%;
+  height: 100%;
+  left: -40%;
+  position: fixed;
+  transition: all 1s linear;
+  width: 20%;
 }
 
 .side-menu {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
 }
 
 .btn-menu {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-nav a{
-	text-decoration: none;
+nav a {
+  text-decoration: none;
 }
 
 .btn-side {
-	background: purple;
-	border-radius:5px;
-	color:rgb(255, 255, 255);
-	font-size: 25px;
-	margin: 10%;
-	padding: 10%;
+  background: purple;
+  border-radius: 5px;
+  color: white;
+  font-size: 25px;
+  margin: 5%;
+  padding: 5%;
 }
 
-.btn-side:hover{
-	background: blue;
+.btn-side:hover {
+  background: blue;
 }

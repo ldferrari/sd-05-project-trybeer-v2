@@ -4,8 +4,6 @@ import InputEmail from '../components/login/InputEmail';
 import InputPassword from '../components/login/InputPassword';
 import ClickLogin from '../components/login/ClickLogin';
 
-import SqlBtn from '../components/sqlBtn';
-
 function goToRegister() {
   return (
     <Link to="/register">
@@ -23,7 +21,6 @@ function Login() {
       <InputPassword />
       <ClickLogin />
       {goToRegister()}
-      <SqlBtn />
     </div>
   );
 }

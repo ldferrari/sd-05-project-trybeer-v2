@@ -6,22 +6,6 @@ import OrderStatus from '../../components/admin/OrderStatus';
 import TrybeerContext from '../../context/TrybeerContext';
 import BtnStatus from '../../components/admin/BtnChangeStatus';
 
-function renderDetails(saleNumber, saleDetails, totalPrice) {
-  return (
-    <div>
-      <AdminMenu />
-      <div>
-        {orderNumber(saleNumber)}
-        <OrderStatus id={ saleNumber } />
-      </div>
-      <div>
-        {details(saleDetails)}
-        {total(totalPrice)}
-      </div>
-      <BtnStatus id={ saleNumber } />
-    </div>
-  );
-}
 function orderNumber(saleNumber) {
   return (
     <span id="sale-id" data-testid="order-number">
@@ -45,6 +29,23 @@ function total(totalPrice) {
     <span data-testid="order-total-value">
       {`Total: R$ ${totalPrice.toFixed(two).replace('.', ',')}`}
     </span>
+  );
+}
+
+function renderDetails(saleNumber, saleDetails, totalPrice) {
+  return (
+    <div>
+      <AdminMenu />
+      <div>
+        {orderNumber(saleNumber)}
+        <OrderStatus id={ saleNumber } />
+      </div>
+      <div>
+        {details(saleDetails)}
+        {total(totalPrice)}
+      </div>
+      <BtnStatus id={ saleNumber } />
+    </div>
   );
 }
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import '../../css/OrderCard.css';
 
 export default function OrderCard({ order, index }) {
-  let date = order.sale_date;
+  let date = order.sales_date;
   const zero = 0;
   const ten = 10;
   date = date.substring(zero, ten);
@@ -19,6 +19,7 @@ export default function OrderCard({ order, index }) {
           { `R$ ${(order.total_price).replace('.', ',')}` }
         </p>
         <p data-testid={ `${index}-order-date` }>{`${date[2]}/${date[1]}` }</p>
+        <p data-testid={ `${index}-order-status` }>{ order.status }</p>
       </Link>
     </div>
   );
