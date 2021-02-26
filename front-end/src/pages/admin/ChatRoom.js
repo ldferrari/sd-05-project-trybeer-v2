@@ -50,6 +50,7 @@ function ChatRoom() {
           <div key={ index } data-testid="containerChat">
             <button
               type="button"
+              data-testid="top-hamburguer"
               id="send"
               onClick={ () => setEmail(chat.email) || setConversa(true) }
             >
