@@ -46,7 +46,7 @@ function ClientChat() {
       const divMessage = { email, hour, message };
       setMsgsByClient((previousState) => [...previousState, divMessage]);
     });
-  }, []);
+  }, [email]);
 
   // talvez [email]
 
