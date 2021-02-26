@@ -25,6 +25,6 @@ chat.post('/', async (req, _res) => {
   } catch (_e) {
     res.status(codeErr).send(errMessage);
   }
-})
+});
 
 module.exports = chat;
