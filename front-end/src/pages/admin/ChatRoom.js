@@ -3,10 +3,8 @@ import React, { useEffect, useState } from 'react';
 // import { all } from 'sequelize/types/lib/operators'; ?
 import AdminMenu from '../../components/admin/AdminMenu';
 import AdminChat from '../../components/admin/AdminChat';
-import AdminMenu from '../../components/admin/AdminMenu';
 
 const { getAllMessages } = require('../../services/fetchMongo');
-
 function ChatRoom() {
   // const [clickChat, setClickChat] = useState();
   const [allChats, setAllChats] = useState('');
