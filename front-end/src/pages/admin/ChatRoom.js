@@ -20,7 +20,7 @@ function ChatRoom() {
     fetchData();
   }, []);
 
-  if (conversa) return <AdminChat email={ email } />;
+  if (conversa) return <AdminChat email={email} />;
 
   if (!allChats || allChats.length < 1) {
     return (
@@ -37,18 +37,19 @@ function ChatRoom() {
         <h2>Conversas</h2>
         {console.log(conversa)}
         {allChats.map((chat, index) => (
-          <button
-            key={ index }
-            data-testid="containerChat"
-            type="button"
-            id="send"
-            onClick={ () => setEmail(chat.email) || setConversa(true) }
-          >
-            <p data-testid="profile-name">{chat.email}</p>
-            <p data-testid="last-message">
-              {`Última mensagem às ${chat.hour}`}
-            </p>
-          </button>
+          <div key={ index } data-testid="containerChat">
+            <button
+              type="button"
+              id="send"
+              onClick={() => setEmail(chat.email) || setConversa(true)}
+            >
+              <p data-testid="profile-name">{chat.email}</p>
+              <p data-testid="last-message">
+                {`Última mensagem às ${chat.hour}`}
+              </p>
+            </button>
+          </div>
+
         ))}
       </section>
     );
