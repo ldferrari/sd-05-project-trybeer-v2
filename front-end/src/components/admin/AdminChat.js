@@ -46,7 +46,7 @@ function AdminChat(props) {
       <div>
         {messagesByClient
           && messagesByClient.forEach((msg) => (
-            <div>
+            <div data-testid="top-hamburguer">
               <p>
                 <span data-testid="nickname">{msg.nickname}</span>
                 -
