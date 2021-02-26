@@ -26,7 +26,10 @@ function sair() {
 
 function nav() {
   return (
-    <div className="admin-side-bar-container">
+    <div
+      className="admin-side-bar-container"
+      data-testid="top-hamburguer"
+    >
       <h2>TryBeer</h2>
       <nav>
         <Link
