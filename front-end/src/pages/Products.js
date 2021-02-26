@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 import TryBeerContext from '../context/TryBeerContext';
 import Header from '../components/Header';
@@ -7,19 +7,22 @@ import { getAllProducts } from '../services/ApiTrybeer';
 import ProductsList from '../components/ProductsList';
 import CheckoutButton from '../components/CheckoutButton';
 
-const userData = JSON.parse(localStorage.getItem('user'));
-const token = userData && userData.token;
+// const userData = JSON.parse(localStorage.getItem('user'));
+// const token = userData && userData.token;
+// console.table([userData, token]);
 const totalReais = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
 const Products = () => {
   const { setProductList, total } = useContext(TryBeerContext);
 
   useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const token = userData && userData.token;
     getAllProducts(token).then((products) => setProductList(products))
       .catch((err) => err);
   }, [setProductList]);
 
-  if (!token) return <Redirect to="/login" />;
+  // if (!token) return <Redirect to="/login" />;
   return (
     <section>
       <Header title="TryBeer" />
