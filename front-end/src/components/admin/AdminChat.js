@@ -2,22 +2,25 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-const io = require("socket.io-client");
+// const io = require("socket.io-client");
 const { getMessagesByClient } = require('../../services/fetchMongo');
 require('dotenv').config();
 
 function AdminChat(props) {
   const { email } = props;
   // prop email vindo do ChatRoom que permite identificar a conversa especifica
-  const PORT = process.env.PORT || 3001;
-  const sellerSocket = io(`http://localhost:${PORT}/admin/chats`);
+  // const PORT = process.env.PORT || 3001;
+  // const sellerSocket = io(`http://localhost:${PORT}/admin/chats`);
 
   const [messagesByClient, setMessagesByClient] = useState('')
 
-  useEffect(async () => {
-    const msgByClient = await getMessagesByClient(email);
-    setMessagesByClient((messagesByClient) => [...messagesByClient, msgByClient]);
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const msgByClient = await getMessagesByClient(email);
+      setMessagesByClient((messagesByClient) => [...messagesByClient, msgByClient]);
+    }
+    fetchData();
+  }, [email]);
 
   const handleSend = () => {};
   // sellerSocketIo.emit('message', somedata);

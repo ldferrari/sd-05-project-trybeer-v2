@@ -29,10 +29,13 @@ function ClientChat() {
   const [buyerMessage, setBuyerMessage] = useState('');
   const [msgsByClient, setMsgsByClient] = useState('');
 
-  useEffect(async () => {
-    const messagesByClient = await getMessagesByClient(email);
-    setMsgsByClient(messagesByClient);
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const messagesByClient = await getMessagesByClient(email);
+      setMsgsByClient(messagesByClient);
+    };
+    fetchData();
+  }, [email]);
   useEffect(() => {
     buyerSocket.on('showMessage', ({ email, hour, message }) => {
       const divMessage = { email, hour, message };
@@ -47,7 +50,7 @@ function ClientChat() {
     setBuyerMessage(message);
   };
 
-  const handleSend = async () => {
+  const handleSend = async (email) => {
     // const messagesByClient = await getMessagesByClient(email);
     buyerSocket.emit('message', { email, message: buyerMessage });
     // return messagesByClient;
@@ -80,7 +83,7 @@ function ClientChat() {
         placeholder="Digite sua mensagem"
         onChange={(e) => handleTextChange(e)}
       />
-      <button data-testid="send-message" type="button" id="send" onClick={() => handleSend()}>
+      <button data-testid="send-message" type="button" id="send" onClick={() => handleSend(email)}>
         Enviar
       </button>
     </section>

@@ -8,9 +8,12 @@ function ChatRoom() {
   const [allChats, setAllChats] = useState('');
   // idea would be to have setClickChat(false) on the back button in AdminChat
 
-  useEffect(async () => {
-    const getAllChats = await getAllMessages();
-    setAllChats((allChats) => [...allChats, getAllChats]);
+  useEffect(() => {
+    async function fetchData() {
+      const getAllChats = await getAllMessages();
+      setAllChats((allChats) => [...allChats, getAllChats]);
+    }
+    fetchData();
   }, []);
 
   const handleClickChat = (emailClient) => { 
