@@ -1,30 +1,30 @@
-const { ObjectId } = require('mongodb');
 const connection = require('./connection');
-const moment = require('moment');
 
-async function getChatHistory() {
-  const messages = await connection().then((db) =>
-    db.collection('messages').find({}).toArray(),
-  );
-  console.log(messages);
+const createMessage = async ({ nickname, message, timestamp }) => {
+  try {
+    const newMessage = await connection().then((db) =>
+      db.collection('messages').insertOne({ nickname, message, timestamp }),
+    );
 
-  return messages.map((message) => {
-    const { _id: id } = message;
-    const timestamp = new Date(ObjectId(id).getTimestamp());
-    const date = moment(timestamp).format('HH:mm');
+    return newMessage;
+  } catch (error) {
+    console.error(error.message);
 
-    return { ...message, date };
-  });
+    return error.message;
+  }
+};
+
+async function getUserChatHistory(nickname) {
+  try {
+    const chatHistory = await connection().then((db) => db.collection('messages')
+      .find({ nickname }).toArray());
+
+    return chatHistory;
+  } catch (error) {
+    console.error(error.message);
+
+    return error.message;
+  }
 }
 
-async function sendMessage(message, nickname) {
-  const newMessage = await connection().then((db) =>
-    db.collection('messages').insertOne({ message, nickname }));
-  const { _id: id } = message;
-  const timestamp = new Date(ObjectId(id).getTimestamp());
-  const date = moment(timestamp).format('HH:mm');
-
-  return { ...newMessage.ops[0], date };
-}
-
-module.exports = { getChatHistory, sendMessage };
+module.exports = { createMessage, getUserChatHistory };
