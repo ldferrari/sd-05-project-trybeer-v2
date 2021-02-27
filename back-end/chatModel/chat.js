@@ -4,8 +4,9 @@ const moment = require('moment');
 
 async function getChatHistory() {
   const messages = await connection().then((db) =>
-    db.collection('messages').find().toArray(),
+    db.collection('messages').find({}).toArray(),
   );
+  console.log(messages);
 
   return messages.map((message) => {
     const { _id: id } = message;

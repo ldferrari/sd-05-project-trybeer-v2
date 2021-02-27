@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 import Header from '../components/Header';
 
-const socket = io('http://localhost:3001');
+const socket = io('http://localhost:3000');
 
 function ClientChat() {
   const [chatHistory, setChatHistory] = useState([]);
