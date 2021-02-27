@@ -539,7 +539,7 @@ OBS: Haverá um arquivo de conexão com o mongodb já pronto no caminho `sd-05-p
 
 **[Será validado que ao enviar mensagem e listado a hora do envio da mensagem]**
 
-**[Será validado que é possivel voltar pra tela de `admin/chat` através do botão voltar]**
+**[Será validado que é possivel voltar pra tela de `admin/chats` através do botão voltar]**
 
 **[Será validado que é possivel enviar mensagem para o cliente e a mensagem poderá ser visualizada pelo cliente]**
 

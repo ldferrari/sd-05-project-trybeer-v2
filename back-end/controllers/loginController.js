@@ -15,6 +15,7 @@ loginRouter.post(
     const { email, password } = req.body;
 
     const userLogin = await loginService.userLogin(email, password);
+
     if (!userLogin) return res.status(status400).json({ message: 'Login failed' });
 
     const payload = {

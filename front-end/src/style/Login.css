@@ -67,7 +67,6 @@
 }
 
 .containerA {
-  /* padding-left: 0.5%; */
   align-content: center;
   align-items: center;
   display: flex;
@@ -78,8 +77,8 @@
   align-content: center;
   align-items: center;
   display: flex;
-  justify-content: center;
   flex-flow: row;
+  justify-content: center;
 }
 
 /* #containerB {
