@@ -26,6 +26,7 @@ app.use(cors());
 const {
   createMessage,
   getUserChatHistory,
+  getRecentMessages,
 } = require('./chatModel/chat');
 
 app.use('/login', loginController);
@@ -35,6 +36,13 @@ app.use('/products', productController);
 app.use('/orders', salesController);
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.get('/admin/chats', async (_req, res) => {
+  const status200 = 200;
+  const recentMessages = await getRecentMessages();
+
+  return res.status(status200).json(recentMessages);
+});
 
 app.get('/chat', async (req, res) => {
   const { nickname } = req.query;
