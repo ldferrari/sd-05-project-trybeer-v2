@@ -1,63 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+// import React, { useState, useEffect } from 'react';
+// import io from 'socket.io-client';
 
-import Header from '../components/Header';
+// import Header from '../components/Header';
 
-const socket = io('http://localhost:3001');
+// const socket = io('http://localhost:3001');
 
-function ClientChat() {
-  const [chatHistory, setChatHistory] = useState([]);
-  const [nickname, setNickname] = useState('');
-  const [message, setMessage] = useState('');
+// socket.on('connect', () => console.log('Server online.'))
 
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    const email = userData && userData.user && userData.user.email;
+// function ClientChat() {
+//   const [chatHistory, setChatHistory] = useState([]);
+//   const [message, setMessage] = useState('');
+//   const userData = JSON.parse(localStorage.getItem('user'));
+//   const email = userData && userData.user && userData.user.email;
+//   const role = userData && userData.user && userData.user.role;
 
-    socket.on('chatHistory', (payload) => {
-      setChatHistory(payload);
-    });
+//   return (
+//     <section>
+//       <Header title="TryBeer" />
+//       <ul>
+//         {chatHistory
+//           && chatHistory.map((msg) => (
+//             <li key={ msg.timestamp }>
+//               <p data-testid="nickname">{ msg.nickname }</p>
+//               <p data-testid="message-time">{ msg.timestamp }</p>
+//               <p data-testid="text-message">{ msg.message }</p>
+//             </li>
+//           ))}
+//       </ul>
+//       <form>
+//         <input
+//           type="text"
+//           data-testid="message-input"
+//           onChange={ (event) => setMessage(event.target.value) }
+//         />
+//         <button type="submit" data-testid="send-message">
+//           Enviar
+//         </button>
+//       </form>
+//     </section>
+//   );
+// }
 
-    return setNickname(email);
-  }, []);
-
-  const sendMessage = (event) => {
-    event.preventDefault();
-
-    socket.emit('sendMessage', { message, nickname });
-
-    socket.on('saveMessage', (payload) => {
-      setChatHistory([...chatHistory, payload]);
-    });
-
-    event.target.reset();
-  };
-
-  return (
-    <section>
-      <Header title="TryBeer" />
-      <section>
-        {chatHistory
-          && chatHistory.map((msg) => (
-            <section key={ msg.date }>
-              <p data-testid="nickname">{ msg.nickname }</p>
-              <p data-testid="message-time">{ msg.date }</p>
-              <p data-testid="text-message">{ msg.chatMessage }</p>
-            </section>
-          ))}
-      </section>
-      <form onSubmit={ (event) => sendMessage(event) }>
-        <input
-          type="text"
-          data-testid="message-input"
-          onChange={ (event) => setMessage(event.target.value) }
-        />
-        <button type="submit" data-testid="send-message">
-          Enviar
-        </button>
-      </form>
-    </section>
-  );
-}
-
-export default ClientChat;
+// export default ClientChat;

@@ -85,7 +85,7 @@ const handleClick = (e, handleParams) => {
   } = handleParams;
   const goToProducts = () => history.push('/products');
   const orderData = {
-    email, totalPrice, address: streetName, number: houseNumber, saleDate };
+    email, totalPrice, streetName, houseNumber, saleDate };
 
   e.preventDefault();
   placeOrder(orderData);

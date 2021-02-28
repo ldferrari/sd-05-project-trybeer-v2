@@ -36,7 +36,7 @@ app.get('/chat', async (req, res) => {
   const messages = await chatModel.getUserChatHistory(nickname);
 
   res.status(status200).json(messages);
-})
+});
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
