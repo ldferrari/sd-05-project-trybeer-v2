@@ -2,9 +2,9 @@ const connection = require('./connection');
 
 const createMessage = async ({ nickname, message, timestamp }) => {
   try {
-    const newMessage = await connection().then((db) =>
-      db.collection('messages').insertOne({ nickname, message, timestamp }),
-    );
+    const newMessage = await connection()
+      .then((db) => db.collection('messages')
+        .insertOne({ nickname, message, timestamp }));
 
     return newMessage;
   } catch (error) {
@@ -16,10 +16,10 @@ const createMessage = async ({ nickname, message, timestamp }) => {
 
 async function getUserChatHistory(nickname) {
   try {
-    const chatHistory = await connection().then((db) => db.collection('messages')
+    const messages = await connection().then((db) => db.collection('messages')
       .find({ nickname }).toArray());
 
-    return chatHistory;
+    return messages;
   } catch (error) {
     console.error(error.message);
 
@@ -27,4 +27,7 @@ async function getUserChatHistory(nickname) {
   }
 }
 
-module.exports = { createMessage, getUserChatHistory };
+module.exports = {
+  createMessage,
+  getUserChatHistory,
+};
