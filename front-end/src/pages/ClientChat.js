@@ -1,44 +1,67 @@
-// import React, { useState, useEffect } from 'react';
-// import io from 'socket.io-client';
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 
-// import Header from '../components/Header';
+import { getChatHistory } from '../services/ApiTrybeer';
+import Header from '../components/Header';
 
-// const socket = io('http://localhost:3001');
+const socketClient = io('http://localhost:3001');
 
-// socket.on('connect', () => console.log('Server online.'))
+socketClient.on('connect', () => console.log('Server online.'));
 
-// function ClientChat() {
-//   const [chatHistory, setChatHistory] = useState([]);
-//   const [message, setMessage] = useState('');
-//   const userData = JSON.parse(localStorage.getItem('user'));
-//   const email = userData && userData.user && userData.user.email;
-//   const role = userData && userData.user && userData.user.role;
+export default function ClientChat() {
+  const [message, setMessage] = useState('');
+  const [chatHistory, setChatHistory] = useState([]);
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const email = userData && userData.user && userData.user.email;
+  const role = userData && userData.user && userData.user.role;
 
-//   return (
-//     <section>
-//       <Header title="TryBeer" />
-//       <ul>
-//         {chatHistory
-//           && chatHistory.map((msg) => (
-//             <li key={ msg.timestamp }>
-//               <p data-testid="nickname">{ msg.nickname }</p>
-//               <p data-testid="message-time">{ msg.timestamp }</p>
-//               <p data-testid="text-message">{ msg.message }</p>
-//             </li>
-//           ))}
-//       </ul>
-//       <form>
-//         <input
-//           type="text"
-//           data-testid="message-input"
-//           onChange={ (event) => setMessage(event.target.value) }
-//         />
-//         <button type="submit" data-testid="send-message">
-//           Enviar
-//         </button>
-//       </form>
-//     </section>
-//   );
-// }
+  useEffect(() => {
+    getChatHistory().then((history) => setChatHistory(history));
+  }, []);
 
-// export default ClientChat;
+  // https://stackoverflow.com/questions/9418697/how-to-unsubscribe-from-a-socket-io-subscription#9696077
+  useEffect(() => {
+    const sendMessage = (newMessage) => setChatHistory([...chatHistory, newMessage]);
+    socketClient.on('message', sendMessage);
+    return () => socketClient.off('message', sendMessage);
+  }, [chatHistory]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (message.trim()) {
+      socketClient.emit('message', { nickname: email, message, role });
+      setMessage('');
+    }
+  };
+
+  return (
+    <main>
+      <Header title="Chat" />
+      <ul>
+        {chatHistory.map((msg, index) => (
+          <li key={ index } data-testid="text-message">
+            <span data-testid="nickname">{ msg.nickname }</span>
+            <span data-testid="message-time">{ ` @${msg.timestamp}` }</span>
+            <br />
+            <span data-testid="text-message">{ msg.message }</span>
+          </li>
+        ))}
+      </ul>
+      <form>
+        <input
+          data-testid="message-input"
+          type="text"
+          value={ message }
+          onChange={ (event) => setMessage(event.target.value) }
+        />
+        <button
+          data-testid="send-message"
+          type="submit"
+          onClick={ (event) => handleSubmit(event) }
+        >
+          Enviar
+        </button>
+      </form>
+    </main>
+  );
+}

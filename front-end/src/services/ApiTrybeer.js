@@ -64,6 +64,13 @@ function fetchAdminOrders(token) {
     .catch((err) => err);
 }
 
+function getChatHistory(nickname) {
+  return axios
+    .get(`${API_URL}/chat?nickname=${nickname}`)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
 export {
   fetchLogin,
   apiRegister,
@@ -72,4 +79,5 @@ export {
   placeOrder,
   fetchOrderId,
   fetchAdminOrders,
+  getChatHistory,
 };
