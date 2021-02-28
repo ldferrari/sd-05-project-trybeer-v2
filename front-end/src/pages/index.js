@@ -6,5 +6,16 @@ import Profile from './Profile';
 import Checkout from './Checkout';
 import OrderDetails from './OrderDetails';
 import ClientChat from './ClientChat';
+import AdminChatList from './AdminChatList';
 
-export { Login, Register, Products, Orders, Profile, Checkout, OrderDetails, ClientChat };
+export {
+  Login,
+  Register,
+  Products,
+  Orders,
+  Profile,
+  Checkout,
+  OrderDetails,
+  ClientChat,
+  AdminChatList,
+};

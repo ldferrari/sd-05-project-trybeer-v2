@@ -9,6 +9,7 @@ import {
   Checkout,
   OrderDetails,
   ClientChat,
+  AdminChatList,
 } from '.';
 
 const Home = () => (
@@ -26,6 +27,7 @@ const Home = () => (
       <Route exact path="/orders/:id" component={ OrderDetails } />
       <Route exact path="/admin/orders" component={ Orders } />
       <Route exact path="/admin/profile" component={ Profile } />
+      <Route exact path="/admin/chats" component={ AdminChatList } />
       <Route exact path="/chat" component={ ClientChat } />
     </Switch>
   </Router>
