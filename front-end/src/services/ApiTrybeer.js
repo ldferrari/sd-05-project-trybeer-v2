@@ -71,6 +71,13 @@ function getChatHistory(nickname) {
     .catch((err) => err);
 }
 
+function getRecentMessages() {
+  return axios
+    .get(`${API_URL}/admin/chats`)
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
 export {
   fetchLogin,
   apiRegister,
@@ -80,4 +87,5 @@ export {
   fetchOrderId,
   fetchAdminOrders,
   getChatHistory,
+  getRecentMessages,
 };
