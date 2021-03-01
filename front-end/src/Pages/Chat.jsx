@@ -61,13 +61,13 @@ const Chat = ({
       <div className="container-main">
         <div className="container-screen" style={containerStyle}>
           <div style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
-            { chat.length === 0 ? chat.map((chatBuffer) => (
+            {chat.map((chatBuffer) => (
               <ChatMessage
                 key={chatBuffer.createdAt}
                 buffer={chatBuffer}
                 isSelf={isSelfMessage(chatBuffer)}
               />
-            )) : <p>Não há mensagens.</p>
+            ))
             }
           </div>
           <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
