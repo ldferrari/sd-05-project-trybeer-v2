@@ -59,8 +59,8 @@ input[type=checkbox] {
 
 .btn-return {
   align-self: center;
-  border: rgb(76, 196, 76) solid 1px;
   background-color: rgba(0, 0, 0, 0);
+  border: rgb(76, 196, 76) solid 1px;
   color: rgb(52, 52, 211);
   text-decoration: underline;
 }

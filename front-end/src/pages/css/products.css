@@ -1,6 +1,6 @@
 /* .background {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: rgb(255, 226, 175);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 } */
 
 /* .corpo {
@@ -12,16 +12,16 @@
 }
 
 .verCarrinho {
-  display: flex;
-  flex-flow: row;
   align-self: flex-end;
   background-color: rgb(94, 203, 94);
   border: solid rgb(76, 196, 76) 1px;
+  display: flex;
+  flex-flow: row;
   font-weight: 700;
   margin-right: 5px;
   position: sticky;
-  top: 10vh;
   text-decoration: none;
+  top: 10vh;
 }
 
 .product-card {
@@ -32,8 +32,8 @@
   flex-flow: row;
   justify-content: space-between;
   min-height: 70px;
-  min-width: 320px;
   max-width: 360px;
+  min-width: 320px;
   width: 100%;
 }
 
@@ -52,10 +52,10 @@
 }
 
 .action-buttons {
-  margin: 25px 0;
-  display: flex;
-  flex-flow: nowrap;
   align-items: center;
+  display: flex;
+  margin: 25px 0;
+  flex-flow: nowrap;
   justify-content: center;
   text-align: center;
 }

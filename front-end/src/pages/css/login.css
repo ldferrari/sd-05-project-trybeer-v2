@@ -1,7 +1,7 @@
 /* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 } */
 
 /* .login {
@@ -24,7 +24,7 @@
 
 .login input {
   background-color: whitesmoke;
-  border: solid rgba(0, 0, 0, 0.5) 1px;
+  border: solid rgba(0, 0, 0, .5) 1px;
   border-radius: 5px;
   padding: 3px 7px;
 }
@@ -37,9 +37,9 @@
 }
 
 .buttons {
-  margin-top: 20px;
   display: flex;
   flex-flow: column;
+  margin-top: 20px;
 }
 
 button {

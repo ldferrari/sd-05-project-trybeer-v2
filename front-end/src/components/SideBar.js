@@ -37,7 +37,7 @@ export default function SideBar({ userRole, active }) {
             <Link to="/admin/profile" data-testid="side-menu-item-profile">
               Meu perfil
             </Link>
-            <Link to="/admin/profile" data-testid="side-menu-item-chat">
+            <Link to="/admin/chats" data-testid="side-menu-item-chat">
               Conversas
             </Link>
           </div>
