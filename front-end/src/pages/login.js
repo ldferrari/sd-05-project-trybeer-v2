@@ -8,7 +8,7 @@ import logo from '../images/logo.png';
 import Input from '../components/Input';
 import { iEmail, iPassword } from '../components/data/loginData.json';
 
-const handleRoute = async (ema, pass, setDesignetedRoute, setUserName) => {
+const handleRoute = async (ema, pass, setDesignatedRoute, setUserName) => {
   const userRole = await checkUser(ema, pass);
   if (userRole) {
     localStorage.setItem('role', userRole.role);
@@ -19,10 +19,10 @@ const handleRoute = async (ema, pass, setDesignetedRoute, setUserName) => {
   }
   switch (userRole.role) {
   case 'client':
-    setDesignetedRoute('/products');
+    setDesignatedRoute('/products');
     break;
   case 'administrator':
-    setDesignetedRoute('/admin/orders');
+    setDesignatedRoute('/admin/orders');
     break;
   default:
     break;
@@ -31,10 +31,11 @@ const handleRoute = async (ema, pass, setDesignetedRoute, setUserName) => {
 const Login = () => {
   const { password, setUserName, userEmail } = useContext(Context);
   const [isLoginValid, setIsLoginValid] = useState(false);
-  const [designatedRoute, setDesignetedRoute] = useState(undefined);
+  const [designatedRoute, setDesignatedRoute] = useState(undefined);
 
   useEffect(() => {
     setIsLoginValid(validateLogin(userEmail, password));
+    console.log(isLoginValid);
   }, [userEmail, password]);
 
   return (
@@ -47,7 +48,10 @@ const Login = () => {
             type="submit"
             data-testid="signin-btn"
             className="btn-login"
-            onClick={ () => handleRoute(userEmail, password, setDesignetedRoute, setUserName) }
+            onClick={ () => handleRoute(userEmail,
+              password,
+              setDesignatedRoute,
+              setUserName) }
           >
             ENTRAR
           </button>

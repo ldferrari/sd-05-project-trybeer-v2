@@ -10,15 +10,17 @@ const OrderDetails = (props) => {
   const [products, setProducts] = useState([]);
   const [totalP, setTotalP] = useState(zero);
   const [dataSale, setDataSale] = useState('');
-  const { match: { params: { id } } } = props;
-  const formatDate = (saleDate) => (
-    new Date(saleDate).toLocaleDateString('pt-br', {
-      day: '2-digit',
-      month: '2-digit',
-    })
-  );
+  const {
+    match: {
+      params: { id },
+    },
+  } = props;
+  const formatDate = (saleDate) => new Date(saleDate).toLocaleDateString('pt-br', {
+    day: '2-digit',
+    month: '2-digit',
+  });
   useEffect(() => {
-    const token = (localStorage.getItem('token') || '');
+    const token = localStorage.getItem('token') || '';
     getOrderById(token, id).then((orders) => {
       setTotalP(orders[0].total_price);
       setDataSale(orders[0].sale_date);
@@ -34,9 +36,7 @@ const OrderDetails = (props) => {
     <div>
       <Header>Meus pedidos</Header>
       <table>
-        <caption data-testid="order-number">
-          {`Pedido ${id}`}
-        </caption>
+        <caption data-testid="order-number">{`Pedido ${id}`}</caption>
         <tr>
           <th>Product</th>
           <th>Price</th>
@@ -45,17 +45,22 @@ const OrderDetails = (props) => {
         </tr>
         {products.map((p, index) => (
           <tr key={ p.product.name }>
-            <td data-testid={ `${index}-product-name` }>{p.product.name}</td>
+            <td data-testid={ `${index}-product-name` }>{ p.product.name }</td>
             <td>{ `R$ ${p.product.price}` }</td>
             <td data-testid={ `${index}-product-qtd` }>{p.quantity}</td>
             <td data-testid={ `${index}-product-total-value` }>
-              {`R$ ${(p.product.price * p.quantity).toFixed(two).replace('.', ',')}`}</td>
+              {`R$ ${(p.product.price * p.quantity)
+                .toFixed(two)
+                .replace('.', ',')}`}
+            </td>
           </tr>
         ))}
       </table>
       {/* <p>{products[0]? products[0].total_price : 0}</p> */}
-      <p data-testid="order-total-value">{`R$ ${String(totalP).replace('.', ',')}`}</p>
-      <p data-testid="order-date">{formatDate(dataSale)}</p>
+      <p data-testid="order-total-value">
+        {`R$ ${String(totalP).replace('.', ',')}`}
+      </p>
+      <p data-testid="order-date">{ formatDate(dataSale) }</p>
     </div>
   );
 };

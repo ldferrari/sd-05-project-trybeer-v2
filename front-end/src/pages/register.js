@@ -10,8 +10,8 @@ import Form from '../components/Form';
 import Button from '../components/Button';
 import { bRegister } from '../components/data/registerData.json';
 
-async function handleReg(userToRegister, setDesignetedRoute, userEmail) {
-  if (!validateRegister(userToRegister)) return setDesignetedRoute(undefined);
+async function handleReg(userToRegister, setDesignatedRoute, userEmail) {
+  if (!validateRegister(userToRegister)) return setDesignatedRoute(undefined);
   const response = await registerUser(userToRegister);
   if (response.message) {
     const labelEmail = document.querySelector('#lblEmail');
@@ -23,15 +23,15 @@ async function handleReg(userToRegister, setDesignetedRoute, userEmail) {
   localStorage.setItem('token', response.token);
   localStorage.setItem('email', userEmail);
   return response.role === 'client'
-    ? setDesignetedRoute('/products')
-    : setDesignetedRoute('/admin/orders');
+    ? setDesignatedRoute('/products')
+    : setDesignatedRoute('/admin/orders');
 }
 const Register = () => {
   const { userEmail } = useContext(Context);
-  const [designatedRoute, setDesignetedRoute] = useState(undefined);
+  const [designatedRoute, setDesignatedRoute] = useState(undefined);
   const handleRegister = async (userReg, e) => {
     e.preventDefault();
-    handleReg(userReg, setDesignetedRoute, userEmail);
+    handleReg(userReg, setDesignatedRoute, userEmail);
   };
   return (
     <div className="register">

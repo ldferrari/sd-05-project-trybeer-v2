@@ -17,15 +17,24 @@ export default function Header({ children }) {
         <button
           className="bamburguer"
           data-testid="top-hamburguer"
-          onClick={ () => setBtnBurguer(!btnBurguer) } type="button"
+          onClick={ () => setBtnBurguer(!btnBurguer) }
+          type="button"
         >
-          <img id="btn-hmb" height="50px" width="50px"
-            src={ sidebaricon } alt="Hamburguer menu icon" />
+          <img
+            id="btn-hmb"
+            height="50px"
+            width="50px"
+            src={ sidebaricon }
+            alt="Hamburguer menu icon"
+          />
         </button>
-        <span className="title" 
-          data-testid="top-title">{children === 'Products' ? 'TryBeer' : children}</span>
+        <span className="title" data-testid="top-title">
+          {children === 'Products' ? 'TryBeer' : children}
+        </span>
       </header>
-      <div>{btnBurguer && <SideBar userRole={ userInfo } active={ btnBurguer } />}</div>
+      <div>
+        {btnBurguer && <SideBar userRole={ userInfo } active={ btnBurguer } />}
+      </div>
     </div>
   );
 }

@@ -1,19 +1,15 @@
 const url = 'http://localhost:3001';
 
-// const headers = {
-//   Accept: 'application/json',
-//   'Content-Type': 'application/json',
-//   'Access-Control-Allow-Origin': '*',
-// }
+const headers = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+};
 
 export const checkUser = async (email, password) => {
   const myInit = {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
+    headers,
     mode: 'cors',
     body: JSON.stringify({ email, password }),
   };
@@ -24,11 +20,7 @@ export const checkUser = async (email, password) => {
 export const registerUser = async (userData) => {
   const registerReq = {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
+    headers,
     mode: 'cors',
     body: JSON.stringify(userData),
   };
@@ -40,12 +32,7 @@ export const registerUser = async (userData) => {
 export const getUserByEmail = async (email, token) => {
   const updateReq = {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-    },
+    headers: { ...headers, Authorization: token },
     mode: 'cors',
   };
   const response = await fetch(`${url}/users/profile?email=${email}`, updateReq)
@@ -56,12 +43,7 @@ export const getUserByEmail = async (email, token) => {
 export const updateUserName = async (userData, token) => {
   const updateReq = {
     method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-    },
+    headers: { ...headers, Authorization: token },
     mode: 'cors',
     body: JSON.stringify(userData),
   };
@@ -73,12 +55,7 @@ export const updateUserName = async (userData, token) => {
 export const getProducts = async (email, token) => {
   const updateReq = {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-    },
+    headers: { ...headers, Authorization: token },
     mode: 'cors',
   };
   const response = await fetch(`${url}/products?email=${email}`, updateReq)
@@ -89,12 +66,7 @@ export const getProducts = async (email, token) => {
 export const orderPlaced = async (order, email, token) => {
   const registerReq = {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-    },
+    headers: { ...headers, Authorization: token },
     mode: 'cors',
     body: JSON.stringify({ email, order }),
   };
@@ -106,12 +78,7 @@ export const orderPlaced = async (order, email, token) => {
 export const getOrders = async (email, token) => {
   const updateReq = {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-    },
+    headers: { ...headers, Authorization: token },
     mode: 'cors',
   };
   const response = await fetch(`${url}/orders?email=${email}`, updateReq)
@@ -122,12 +89,7 @@ export const getOrders = async (email, token) => {
 export const getOrderById = async (token, id) => {
   const updateReq = {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-    },
+    headers: { ...headers, Authorization: token },
     mode: 'cors',
   };
   // const response = await fetch(`${url}/orders/${id}?email=${email}`, updateReq)
@@ -139,13 +101,7 @@ export const getOrderById = async (token, id) => {
 export const getOrdersAdmin = async (role, token) => {
   const request = {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-      role,
-    },
+    headers: { ...headers, Authorization: token, role },
     mode: 'cors',
   };
   const response = await fetch(`${url}/orders/admin`, request)
@@ -156,13 +112,7 @@ export const getOrdersAdmin = async (role, token) => {
 export const getAdmOrderById = async (role, id, token) => {
   const updateReq = {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-      role,
-    },
+    headers: { ...headers, Authorization: token, role },
     mode: 'cors',
   };
   const response = await fetch(`${url}/orders/admin/${id}`, updateReq)
@@ -170,16 +120,11 @@ export const getAdmOrderById = async (role, id, token) => {
   return response || undefined;
 };
 
-export const updateStatus = async (role, id, token) => {
+export const updateStatus = async (role, id, token, orderStatus) => {
   const updateReq = {
     method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: token,
-      role,
-    },
+    headers: { ...headers, Authorization: token, role },
+    body: JSON.stringify({ orderStatus }),
     mode: 'cors',
   };
   const response = await fetch(`${url}/orders/admin/${id}`, updateReq)
