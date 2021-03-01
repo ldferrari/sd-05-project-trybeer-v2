@@ -1,10 +1,9 @@
-.background {
+/* .background {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: rgb(255, 226, 175);
-}
+} */
 
-.corpo {
-  /* border:springgreen solid 1px; */
+/* .corpo {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -45,7 +44,6 @@
 }
 
 .product-info {
-  /* border: tomato solid 1px; */
   align-items: flex-start;
   display: flex;
   flex-flow: column;
@@ -88,4 +86,4 @@ button:active {
   background-color: transparent;
   border: solid rgb(195, 16, 16) 2px;
   color: rgb(195, 16, 16);
-}
+} */
