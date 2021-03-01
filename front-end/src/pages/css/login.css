@@ -1,8 +1,9 @@
-/* * {
+/* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 } */
+
 /* .login {
   align-items: center;
   background-color: rgb(255, 226, 175);
@@ -69,6 +70,7 @@ a:visited {
 } */
 
 /* animation */
+
 /* @keyframes fadein {
   from {
     opacity: 0;
@@ -79,6 +81,7 @@ a:visited {
 } */
 
 /* larger screens style */
+
 /* @media only screen and (min-width: 600px) {
   .login {
     display: flex;
