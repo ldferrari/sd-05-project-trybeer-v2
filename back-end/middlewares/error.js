@@ -1,19 +1,23 @@
+const invalidDataCode = 400;
+const conflictCode = 409;
+const unauthorizedDataCode = 401;
+const notFoundCode = 404;
+
 module.exports = (err, _req, res, _next) => {
-  console.error(err);
   const { message, code } = err;
   if (code === 'invalid_data') {
-    res.status(400).json({ message });
+    res.status(invalidDataCode).json({ message });
   }
   if (code === 'conflict') {
-    res.status(409).json({ message });
+    res.status(conflictCode).json({ message });
   }
   if (code === 'unauthorized_data') {
-    res.status(401).json({ message });
+    res.status(unauthorizedDataCode).json({ message });
   }
   if (code === 'invalid_user') {
-    res.status(401).json({ message });
+    res.status(unauthorizedDataCode).json({ message });
   }
   if (code === 'not_found') {
-    res.status(404).json({ message });
+    res.status(notFoundCode).json({ message });
   }
 };

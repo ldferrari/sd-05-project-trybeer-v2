@@ -1,29 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import dateFormat from 'dateformat';
 import PropTypes from 'prop-types';
+import MeusPCId from './MeusPedidosCard/MeusPCId';
+import MeusPCDate from './MeusPedidosCard/MeusPCDate';
+import MeusPCPrice from './MeusPedidosCard/MeusPCPrice';
+import MeusPCStatus from './MeusPedidosCard/MeusPCStatus';
 
-export default function MausPedidosCard(props) {
-  const { order, index } = props;
-
+export default function MeusPedidosCard(props) {
+  const { pedidos } = props;
   return (
-    <Link to={ `/orders/${order.id}` } className="linkMeusPedidos">
-      <div data-testid={ `${index}-order-card-container` } className="cardConteiner">
-        <div data-testid={ `${index}-order-number` }>
-          { `Pedido ${order.id}` }
-        </div>
-        <div data-testid={ `${index}-order-date` }>
-          { dateFormat(order.sale_date, 'dd/mm') }
-        </div>
-        <div data-testid={ `${index}-order-total-value` } className="valueMeuPedido">
-          { `R$ ${order.total_price.replace('.', ',')}` }
-        </div>
-      </div>
-    </Link>
+    <div className="bodyMeusPedidos">
+      {pedidos.map((order, index) => (
+        <Link to={ `/orders/${order.id}` } key={ order.id } className="linkMeusPedidos">
+          <div data-testid={ `${index}-order-card-container` } className="cardConteiner">
+            <MeusPCId index={ index } order={ order } />
+            <MeusPCDate index={ index } order={ order } />
+            <MeusPCPrice index={ index } order={ order } />
+            <MeusPCStatus index={ index } order={ order } />
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }
 
-MausPedidosCard.propTypes = {
-  order: PropTypes.arrayOf(PropTypes.object).isRequired,
-  index: PropTypes.number.isRequired,
+MeusPedidosCard.propTypes = {
+  pedidos: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

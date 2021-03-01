@@ -1,16 +1,17 @@
-@media only screen and (min-width: 600px) {
+@media only screen and ( min-width : 600px ) {
+
   .admProfileBody {
     margin-left: 15%;
   }
 
   .admProfileTitle {
     color: rgb(196, 135, 3);
-  	font-family: Roboto;
-  	font-size: 34px;
+    font-family: Roboto Mono , Menlo , Monaco , Courier , monospace;
+    font-size: 34px;
     line-height: 42px;
     margin-top: 5%;
-  	padding: 0 0 0 60px;
-  	text-align: center;
+    padding: 0 0 0 60px;
+    text-align: center;
   }
 
   .admProfileLabel {
@@ -25,17 +26,18 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and ( max-width : 600px ) {
+
   .admProfileBody {
     margin-top: 35%;
   }
 
   .admProfileTitle {
     color: rgb(196, 135, 3);
-  	font-family: Roboto;
-  	font-size: 34px;
+    font-family: Roboto Mono , Menlo , Monaco , Courier , monospace;
+    font-size: 34px;
     line-height: 42px;
-  	text-align: center;
+    text-align: center;
   }
 
   .admProfileLabel {

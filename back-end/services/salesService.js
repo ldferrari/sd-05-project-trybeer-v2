@@ -1,31 +1,33 @@
-const salesModel = require('../models/salesModel');
+const { Sale } = require('../models');
 
-const getAllSales = async () => salesModel.getAllSales();
+const getAllSales = async () => Sale.findAll();
 
 const getSale = async (id) => {
-  const saleExists = await salesModel.getSale(id);
+  const saleExists = await Sale.findOne({ where: { id } });
 
-  if (saleExists.length < 1) {
-    throw new Error({
+  if (!saleExists) {
+    return {
+      error: true,
       code: 'not_found',
       message: 'Sale not found',
-    });
+    };
   }
 
   return saleExists;
 };
 
 const update = async (id, status) => {
-  const saleExists = await salesModel.getSale(id);
+  const saleExists = await getSale(id);
 
-  if (saleExists.length < 1) {
-    throw new Error({
+  if (!saleExists) {
+    return {
+      error: true,
       code: 'not_found',
       message: 'Sale not found',
-    });
+    };
   }
 
-  await salesModel.update(id, status);
+  await Sale.update({ status }, { where: { id } });
   return ({ id, status, message: 'success' });
 };
 

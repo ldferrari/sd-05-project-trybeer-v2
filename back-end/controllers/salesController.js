@@ -1,42 +1,39 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
+const { getOrderDetails } = require('../services/orderDetailsService');
 const salesService = require('../services/salesService');
 
 const sales = Router();
 
-sales.get('/', async (req, res) => {
-  try {
-    const getAllSales = await salesService.getAllSales(req.body.id);
-    res.status(200).json(getAllSales);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Algo deu errado.' });
-  }
-});
+const successCode = 200;
+const internalServerCode = 500;
 
-sales.get('/:id', rescue(async (req, res) => {
-  const { id } = req.params;
-  try {
-    const sale = await salesService.getSale(id);
-    return res.status(200).json(sale);
-  } catch (err) {
-    if (err.code === 'not_found') {
-      res.status(404).json({ err });
-    }
+sales.get('/', rescue(async (req, res, next) => {
+  const sales = await salesService.getAllSales(req.body.id);
+  if (sales.error) {
+    next(sales);
   }
+  res.status(successCode).json(sales);
+}
+));
+
+sales.get('/:id', rescue(async (req, res, next) => {
+  const { id } = req.params;
+  const sale = await getOrderDetails(id);
+  if (sale.error) {
+    next(sale);
+  }
+  return res.status(successCode).json(sale);
 }));
 
-sales.put('/:id', rescue(async (req, res) => {
+sales.put('/:id', rescue(async (req, res, next) => {
   const { id } = req.params;
   const { status } = req.body;
-  try {
-    const response = await salesService.update(id, status);
-    return res.status(200).json(response);
-  } catch (err) {
-    if (err.code === 'not_found') {
-      return res.status(404).json({ err });
-    }
+  const response = await salesService.update(id, status);
+  if (response.error) {
+    next(response);
   }
+  return res.status(successCode).json(response);
 }));
 
 module.exports = sales;
