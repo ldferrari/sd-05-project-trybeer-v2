@@ -27,7 +27,7 @@
 
 .product-card {
   align-items: flex-start;
-  background-color: rgba(245, 245, 245, .4);
+  background-color: rgba(245, 245, 245, 0.4);
   border: lightslategrey solid 1px;
   display: flex;
   flex-flow: row;

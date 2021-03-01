@@ -49,12 +49,13 @@ orders.get('/admin/:id', validateJWT, async (req, res) => {
 orders.put('/admin/:id', validateJWT, async (req, res) => {
   const { id } = req.params;
   const { role } = req.headers;
+  const { orderStatus } = req.body;
 
   if (role !== 'administrator') {
     return res.status(httpStatusCode.unauthorized).json({ message: 'Unauthorized' });
   }
 
-  await service.updateOrderStatus(id);
+  await service.updateOrderStatus(id, orderStatus);
   return res.status(httpStatusCode.ok).json({ message: 'Order updated' });
 });
 

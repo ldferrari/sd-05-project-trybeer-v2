@@ -1,4 +1,5 @@
-const { sale: model, sale_product: salesProductsModel, product: m2 } = require('../models');
+const { sale_product: salesProductsModel, product: m2 } = require('../models');
+const { sale: model } = require('../models');
 const userService = require('./usersService');
 const moment = require('moment');
 // const pending = 'Pendente';
@@ -60,9 +61,8 @@ const getSalesAdmin = async () => {
   return sales;
 };
 
-const updateOrderStatus = async (orderId) => {
-  const status = 'Entregue';
-  await model.update({ status }, {where: {id: orderId}});
+const updateOrderStatus = async (orderId, orderStatus) => {
+  await model.update({ status: orderStatus }, {where: {id: orderId}});
 };
 
 module.exports = {
