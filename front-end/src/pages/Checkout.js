@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import TryBeerContext from '../context/TryBeerContext';
 import { placeOrder } from '../services/ApiTrybeer';
 import Header from '../components/Header';
@@ -15,7 +15,6 @@ const delayTime = 1500;
 
 const userData = JSON.parse(localStorage.getItem('user'));
 const role = userData && userData.user && userData.user.role;
-const token = userData && userData.token;
 
 const date = new Date();
 const month = date.getUTCMonth() + 1;
@@ -70,7 +69,6 @@ const detailsOrder = (priceCart, cartItems, setCartItems) => {
     <>
       <h5>Produtos</h5>
       {productCard(cartItems, setCartItems)}
-      {console.log(totalPrice)}
       <span>{totalPrice === noValue ? 'Não há produtos no carrinho' : ''}</span>
       <h5 data-testid="order-total-value">
         {`Total: R$ ${totalPrice.toFixed(decimals).replace('.', ',')}`}
@@ -129,7 +127,6 @@ const Checkout = () => {
   const finishParams = { email, history, streetName, houseNumber, success, setSuccess };
   const priceCart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  if (!token) return <Redirect to="/login" />;
   return (
     <section>
       <Header title={ role === 'client' ? 'Meu perfil' : 'Perfil' } />

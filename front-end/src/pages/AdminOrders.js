@@ -12,7 +12,7 @@ export default function AdminOrders() {
   return (
     <section>
       <Header title="Pedidos Pendentes" />
-      <AdminOrderCard token={ token } />
+      <AdminOrderCard />
     </section>
   );
 }
