@@ -11,7 +11,7 @@ import InputNumber from '../components/InputNumber';
 
 const noValue = 0;
 const decimals = 2;
-const delayTime = 1500;
+const delayTime = 30000;
 
 const userData = JSON.parse(localStorage.getItem('user'));
 const role = userData && userData.user && userData.user.role;

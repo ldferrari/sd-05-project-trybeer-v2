@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import TryBeerContext from '../context/TryBeerContext';
 
 const decimals = 2;
 
@@ -11,6 +12,7 @@ function reais(products, index) {
 
 export default function OrderInformation(props) {
   const { index } = props;
+  const { orderStatus } = useContext(TryBeerContext);
   const products = JSON.parse(localStorage.getItem('cart'));
 
   return (
@@ -25,6 +27,7 @@ export default function OrderInformation(props) {
       <span data-testid={ `${index}-product-total-value` }>
         {products[index] && `R$ ${reais(products, index)}`}
       </span>
+      <span data-testid={ `${index}-order-status` }>{orderStatus}</span>
     </section>
   );
 }

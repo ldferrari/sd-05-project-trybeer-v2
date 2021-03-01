@@ -8,6 +8,7 @@ import OrderDetails from './OrderDetails';
 import ClientChat from './ClientChat';
 import AdminChatList from './AdminChatList';
 import AdminOrders from './AdminOrders';
+import AdminOrderDetails from './AdminOrderDetails';
 
 export {
   Login,
@@ -20,4 +21,5 @@ export {
   ClientChat,
   AdminChatList,
   AdminOrders,
+  AdminOrderDetails,
 };

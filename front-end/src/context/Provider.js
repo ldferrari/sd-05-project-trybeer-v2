@@ -19,6 +19,7 @@ const Provider = ({ children }) => {
   const [emailAlreadyExists, setEmailAlreadyExists] = useState('');
   const [success, setSuccess] = useState(false);
   const [cartItems, setCartItems] = useState(cartStored || []);
+  const [orderStatus, setOrderStatus] = useState('Pendente');
 
   const contextValue = { email,
     setEmail,
@@ -46,6 +47,8 @@ const Provider = ({ children }) => {
     setSuccess,
     cartItems,
     setCartItems,
+    orderStatus,
+    setOrderStatus,
   };
 
   return (
