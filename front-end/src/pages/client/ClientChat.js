@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ClientMenu from '../../components/client/ClientMenu';
 
 const io = require('socket.io-client');
 const { getMessagesByClient } = require('../../services/fetchMongo');
@@ -65,6 +66,7 @@ function ClientChat() {
 
   return (
     <section>
+      <ClientMenu />
       {/* 1. Parte manipulada real-time com socket */}
       {renderMessages(msgsByClient)}
       {/* 2. Parte passando por bd: */}
@@ -80,21 +82,23 @@ function ClientChat() {
             </div>
           ))}
       </div> */}
-      <input
-        data-testid="message-input"
-        type="text"
-        id="message-input"
-        placeholder="Digite sua mensagem"
-        onChange={ (e) => handleTextChange(e) }
-      />
-      <button
-        data-testid="send-message"
-        type="button"
-        id="send"
-        onClick={ () => handleSend() }
-      >
-        Enviar
-      </button>
+      <div className="input-message">
+        <input
+          data-testid="message-input"
+          type="text"
+          id="message-input"
+          placeholder="Digite sua mensagem"
+          onChange={ (e) => handleTextChange(e) }
+        />
+        <button
+          data-testid="send-message"
+          type="button"
+          id="send"
+          onClick={ () => handleSend() }
+        >
+          Enviar
+        </button>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 // import { all } from 'sequelize/types/lib/operators'; ?
 import AdminMenu from '../../components/admin/AdminMenu';
 import AdminChat from '../../components/admin/AdminChat';
@@ -47,7 +46,7 @@ function ChatRoom() {
         <h2>Conversas</h2>
         {console.log(conversa)}
         {allChats.map((chat, index) => (
-          <Link
+          <button
             key={ index }
             data-testid="containerChat"
             to="/admin/chat"
@@ -59,7 +58,7 @@ function ChatRoom() {
             <p data-testid="last-message">
               {`Última mensagem às ${chat.hour}`}
             </p>
-          </Link>
+          </button>
         ))}
       </section>
     );
