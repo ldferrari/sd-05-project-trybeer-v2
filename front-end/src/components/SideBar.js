@@ -21,7 +21,7 @@ export default function SideBar({ userRole, active }) {
             Meu perfil
           </Link>
           <Link to="/chat" data-testid="side-menu-chat">
-            Conversar com a Loja
+            Conversar com a loja
           </Link>
           <Link to="/login" onClick={ handleClick } data-testid="side-menu-item-logout">
             Sair
