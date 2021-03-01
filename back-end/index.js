@@ -10,6 +10,7 @@ const registerController = require('./controllers/registerController');
 const userController = require('./controllers/userController');
 const productController = require('./controllers/productController');
 const salesController = require('./controllers/salesController');
+const adminController = require('./controllers/adminController');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -34,6 +35,7 @@ app.use('/register', registerController);
 app.use('/users', userController);
 app.use('/products', productController);
 app.use('/orders', salesController);
+app.use('/admin/orders', adminController);
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
