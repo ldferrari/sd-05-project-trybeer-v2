@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-const SCHEMA = process.env.SCHEMA || 'Trybeer';
+const SCHEMA = process.env.SCHEMA || 'trybeer';
 const DB_URL = `mongodb://${process.env.HOSTURL || 'localhost'}:27017/${SCHEMA}`;
 let connection = null;
 
