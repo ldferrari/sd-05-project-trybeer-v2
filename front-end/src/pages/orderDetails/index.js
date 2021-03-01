@@ -30,8 +30,6 @@ export default function OrderDetails(props) {
     }
     async function fetchOrder() {
       const temp = await postGetTheOrder(token, id);
-  
-      console.log(temp);
       const { data } = temp;
       setOrder(data);
     }
@@ -47,8 +45,8 @@ export default function OrderDetails(props) {
         return 'entregue';
       default:
         return 'pendente';
-    };
-  }
+    }
+  };
   return (
     <div className="orderDetailsPage">
       <Header>Detalhes de Pedido</Header>
@@ -91,7 +89,7 @@ export default function OrderDetails(props) {
           <p data-testid="order-total-value" className="total">
             { `TOTAL: R$ ${cartSum.toString().replace('.', ',')}` }
           </p>
-      </div>
+        </div>
       </div>
       <Footer />
     </div>

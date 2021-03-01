@@ -31,7 +31,7 @@ const Orders = (props) => {
         <div className="ordersList">
           { theOrders.map((order, index) => (
             <OrderCard key={ order.id } order={ order } index={ index } />
-            )) }
+          )) }
         </div>
       </div>
       <Footer />
