@@ -7,6 +7,7 @@ import Checkout from './Checkout';
 import OrderDetails from './OrderDetails';
 import ClientChat from './ClientChat';
 import AdminChatList from './AdminChatList';
+import AdminOrders from './AdminOrders';
 
 export {
   Login,
@@ -18,4 +19,5 @@ export {
   OrderDetails,
   ClientChat,
   AdminChatList,
+  AdminOrders,
 };
