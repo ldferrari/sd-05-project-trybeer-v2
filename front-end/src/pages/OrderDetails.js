@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
@@ -7,39 +6,32 @@ import { fetchOrderId } from '../services/ApiTrybeer';
 import OrderInformation from '../components/OrderInformation';
 import OrderDateAndValue from '../components/OrderDateAndValue';
 
-const userData = JSON.parse(localStorage.getItem('user'));
-const email = userData && userData.user && userData.user.email;
-const token = userData && userData.token;
-
-const zero = 0;
-
-function fetchAndSetData(data) {
-  const { setDate, setTotal, setOrders } = data;
-
-  fetchOrderId(email).then((sales) => {
-    if (sales.length > zero) {
-      setDate(sales[0].sale_date);
-      setTotal(sales[0].total_price);
-      setOrders(sales);
-    }
-  });
-}
-
 export default function OrderDetails(props) {
+  const zero = 0;
   const { match: { params: { id } } } = props;
   const [orders, setOrders] = useState([]);
   const [date, setDate] = useState('');
   const [total, setTotal] = useState(zero);
-  const data = { setDate, setTotal, setOrders };
-  useEffect(() => { fetchAndSetData(data); }, [data]);
+  const products = JSON.parse(localStorage.getItem('cart'));
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const email = userData && userData.user && userData.user.email;
 
-  if (!token) return <Redirect to="/login" />;
+  useEffect(() => {
+    const sales = async () => {
+      const result = await fetchOrderId(email);
+      setOrders(result);
+      setDate(result[0].sale_date);
+      setTotal(result[0].total_price);
+    };
+
+    return sales();
+  }, []);
   return (
     <section>
-      <Header title="Meus pedidos" />
+      <Header title="Meus Pedidos" />
       <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
-      {orders.map((product, index) => (
-        <OrderInformation key={ product.id } product={ product } index={ index } />
+      {orders && orders.map((order, index) => (
+        <OrderInformation key={ order.id } index={ index } products={ products } />
       ))}
       <OrderDateAndValue total={ total } date={ date } />
     </section>

@@ -11,9 +11,8 @@ function reais(products, index) {
 }
 
 export default function OrderInformation(props) {
-  const { index } = props;
+  const { products, index } = props;
   const { orderStatus } = useContext(TryBeerContext);
-  const products = JSON.parse(localStorage.getItem('cart'));
 
   return (
     <section>
