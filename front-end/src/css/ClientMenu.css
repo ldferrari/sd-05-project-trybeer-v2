@@ -67,3 +67,7 @@ nav a {
 .btn-side:hover {
   background: blue;
 }
+
+.input-message {
+  margin: 50px
+}
