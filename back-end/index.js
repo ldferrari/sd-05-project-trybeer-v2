@@ -58,7 +58,7 @@ io.on('connection', async (socket) => {
   console.log(`User id: ${socket.id} joined the room!`);
 
   socket.on('message', async ({ nickname, message, role }) => {
-    const timestamp = moment(new Date()).format('hh:mm');
+    const timestamp = moment(new Date()).format('HH:mm');
     await createMessage({ nickname, message, timestamp, role });
     io.emit('message', { nickname, timestamp, message });
   });
