@@ -20,6 +20,9 @@ export default function SideBar({ userRole, active }) {
           <Link to="/profile" data-testid="side-menu-item-my-profile">
             Meu perfil
           </Link>
+          <Link to="/chat" data-testid="side-menu-chat">
+            Conversar com a Loja
+          </Link>
           <Link to="/login" onClick={ handleClick } data-testid="side-menu-item-logout">
             Sair
           </Link>
@@ -33,6 +36,9 @@ export default function SideBar({ userRole, active }) {
             </Link>
             <Link to="/admin/profile" data-testid="side-menu-item-profile">
               Meu perfil
+            </Link>
+            <Link to="/admin/profile" data-testid="side-menu-item-chat">
+              Conversas
             </Link>
           </div>
           <Link to="/login" data-testid="side-menu-item-logout">

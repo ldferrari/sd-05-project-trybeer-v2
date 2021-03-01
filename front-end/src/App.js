@@ -15,6 +15,7 @@ import Orders from './pages/orders';
 import Checkout from './pages/checkout';
 import OrderId from './components/OrderDetails';
 import OrdersAdminDetails from './components/OrdersAdmDetails';
+import Chat from './pages/chat';
 import './App.css';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/orders" component={ Orders } />
             <Route exact path="/admin/orders/:id" component={ OrdersAdminDetails } />
             <Route exact patch="/admin/orders" component={ Orders } />
+            <Route exact path="/chat" component={ Chat } />
           </Switch>
         </BrowserRouter>
       </Provider>
