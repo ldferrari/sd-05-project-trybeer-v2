@@ -63,7 +63,6 @@ orders.get('/:id', validateJWT, async (req, res) => {
   let { id } = req.params;
   
   const ordersProducts = await service.getSalesProducts(id);
-  
   return res.status(httpStatusCode.ok).json(ordersProducts);
 });
 

@@ -34,6 +34,9 @@ export default function Orders() {
               <span data-testid={ `${index}-order-total-value` }>
                 {`R$ ${order.total_price.toFixed(two).replace('.', ',')}`}
               </span>
+              <span>
+                {order.status}
+              </span>
             </div>
           </li>
           <br />

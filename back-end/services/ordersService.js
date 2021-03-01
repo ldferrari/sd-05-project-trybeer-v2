@@ -15,7 +15,7 @@ const insertSale = async (order, email) => {
   const userID = await userService.getUserId(email);
   const { dataValues: { id: saleId } } = await model.create({user_id: userID, 
     delivery_address: deliveryAddress, delivery_number: deliveryNumber,
-    sale_date: date, status: 'pending',total_price: Number(totalPrice)});
+    sale_date: date, status: 'Pendente',total_price: Number(totalPrice)});
   const promisesArray = [];
   for (let i = zero; i < cart.length; i += 1) {
     promisesArray.push(

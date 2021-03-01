@@ -9,6 +9,7 @@ const OrderDetails = (props) => {
   const two = 2;
   const [products, setProducts] = useState([]);
   const [totalP, setTotalP] = useState(zero);
+  const [status, setStatus] = useState('');
   const [dataSale, setDataSale] = useState('');
   const {
     match: {
@@ -24,6 +25,7 @@ const OrderDetails = (props) => {
     getOrderById(token, id).then((orders) => {
       setTotalP(orders[0].total_price);
       setDataSale(orders[0].sale_date);
+      setStatus(orders[0].status);
       return setProducts(orders[0].sale_products);
     });
   }, []);
@@ -37,6 +39,7 @@ const OrderDetails = (props) => {
       <Header>Meus pedidos</Header>
       <table>
         <caption data-testid="order-number">{`Pedido ${id}`}</caption>
+        <span>{status}</span>
         <tr>
           <th>Product</th>
           <th>Price</th>
