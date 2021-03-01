@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductsAct } from './Redux/Actions/index';
+
+import Chat from './Pages/Chat';
+import MessagesBoard from './Pages/MessagesBoard';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';
 import Products from './Pages/Products';
@@ -29,6 +32,8 @@ function App({ ProductsAPI }) {
         <Route exact path="/">
           <Redirect to="/login" />
         </Route>
+        <Route path="/chat" component={ Chat } />
+        <Route path="/admin/chat/:id" component={ Chat } />
         <Route exact path="/login" component={ Login } />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/products" component={ Products } />
@@ -39,6 +44,7 @@ function App({ ProductsAPI }) {
         <Route exact path="/admin/orders" component={ AdminOrders } />
         <Route exact path="/admin/orders/:id" component={ OrderDetailsAdmin } />
         <Route exact path="/admin/profile" component={ AdminProfile } />
+        <Route path="/admin/chats" component={ MessagesBoard } />
       </Switch>
     </div>
   );
