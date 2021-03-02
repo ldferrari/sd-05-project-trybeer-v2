@@ -44,7 +44,7 @@ const getCartInfo = () => {
       const { quantity, price, name } = currentCart[id];
       if (quantity === 0) return info;
       const itemArray = [...info.itemArray, { id, price, quantity, name }];
-      total = (info.total + Number(quantity) * Number(price));
+      const total = (info.total + Number(quantity) * Number(price));
       return {
         total,
         itemArray,
