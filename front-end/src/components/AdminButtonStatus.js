@@ -13,14 +13,14 @@ export default function ButtonStatus({ id }) {
       <button
         type="button"
         data-testid="mark-as-delivered-btn"
-        onClick={() => fetchAdminOrders(id).then(setStatus('Entregue'))}
+        onClick={ () => fetchAdminOrders(id).then(setStatus('Entregue')) }
       >
         Marcar como entregue
       </button>
       <button
         type="button"
         data-testid="mark-as-prepared-btn"
-        onClick={() => fetchAdminOrders(id).then(setStatus('Preparando'))}
+        onClick={ () => fetchAdminOrders(id).then(setStatus('Preparando')) }
       >
         Preparar pedido
       </button>
