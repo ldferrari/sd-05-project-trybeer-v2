@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; // useContext
+import React, { useCallback, useEffect, useState } from 'react'; // useContext
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getMessagesById } from '../../services/requestAPI';
@@ -25,6 +25,7 @@ const AdminChatConversation = (props) => {
   // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = useState(''); // Message to be sent
   // =>const [theOrders, setOrders] = useState([]);
+  const setHistoryCallback = useCallback(setHistory, []);
   useEffect(() => {
     const { history } = props;
     if (!localStorage.getItem('token')) {
@@ -32,14 +33,13 @@ const AdminChatConversation = (props) => {
     }
     async function fetchOldMessages() {
       const { data } = await getMessagesById(localStorage.getItem('token'), email);
-      // console.log(data);
       if (data.code) return false;
-      setHistory(data.map(({ time, nome, message }) => ({ time, nome, message })));
+      setHistoryCallback(data.map(({ time, nome, message }) => ({ time, nome, message })));
       setNewMessage(data);
       return true;
     }
     fetchOldMessages();
-  }, [props, email, setHistory]);
+  }, [props, email, setHistoryCallback]);
 
   const handleNewMessageChange = (event) => {
     const now = new Date();
@@ -49,14 +49,25 @@ const AdminChatConversation = (props) => {
     // precisa colocar a const time e o email além da msg ou faz isso pelo "server?"
   };
 
+  useEffect(() => {
+    const conteudo = document.getElementsByClassName('messages-container');
+    conteudo[0].scrollTop = conteudo[0].scrollHeight;
+  }, [messages]);
+
   const handleSendMessage = () => {
     sendMessage(newMessage);
     // setNewMessage('');
     newMessage.message = '';
   };
+  const handleEnter = (e) => {
+    const enterKey = 13;
+    if (e.keyCode === enterKey) {
+      handleSendMessage();
+    }
+  };
   return (
-    <div className="">
-      <h1 className="">{`Conversa com: ${email}`}</h1>
+    <div className="chat-admin-list-message">
+      <h1 className="" data-testid="profile-name">{`Conversa com: ${email}`}</h1>
       <Link to="/admin/chats" data-testid="back-button">Voltar</Link>
       <div className="messages-container">
         <ul className="messages-list">
@@ -79,6 +90,7 @@ const AdminChatConversation = (props) => {
         data-testid="message-input"
         value={ newMessage.message }
         onChange={ handleNewMessageChange }
+        onKeyUp={ handleEnter }
         placeholder="Digite..."
         className="new-message-input-field"
       />

@@ -8,7 +8,7 @@ import Rotas from './routes';
 import './App.css';
 
 const App = () => (
-  <div>
+  <div className="base-app">
     <Provider>
       <BrowserRouter>
         <Rotas />

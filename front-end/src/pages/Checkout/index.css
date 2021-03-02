@@ -1,14 +1,29 @@
-.legenda {
-  font-weight: bold;
+.Checkout {
+  overflow-y: auto;
+  height: 100vh;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 .total {
   margin-left: 2%;
   margin-right: 2%;
   padding: 2%;
   text-align: right;
   font-size:larger ;
+}
+
+table.cartItems{
+  width: 100%;
+  /* border: 1px solid black; */
+}
+table.cartItems th{
+  text-align: center;
+  /* border: 1px solid black; */
+}
+.cartItems td{
+margin: auto;
 }
 
 .checkoutitle {
@@ -21,6 +36,29 @@
   margin-left: 2%;
   margin-right: 2%;
   padding: 2%;
+  
+
+}
+.input-rua {
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  width: 70%;
+}
+.input-rua input{
+  width: 100%;
+  line-height: 1.5rem;
+}
+
+.input-numero {
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  width: 30%;
+}
+.input-numero input {
+  width: 100%;
+  line-height: 1.5rem;
 }
 
 .finishBtn {
@@ -50,10 +88,30 @@
   padding-bottom: 3%;
 }
 
+.checkout-forms-inputs {
+  display: flex;
+}
+
+tr.legenda {
+  /* font-weight: bold; */
+  /* display: flex;
+  justify-content: space-around; */
+}
+
+tr.legenda-small{
+  display: none;
+}
+
 @media screen and ( min-width : 300px ) and ( max-width : 569px ) {
 
-  .legenda {
+  tr.legenda {
+    display: none;
+  }
+  span.legenda {
     display: none;
   }
 
+  tr.legenda-small{
+    display: block;
+  }
 }

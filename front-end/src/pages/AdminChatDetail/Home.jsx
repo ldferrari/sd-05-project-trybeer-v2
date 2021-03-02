@@ -30,15 +30,15 @@ const Home = (props) => {
   // const [allMessages, setAllMessages] = useState([]);
   // const token = localStorage.getItem('token');
   // const { history } = props;
-  const { email } = props;
+  const { email, history } = props;
 
   return (
     <div className={ classes.root }>
-      <Box display="flex">
-        <AdminSideBar title="Conversas" icon="inbox" />
-        <Box p={ 4 } mt={ 14 }>
-          <Grid container spacing={ 4 }>
-            <AdminChatConversation email={ email } />
+      <Box display="flex" height={ 1 }>
+        <AdminSideBar title="Conversas" icon="inbox" history={ history } />
+        <Box p={ 0 } mt={ 0 } paulo="" width="100%">
+          <Grid container spacing={ 0 }>
+            <AdminChatConversation email={ email } history={ history } />
           </Grid>
         </Box>
       </Box>
@@ -50,4 +50,5 @@ export default Home;
 
 Home.propTypes = {
   email: propTypes.string.isRequired,
+  history: propTypes.string.isRequired,
 };

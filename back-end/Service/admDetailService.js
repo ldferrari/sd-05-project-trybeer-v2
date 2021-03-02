@@ -17,8 +17,8 @@ const getDetails = async (saleId) => {
       sale_id,
       product_id,
       quantity,
-      name: objProduto[id].name,
-      price: objProduto[id].price,
+      name: objProduto[product_id].name,
+      price: objProduto[product_id].price,
       status: saidaStatus.status,
     }));
 };

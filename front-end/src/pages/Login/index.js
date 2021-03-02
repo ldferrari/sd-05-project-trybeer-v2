@@ -16,7 +16,7 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [alertLogin, setAlertLogin] = useState('');
-  const validationEmail = (value) => (/[A-Za-z0-9]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(value)
+  const validationEmail = (value) => (/[A-Za-z0-9À-ī]+@[A-Za-z]+[A-z]*(\.\w{2,3})+/.test(value)
     ? setValidEmail(true)
     : setValidEmail(false));
 

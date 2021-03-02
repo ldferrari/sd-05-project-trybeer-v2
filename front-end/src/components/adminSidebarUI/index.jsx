@@ -10,7 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -107,7 +107,8 @@ export default function AdminSidebarUI(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const { icon, title, history } = props;
+  const { icon, title } = props;
+  const history = useHistory();
   return (
     <div className={ classes.root }>
       <CssBaseline />
@@ -143,9 +144,10 @@ export default function AdminSidebarUI(props) {
         anchor="left"
         open={ open }
         classes={ { paper: classes.drawerPaper } }
+        height="100%"
       >
         <div className={ classes.drawerHeader }>
-          <img className={ classes.logo } src="../uai2.png" alt="logo" />
+          <img className={ classes.logo } src="../../uai2.png" alt="logo" />
           <div className={ classes.grow } />
           <IconButton onClick={ handleDrawerClose }>
             { theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
@@ -206,5 +208,4 @@ export default function AdminSidebarUI(props) {
 AdminSidebarUI.propTypes = {
   icon: propTypes.instanceOf(Object).isRequired,
   title: propTypes.number.isRequired,
-  history: propTypes.instanceOf(Object).isRequired,
 };

@@ -23,5 +23,18 @@
 }
 
 .orderCardTitle {
+  font-size: x-large;
+}
+
+.preparando{
+  color: #999900;
+  font-weight: bold;
+}
+.entregue{
+  color: green;
+  font-weight: bold;
+}
+.pendente{
+  color: darkred;
   font-weight: bold;
 }
