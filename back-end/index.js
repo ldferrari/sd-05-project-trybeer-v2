@@ -52,9 +52,10 @@ const service = require('./Chat/service/chatService');
 app.use(cors());
 
 app.use(bodyParser.json());
-
+// teste login done
 app.use('/login', loginController);
 
+// teste register done
 app.use('/register', registerController);
 
 app.use('/profile', checkToken, profileController);
