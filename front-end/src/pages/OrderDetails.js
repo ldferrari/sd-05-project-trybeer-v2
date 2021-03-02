@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
 import { fetchOrderId } from '../services/ApiTrybeer';
-import OrderInformation from '../components/OrderInformation';
-import OrderDateAndValue from '../components/OrderDateAndValue';
+import TryBeerContext from '../context/TryBeerContext';
+// import OrderInformation from '../components/OrderInformation';
+// import OrderDateAndValue from '../components/OrderDateAndValue';
+
+const decimals = 2;
+function reais(products, index) {
+  return (products[index].price * products[index].quantity)
+    .toFixed(decimals)
+    .replace('.', ',');
+}
 
 export default function OrderDetails(props) {
   const zero = 0;
   const { match: { params: { id } } } = props;
+  const { orderStatus } = useContext(TryBeerContext);
   const [orders, setOrders] = useState([]);
   const [date, setDate] = useState('');
   const [total, setTotal] = useState(zero);
@@ -24,16 +33,45 @@ export default function OrderDetails(props) {
       setTotal(result[0].total_price);
     };
 
-    return sales();
-  }, []);
+    sales();
+  }, [email]);
+
   return (
     <section>
       <Header title="Meus Pedidos" />
       <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
-      {orders && orders.map((order, index) => (
-        <OrderInformation key={ order.id } index={ index } products={ products } />
-      ))}
-      <OrderDateAndValue total={ total } date={ date } />
+      {orders
+        && orders.map((order, index) => (
+          <section key={ order.id }>
+            <h3 data-testid={ `${index}-product-name` }>
+              {products[index] && products[index].name}
+            </h3>
+            <span>{products[index] && `R$ ${products[index].price}`}</span>
+            <span data-testid={ `${index}-product-qtd` }>
+              {products[index] && products[index].quantity}
+            </span>
+            <span data-testid={ `${index}-product-total-value` }>
+              {products[index] && `R$ ${reais(products, index)}`}
+            </span>
+            <span data-testid={ `${index}-order-status` }>{orderStatus}</span>
+          </section>
+        ))}
+      {orders && (
+        <section>
+          <p data-testid="order-total-value">
+            {`${new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(total)}`}
+          </p>
+          <p data-testid="order-date">
+            {`${new Date(date).toLocaleDateString('pt-br', {
+              day: '2-digit',
+              month: '2-digit',
+            })}`}
+          </p>
+        </section>
+      )}
     </section>
   );
 }

@@ -49,8 +49,8 @@ function placeOrder(orderData) {
     .catch((err) => err);
 }
 
-async function fetchOrderId(email) {
-  return await axios
+function fetchOrderId(email) {
+  return axios
     .get(`${API_URL}/orders?email=${email}`)
     .then((res) => res.data)
     .catch((err) => err);
