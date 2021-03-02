@@ -1,4 +1,4 @@
-/* const frisby = require('frisby');
+const frisby = require('frisby');
 const shell = require('shelljs');
 
 const url = 'http://localhost:3001';
@@ -97,5 +97,47 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
         expect(result.message).toBe('Email não encontrado.');
       });
   });
+  it('Será validado que não é possível fazer login com um password incorreto', async () => {
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'zebirita@gmail.com',
+          password: '123456789',
+        })
+      .expect('status', 401)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('Email e/ou password incorretos.');
+      });
+  });
+  it('Será validado que não é possível fazer login com um password menor que 6 caracteres', async () => {
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'zebirita@gmail.com',
+          password: '12345',
+        })
+      .expect('status', 401)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('Senha inválida.');
+      });
+  });
+  it('Será validado que não é possível fazer login com um email com email inválido', async () => {
+    await frisby
+      .post(`${url}/login`,
+        {
+          email: 'zebiritagmail.com',
+          password: '12345',
+        })
+      .expect('status', 401)
+      .then((response) => {
+        const { body } = response;
+        const result = JSON.parse(body);
+        expect(result.message).toBe('Email inválido.');
+      });
+  });
 });
- */
+
