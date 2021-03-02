@@ -49,13 +49,24 @@ const AdminChatConversation = (props) => {
     // precisa colocar a const time e o email além da msg ou faz isso pelo "server?"
   };
 
+  useEffect(() => {
+    const conteudo = document.getElementsByClassName('messages-container');
+    conteudo[0].scrollTop = conteudo[0].scrollHeight;
+  }, [messages]);
+
   const handleSendMessage = () => {
     sendMessage(newMessage);
     // setNewMessage('');
     newMessage.message = '';
   };
+  const handleEnter = (e) => {
+    const enterKey = 13;
+    if (e.keyCode === enterKey) {
+      handleSendMessage();
+    }
+  };
   return (
-    <div className="">
+    <div className="chat-admin-list-message">
       <h1 className="" data-testid="profile-name">{`Conversa com: ${email}`}</h1>
       <Link to="/admin/chats" data-testid="back-button">Voltar</Link>
       <div className="messages-container">
@@ -79,6 +90,7 @@ const AdminChatConversation = (props) => {
         data-testid="message-input"
         value={ newMessage.message }
         onChange={ handleNewMessageChange }
+        onKeyUp={ handleEnter }
         placeholder="Digite..."
         className="new-message-input-field"
       />

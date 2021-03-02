@@ -27,7 +27,7 @@ const SideBar = () => (
           </Link>
         </li>
       </ul>
-      <ul>
+      <ul className="ExitBtn">
         <li className="menuBtn">
           <Link
             to="/"

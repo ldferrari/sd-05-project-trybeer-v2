@@ -55,38 +55,38 @@ const Perfil = () => {
   return (
     <div className="ProfilePage">
       <Header>Meu Perfil</Header>
-      <div className="profile-main-content"> 
+      <div className="profile-main-content">
         <h2 data-testid="top-title">Meu perfil</h2>
         <div className="form">
-        <p>Nome:</p>
-        <input
-          type="text"
-          name="name"
-          id="name-id"
-          value={ nomes }
-          data-testid="profile-name-input"
-          onChange={ handleChanged }
-        />
-        <p>E-mail:</p>
-        <input
-          type="email"
-          id="email"
-          name="email-id"
-          value={ email }
-          data-testid="profile-email-input"
-          readOnly
-        />
-        <span className="update-alert">{alertUpdate}</span>
-      </div>
-      <button
-        type="button"
-        data-testid="profile-save-btn"
-        disabled={ !(validName) }
-        className={ (validName) ? 'ready loginBtn' : '' }
-        onClick={ handleSubmit }
-      >
-        Salvar
-      </button>
+          <p>Nome:</p>
+          <input
+            type="text"
+            name="name"
+            id="name-id"
+            value={ nomes }
+            data-testid="profile-name-input"
+            onChange={ handleChanged }
+          />
+          <p>E-mail:</p>
+          <input
+            type="email"
+            id="email"
+            name="email-id"
+            value={ email }
+            data-testid="profile-email-input"
+            readOnly
+          />
+          <span className="update-alert">{alertUpdate}</span>
+        </div>
+        <button
+          type="button"
+          data-testid="profile-save-btn"
+          disabled={ !(validName) }
+          className={ (validName) ? 'ready loginBtn' : '' }
+          onClick={ handleSubmit }
+        >
+          Salvar
+        </button>
       </div>
       <Footer />
     </div>

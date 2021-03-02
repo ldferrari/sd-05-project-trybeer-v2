@@ -13,7 +13,7 @@ const validateEmail = (email) => {
 
 register.post('/', async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role = 'client' } = req.body;
 
     if (!/^[A-Za-z \s]{12,}$/.test(name)) {
       return res.status(401).json({
@@ -22,17 +22,23 @@ register.post('/', async (req, res) => {
       });
     }
 
-    if (!validateEmail) {
+    if (!email || !validateEmail) {
       return res.status(400).json({
         message: 'Email inválido. Um email válido possui o formato <nome>@<domínio>',
         ok: false,
       });
     }
 
-    if (password.length < 6) {
+    if (typeof password !== 'string' || password.length < 6) {
       return res.status(401).json({ message: 'Email ou senha incorreto.', ok: false });
     }
+
+    if (!(role === 'client' || role === 'administrator')) {
+      return res.status(401).json({ message: 'Role não esperado.', ok: false });
+    }
+
     const newUser = await service.create(name, email, password, role);
+
     if (newUser.error) {
       return res.status(newUser.statusCode).json({ message: newUser.message, ok: false });
     }

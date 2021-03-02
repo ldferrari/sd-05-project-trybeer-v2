@@ -23,7 +23,7 @@ const OrderCard = (props) => {
       default:
         return 'pendente';
     }
-  }
+  };
   return (
     <div className="oCard">
       <Link
@@ -41,7 +41,7 @@ const OrderCard = (props) => {
         <p data-testid={ `${index}-order-total-value` }>
           { `R$ ${order.total_price.toFixed(dois).replace('.', ',')}` }
         </p>
-        <p className={selectColor()}>
+        <p className={ selectColor() }>
           { status }
         </p>
       </Link>

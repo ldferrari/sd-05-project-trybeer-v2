@@ -30,7 +30,6 @@ export default function OrderDetails(props) {
     }
     async function fetchOrder() {
       const temp = await postGetTheOrder(token, id);
-      console.log(temp);
       const { data } = temp;
       setOrder(data);
     }
@@ -47,40 +46,50 @@ export default function OrderDetails(props) {
       default:
         return 'pendente';
     }
-  }
+  };
   return (
     <div className="orderDetailsPage">
       <Header>Detalhes de Pedido</Header>
       <div className="details-main-content">
         <div className="detailsHeader">
           <div className="details-header-status">
-              <h4 className="orderTitle">{`Status: `}<span className={selectColor()}>{`${status}`}</span> </h4>
-              <h4 data-testid="order-date" className="orderTitle">
-                { dateFormat(globalData[id], 'dd/mm') }
-              </h4>
-            </div>
-            <h4 data-testid="order-number" className="orderTitle">
-              { `Pedido ${id}` }
+            <h4 className="orderTitle">
+              Status:
+              <span className={ selectColor() }>{`${status}`}</span>
+            </h4>
+            <h4 data-testid="order-date" className="orderTitle">
+              { dateFormat(globalData[id], 'dd/mm') }
             </h4>
           </div>
-          
+          <h4 data-testid="order-number" className="orderTitle">
+            { `Pedido ${id}` }
+          </h4>
+        </div>
         <div className="pedido">
-        <div className="legenda">
-          <p>QUANTIDADE</p>
-          <p>PRODUTO</p>
-          <p>PREÇO</p>
-          <p>TOTAL</p>
+          <table className="cartItems">
+            <tr className="legenda cartItem">
+              <th className="qty">QUANTIDADE</th>
+              <th className="name">PRODUTO</th>
+              <th className="unit-price">PREÇO</th>
+              <th className="total-product">TOTAL</th>
+            </tr>
+            <tr className="legenda-small cartItem">
+              <th className="qty">QTD</th>
+              <th className="name">PROD</th>
+              <th className="unit-price">R$/Un</th>
+              <th className="total-product">R$</th>
+            </tr>
+            {/* <div className="cartItems"> */}
+            {
+            orderHere
+              .map((item, index) => <OrderItem key={ item.id } item={ item } index={ index } />)
+            }
+            {/* </div> */}
+          </table>
+          <p data-testid="order-total-value" className="total">
+            { `TOTAL: R$ ${cartSum.toString().replace('.', ',')}` }
+          </p>
         </div>
-        <div className="cartItems">
-          {
-          orderHere
-            .map((item, index) => <OrderItem key={ item.id } item={ item } index={ index } />)
-          }
-        </div>
-        <p data-testid="order-total-value" className="total">
-          { `TOTAL: R$ ${cartSum.toString().replace('.', ',')}` }
-        </p>
-      </div>
       </div>
       <Footer />
     </div>

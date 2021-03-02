@@ -85,6 +85,7 @@ const Register = (props) => {
               name="name"
               onChange={ ({ target: { value } }) => setName(value) }
               data-testid="signup-name"
+              className="register-inputs"
             />
           </label>
         </fieldset>
@@ -96,6 +97,7 @@ const Register = (props) => {
               name="email"
               onChange={ ({ target: { value } }) => setEmail(value) }
               data-testid="signup-email"
+              className="register-inputs"
             />
           </label>
         </fieldset>
@@ -107,6 +109,7 @@ const Register = (props) => {
               name="password"
               onChange={ ({ target: { value } }) => setPassword(value) }
               data-testid="signup-password"
+              className="register-inputs"
             />
           </label>
         </fieldset>
