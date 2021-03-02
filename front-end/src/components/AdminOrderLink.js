@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function AdminOrderLink(props) {
   const { order, index } = props;
+  const total = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
   return (
     <Link to={ `/admin/orders/${order.id}` }>
@@ -12,7 +13,7 @@ export default function AdminOrderLink(props) {
         { `${order.delivery_address}, ${order.delivery_number}` }
       </span>
       <span data-testid={ `${index}-order-total-value` }>
-        { `R$ ${order.total_price.replace('.', ',')}` }
+        { `${total.format(order.total_price)}` }
       </span>
       <span data-testid={ `${index}-order-status` }>{order.status}</span>
     </Link>

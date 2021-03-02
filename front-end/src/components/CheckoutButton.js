@@ -15,5 +15,5 @@ export default function CheckoutButton(props) {
 }
 
 CheckoutButton.propTypes = {
-  total: PropTypes.number.isRequired,
+  total: PropTypes.string.isRequired,
 };

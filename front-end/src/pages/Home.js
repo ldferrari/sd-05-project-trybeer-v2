@@ -10,6 +10,8 @@ import {
   OrderDetails,
   ClientChat,
   AdminChatList,
+  AdminOrders,
+  AdminOrderDetails,
 } from '.';
 
 const Home = () => (
@@ -25,7 +27,8 @@ const Home = () => (
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/orders" component={ Orders } />
       <Route exact path="/orders/:id" component={ OrderDetails } />
-      <Route exact path="/admin/orders" component={ Orders } />
+      <Route exact path="/admin/orders/:id" component={ AdminOrderDetails } />
+      <Route exact path="/admin/orders" component={ AdminOrders } />
       <Route exact path="/admin/profile" component={ Profile } />
       <Route exact path="/admin/chats" component={ AdminChatList } />
       <Route exact path="/chat" component={ ClientChat } />

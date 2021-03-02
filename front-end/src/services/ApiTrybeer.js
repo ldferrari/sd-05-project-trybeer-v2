@@ -1,4 +1,3 @@
-// API axios
 const axios = require('axios');
 
 const API_URL = 'http://localhost:3001';
@@ -57,9 +56,9 @@ function fetchOrderId(email) {
     .catch((err) => err);
 }
 
-function fetchAdminOrders(token) {
+function fetchAdminOrders() {
   return axios
-    .get(`${API_URL}/orders/admin`, { headers: { Authorization: token } })
+    .get(`${API_URL}/admin/orders`)
     .then((res) => res.data)
     .catch((err) => err);
 }

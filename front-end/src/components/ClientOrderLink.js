@@ -18,6 +18,7 @@ export default function ClientOrderLink(props) {
           month: '2-digit',
         })}` }
       </p>
+      <span data-testid={ `${index}-order-status` }>{order.status}</span>
     </Link>
   );
 }

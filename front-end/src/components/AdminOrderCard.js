@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { fetchAdminOrders } from '../services/ApiTrybeer';
 import AdminOrderLink from './AdminOrderLink';
 
-export default function AdminOrderCard({ token }) {
+export default function AdminOrderCard() {
   const [adminOrders, setAdminOrders] = useState([]);
 
   useEffect(() => {
-    fetchAdminOrders(token).then((sales) => setAdminOrders(sales));
-  }, [token]);
+    fetchAdminOrders().then((sales) => setAdminOrders(sales));
+  }, []);
 
   return (
     <section>
@@ -21,7 +20,3 @@ export default function AdminOrderCard({ token }) {
     </section>
   );
 }
-
-AdminOrderCard.propTypes = {
-  token: PropTypes.string.isRequired,
-};

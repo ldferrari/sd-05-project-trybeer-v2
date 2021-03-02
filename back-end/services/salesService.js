@@ -37,8 +37,13 @@ async function getSalesById(body) {
 }
 
 async function getAdminSales() {
-  const sales = await sales.findAll();
-  return sales;
+  const allSales = await sales.findAll();
+  return allSales;
 }
 
-module.exports = { createSale, getSalesById, getAdminSales };
+async function updateSaleStatus(id, status) {
+  await sales.update({ status }, { where: { id } });
+  return { id, status, message: 'Status updated successfully!' };
+}
+
+module.exports = { createSale, getSalesById, getAdminSales, updateSaleStatus };
