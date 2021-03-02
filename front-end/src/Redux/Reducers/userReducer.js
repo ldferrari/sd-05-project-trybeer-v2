@@ -43,6 +43,7 @@ function userRequestReducer(state = INITIAL_STATE, action) {
     return {
       ...state,
       isLoading: false,
+      error: 'Erro ao atualizar o usuário',
     };
   case REGISTER_USER_SUCCESS:
     return {

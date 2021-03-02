@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import helper from '../Helper/index';
+import helper from '../Helper';
 
 // const cssProvisorio = {
 //   display: 'flex',
@@ -47,14 +47,14 @@ function CheckoutProductCard({ item, index, callbackDelete }) {
 }
 
 CheckoutProductCard.propTypes = {
-  i: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+  callbackDelete: PropTypes.func.isRequired,
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string,
     price: PropTypes.number,
     quantity: PropTypes.number,
   }).isRequired,
-  triggerDelete: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

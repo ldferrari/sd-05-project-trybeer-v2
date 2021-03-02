@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const FIVEHUNDRED = 500;
 
 const app = express();
 
@@ -45,7 +46,7 @@ chatController.run(server, serverConfig)(chatConnections);
 const errorMiddleware = (err, _req, res, _next) => {
   console.error(err);
   const { message } = err;
-  res.status(500).json({ message });
+  res.status(FIVEHUNDRED).json({ message });
 };
 
 app.use(errorMiddleware);

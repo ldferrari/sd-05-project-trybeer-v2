@@ -88,19 +88,20 @@ const Register = ({ registerUser, userError }) => {
               validate();
             } }
           />
+          <label htmlFor="checkbox" data-testid="signup-seller">
+            <input
+              id="checkbox"
+              type="checkbox"
+              onChange={ ({ target: { checked } }) => {
+                setIsSeller(checked);
+              } }
+            />
+            <span>Quero Vender</span>
+          </label>
           <div
             style={ { display: 'flex', flexDirection: 'column' } }
             className="space-between"
           >
-            <label data-testid="signup-seller">
-              <input
-                type="checkbox"
-                onChange={ ({ target: { checked } }) => {
-                  setIsSeller(checked);
-                } }
-              />
-              <span>Quero Vender</span>
-            </label>
             <button
               disabled={ isDisabled }
               type="button"

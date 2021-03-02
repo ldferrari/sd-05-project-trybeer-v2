@@ -20,7 +20,7 @@ function Checkout({ history }) {
   const [cart, setCart] = useState(helper.getCartInfo());
 
   useEffect(() => {
-    if (false || street === '' || houseNumber === '') {
+    if (street === '' || houseNumber === '') {
       setbuttonShoulBeDisabled(true);
     } else {
       setbuttonShoulBeDisabled(false);
@@ -94,11 +94,9 @@ Checkout.propTypes = {
       pathname: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  submitOrder: PropTypes.func.isRequired,
   userData: PropTypes.shape({
     user: PropTypes.shape(Object),
   }).isRequired,
-  repopulatingStore: PropTypes.func.isRequired,
 };
 
 export default Checkout;

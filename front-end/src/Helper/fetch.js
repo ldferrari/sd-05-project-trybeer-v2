@@ -1,12 +1,21 @@
 import localStorage from './localStorageHandle';
 
+const TypeJSON = 'application/json';
+
 const SERVER_URL = 'http://localhost:3001';
+
+const treatResponse = (response) => (
+  response
+    .json()
+    .then((json) => Promise.resolve(json))
+    .catch((err) => Promise.reject(err))
+);
 
 const myInit = {
   mode: 'cors',
   method: 'GET',
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': TypeJSON,
   },
 };
 
@@ -14,7 +23,7 @@ const myInitWithBody = (data, token) => ({
   mode: 'cors',
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': TypeJSON,
     Authorization: token || localStorage.getDataByKey('token') || '',
   },
   body: JSON.stringify(data),
@@ -24,50 +33,31 @@ const myInitWithBody = (data, token) => ({
 
 // prettier-ignore
 const getProducts = () => (
-  fetch(`${SERVER_URL}/products`, myInit).then((response) => (
-    response
-      .json()
-      .then((json) => Promise.resolve(json))
-      .catch((err) => Promise.reject(err))
-  ))
+  fetch(`${SERVER_URL}/products`, myInit).then((response) => treatResponse(response))
 );
 
 // prettier-ignore
 const getUser = (data) => (
-  fetch(`${SERVER_URL}/`, myInitWithBody(data)).then((response) => (
-    response
-      .json()
-      .then((json) => Promise.resolve(json))
-      .catch((err) => Promise.reject(err))))
+  fetch(`${SERVER_URL}/`, myInitWithBody(data))
+    .then((response) => treatResponse(response))
 );
 
 const login = ({ email, password }) => (
   fetch(`${SERVER_URL}/`, myInitWithBody({ email, password }))
-    .then((response) => (
-      response
-        .json()
-        .then((json) => Promise.resolve(json))
-        .catch((err) => Promise.reject(err))))
+    .then((response) => treatResponse(response))
 );
 
 // prettier-ignore
 const updateUser = (data) => {
   const token = localStorage.getDataByKey('token');
-  return fetch(`${SERVER_URL}/update`, myInitWithBody(data, token)).then(
-    (response) => response
-      .json()
-      .then((json) => Promise.resolve(json))
-      .catch((err) => Promise.reject(err)),
-  );
+  return fetch(`${SERVER_URL}/update`, myInitWithBody(data, token))
+    .then((response) => treatResponse(response));
 };
 
 // [REFATORAR] - Precisamos retornar o status da requisição para saber se houve um erro
 const submitOrderFetch = (data) => (
-  fetch(`${SERVER_URL}/sales`, myInitWithBody(data)).then((response) => (
-    response
-      .json()
-      .then((json) => Promise.resolve(json))
-      .catch((err) => Promise.reject(err))))
+  fetch(`${SERVER_URL}/sales`, myInitWithBody(data))
+    .then((response) => treatResponse(response))
 );
 // prettier-ignore
 const registerUser = (data) => (
@@ -84,35 +74,36 @@ const registerUser = (data) => (
   )
 );
 
-const clientSalesByUserId = (id) => fetch(`${SERVER_URL}/sales/user/${id}`, myInitWithBody).then((response) => response
-  .json()
-  .then((json) => Promise.resolve(json))
-  .catch((err) => Promise.reject(err)));
+const clientSalesByUserId = (id) => (
+  fetch(`${SERVER_URL}/sales/user/${id}`, myInitWithBody)
+    .then((response) => treatResponse(response))
+);
 
-const salesById = (id) => fetch(`${SERVER_URL}/sales/${id}`, myInitWithBody).then((response) => response
-  .json()
-  .then((json) => Promise.resolve(json))
-  .catch((err) => Promise.reject(err)));
+const salesById = (id) => (
+  fetch(`${SERVER_URL}/sales/${id}`, myInitWithBody)
+    .then((response) => treatResponse(response))
+);
 
-const getSalesOrder = () => fetch(`${SERVER_URL}/sales`, myInit).then((response) => response
-  .json()
-  .then((json) => Promise.resolve(json))
-  .catch((err) => Promise.reject(err.response)));
+const getSalesOrder = () => fetch(`${SERVER_URL}/sales`, myInit)
+  .then((response) => treatResponse(response));
 
 const updateStatusFetchFlag = (data, token) => ({
   mode: 'cors',
   method: 'PUT',
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': TypeJSON,
     Authorization: token || '',
   },
   body: JSON.stringify(data),
 });
 
-const updateDeliveryStatus = (id, status) => fetch(`${SERVER_URL}/sales/status`, updateStatusFetchFlag({ id, status })).then((response) => response
-  .json()
-  .then((json) => Promise.resolve(json))
-  .catch((err) => Promise.reject(err.response)));
+const updateDeliveryStatus = (id, status) => (
+  fetch(`${SERVER_URL}/sales/status`, updateStatusFetchFlag({ id, status }))
+    .then((response) => response
+      .json()
+      .then((json) => Promise.resolve(json))
+      .catch((err) => Promise.reject(err.response)))
+);
 
 export default {
   SERVER_URL,

@@ -1,6 +1,8 @@
 const socketIo = require('socket.io');
 const { checkToken } = require('../auth/jwt.auth');
 
+const ZERO = 0;
+
 const users = {};
 
 const formatMessage = (from, to) => (message) => ({
@@ -65,7 +67,7 @@ const run = (...server) => async ({ mongoConnection, mysqlConnection }) => {
 
     socket.on('disconnect', () => {
       delete users[socket.id];
-      socket.disconnect(0);
+      socket.disconnect(ZERO);
     });
   });
 };
@@ -73,4 +75,4 @@ const run = (...server) => async ({ mongoConnection, mysqlConnection }) => {
 module.exports = {
   users,
   run,
-}
+};

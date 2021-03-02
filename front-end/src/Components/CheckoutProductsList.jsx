@@ -14,7 +14,6 @@ const CheckoutProductsList = ({ cart, onUpdate }) => (
     <div className="responsive-list">
       {(cart.itemArray || []).map((item, index) => (
         <CheckoutProductCard
-
           key={ item.id }
           item={ item }
           index={ index }
@@ -37,11 +36,12 @@ const CheckoutProductsList = ({ cart, onUpdate }) => (
 
 CheckoutProductsList.propTypes = {
   cart: PropTypes.shape({
+    itemArray: PropTypes.shape(Array),
     map: PropTypes.func,
     reduce: PropTypes.func,
+    total: PropTypes.number,
   }).isRequired,
-  repopulatingStore: PropTypes.func.isRequired,
-  setisTotalZero: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default CheckoutProductsList;

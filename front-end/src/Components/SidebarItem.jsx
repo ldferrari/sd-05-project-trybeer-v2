@@ -26,6 +26,14 @@ const SideBarItem = ({ children, action, to, onClick }) => {
           if (typeof onClick === 'function') onClick();
           setRedirect(to || `/${action.split('-').slice(LAST)}`);
         } }
+        onKeyDown={ (key) => {
+          if (key === 'a') {
+            if (typeof onClick === 'function') onClick();
+            setRedirect(to || `/${action.split('-').slice(LAST)}`);
+          }
+        } }
+        role="menu"
+        tabIndex="0"
         style={ sidebarStyle }
       >
         {children}

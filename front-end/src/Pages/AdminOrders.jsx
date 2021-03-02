@@ -5,7 +5,7 @@ import Restrict from '../Components/Restrict';
 import AdminSideBar from '../Components/AdminSideBar';
 import helper from '../Helper';
 
-const AdminOrders = ({ history }) => {
+const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -39,11 +39,13 @@ const AdminOrders = ({ history }) => {
                 },
                 index,
               ) => (
-                <div className="blue-mid-bg card margin-small">
+                <div
+                  key={ orderNumber }
+                  className="blue-mid-bg card margin-small"
+                >
                   <Link
                     className="white-text"
                     to={ `/admin/orders/${orderNumber}` }
-                    key={ orderNumber }
                   >
                     <div className="space-between">
                       <span

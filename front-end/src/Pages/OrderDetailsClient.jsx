@@ -4,8 +4,7 @@ import Restrict from '../Components/Restrict';
 import Header from '../Components/Header';
 import helper from '../Helper';
 
-const NOONE = 0;
-const INITIAL = 0;
+const NONE = 0;
 
 const MOCK = {
   total_price: 0,
@@ -39,8 +38,8 @@ function OrderDetails({
     });
   }, [id]);
 
-  const total = order.length !== NOONE ? helper.transformPrice(order.total_price) : 0;
-  const date = order.length !== NOONE
+  const total = order.length !== NONE ? helper.transformPrice(order.total_price) : 0;
+  const date = order.length !== NONE
     ? helper.transformDate(order.sale_date)
     : null;
 

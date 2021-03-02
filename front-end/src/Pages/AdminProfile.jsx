@@ -23,15 +23,15 @@ const AdminProfile = () => {
         <AdminSideBar />
         <div className="responsive-list">
           <div className="card" style={ { margin: ' 16px 16px' } }>
-            <div className="space-between">
-              <span>Nome: </span>
-              <span data-testid="profile-name">{name}</span>
-            </div>
+            {/* <div className="space-between"> */}
+            <span>Nome: </span>
+            <span data-testid="profile-name">{name}</span>
+            {/* </div> */}
             <br />
-            <div className="space-between">
-              <span>Email: </span>
-              <span data-testid="profile-email">{email}</span>
-            </div>
+            {/* <div className="space-between"> */}
+            <span>Email: </span>
+            <span data-testid="profile-email">{email}</span>
+            {/* </div> */}
           </div>
         </div>
       </div>

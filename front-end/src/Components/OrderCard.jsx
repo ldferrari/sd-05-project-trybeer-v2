@@ -2,7 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const OrderCard = ({ ordered: { id, sale_date: saleDate, total_price: totalPrice }, index }) => {
+const OrderCard = ({
+  ordered: { id, sale_date: saleDate, total_price: totalPrice },
+  index,
+}) => {
   const priceFormated = parseFloat(totalPrice).toLocaleString('pt-br', {
     style: 'currency',
     currency: 'BRL',
@@ -18,7 +21,10 @@ const OrderCard = ({ ordered: { id, sale_date: saleDate, total_price: totalPrice
   return (
     <div>
       <Link to={ `/orders/${id}` }>
-        <div className="container-list blue-mid-bg white-text card horizontal space-between" data-testid={ `${index}-order-card-container` }>
+        <div
+          className="container-list blue-mid-bg white-text card horizontal space-between"
+          data-testid={ `${index}-order-card-container` }
+        >
           <div>
             <span className="elements" data-testid={ `${index}-order-number` }>
               Pedido
@@ -32,7 +38,10 @@ const OrderCard = ({ ordered: { id, sale_date: saleDate, total_price: totalPrice
             </span>
           </div>
           <div>
-            <span className="elements" data-testid={ `${index}-order-total-value` }>
+            <span
+              className="elements"
+              data-testid={ `${index}-order-total-value` }
+            >
               {priceFormated}
             </span>
           </div>

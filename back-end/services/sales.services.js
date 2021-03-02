@@ -1,5 +1,6 @@
 const rescue = require('express-rescue');
 const { checkToken } = require('../auth/jwt.auth');
+const ZERO =  0;
 
 // [REFATORAR] - Somatória dos preços usando o banco e não a requisição do front
 module.exports = (requests) => {
@@ -13,7 +14,7 @@ module.exports = (requests) => {
 
     const total = cart.itemArray.reduce(
       (total, { price, quantity }) => total + price * Number(quantity),
-      0,
+      ZERO,
     );
 
     const salesData = [id, total, street, houseNumber, new Date(), 'Pendente'];
@@ -40,7 +41,7 @@ module.exports = (requests) => {
     const orders = await requests.orderByUserId(id);
     if (!orders) throw new Error('não existe pedidos para este usuário');
     if (orders.sqlMessage) {
-      throw new Error('deu ruim na hora de atualizar o status');
+      throw new Error('deu ruim na hora de atualizar o status by id');
     }
     req.data = orders;
     next();
@@ -53,8 +54,8 @@ module.exports = (requests) => {
       throw new Error('Opção de status inválida');
     const update = await requests.updateStatus(status, id);
     console.log(update);
-    if (update.sqlMessage || update[0] === 0) {
-      throw new Error('deu ruim na hora de atualizar o status');
+    if (update.sqlMessage || update[ZERO] === ZERO) {
+      throw new Error('deu ruim na hora de atualizar o status update');
     }
     req.data = { message: 'Status atualizado com sucesso!' };
     next();
@@ -63,10 +64,10 @@ module.exports = (requests) => {
   const getAllSales = rescue(async (req, _res, next) => {
     const allSales = await requests.allSales();
     console.log(allSales, 'all Sales');
-    if (!allSales || allSales.length === 0)
+    if (!allSales || allSales.length === ZERO)
       throw new Error('Não foram cadastradas vendas');
     if (allSales.sqlMessage) {
-      throw new Error('deu ruim na hora de atualizar o status');
+      throw new Error('deu ruim na hora de pegal todas as vendas');
     }
     req.data = allSales;
     next();

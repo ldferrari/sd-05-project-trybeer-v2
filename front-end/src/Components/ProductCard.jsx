@@ -1,54 +1,56 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Helpers from '../Helper/index';
-import ourLogo from '../fetch-beer-3.png';
+import Helpers from '../Helper';
+
+const ONE = 1;
 
 function ProductCard({ product, onRefresh }) {
   const { id, name, price, url_image: urlImage } = product;
 
   const [quantity, setQuantity] = useState(
-    Helpers.getProductFromCartById(id)?.quantity,
+    Helpers.getProductFromCartById(id) ? (
+      Helpers.getProductFromCartById(id).quantity
+    ) : (
+      undefined
+    ),
   );
 
- 
   return (
     <div className="card padding-zero blue-mid-bg margin-small">
-      <div class="card-content padding-8px white-text">
+      <div className="card-content padding-8px white-text">
         <div className="card-image">
           <img
             className="responsive-img"
-            data-testid={`${id - 1}-product-img`}
+            data-testid={ `${id - ONE}-product-img` }
             // src={ourLogo}
-            src={urlImage} // usar esta quando tiver as imagens vindo do back
-            alt={name}
+            src={ urlImage } // usar esta quando tiver as imagens vindo do back
+            alt={ name }
           />
         </div>
 
-        <div className="card-title" data-testid={`${id - 1}-product-name`}>
+        <div className="card-title" data-testid={ `${id - ONE}-product-name` }>
           {name}
         </div>
-        
 
-        <h6 className='margin-bot' data-testid={`${id - 1}-product-price`}>
+        <h6 className="margin-bot" data-testid={ `${id - ONE}-product-price` }>
           {`R$ ${Helpers.transformPrice(price)}`}
         </h6>
 
         <div className="quantity-and-btn">
           <div className="card-quantity">
-            <div className='quantity'>
-              <h6 data-testid={`${id - 1}-product-qtd`}>{quantity || '0'}</h6>
-            </div>
+            <h6 data-testid={ `${id - ONE}-product-qtd` }>{quantity || '0'}</h6>
+            <div className="quantity" />
           </div>
 
           <div className="qty-btns">
             <button
               className="waves-effect waves-light btn-flat  yellow-main-bg white-mid-cl"
               type="button"
-              data-testid={`${id - 1}-product-minus`}
-              onClick={() => {
-                setQuantity(Helpers.setProductToCart(product, -1));
+              data-testid={ `${id - ONE}-product-minus` }
+              onClick={ () => {
+                setQuantity(Helpers.setProductToCart(product, MINUSONE));
                 onRefresh();
-              }}
+              } }
             >
               -
             </button>
@@ -56,11 +58,11 @@ function ProductCard({ product, onRefresh }) {
             <button
               className="waves-effect waves-teal btn-flat yellow-main-bg white-mid-cl"
               type="button"
-              data-testid={`${id - 1}-product-plus`}
-              onClick={() => {
-                setQuantity(Helpers.setProductToCart(product, 1));
+              data-testid={ `${id - ONE}-product-plus` }
+              onClick={ () => {
+                setQuantity(Helpers.setProductToCart(product, ONE));
                 onRefresh();
-              }}
+              } }
             >
               +
             </button>
@@ -72,9 +74,7 @@ function ProductCard({ product, onRefresh }) {
 }
 
 ProductCard.propTypes = {
-  cart: PropTypes.shape(Object).isRequired,
-  decreaseQuantity: PropTypes.func.isRequired,
-  increaseQuantity: PropTypes.func.isRequired,
+  onRefresh: PropTypes.func.isRequired,
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

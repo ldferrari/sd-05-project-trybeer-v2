@@ -38,7 +38,9 @@ function productsRequestReducer(state = INITIAL_STATE, action) {
         newCart = state.cart;
       }
     });
-    const newTotalPrice = (state.totalPrice + parseFloat(product.price)).toFixed(ordemDeGrandeza);
+    const newTotalPrice = (
+      (state.totalPrice + parseFloat(product.price)).toFixed(ordemDeGrandeza)
+    );
     localStorage.setItem('totalPrice', newTotalPrice);
     return {
       ...state,

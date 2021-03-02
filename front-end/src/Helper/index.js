@@ -10,26 +10,24 @@ const MIN = 0;
 
 const socket = io(fetch.SERVER_URL);
 
-const Socket = (component) => {
-  return ({ ...props }) => component({ ...props, socket }); 
-}
+const Socket = (component) => ({ ...props }) => component({ ...props, socket });
 
 const updateChat = (newMessage) => {
   const currentChat = localstorage.getDataByKey(CHAT);
   localstorage.registerData({ messages: [...currentChat, newMessage] });
-}
+};
 
 const getChatMessages = () => localstorage.getDataByKey(CHAT) || [];
 
 const loginUser = async ({ email, password }) => {
-  const {
-    message = null,
-    ...user
-  } = await fetch.login({ email, password });
+  const { message = null, ...user } = await fetch.login({ email, password });
   if (message) return { error: message };
-  localstorage.registerData({ token: user.token, messages: user?.user.messages });
+  localstorage.registerData({
+    token: user.token,
+    messages: user.user ? user.user.messages : undefined,
+  });
   return { user };
-}
+};
 
 const transformPrice = (value) => {
   const decimals = 2;
@@ -37,24 +35,29 @@ const transformPrice = (value) => {
   const valueWithComma = valueWith2Decimals.toString().replace('.', ',');
   return valueWithComma;
 };
-
+// [SE NÃO FUNCIONAR PROCURA AQUI]
 const getCartInfo = () => {
   const currentCart = localstorage.getDataByKey(CART);
   if (!currentCart) return {};
-  return Object.keys(currentCart).reduce((info, id) => {
-    const { quantity, price, name } = currentCart[id];
-    if (quantity === 0) return info;
-    const itemArray = [ ...info.itemArray, { id, price, quantity, name } ];
-    const total = info.total += Number(quantity) * Number(price);
-    return {
-      total,
-      itemArray,
-    };
-  }, { total: 0, itemArray: [] });
+  return Object.keys(currentCart).reduce(
+    (info, id) => {
+      const { quantity, price, name } = currentCart[id];
+      if (quantity === 0) return info;
+      const itemArray = [...info.itemArray, { id, price, quantity, name }];
+      total = (info.total + Number(quantity) * Number(price));
+      return {
+        total,
+        itemArray,
+      };
+    },
+    { total: 0, itemArray: [] },
+  );
 };
 
 const getProductFromCartById = (productId) => {
-  const currentCart = localstorage.getDataByKey(CART)?.[productId];
+  const currentCart = localstorage.getDataByKey(CART)[productId]
+    ? localstorage.getDataByKey(CART)[productId]
+    : undefined;
   return currentCart || {};
 };
 
@@ -62,7 +65,9 @@ const setProductToCart = (product, amount) => {
   const currentCart = localstorage.getDataByKey(CART);
   const item = {
     ...product,
-    quantity: Math.max((currentCart[product.id]?.quantity || 0) + amount, 0),
+    quantity: currentCart[product.id]
+      ? Math.max((currentCart[product.id].quantity || 0) + amount, 0)
+      : amount,
   };
   const cart = { ...currentCart, [product.id]: item };
   localstorage.registerData({ cart });
@@ -76,11 +81,10 @@ const removeProductFromCartById = (productID) => {
   return cart;
 };
 
-const transformDate = (date) => new Date(date)
-  .toLocaleDateString('pt-br', {
-    day: '2-digit',
-    month: '2-digit',
-  });
+const transformDate = (date) => new Date(date).toLocaleDateString('pt-br', {
+  day: '2-digit',
+  month: '2-digit',
+});
 
 // Essa função gera chaves aleatórias para as iterações de map
 const generateKey = (prefix) => `${prefix}-${Math.random()}`;

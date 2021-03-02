@@ -37,6 +37,7 @@ const Header = ({ pathname }) => {
     <div pathname={ pathname }>
       <div style={ headerStyle }>
         <button
+          type="button"
           data-target="slide-out"
           data-testid="top-hamburguer"
           className="sidenav-trigger btn-flat"

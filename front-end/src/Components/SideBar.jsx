@@ -14,14 +14,14 @@ const sideBarStyle = {
 const SideBar = ({ logout }) => {
   const [role, setRole] = useState('client');
   useEffect(() => {
-    const { role = 'client' } = helper.getUserData();
-    setRole(role);
+    const client = helper.getUserData();
+    setRole(client.role);
   }, []);
 
   return (
     <ul id="slide-out" className="sidenav" style={ sideBarStyle }>
       <div className="horizontal-center">
-        <img className="circle" src={ ourLogo } style={ { width: '100px' } } />
+        <img className="circle" src={ ourLogo } alt="logo" style={ { width: '100px' } } />
       </div>
       <li className="divider" />
       {
@@ -57,7 +57,6 @@ const SideBar = ({ logout }) => {
 
 SideBar.propTypes = {
   logout: PropTypes.func.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

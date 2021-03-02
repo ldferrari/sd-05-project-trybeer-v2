@@ -17,7 +17,7 @@ function Products({ history, isLoading }) {
   const [redirect, setRedirect] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(
-    helper.getCartInfo()?.total || INITIAL_VALUE,
+    helper.getCartInfo().total ? helper.getCartInfo().total : INITIAL_VALUE,
   );
 
   useEffect(() => {
@@ -27,39 +27,43 @@ function Products({ history, isLoading }) {
   }, []);
 
   const onRefresh = () => {
-    const t = helper.getCartInfo()?.total || INITIAL_VALUE;
+    const t = helper.getCartInfo().total ? helper.getCartInfo().total : INITIAL_VALUE;
     setTotal(t);
   };
 
   if (isLoading) return <p>Loading...</p>;
-  if (redirect) return <Redirect to={redirect} />;
+  if (redirect) return <Redirect to={ redirect } />;
 
   return (
     <Restrict>
-      <Header pathname={history.location.pathname} />
+      <Header pathname={ history.location.pathname } />
       <div className="container-pages">
         <div className="responsive-list">
           {products.map((product) => (
             <ProductCard
-              key={product.id}
-              product={product}
-              onRefresh={onRefresh}
+              key={ product.id }
+              product={ product }
+              onRefresh={ onRefresh }
             />
           ))}
         </div>
         <button
-          style={checkoutBtnStyle}
+          style={ checkoutBtnStyle }
           type="button"
-          disabled={total === 0}
+          disabled={ total === 0 }
           data-testid="checkout-bottom-btn"
-          onClick={() => setRedirect('/checkout')}
+          onClick={ () => setRedirect('/checkout') }
           to="/checkout"
           className="btn btn-large orange-bg blue-mid-cl width-380px"
         >
           <span
             data-testid="checkout-bottom-btn-value"
-            style={fontStyle}
-          >{`R$ ${helper.transformPrice(total)}`}</span>
+            style={ fontStyle }
+          >
+            {
+              `R$ ${helper.transformPrice(total)}`
+            }
+          </span>
           <span>{'   '}</span>
           <span>Ver Carrinho</span>
         </button>
@@ -70,7 +74,6 @@ function Products({ history, isLoading }) {
 
 Products.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  cart: PropTypes.shape(Object).isRequired,
   history: PropTypes.shape({
     location: PropTypes.shape({
       pathname: PropTypes.string,
@@ -79,7 +82,6 @@ Products.propTypes = {
   products: PropTypes.shape({
     map: PropTypes.func,
   }).isRequired,
-  totalPrice: PropTypes.number.isRequired,
 };
 
 export default Products;

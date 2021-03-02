@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Restrict from '../Components/Restrict';
 import helper from '../Helper';
 import AdminSideBar from '../Components/AdminSideBar';
-// import Header from '../Components/Header';
 
 const MOCK = {
   total_price: 0,
@@ -53,64 +52,59 @@ const OrderDetailsAdmin = ({
             className="blue-mid-bg white-text card"
             style={ { margin: ' 16px 16px' } }
           >
-            <div className="space-between">
-              <h6 data-testid="order-number">
-                Pedido
-                {id}
-              </h6>
-              <div
-                data-testid="order-status"
-                style={ { color: isPendente ? '#FFB703' : ' #023047' } }
-              >
-                {isPendente ? <h6>Pendente</h6> : <h6>Entregue</h6>}
-              </div>
+            <h6 data-testid="order-number">
+              Pedido
+              {id}
+            </h6>
+            <div
+              data-testid="order-status"
+              style={ { color: isPendente ? '#FFB703' : ' #023047' } }
+            >
+              {isPendente ? <h6>Pendente</h6> : <h6>Entregue</h6>}
             </div>
-            <div className="horizontal-center">
-              <h6 data-testid="order-total-value">
-                Total: R$
-                {total}
-              </h6>
-            </div>
+          </div>
+          <div className="horizontal-center">
+            <h6 data-testid="order-total-value">
+              Total: R$
+              {total}
+            </h6>
             <hr style={ { border: '1px dashed' } } />
+            <ul>
+              {order.product.map((product, index) => {
+                const totalValueByProduct = helper.transformPrice(
+                  product.price * product.sales_product.quantity,
+                );
 
-            <div className="horizontal-center">
-              <ul>
-                {order.product.map((product, index) => {
-                  const totalValueByProduct = helper.transformPrice(
-                    product.price * product.sales_product.quantity,
-                  );
-
-                  return (
-                    <li key={ product.name }>
-                      <span data-testid={ `${index}-product-qtd` }>
-                        {product.sales_product.quantity}
-                        {' '}
-                        -
-                        {' '}
-                      </span>
-                      <span data-testid={ `${index}-product-name` }>
-                        {product.name}
-                        {' '}
-                      </span>
-                      <span data-testid="0-order-unit-price">
-                        (R$
-                        {' '}
-                        {helper.transformPrice(product.price)}
-                        )
-                      </span>
-                      <span>{'   '}</span>
-                      <span>-</span>
-                      <span>{'   '}</span>
-                      <span data-testid={ `${index}-product-total-value` }>
-                        R$
-                        {' '}
-                        {totalValueByProduct}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+                return (
+                  <li key={ product.name }>
+                    <span data-testid={ `${index}-product-qtd` }>
+                      {product.sales_product.quantity}
+                      {' '}
+                      -
+                      {' '}
+                    </span>
+                    <span data-testid={ `${index}-product-name` }>
+                      {product.name}
+                      {' '}
+                    </span>
+                    <span data-testid="0-order-unit-price">
+                      (R$
+                      {' '}
+                      {helper.transformPrice(product.price)}
+                      )
+                    </span>
+                    <span>{'   '}</span>
+                    <span>-</span>
+                    <span>{'   '}</span>
+                    <span data-testid={ `${index}-product-total-value` }>
+                      R$
+                      {' '}
+                      {totalValueByProduct}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
             <div className="horizontal-center">
               {isPendente && (
                 <button
