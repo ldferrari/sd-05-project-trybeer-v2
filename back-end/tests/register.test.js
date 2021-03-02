@@ -12,7 +12,7 @@ const req = {
 
 req.body = req;
 
-describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
+describe('Sua aplicação deve ter o endpoint POST /register', () => {
   afterAll(async (done) => {
     await db.sequelize.close();
     done();
@@ -23,6 +23,13 @@ describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
     await registerService.createUser(name, email, password, role);
   });
 
+  it('Será validado não é possível cadastro com dados inválidos', async () => {
+    const { name, email, password, role } = req;
+    await registerService.createUser(name, email, password, role);
+  });
+});
+
+describe('Sua aplicação deve editar usuários', () => {
   it('Será testado que o update será feito corretamente', async () => {
     await userService.updateUser(req.name, req.email);
   });
@@ -30,12 +37,7 @@ describe('Sua aplicação deve ter o endpoint POST `/register`', () => {
   it('Será testado que o update não será feito corretamente', async () => {
     await userService.updateUser('', '');
   });
-
-  it('Será validado não é possível cadastrar um usuário com dados inválidos', async () => {
-    const { name, email, password, role } = req;
-    await registerService.createUser(name, email, password, role);
-  });
-
+  
   it('será testado se pode pegar todos os pedidos', async () => {
     await productService.getAllProducts();
   });

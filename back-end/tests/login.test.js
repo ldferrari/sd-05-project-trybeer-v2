@@ -12,15 +12,6 @@ const fail_req = {
 };
 
 describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
-  const mockResponse = () => {
-    const res = {
-      send: jest.fn(),
-    };
-    res.status = jest.fn().mockReturnValue(res);
-    res.json = jest.fn().mockReturnValue(res);
-    return res;
-  };
-
   afterAll(async (done) => {
     await db.sequelize.close();
     done();
