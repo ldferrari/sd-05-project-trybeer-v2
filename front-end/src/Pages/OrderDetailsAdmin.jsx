@@ -51,21 +51,27 @@ const OrderDetailsAdmin = ({
         <div className="responsive-list">
           <div
             className="blue-mid-bg white-text card"
-            style={{ margin: ' 16px 16px' }}
+            style={ { margin: ' 16px 16px' } }
           >
             <div className="space-between">
-              <h6 data-testid="order-number">Pedido {id}</h6>
+              <h6 data-testid="order-number">
+                Pedido
+                {id}
+              </h6>
               <div
                 data-testid="order-status"
-                style={{ color: isPendente ? '#FFB703' : ' #023047' }}
+                style={ { color: isPendente ? '#FFB703' : ' #023047' } }
               >
                 {isPendente ? <h6>Pendente</h6> : <h6>Entregue</h6>}
               </div>
             </div>
             <div className="horizontal-center">
-              <h6 data-testid="order-total-value">Total: R$ {total}</h6>
+              <h6 data-testid="order-total-value">
+                Total: R$
+                {total}
+              </h6>
             </div>
-            <hr style={{ border: '1px dashed' }} />
+            <hr style={ { border: '1px dashed' } } />
 
             <div className="horizontal-center">
               <ul>
@@ -75,21 +81,30 @@ const OrderDetailsAdmin = ({
                   );
 
                   return (
-                    <li key={product.name}>
-                      <span data-testid={`${index}-product-qtd`}>
-                        {product.sales_product.quantity} -{' '}
+                    <li key={ product.name }>
+                      <span data-testid={ `${index}-product-qtd` }>
+                        {product.sales_product.quantity}
+                        {' '}
+                        -
+                        {' '}
                       </span>
-                      <span data-testid={`${index}-product-name`}>
-                        {product.name}{' '}
+                      <span data-testid={ `${index}-product-name` }>
+                        {product.name}
+                        {' '}
                       </span>
                       <span data-testid="0-order-unit-price">
-                        (R$ {helper.transformPrice(product.price)})
+                        (R$
+                        {' '}
+                        {helper.transformPrice(product.price)}
+                        )
                       </span>
                       <span>{'   '}</span>
-                      <span>{'-'}</span>
+                      <span>-</span>
                       <span>{'   '}</span>
-                      <span data-testid={`${index}-product-total-value`}>
-                        R$ {totalValueByProduct}
+                      <span data-testid={ `${index}-product-total-value` }>
+                        R$
+                        {' '}
+                        {totalValueByProduct}
                       </span>
                     </li>
                   );
@@ -103,7 +118,7 @@ const OrderDetailsAdmin = ({
                   className="btn orange-bg blue-mid-cl"
                   data-testid="mark-as-delivered-btn"
                   type="button"
-                  onClick={() => setAsPendente()}
+                  onClick={ () => setAsPendente() }
                 >
                   Marcar como entregue
                 </button>

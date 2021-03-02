@@ -25,32 +25,32 @@ const sidebarItemStyle = {
 };
 
 const AdminSideBar = ({ logout }) => (
-  <div className="admin-side-bar-container" style={sideBarStyle}>
+  <div className="admin-side-bar-container" style={ sideBarStyle }>
     <nav>
       <Link
-        style={sidebarItemStyle}
+        style={ sidebarItemStyle }
         to="/admin/orders"
         data-testid="side-menu-item-orders"
       >
         Pedidos
       </Link>
       <Link
-        style={sidebarItemStyle}
+        style={ sidebarItemStyle }
         to="/admin/profile"
         data-testid="side-menu-item-profile"
       >
         Perfil
       </Link>
       <Link
-        style={sidebarItemStyle}
+        style={ sidebarItemStyle }
         to="/admin/chats"
         data-testid="side-menu-item-chat"
       >
         Conversas
       </Link>
       <Link
-        style={sidebarItemStyle}
-        onClick={() => logout()}
+        style={ sidebarItemStyle }
+        onClick={ () => logout() }
         to="/login"
         data-testid="side-menu-item-logout"
       >

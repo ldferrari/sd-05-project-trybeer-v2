@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import M from 'materialize-css';
 import Restrict from '../Components/Restrict';
 import AdminSideBar from '../Components/AdminSideBar';
 import helper from '../Helper';
-
-import M from 'materialize-css';
 
 const AdminOrders = ({ history }) => {
   const [orders, setOrders] = useState([]);
@@ -13,11 +12,13 @@ const AdminOrders = ({ history }) => {
     helper.fetch.getSalesOrder().then((result) => {
       console.log(typeof result);
       if (!result.message) setOrders(result);
-      if(result.message) M.toast(
-        { html: `<p>${result.message}</p>`, classes: 'dandrea' },
-      );
+      if (result.message) {
+        M.toast(
+          { html: `<p>${result.message}</p>`, classes: 'dandrea' },
+        );
+      }
     });
-    console.log(orders)
+    console.log(orders);
   }, []);
 
   return (
@@ -26,8 +27,8 @@ const AdminOrders = ({ history }) => {
       <div>
         <AdminSideBar />
         <div className="responsive-list">
-          {orders &&
-            orders.map(
+          {orders
+            && orders.map(
               (
                 {
                   id: orderNumber,
@@ -41,18 +42,18 @@ const AdminOrders = ({ history }) => {
                 <div className="blue-mid-bg card margin-small">
                   <Link
                     className="white-text"
-                    to={`/admin/orders/${orderNumber}`}
-                    key={orderNumber}
+                    to={ `/admin/orders/${orderNumber}` }
+                    key={ orderNumber }
                   >
                     <div className="space-between">
                       <span
                         className="elements"
-                        data-testid={`${index}-order-number`}
+                        data-testid={ `${index}-order-number` }
                       >
                         {`Pedido ${orderNumber}`}
                       </span>
                       <span
-                        data-testid={`${index}-order-status`}
+                        data-testid={ `${index}-order-status` }
                         className="elements"
                       >
                         {status}
@@ -61,16 +62,16 @@ const AdminOrders = ({ history }) => {
                     <div className="horizontal-center">
                       <h6
                         className="elements"
-                        data-testid={`${index}-order-total-value`}
+                        data-testid={ `${index}-order-total-value` }
                       >
                         {`R$ ${helper.transformPrice(orderPrice)}`}
                       </h6>
                     </div>
-                    <hr style={{ border: '1px dashed' }} />
+                    <hr style={ { border: '1px dashed' } } />
                     <div className="horizontal-center">
                       <span
                         className="elements"
-                        data-testid={`${index}-order-address`}
+                        data-testid={ `${index}-order-address` }
                       >
                         {`${address}, ${addressNumber}`}
                       </span>

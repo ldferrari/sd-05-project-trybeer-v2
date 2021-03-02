@@ -21,9 +21,9 @@ const SideBar = ({ logout }) => {
   return (
     <ul id="slide-out" className="sidenav" style={ sideBarStyle }>
       <div className="horizontal-center">
-        <img className="circle" src={ourLogo} style={{width: '100px'}} />
+        <img className="circle" src={ ourLogo } style={ { width: '100px' } } />
       </div>
-      <li className="divider"></li>
+      <li className="divider" />
       {
         role === 'client' ? (
           <>
@@ -43,7 +43,7 @@ const SideBar = ({ logout }) => {
           </>
         )
       }
-      <li className="divider"></li>
+      <li className="divider" />
       <Item
         action="side-menu-item-logout"
         to="/login"

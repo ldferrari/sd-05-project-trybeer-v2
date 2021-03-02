@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import M from 'materialize-css';
 import CheckoutProductsList from '../Components/CheckoutProductsList';
 import Header from '../Components/Header';
 import Input from '../Components/Input';
 import Restrict from '../Components/Restrict';
-import helper from '../Helper/';
-
-import M from 'materialize-css';
+import helper from '../Helper';
 
 const TIMEOUT = 3000;
 
@@ -46,12 +45,12 @@ function Checkout({ history }) {
 
   return (
     <Restrict>
-      <Header pathname={history.location.pathname} />
+      <Header pathname={ history.location.pathname } />
       <div className="container-main">
-        <CheckoutProductsList cart={cart} onUpdate={setCart} />
+        <CheckoutProductsList cart={ cart } onUpdate={ setCart } />
 
         <div
-          style={{ display: 'flex', flexDirection: 'column' }}
+          style={ { display: 'flex', flexDirection: 'column' } }
           className="card"
         >
           <h6>Endereço</h6>
@@ -60,7 +59,7 @@ function Checkout({ history }) {
           <Input
             test="checkout-street-input"
             id="rua"
-            onChange={(e) => setStreet(e.target.value)}
+            onChange={ (e) => setStreet(e.target.value) }
           />
           <br />
           <p>Número da casa:</p>
@@ -68,14 +67,14 @@ function Checkout({ history }) {
           <Input
             test="checkout-house-number-input"
             id="numero-da-casa"
-            onChange={(e) => setHouseNumber(e.target.value)}
+            onChange={ (e) => setHouseNumber(e.target.value) }
           />
           <button
             className="btn btn-flat yellow-main-bg blue-mid-cl"
-            disabled={buttonShoulBeDisabled}
+            disabled={ buttonShoulBeDisabled }
             data-testid="checkout-finish-btn"
             type="button"
-            onClick={submitHandler()}
+            onClick={ submitHandler() }
           >
             Finalizar Pedido
           </button>

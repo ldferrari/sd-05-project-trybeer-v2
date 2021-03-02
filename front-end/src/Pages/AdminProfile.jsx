@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import AdminSideBar from '../Components/AdminSideBar';
-import getUserData from '../../src/Services/utils';
+import getUserData from '../Services/utils';
 
 import Restrict from '../Components/Restrict';
 
@@ -22,7 +22,7 @@ const AdminProfile = () => {
       <div>
         <AdminSideBar />
         <div className="responsive-list">
-          <div className="card" style={{ margin: ' 16px 16px' }}>
+          <div className="card" style={ { margin: ' 16px 16px' } }>
             <div className="space-between">
               <span>Nome: </span>
               <span data-testid="profile-name">{name}</span>

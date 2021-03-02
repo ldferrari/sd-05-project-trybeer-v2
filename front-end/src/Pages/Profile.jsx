@@ -15,7 +15,6 @@ const changeInput = (event, setFunction) => setFunction(event.target.value);
 //   // marginTop: '250px',
 // };
 
-
 function Profile({ history, updateUser }) {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
@@ -33,47 +32,47 @@ function Profile({ history, updateUser }) {
 
   return (
     <Restrict>
-      <Header pathname={history.location.pathname} />
+      <Header pathname={ history.location.pathname } />
       <div className="container-main horizontal-center">
         {/* <div className="container-screen"> */}
-          <div
-            className="card "
+        <div
+          className="card "
+        >
+          <strong>Perfil</strong>
+          <form>
+            <p>Nome:</p>
+            <input
+              type="text"
+              data-testid="profile-name-input"
+              value={ name }
+              onChange={ (event) => {
+                changeInput(event, setName);
+                setChanged(true);
+              } }
+            />
+            <p>Email :</p>
+            <input
+              type="email"
+              data-testid="profile-email-input"
+              value={ email }
+              readOnly
+            />
+          </form>
+          <button
+            className="btn btn-flat yellow-main-bg blue-mid-cl"
+            disabled={ !changed }
+            data-testid="profile-save-btn"
+            onClick={ () => {
+              updateUser({ id, name });
+              setShouldRefresh(true);
+            } }
+            type="button"
           >
-            <strong>Perfil</strong>
-            <form>
-              <p>Nome:</p>
-              <input
-                type="text"
-                data-testid="profile-name-input"
-                value={name}
-                onChange={(event) => {
-                  changeInput(event, setName);
-                  setChanged(true);
-                }}
-              />
-              <p>Email :</p>
-              <input
-                type="email"
-                data-testid="profile-email-input"
-                value={email}
-                readOnly
-              />
-            </form>
-            <button
-              className="btn btn-flat yellow-main-bg blue-mid-cl"
-              disabled={!changed}
-              data-testid="profile-save-btn"
-              onClick={() => {
-                updateUser({ id, name });
-                setShouldRefresh(true);
-              }}
-              type="button"
-            >
-              Salvar
-            </button>
-            {shouldRefresh && <p>Atualização concluída com sucesso</p>}
-          </div>
+            Salvar
+          </button>
+          {shouldRefresh && <p>Atualização concluída com sucesso</p>}
         </div>
+      </div>
       {/* </div> */}
     </Restrict>
   );

@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+
+const TEN = 10;
 
 const containerStyle = {
   display: 'flex',
@@ -30,8 +33,8 @@ const store = {
 const getTime = (date) => {
   const hh = date.getHours();
   const mm = date.getMinutes();
-  return `${hh}:${mm >= 10 ? '' : '0'}${mm}`;
-}
+  return `${hh}:${mm >= TEN ? '' : '0'}${mm}`;
+};
 
 const ChatMessage = ({ buffer, isSelf }) => {
   const { from = store, message, createdAt } = buffer;
@@ -39,21 +42,23 @@ const ChatMessage = ({ buffer, isSelf }) => {
   const flexDirection = isSelf ? 'row-reverse' : 'row';
   const messageAlign = isSelf ? 'right' : 'left';
   return (
-    <div style={{ ...containerStyle, flexDirection }}>
+    <div style={ { ...containerStyle, flexDirection } }>
       <div
-        className={`card-panel ${isSelf ? 'yellow' : 'grey'} lighten-3 z-depth-1`}
-        style={{ ...cardStyle, flexDirection }}
+        className={ `card-panel ${isSelf ? 'yellow' : 'grey'} lighten-3 z-depth-1` }
+        style={ { ...cardStyle, flexDirection } }
       >
-        <div style={cardPhotoStyle}>
+        <div style={ cardPhotoStyle }>
           <img
-            src={`https://ui-avatars.com/api/?name=${from?.email}&size=48`}
+            src={ `https://ui-avatars.com/api/?name=${from.email}&size=48` }
             alt=""
             className="circle responsive-img"
           />
         </div>
-        <div style={{ ...cardMessageStyle, textAlign: messageAlign }}>
+        <div style={ { ...cardMessageStyle, textAlign: messageAlign } }>
           <span className="green-text">
-            <small data-testid="nickname">{from?.email}</small> -
+            <small data-testid="nickname">{from.email}</small>
+            {' '}
+            -
             <small data-testid="message-time">{getTime(date)}</small>
           </span>
           <hr />
@@ -65,8 +70,19 @@ const ChatMessage = ({ buffer, isSelf }) => {
           </span>
         </div>
       </div>
-    </div>  
+    </div>
   );
+};
+
+ChatMessage.propTypes = {
+  buffer: PropTypes.shape({
+    createdAt: PropTypes.string,
+    from: PropTypes.shape({
+      email: PropTypes.string,
+    }).isRequired,
+    message: PropTypes.string,
+  }).isRequired,
+  isSelf: PropTypes.string.isRequired,
 };
 
 export default ChatMessage;

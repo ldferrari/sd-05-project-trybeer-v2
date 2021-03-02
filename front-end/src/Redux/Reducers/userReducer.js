@@ -18,53 +18,53 @@ const INITIAL_STATE = {
 
 function userRequestReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case REQUESTING_USER:
-      return { ...state, isLoading: true };
-    case REQUEST_USER_SUCCESS:
-      return {
-        ...state,
-        userData: action.data,
-        shouldRedirect: true,
-        isLoading: false,
-      };
-    case REQUEST_USER_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case UPDATE_USER_SUCCESS:
-      return {
-        ...state,
-        userData: { user: action.data },
-        shouldRedirect: true,
-        isLoading: false,
-      };
-    case UPDATE_USER_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case REGISTER_USER_SUCCESS:
-      return {
-        ...state,
-        userData: { user: action.data },
-        shouldRedirect: true,
-        isLoading: false,
-        error: '',
-      };
-    case REGISTER_USER_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.error,
-      };
-    case CLEAR_USER:
-      return {
-        ...state,
-        userData: {},
-      };
-    default:
-      return state;
+  case REQUESTING_USER:
+    return { ...state, isLoading: true };
+  case REQUEST_USER_SUCCESS:
+    return {
+      ...state,
+      userData: action.data,
+      shouldRedirect: true,
+      isLoading: false,
+    };
+  case REQUEST_USER_ERROR:
+    return {
+      ...state,
+      isLoading: false,
+    };
+  case UPDATE_USER_SUCCESS:
+    return {
+      ...state,
+      userData: { user: action.data },
+      shouldRedirect: true,
+      isLoading: false,
+    };
+  case UPDATE_USER_ERROR:
+    return {
+      ...state,
+      isLoading: false,
+    };
+  case REGISTER_USER_SUCCESS:
+    return {
+      ...state,
+      userData: { user: action.data },
+      shouldRedirect: true,
+      isLoading: false,
+      error: '',
+    };
+  case REGISTER_USER_ERROR:
+    return {
+      ...state,
+      isLoading: false,
+      error: action.error,
+    };
+  case CLEAR_USER:
+    return {
+      ...state,
+      userData: {},
+    };
+  default:
+    return state;
   }
 }
 

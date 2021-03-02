@@ -9,8 +9,8 @@ export function initializeSocket() {
   return (dispatch) => {
     dispatch(startSocket());
     return io(fetch.SERVER_URL).then(
-      
-/*       (data) => dispatch(startSocket(data)),
+
+      /*       (data) => dispatch(startSocket(data)),
       (error) => dispatch(requestProductsError(error)), */
     );
   };

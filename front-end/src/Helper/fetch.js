@@ -114,17 +114,17 @@ const updateDeliveryStatus = (id, status) => fetch(`${SERVER_URL}/sales/status`,
   .then((json) => Promise.resolve(json))
   .catch((err) => Promise.reject(err.response)));
 
-  export default {
-    SERVER_URL,
-    getProducts,
-    getUser,
-    login,
-    updateUser,
-    submitOrderFetch,
-    registerUser,
-    clientSalesByUserId,
-    salesById,
-    getSalesOrder,
-    updateStatusFetchFlag,
-    updateDeliveryStatus,
-  };
+export default {
+  SERVER_URL,
+  getProducts,
+  getUser,
+  login,
+  updateUser,
+  submitOrderFetch,
+  registerUser,
+  clientSalesByUserId,
+  salesById,
+  getSalesOrder,
+  updateStatusFetchFlag,
+  updateDeliveryStatus,
+};

@@ -12,7 +12,6 @@ const containerStyle = {
 };
 
 const MessagesBoard = () => {
-
   const [lastMessages, setLastMessages] = useState([]);
 
   useEffect(() => {
@@ -29,11 +28,11 @@ const MessagesBoard = () => {
     <Restrict>
       <AdminSideBar />
       <div className="container-main">
-        <div className="container-screen" style={containerStyle}>
+        <div className="container-screen" style={ containerStyle }>
           {
             lastMessages.length
-              ? lastMessages.map(message => (
-                <CardMessage buffer={message} key={message.createdAt} />
+              ? lastMessages.map((message) => (
+                <CardMessage buffer={ message } key={ message.createdAt } />
               ))
               : <div>Nenhuma conversa por aqui.</div>
           }

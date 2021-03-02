@@ -25,7 +25,7 @@ const SideBarItem = ({ children, action, to, onClick }) => {
         onClick={ () => {
           if (typeof onClick === 'function') onClick();
           setRedirect(to || `/${action.split('-').slice(LAST)}`);
-        }}
+        } }
         style={ sidebarStyle }
       >
         {children}

@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import M from 'materialize-css';
 import titleForHeader from '../Helper/titleForHeader';
 import SideBar from './SideBar';
-
-import M from 'materialize-css';
 
 const headerStyle = {
   alignItems: 'center',
@@ -26,8 +25,8 @@ const Header = ({ pathname }) => {
     setTitle(curTitle);
     const sidenav = document.querySelector('.sidenav');
     M.Sidenav.init(sidenav, {});
-  }, [])
-  
+  }, []);
+
   const toggleDrawer = () => () => {
     setShowSideBar(!showSideBar);
   };
@@ -45,8 +44,9 @@ const Header = ({ pathname }) => {
         >
           <i
             className="material-icons"
-            style={ { color: 'var(--white)', fontSize: '32px' } }>
-              menu
+            style={ { color: 'var(--white)', fontSize: '32px' } }
+          >
+            menu
           </i>
         </button>
         <h5 data-testid="top-title">{ title }</h5>
@@ -58,7 +58,7 @@ const Header = ({ pathname }) => {
           .
         </span>
       </div>
-      <SideBar redirect={ setRedirect }/>
+      <SideBar redirect={ setRedirect } />
     </div>
   );
 };

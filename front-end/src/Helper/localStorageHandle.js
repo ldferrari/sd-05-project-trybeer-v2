@@ -26,4 +26,4 @@ export default {
   clearAll,
   registerData,
   getDataByKey,
-}
+};
