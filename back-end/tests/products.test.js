@@ -5,18 +5,19 @@ const url = 'http://localhost:3001';
 
 const { listaProdutos } = require('./listProducts');
 
-const logMeIn = async () =>
-  frisby
-    .post(`${url}/login`, {
+const logMeIn = async (endPoint = 'login', status = 200) => {
+  const response = await frisby
+    .post(`${url}/${endPoint}`, {
+      name: 'Usuario novinho',
       email: 'usuario@novo.com',
       password: '12345678',
+      role: 'client',
     })
-    .expect('status', 200)
-    .then((response) => {
-      const { body } = response;
-      const result = JSON.parse(body);
-      return result.token;
-    });
+    .expect('status', status);
+  const { body } = response;
+  const result = JSON.parse(body);
+  return result.token;
+};
 
 describe('Sua aplicação deve ter o endpoint GET `/products`', () => {
   beforeAll(async () => {
@@ -26,20 +27,8 @@ describe('Sua aplicação deve ter o endpoint GET `/products`', () => {
   });
 
   it('Será validado que a resposta da endpoint não é nula', async () => {
-    const token = await frisby
-      .post(`${url}/register`, {
-        name: 'Usuario novinho',
-        email: 'usuario@novo.com',
-        password: '12345678',
-        role: 'client',
-      })
-      .expect('status', 201)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        return result.token;
-      });
-    await frisby
+    const token = await logMeIn('register', 201);
+    const response = await frisby
       .setup({
         request: {
           headers: {
@@ -49,16 +38,14 @@ describe('Sua aplicação deve ter o endpoint GET `/products`', () => {
         },
       })
       .get(`${url}/products`)
-      .expect('status', 200)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result).not.toBeNull();
-      });
+      .expect('status', 200);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result).not.toBeNull();
   });
   it('Será validado que o tamanho do array de produtos da resposta do endpoint não é zero', async () => {
     const token = await logMeIn();
-    await frisby
+    const response = await frisby
       .setup({
         request: {
           headers: {
@@ -68,16 +55,14 @@ describe('Sua aplicação deve ter o endpoint GET `/products`', () => {
         },
       })
       .get(`${url}/products`)
-      .expect('status', 200)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.length).not.toBe(0);
-      });
+      .expect('status', 200);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.length).not.toBe(0);
   });
   it('Será validado que o tamanho do array de produtos da resposta do endpoint é onze', async () => {
     const token = await logMeIn();
-    await frisby
+    const response = await frisby
       .setup({
         request: {
           headers: {
@@ -87,26 +72,20 @@ describe('Sua aplicação deve ter o endpoint GET `/products`', () => {
         },
       })
       .get(`${url}/products`)
-      .expect('status', 200)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.length).toBe(11);
-      });
+      .expect('status', 200);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.length).toBe(11);
   });
   it('Será validado que não é possível ver os produtos se o usuário não estiver logado', async () => {
-    await frisby
-      .get(`${url}/products`)
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('No autorization.');
-      });
+    const response = await frisby.get(`${url}/products`).expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('No autorization.');
   });
   it('Será validado que a lista de produtos recebidas é igual a lista de produtos esperada', async () => {
     const token = await logMeIn();
-    await frisby
+    const response = await frisby
       .setup({
         request: {
           headers: {
@@ -116,11 +95,9 @@ describe('Sua aplicação deve ter o endpoint GET `/products`', () => {
         },
       })
       .get(`${url}/products`)
-      .expect('status', 200)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result).toEqual(listaProdutos);
-      });
+      .expect('status', 200);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result).toEqual(listaProdutos);
   });
 });

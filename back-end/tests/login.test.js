@@ -11,133 +11,105 @@ describe('Sua aplicação deve ter o endpoint POST `/login`', () => {
   });
 
   it('Será validado que é possível fazer login com sucesso', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'zebirita@gmail.com',
-          password: '12345678',
-        })
-      .expect('status', 200)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.token).not.toBeNull();
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: 'zebirita@gmail.com',
+        password: '12345678',
+      })
+      .expect('status', 200);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.token).not.toBeNull();
   });
 
   it('Será validado que não é possível fazer login sem o campo `email`', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          password: '12345678',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Todos os campos devem ser preenchidos!');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        password: '12345678',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Todos os campos devem ser preenchidos!');
   });
 
   it('Será validado que não é possível fazer login sem o campo `password`', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'zebirita@gmail.com',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Todos os campos devem ser preenchidos!');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: 'zebirita@gmail.com',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Todos os campos devem ser preenchidos!');
   });
 
   it('Será validado que não é possível fazer login com o campo `email` em branco', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: '',
-          password: '12345678',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Todos os campos devem ser preenchidos!');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: '',
+        password: '12345678',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Todos os campos devem ser preenchidos!');
   });
 
   it('Será validado que não é possível fazer login com o campo `password` em branco', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'zebirita@gmail.com',
-          password: '',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Todos os campos devem ser preenchidos!');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: 'zebirita@gmail.com',
+        password: '',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Todos os campos devem ser preenchidos!');
   });
 
   it('Será validado que não é possível fazer login com um usuário que não existe', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'menorIdade@gmail.com',
-          password: '12345678',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Email não encontrado.');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: 'menorIdade@gmail.com',
+        password: '12345678',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Email não encontrado.');
   });
   it('Será validado que não é possível fazer login com um password incorreto', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'zebirita@gmail.com',
-          password: '123456789',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Email e/ou password incorretos.');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: 'zebirita@gmail.com',
+        password: '123456789',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Email e/ou password incorretos.');
   });
   it('Será validado que não é possível fazer login com um password menor que 6 caracteres', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'zebirita@gmail.com',
-          password: '12345',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Senha inválida.');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: 'zebirita@gmail.com',
+        password: '12345',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Senha inválida.');
   });
   it('Será validado que não é possível fazer login com um email com email inválido', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'zebiritagmail.com',
-          password: '12345',
-        })
-      .expect('status', 401)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Email inválido.');
-      });
+    const response = await frisby
+      .post(`${url}/login`, {
+        email: 'zebiritagmail.com',
+        password: '12345',
+      })
+      .expect('status', 401);
+    const { body } = response;
+    const result = JSON.parse(body);
+    expect(result.message).toBe('Email inválido.');
   });
 });
-
