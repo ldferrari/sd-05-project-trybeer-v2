@@ -20,7 +20,7 @@ const handleFormSubmit = (e, setMessage, message, user) => {
 const renderMessages = (messages) => (
   <ul className="message">
     {messages.map((m, index) => (
-      <li key={ index } data-testid="text-message" className="text">
+      <li key={ index } className="text">
         <span data-testid="nickname" className="nickname">{m.nickname}</span>
         <span data-testid="message-time" className="time">{` - ${m.timestamp}`}</span>
         <br />
@@ -75,7 +75,7 @@ export default function ClientChatPage() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const user = JSON.parse(localStorage.getItem('user'));
-  useEffect(() => fetchMess(setMessages, user), [user]);
+  useEffect(() => fetchMess(setMessages, user), []);
   useEffect(() => {
     const handleNewMessage = (newMessage) => setMessages([...messages, newMessage]);
     socketClient.on('message', handleNewMessage);
