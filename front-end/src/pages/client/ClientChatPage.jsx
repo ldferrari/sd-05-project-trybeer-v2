@@ -31,7 +31,7 @@ const renderMessages = (messages) => (
 );
 
 const renderForm = (message, setMessage, handleInputChange, user) => (
-  <form>
+  <form className="clientChatbutton">
     <input
       className="messageInput"
       data-testid="message-input"
@@ -87,9 +87,7 @@ export default function ClientChatPage() {
     <main>
       <Menu title="Chat" />
       { renderMessages(messages) }
-      <div className="clientChatbutton">
-        { renderForm(message, setMessage, handleInputChange, user) }
-      </div>
+      { renderForm(message, setMessage, handleInputChange, user) }
     </main>
   );
 }
