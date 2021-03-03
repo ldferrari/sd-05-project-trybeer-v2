@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 export default function ChatListCard(props) {
   const { nickname, timestamp } = props;
   return (
-    <div style={ { marginLeft: '500px' } }>
-      <Link to="/admin/chat" data-testid="containerChat">
-        <div data-testid="profile-name">{ nickname }</div>
+    <div className="containerChat">
+      <Link to="/admin/chat" data-testid="containerChat" className="containerIn">
+        <div data-testid="profile-name" className="divIn">{ nickname }</div>
         <div data-testid="last-message">{ `Última mensagem às ${timestamp}` }</div>
       </Link>
     </div>

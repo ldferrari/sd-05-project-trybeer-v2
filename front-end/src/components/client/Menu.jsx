@@ -27,7 +27,7 @@ export default function Menu(props) {
           onChange={ () => menuChecked(setIsVisible) }
         />
       </label>
-      <MenuTitle />
+      <MenuTitle title={ title } />
       {isVisible && (<MenuLateral title={ title } />)}
     </header>
   );

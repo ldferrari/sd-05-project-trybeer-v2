@@ -1,0 +1,49 @@
+@media only screen and ( min-width : 600px ) {
+
+  .pageChat {
+    margin-left: 20%;
+  }
+
+  .containerChat {
+    margin: 3% 10%;
+  }
+
+  .containerIn {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 7px 5px 3px rgba(50, 50, 50, 0.77);
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .divIn {
+    margin-right: 100px;
+  }
+}
+
+@media only screen and ( max-width : 600px ) {
+
+  .pageChat {
+    margin-top: 25%;
+  }
+  
+  .containerChat {
+    margin: 5% 5%;
+  }
+
+  .containerIn {
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 7px 5px 3px rgba(50, 50, 50, 0.77);
+    display: flex;
+    font-size: 18px;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .divIn {
+    margin-right: 15px;
+  }
+}

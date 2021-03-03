@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import io from 'socket.io-client';
 import fetchUserMessages from '../../services/client/fetchAllMessages';
 import Menu from '../../components/client/Menu';
+import '../../css/client/clientChatPage.css';
 
 const socketClient = io('http://localhost:3001');
 
@@ -17,11 +18,11 @@ const handleFormSubmit = (e, setMessage, message, user) => {
 };
 
 const renderMessages = (messages) => (
-  <ul>
+  <ul className="message">
     {messages.map((m, index) => (
-      <li key={ index } data-testid="text-message">
-        <span data-testid="nickname">{m.nickname}</span>
-        <span data-testid="message-time">{` - ${m.timestamp}`}</span>
+      <li key={ index } data-testid="text-message" className="text">
+        <span data-testid="nickname" className="nickname">{m.nickname}</span>
+        <span data-testid="message-time" className="time">{` - ${m.timestamp}`}</span>
         <br />
         <span data-testid="text-message">{m.message}</span>
       </li>
@@ -30,14 +31,16 @@ const renderMessages = (messages) => (
 );
 
 const renderForm = (message, setMessage, handleInputChange, user) => (
-  <form style={ { marginTop: '100px' } }>
+  <form>
     <input
+      className="messageInput"
       data-testid="message-input"
       type="text"
       onChange={ handleInputChange }
       value={ message }
     />
     <button
+      className="messageButton"
       data-testid="send-message"
       type="submit"
       onClick={ (e) => handleFormSubmit(e, setMessage, message, user) }
@@ -72,7 +75,7 @@ export default function ClientChatPage() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const user = JSON.parse(localStorage.getItem('user'));
-  useEffect(() => fetchMess(setMessages, user), []);
+  useEffect(() => fetchMess(setMessages, user), [user]);
   useEffect(() => {
     const handleNewMessage = (newMessage) => setMessages([...messages, newMessage]);
     socketClient.on('message', handleNewMessage);
@@ -84,7 +87,9 @@ export default function ClientChatPage() {
     <main>
       <Menu title="Chat" />
       { renderMessages(messages) }
-      { renderForm(message, setMessage, handleInputChange, user) }
+      <div className="clientChatbutton">
+        { renderForm(message, setMessage, handleInputChange, user) }
+      </div>
     </main>
   );
 }
