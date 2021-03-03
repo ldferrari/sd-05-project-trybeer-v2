@@ -77,7 +77,7 @@
   .menuLateralAdm {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex: wrap;
     height: 100%;
     margin: 1% 0;
     padding: 0;

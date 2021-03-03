@@ -27,20 +27,20 @@
   .pageChat {
     margin-top: 25%;
   }
-  
+
   .containerChat {
-    margin: 5% 5%;
+    margin: 5%;
   }
 
   .containerIn {
-    text-align: center;
     background-color: white;
     border-radius: 10px;
     box-shadow: 7px 5px 3px rgba(50, 50, 50, 0.77);
     display: flex;
-    font-size: 18px;
     flex-direction: column;
+    font-size: 18px;
     padding: 10px;
+    text-align: center;
   }
 
   .divIn {
