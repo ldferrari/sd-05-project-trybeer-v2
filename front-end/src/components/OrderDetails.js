@@ -28,7 +28,7 @@ const OrderDetails = (props) => {
       setStatus(orders[0].status);
       return setProducts(orders[0].sale_products);
     });
-  }, []);
+  }, []); // eslint-disable-line
 
   const lsToken = localStorage.getItem('token');
   if (!lsToken) {

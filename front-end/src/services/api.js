@@ -131,3 +131,37 @@ export const updateStatus = async (role, id, token, orderStatus) => {
     .then((order) => order.json());
   return response || undefined;
 };
+export const getMessages = async (email) => {
+  const getReq = {
+    method: 'GET',
+    headers: { ...headers },
+    mode: 'cors',
+  };
+  const response = await fetch(`${url}/chat?username=${email}`, getReq)
+    .then((messages) => messages.json());
+  return response || undefined;
+};
+export const createdMessage = async (chatMessage, email) => {
+  const postReq = {
+    method: 'POST',
+    headers: { ...headers },
+    mode: 'cors',
+    body: {
+      chatMessage,
+      nickname: email,
+    },
+  };
+  const response = await fetch(`${url}/chat`, postReq)
+    .then((cMessage) => cMessage.json());
+  return response || undefined;
+};
+export const getAdmMessages = async () => {
+  const getReq = {
+    method: 'GET',
+    headers: { ...headers },
+    mode: 'cors',
+  };
+  const response = await fetch(`${url}/admin/chats`, getReq)
+    .then((admMessages) => admMessages.json());
+  return response || undefined;
+};

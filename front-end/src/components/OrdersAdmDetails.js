@@ -21,7 +21,7 @@ const OrdersAdminDetails = (props) => {
       setTotalPrice(sale[0].total_price);
       setOrder(sale[0].sale_products);
     });
-  }, []);
+  }, []); // eslint-disable-line
 
   const handleClick = (orderStatus) => {
     updateStatus(role, id, token, orderStatus).then(() => setStatus(orderStatus));

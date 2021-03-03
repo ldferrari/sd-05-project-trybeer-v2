@@ -36,7 +36,7 @@ const Login = () => {
   useEffect(() => {
     setIsLoginValid(validateLogin(userEmail, password));
     console.log(isLoginValid);
-  }, [userEmail, password]);
+  }, [userEmail, password]); // eslint-disable-line
 
   return (
     <div className="login">

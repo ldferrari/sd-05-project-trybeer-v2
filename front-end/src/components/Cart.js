@@ -11,13 +11,13 @@ const Cart = () => {
   useEffect(() => {
     setTotal(() => Array.from(storage)
       .reduce((acc, product) => acc + product.qty * product.price, zero));
-  }, []);
+  }, []); // eslint-disable-line
   // load on remove product
   useEffect(() => {
     setStorage(() => JSON.parse(localStorage.getItem('cart')) || []);
     setTotal(() => Array.from(storage)
       .reduce((acc, product) => acc + product.qty * product.price, zero));
-  }, [refresh]);
+  }, [refresh]); // eslint-disable-line
 
   // track total
   useEffect(() => {
