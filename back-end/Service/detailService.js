@@ -1,5 +1,7 @@
 const { Sale_Product, Product, Sale } = require('../models');
 
+const getOrders = async (userId) => Sale.findAll({ where: { userId } });
+
 const getDetails = async (saleId) => {
 // solução alternativa até o sequelize many to many funcionar
   const saidaBruta = (await Sale_Product.findAll({ where: { sale_id: saleId },
@@ -31,4 +33,5 @@ const getDetails = async (saleId) => {
 
 module.exports = {
   getDetails,
+  getOrders,
 };
