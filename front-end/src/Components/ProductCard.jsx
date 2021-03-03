@@ -48,7 +48,7 @@ function ProductCard({ product, onRefresh }) {
               type="button"
               data-testid={ `${id - ONE}-product-minus` }
               onClick={ () => {
-                setQuantity(Helpers.setProductToCart(product, - ONE));
+                setQuantity(Helpers.setProductToCart(product, -ONE));
                 onRefresh();
               } }
             >
