@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const OrderCard = ({
-  ordered: { id, sale_date: saleDate, total_price: totalPrice },
+  ordered: { id, sale_date: saleDate, status, total_price: totalPrice },
   index,
 }) => {
   const priceFormated = parseFloat(totalPrice).toLocaleString('pt-br', {
@@ -24,7 +24,8 @@ const OrderCard = ({
         <div
           className="container-list blue-mid-bg white-text card horizontal space-between"
           data-testid={ `${index}-order-card-container` }
-        >
+          >
+          <p>Status: {status}</p>
           <div>
             <span className="elements" data-testid={ `${index}-order-number` }>
               Pedido
