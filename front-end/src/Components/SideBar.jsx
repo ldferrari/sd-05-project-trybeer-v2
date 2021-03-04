@@ -33,13 +33,13 @@ const SideBar = ({ logout }) => {
               Pedidos
             </Item>
             <Item action="side-menu-item-my-profile">Meu Perfil</Item>
-            <Item action="side-menu-item-chat">Conversar com a loja</Item>
+            <Item action="side-menu-chat">Conversar com a loja</Item>
           </>
         ) : (
           <>
             <Item action="side-menu-item-orders" to="/admin/orders">Pedidos</Item>
             <Item action="side-menu-item-profile" to="/profile">Meu Perfil</Item>
-            <Item action="side-menu-item-chat" to="/admin/chats">Conversas</Item>
+            <Item action="side-menu-chat" to="/admin/chats">Conversas</Item>
           </>
         )
       }
