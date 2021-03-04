@@ -10,7 +10,6 @@ const AdminOrders = () => {
 
   useEffect(() => {
     helper.fetch.getSalesOrder().then((result) => {
-      console.log(typeof result);
       if (!result.message) setOrders(result);
       if (result.message) {
         M.toast(
@@ -18,7 +17,6 @@ const AdminOrders = () => {
         );
       }
     });
-    console.log(orders);
   }, []);
 
   return (

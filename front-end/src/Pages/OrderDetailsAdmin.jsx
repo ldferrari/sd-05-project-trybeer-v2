@@ -4,12 +4,14 @@ import Restrict from '../Components/Restrict';
 import helper from '../Helper';
 import AdminSideBar from '../Components/AdminSideBar';
 
+const EM_PREPARO = 'Em preparo';
+
 const MOCK = {
   total_price: 0,
   delivery_address: 'endereço',
   delivery_number: 'número',
   sale_date: '2021-02-18T18:22:43.000Z',
-  status: 'Em preparo',
+  status: EM_PREPARO,
   product: [
     {
       name: 'Produto',
@@ -33,8 +35,8 @@ const OrderDetailsAdmin = ({
   useEffect(() => {
     helper.fetch.salesById(id).then((data) => {
       setOrder(data);
-      setStatus(data.status)
-    }) 
+      setStatus(data.status);
+    });
   }, [id]);
 
   const total = helper.transformPrice(order.total_price);
@@ -42,18 +44,60 @@ const OrderDetailsAdmin = ({
   const Deliver = () => {
     // marcar como pendente na store e no banco
     helper.fetch.updateDeliveryStatus(id, 'Entregue');
-    setStatus('Entregue')
+    setStatus('Entregue');
     // ---
   };
   const Prepare = () => {
     // marcar como pendente na store e no banco
-    helper.fetch.updateDeliveryStatus(id, 'Em preparo');
-    setStatus('Em preparo')
+    helper.fetch.updateDeliveryStatus(id, EM_PREPARO);
+    setStatus(EM_PREPARO);
     // ---
   };
 
-  console.log(status)
-  if (status === 'none') return <p>Loading...</p>
+  const renderButons = (statusParam) => {
+    if (statusParam === 'Entregue') {
+      return <p>Bom apetite</p>;
+    }
+    if (statusParam === 'Em preparo') {
+      return (
+        <button
+          // style={{ textOverflow: 'ellipsis'}}
+          className="btn orange-bg blue-mid-cl"
+          data-testid="mark-as-delivered-btn"
+          type="button"
+          onClick={ () => Deliver() }
+        >
+          Marcar como entregue
+        </button>
+      );
+    }
+    if (statusParam === 'Pendente') {
+      return (
+        <div>
+          <button
+          // style={{ textOverflow: 'ellipsis'}}
+            className="btn orange-bg blue-mid-cl"
+            data-testid="mark-as-delivered-btn"
+            type="button"
+            onClick={ () => Deliver() }
+          >
+            Marcar como entregue
+          </button>
+          <button
+            // style={{ textOverflow: 'ellipsis'}}
+            className="btn orange-bg blue-mid-cl"
+            type="button"
+            onClick={ () => Prepare() }
+            data-testid="mark-as-prepared-btn"
+          >
+            Preparar pedido
+          </button>
+        </div>
+      );
+    }
+  };
+
+  if (status === 'none') return <p>Loading...</p>;
   return (
     <Restrict>
       <div>
@@ -71,7 +115,7 @@ const OrderDetailsAdmin = ({
               data-testid="order-status"
               style={ { color: status === 'Entregue' ? '#FFB703' : ' #023047' } }
             >
-              <h6>{status === 'Em preparo' ? 'Preparando' : status}</h6>
+              {status === EM_PREPARO ? 'Preparando' : status}
             </div>
           </div>
           <div className="horizontal-center">
@@ -117,43 +161,7 @@ const OrderDetailsAdmin = ({
               })}
             </ul>
             <div className="horizontal-center">
-              {status === 'Entregue' ? <p>Bom apetite</p> : status === 'Em preparo' ? (
-                <div>
-                  <button
-                    // style={{ textOverflow: 'ellipsis'}}
-                    className="btn orange-bg blue-mid-cl"
-                    data-testid="mark-as-delivered-btn"
-                    type="button"
-                    onClick={ () => Deliver() }
-                    data-testid="mark-as-delivered-btn"
-                  >
-                    Marcar como entregue
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <button
-                  // style={{ textOverflow: 'ellipsis'}}
-                  className="btn orange-bg blue-mid-cl"
-                  data-testid="mark-as-delivered-btn"
-                  type="button"
-                  onClick={ () => Deliver() }
-                  data-testid="mark-as-delivered-btn"
-                >
-                  Marcar como entregue
-                </button>
-                <button
-                // style={{ textOverflow: 'ellipsis'}}
-                className="btn orange-bg blue-mid-cl"
-                data-testid="mark-as-delivered-btn"
-                type="button"
-                onClick={ () => Prepare() }
-                data-testid="mark-as-prepared-btn"
-              >
-                Preparar pedido
-              </button>
-                </div>  
-              ) }
+              {renderButons(status)}
             </div>
           </div>
         </div>

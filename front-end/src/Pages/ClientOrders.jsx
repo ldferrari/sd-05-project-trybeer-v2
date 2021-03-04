@@ -21,8 +21,7 @@ const Orders = ({
     }
   }, [gettingUserSales]);
   if (isLoading) return <p>Carregando seus pedidos</p>;
-  
-  console.log(salesList);
+
   return (
     <Restrict>
       <Header pathname={ history.location.pathname } />

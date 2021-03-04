@@ -63,7 +63,6 @@ const Chat = ({
       <div className="container-main">
         <div className="container-screen" style={ containerStyle }>
           <div style={ { display: 'flex', width: '100%', flexDirection: 'column' } }>
-            {console.log(chat.length)}
             { chat.length !== 0 ? chat.map((chatBuffer) => (
               <ChatMessage
                 key={ chatBuffer.createdAt }
