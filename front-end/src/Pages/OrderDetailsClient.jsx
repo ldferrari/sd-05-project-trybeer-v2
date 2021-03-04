@@ -49,7 +49,7 @@ function OrderDetails({
       <Header pathname={ history.location.pathname } />
       <div className="container-main">
         <div className="blue-mid-bg white-text card">
-          <p>Status: {order.status}</p>
+          <p>Status: {order.status === 'Em preparo' ? 'Preparando' : order.status}</p>
           <div className="space-between">
             <h6 data-testid="order-number">
               Pedido

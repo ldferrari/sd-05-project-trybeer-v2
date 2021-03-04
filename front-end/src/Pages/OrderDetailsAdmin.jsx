@@ -27,22 +27,33 @@ const OrderDetailsAdmin = ({
     params: { id },
   },
 }) => {
-  const [isPendente, setIsPendente] = useState(true);
+  const [status, setStatus] = useState('none');
   const [order, setOrder] = useState(MOCK);
 
   useEffect(() => {
-    helper.fetch.salesById(id).then((data) => setOrder(data));
+    helper.fetch.salesById(id).then((data) => {
+      setOrder(data);
+      setStatus(data.status)
+    }) 
   }, [id]);
 
   const total = helper.transformPrice(order.total_price);
 
-  const setAsPendente = () => {
+  const Deliver = () => {
     // marcar como pendente na store e no banco
     helper.fetch.updateDeliveryStatus(id, 'Entregue');
+    setStatus('Entregue')
     // ---
-    setIsPendente(false);
+  };
+  const Prepare = () => {
+    // marcar como pendente na store e no banco
+    helper.fetch.updateDeliveryStatus(id, 'Em preparo');
+    setStatus('Em preparo')
+    // ---
   };
 
+  console.log(status)
+  if (status === 'none') return <p>Loading...</p>
   return (
     <Restrict>
       <div>
@@ -58,9 +69,9 @@ const OrderDetailsAdmin = ({
             </h6>
             <div
               data-testid="order-status"
-              style={ { color: isPendente ? '#FFB703' : ' #023047' } }
+              style={ { color: status === 'Entregue' ? '#FFB703' : ' #023047' } }
             >
-              {isPendente ? <h6>Pendente</h6> : <h6>Entregue</h6>}
+              <h6>{status === 'Em preparo' ? 'Preparando' : status}</h6>
             </div>
           </div>
           <div className="horizontal-center">
@@ -106,17 +117,43 @@ const OrderDetailsAdmin = ({
               })}
             </ul>
             <div className="horizontal-center">
-              {isPendente && (
-                <button
+              {status === 'Entregue' ? <p>Bom apetite</p> : status === 'Em preparo' ? (
+                <div>
+                  <button
+                    // style={{ textOverflow: 'ellipsis'}}
+                    className="btn orange-bg blue-mid-cl"
+                    data-testid="mark-as-delivered-btn"
+                    type="button"
+                    onClick={ () => Deliver() }
+                    data-testid="mark-as-delivered-btn"
+                  >
+                    Marcar como entregue
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button
                   // style={{ textOverflow: 'ellipsis'}}
                   className="btn orange-bg blue-mid-cl"
                   data-testid="mark-as-delivered-btn"
                   type="button"
-                  onClick={ () => setAsPendente() }
+                  onClick={ () => Deliver() }
+                  data-testid="mark-as-delivered-btn"
                 >
                   Marcar como entregue
                 </button>
-              )}
+                <button
+                // style={{ textOverflow: 'ellipsis'}}
+                className="btn orange-bg blue-mid-cl"
+                data-testid="mark-as-delivered-btn"
+                type="button"
+                onClick={ () => Prepare() }
+                data-testid="mark-as-prepared-btn"
+              >
+                Preparar pedido
+              </button>
+                </div>  
+              ) }
             </div>
           </div>
         </div>
