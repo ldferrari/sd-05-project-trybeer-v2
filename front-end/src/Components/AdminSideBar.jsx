@@ -44,7 +44,7 @@ const AdminSideBar = ({ logout }) => (
       <Link
         style={ sidebarItemStyle }
         to="/admin/chats"
-        data-testid="side-menu-chat"
+        data-testid="side-menu-item-chat"
       >
         Conversas
       </Link>
