@@ -33,8 +33,8 @@ const OrderDetailsAdmin = ({
 
   const [order, setOrder] = useState(MOCK);
 
-  useEffect( async () => {
-    const waithere = await helper.fetch.salesById(id).then((data) => setOrder(data));
+  useEffect(() => {
+    helper.fetch.salesById(id).then((data) => setOrder(data));
     console.log(order.status);
     setIsPendente(false);
     setIsEmPreparo(false);
