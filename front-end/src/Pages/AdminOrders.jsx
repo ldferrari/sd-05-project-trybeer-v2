@@ -56,7 +56,8 @@ const AdminOrders = () => {
                         data-testid={ `${index}-order-status` }
                         className="elements"
                       >
-                        {status}
+                        {status === 'Em preparo' ? 'Preparando' : status}
+
                       </span>
                     </div>
                     <div className="horizontal-center">

@@ -51,7 +51,7 @@ const OrderCard = ({
           </div>
           <div>
             <span className="elements" data-testid={ `${index}-order-status` }>
-              {status}
+              {status === 'Em preparo' ? 'Preparando' : status}
             </span>
           </div>
         </div>
