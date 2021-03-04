@@ -27,12 +27,34 @@ const OrderDetailsAdmin = ({
     params: { id },
   },
 }) => {
-  const [isPendente, setIsPendente] = useState(true);
+  const [isPendente, setIsPendente] = useState(false);
+  const [isEmPreparo, setIsEmPreparo] = useState(false);
+  const [isEntregue, setIsEntregue] = useState(false);
+
   const [order, setOrder] = useState(MOCK);
 
-  useEffect(() => {
-    helper.fetch.salesById(id).then((data) => setOrder(data));
+  useEffect( async () => {
+    const waithere = await helper.fetch.salesById(id).then((data) => setOrder(data));
+    console.log(order.status);
+    setIsPendente(false);
+    setIsEmPreparo(false);
+    setIsEntregue(false);
+    if (order.status === 'Em preparo') {
+      setIsEmPreparo(true);
+      console.log('Passei');
+    };
+    if (order.status === 'Pendente') {
+      setIsPendente(true);
+      console.log('Passei 2');
+    };
+    if (order.status === 'Entregue') {
+      setIsEntregue(true);
+    };
   }, [id]);
+  console.log('order status aqui=>', order.status);
+  console.log('Pendente', isPendente);
+  console.log('Em preparo', isEmPreparo);
+  console.log('Entregue', isEntregue);
 
   const total = helper.transformPrice(order.total_price);
 
@@ -60,7 +82,7 @@ const OrderDetailsAdmin = ({
               data-testid="order-status"
               style={ { color: isPendente ? '#FFB703' : ' #023047' } }
             >
-              {isPendente ? <h6>Pendente</h6> : <h6>Entregue</h6>}
+              <h6>{order.status}</h6>
             </div>
           </div>
           <div className="horizontal-center">
