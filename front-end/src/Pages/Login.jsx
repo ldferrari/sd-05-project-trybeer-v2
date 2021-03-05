@@ -68,7 +68,7 @@ const Login = ({ socket }) => {
                 const res = await helper.loginUser({ email, password });
                 if (!res.error) {
                   setUserData(res.user.user);
-                  socket.emit('init_user', res ? res.user.token : undefined);
+                  socket.emit('init_user', res.user.token);
                 }
                 M.toast({
                   html: '<p>Email ou senha incorretos!</p>',

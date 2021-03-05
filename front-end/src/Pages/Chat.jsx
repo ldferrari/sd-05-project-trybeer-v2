@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Restrict from '../Components/Restrict';
-import Header from '../Components/Header';
+import HeaderAdmin from '../Components/AdminSideBar';
+import HeaderClient from '../Components/Header'
 import ChatMessage from '../Components/ChatMessage';
 import helper from '../Helper';
+
 
 import Input from '../Components/Input';
 
@@ -21,6 +23,8 @@ const Chat = ({
 }) => {
   const [chat, setChat] = useState([]);
   const [message, setMessage] = useState([]);
+  const role = helper.getUserData().role;
+  const myId = helper.getUserData().id;
 
   const updateChat = (messages) => {
     setChat(
@@ -30,12 +34,13 @@ const Chat = ({
         : messages,
     );
   };
-
+  console.log("chat", chat);
+  
   useEffect(() => {
     let messages = helper.getChatMessages();
     updateChat(messages);
-    const x = helper.getUserData().role === 'Client' ? socket.id : 'loja';
-
+    const x = helper.getUserData().role === 'Client' ? helper.getUserData().id : 'loja';
+    
     socket.on(x, (newMessage) => {
       messages = helper.getChatMessages();
       updateChat([...messages, newMessage]);
@@ -51,16 +56,15 @@ const Chat = ({
   };
 
   const isSelfMessage = (msg) => {
-    const { id: selfId } = helper.getUserData();
-    return socket.id === (
-      msg.from ? msg.from.socketId : undefined
-    ) || (msg.from ? msg.from.id : undefined) === selfId;
+    console.log(msg, myId);
+    return myId === msg.from
   };
 
   return (
     <Restrict>
-      <Header pathname={ history.location.pathname } />
+      {role === 'administrator' ? <HeaderAdmin pathname={ history.location.pathname } /> : <HeaderClient pathname={ history.location.pathname } /> }
       <div className="container-main">
+      <button type='button'data-testid="back-button" onClick={() => history.push('/admin/chats')}>Back</button>
         <div className="container-screen" style={ containerStyle }>
           <div style={ { display: 'flex', width: '100%', flexDirection: 'column' } }>
             { chat.length !== 0 ? chat.map((chatBuffer) => (
@@ -87,7 +91,7 @@ const Chat = ({
             disabled={ !message.length }
             type="button"
             onClick={ () => {
-              socket.emit('message', { message, to: id });
+              socket.emit('message', { fromId: myId, toId: id, message });
               document.getElementById('input_message').value = '';
               setMessage('');
             } }

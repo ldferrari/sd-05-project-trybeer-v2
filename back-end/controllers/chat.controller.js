@@ -22,37 +22,25 @@ const run = (...server) => async ({ mongoConnection, mysqlConnection }) => {
     socket.on('init_user', async (token) => {
       try {
         const { payload } = checkToken(token);
-        users[socket.id] = { ...payload, socketId: socket.id };
+        users[payload.id] = { ...payload };
       } catch ({ message }) {
         console.error(message);
       }
     });
 
-    socket.on('test_message', async ({ message }) => {
-      const messageBuffer = formatMessage(users[socket.id], {})(message);
-      io.emit(socket.id, [messageBuffer]);
-    });
-
     // Criei esse socket para uma versão mais robusta do chat
-    socket.on('message', async ({ message, to }) => {
-      if(!users[socket.id]) return;
+    socket.on('message', async ({ fromId, toId, message }) => {
+      if(!users[fromId]) return;
       const messageCollection = await mongoConnection('messages');
-      const [client] = Object.entries(users)
-        .filter(([_, client]) => (client.id === to));
       
       // Aqui vou registrar o buffer no mongo
       // Preciso buscar os dados do 'to' para configurar o messageBuff
-      const messageBuffer = formatMessage(users[socket.id], {})(message);
+      const messageBuffer = formatMessage(users[fromId], {})(message);
 
-      if (client && client.length) { // Verifica se o cliente está online
-        const [clientSocket] = client;
-        messageBuffer.to = users[clientSocket];
-        io.emit(clientSocket, messageBuffer);
-      } else if (to) {
-        // Caso o cliente esteja offline, faz a busca no banco de dados
+      if (toId) {
         try {
           const { dataValues } = await user.findOne({
-            where: { id: to },
+            where: { id: toId },
             attributes: ['id', 'name', 'email', 'role'],
           });
           messageBuffer.to = dataValues;
@@ -62,11 +50,11 @@ const run = (...server) => async ({ mongoConnection, mysqlConnection }) => {
       }
       await messageCollection.insertOne(messageBuffer);
       io.emit('loja', messageBuffer);
-      io.emit(socket.id, messageBuffer);
+      io.emit(fromId, messageBuffer);
     });
 
-    socket.on('disconnect', () => {
-      delete users[socket.id];
+    socket.on('disconnect', (fromId) => {
+      delete users[fromId];
       socket.disconnect(ZERO);
     });
   });

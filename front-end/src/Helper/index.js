@@ -10,7 +10,9 @@ const MIN = 0;
 
 const socket = io(fetch.SERVER_URL);
 
-const Socket = (component) => ({ ...props }) => component({ ...props, socket });
+const Socket = (component) => ({ ...props }) => {
+  return component({ ...props, socket });
+}
 
 const updateChat = (newMessage) => {
   const currentChat = localstorage.getDataByKey(CHAT);
