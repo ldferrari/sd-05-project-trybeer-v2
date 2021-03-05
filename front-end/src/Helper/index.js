@@ -81,7 +81,7 @@ const removeProductFromCartById = (productID) => {
   return cart;
 };
 
-const transformDate = (date) => Date(date).toLocaleDateString('pt-br', {
+const transformDate = (date) => new Date(date).toLocaleDateString('pt-br', {
   day: '2-digit',
   month: '2-digit',
 });

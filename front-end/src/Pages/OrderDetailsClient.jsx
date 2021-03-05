@@ -6,37 +6,22 @@ import helper from '../Helper';
 
 const NONE = 0;
 
-const MOCK = {
-  total_price: 0,
-  delivery_address: 'endereço',
-  delivery_number: 'número',
-  sale_date: '2021-02-18T18:22:43.000Z',
-  status: 'Em preparo',
-  product: [
-    {
-      name: 'Produto',
-      price: 0,
-      url_image: 'http://localhost:3001/images/Heineken 600ml.jpg',
-      sales_product: {
-        quantity: 0,
-      },
-    },
-  ],
-};
-
 function OrderDetails({
   history,
   match: {
     params: { id },
   },
 }) {
-  const [order, setOrder] = useState(MOCK);
+  const [order, setOrder] = useState([]);
 
   useEffect(() => {
     helper.fetch.salesById(id).then((data) => {
+      console.log(data);
       setOrder(data);
     });
   }, [id]);
+  console.log(order.sale_date);
+  console.log(typeof order.sale_date);
 
   const total = order.length !== NONE ? helper.transformPrice(order.total_price) : 0;
   const date = order.length !== NONE
@@ -69,7 +54,7 @@ function OrderDetails({
           <hr style={ { border: '1px dashed' } } />
           <div className="horizontal-center">
             <ul>
-              {order.product.map((product, index) => (
+              {order.length !== NONE && order.product.map((product, index) => (
                 <li key={ product.name }>
                   <span data-testid={ `${index}-product-qtd` }>
                     {product.sales_product.quantity}
