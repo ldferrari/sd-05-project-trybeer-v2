@@ -56,7 +56,11 @@ const ChatMessage = ({ buffer, isSelf }) => {
         </div>
         <div style={ { ...cardMessageStyle, textAlign: messageAlign } }>
           <span className="green-text">
-            <small data-testid="nickname">{from.role === 'administrator'? 'Loja' : from.email}</small>
+            <small data-testid="nickname">
+              {from.role === 'administrator' ? (
+                'Loja'
+              ) : from.email}
+            </small>
             {' '}
             -
             <small data-testid="message-time">{getTime(date)}</small>

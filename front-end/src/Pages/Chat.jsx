@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Restrict from '../Components/Restrict';
 import HeaderAdmin from '../Components/AdminSideBar';
-import HeaderClient from '../Components/Header'
+import HeaderClient from '../Components/Header';
 import ChatMessage from '../Components/ChatMessage';
 import helper from '../Helper';
-
 
 import Input from '../Components/Input';
 
@@ -23,7 +22,7 @@ const Chat = ({
 }) => {
   const [chat, setChat] = useState([]);
   const [message, setMessage] = useState([]);
-  const role = helper.getUserData().role;
+  const { role } = helper.getUserData();
   const myId = helper.getUserData().id;
 
   const updateChat = (messages) => {
@@ -34,13 +33,13 @@ const Chat = ({
         : messages,
     );
   };
-  console.log("chat", chat);
-  
+  console.log('chat', chat);
+
   useEffect(() => {
     let messages = helper.getChatMessages();
     updateChat(messages);
     const x = helper.getUserData().role === 'Client' ? helper.getUserData().id : 'loja';
-    
+
     socket.on(x, (newMessage) => {
       messages = helper.getChatMessages();
       updateChat([...messages, newMessage]);
@@ -57,14 +56,23 @@ const Chat = ({
 
   const isSelfMessage = (msg) => {
     console.log(msg, myId);
-    return myId === msg.from
+    return myId === msg.from;
   };
 
   return (
     <Restrict>
-      {role === 'administrator' ? <HeaderAdmin pathname={ history.location.pathname } /> : <HeaderClient pathname={ history.location.pathname } /> }
+      {role === 'administrator' ? (
+        <HeaderAdmin pathname={ history.location.pathname } />
+      )
+        : <HeaderClient pathname={ history.location.pathname } /> }
       <div className="container-main">
-      <button type='button'data-testid="back-button" onClick={() => history.push('/admin/chats')}>Back</button>
+        <button
+          type="button"
+          data-testid="back-button"
+          onClick={ () => history.push('/admin/chats') }
+        >
+          Back
+        </button>
         <div className="container-screen" style={ containerStyle }>
           <div style={ { display: 'flex', width: '100%', flexDirection: 'column' } }>
             { chat.length !== 0 ? chat.map((chatBuffer) => (
@@ -112,6 +120,7 @@ Chat.propTypes = {
     }).isRequired,
   }).isRequired,
   history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,

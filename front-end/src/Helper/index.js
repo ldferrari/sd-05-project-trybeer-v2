@@ -10,9 +10,7 @@ const MIN = 0;
 
 const socket = io(fetch.SERVER_URL);
 
-const Socket = (component) => ({ ...props }) => {
-  return component({ ...props, socket });
-}
+const Socket = (component) => ({ ...props }) => component({ ...props, socket });
 
 const updateChat = (newMessage) => {
   const currentChat = localstorage.getDataByKey(CHAT);
@@ -46,7 +44,7 @@ const getCartInfo = () => {
       const { quantity, price, name } = currentCart[id];
       if (quantity === 0) return info;
       const itemArray = [...info.itemArray, { id, price, quantity, name }];
-      const total = (info.total + Number(quantity) * Number(price));
+      const total = info.total + Number(quantity) * Number(price);
       return {
         total,
         itemArray,
@@ -83,7 +81,7 @@ const removeProductFromCartById = (productID) => {
   return cart;
 };
 
-const transformDate = (date) => new Date(date).toLocaleDateString('pt-br', {
+const transformDate = (date) => Date(date).toLocaleDateString('pt-br', {
   day: '2-digit',
   month: '2-digit',
 });

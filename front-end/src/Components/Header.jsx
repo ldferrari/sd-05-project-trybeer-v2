@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import M from 'materialize-css';
 import titleForHeader from '../Helper/titleForHeader';
 import SideBar from './SideBar';
-import helper from '../Helper';
 
 const headerStyle = {
   alignItems: 'center',
@@ -25,9 +24,7 @@ const Header = ({ pathname }) => {
     const curTitle = titleForHeader(pathname);
     setTitle(curTitle);
     const sidenav = document.querySelector('.sidenav');
-    const user = helper.getUserData();
-    console.log(user)
-    const nav = M.Sidenav.init(sidenav, {});
+    M.Sidenav.init(sidenav, {});
   }, []);
 
   const toggleDrawer = () => () => {
