@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1.4.4
-        with:	
+        with:
           node-version: '12'
       - name: Evaluator step
         id: evaluator
@@ -63,7 +63,7 @@ jobs:
           DB_URL: 'mongodb://mongodb:27017/Trybeer'
           SCHEMA: 'Trybeer'
           DB_NAME: 'Trybeer'
-          GITHUB_USER: ${{ github.actor }} 
+          GITHUB_USER: 'pedrohcalado'
       - name: Store evaluation step
         uses: betrybe/store-evaluation-action@v2
         with:

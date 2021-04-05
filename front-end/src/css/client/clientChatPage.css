@@ -1,0 +1,101 @@
+@media only screen and ( min-width : 600px ) {
+
+  .message {
+    list-style: none;
+    margin-top: 100px;
+    padding: 0;
+  }
+
+  .text {
+    background-color: whitesmoke;
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    border-radius: 10px;
+    box-shadow: 7px 5px 3px rgba(50, 50, 50, 0.77);
+    list-style: none;
+    margin: 0 10px 10px;
+    padding: 0.5% 3%;
+    width: 60%;
+  }
+
+  .nickname {
+    color: rgb(2, 100, 2);
+    font-weight: 900;
+    line-height: 30px;
+  }
+
+  .time {
+    font-weight: 900;
+  }
+
+  .clientChatbutton {
+    bottom: 0;
+    margin: 5%;
+    position: fixed;
+    width: 90%;
+    z-index: -1;
+  }
+
+  .messageInput {
+    font-size: 20px;
+    margin-right: 2%;
+    width: 70%;
+  }
+
+  .messageButton {
+    background-color: rgb(2, 100, 2);
+    color: white;
+    font-size: 19px;
+    width: 25%;
+  }
+}
+
+@media only screen and ( max-width : 600px ) {
+
+  .message {
+    list-style: none;
+    margin-top: 25%;
+    padding: 0;
+  }
+
+  .text {
+    background-color: whitesmoke;
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    border-radius: 10px;
+    box-shadow: 7px 5px 3px rgba(50, 50, 50, 0.77);
+    list-style: none;
+    margin: 0 10px 10px;
+    padding: 0 3% 1%;
+    width: 60%;
+  }
+
+  .nickname {
+    color: rgb(2, 100, 2);
+    font-weight: 900;
+    line-height: 30px;
+  }
+
+  .time {
+    font-weight: 900;
+  }
+
+  .clientChatbutton {
+    bottom: 0;
+    margin: 5%;
+    position: fixed;
+    width: 90%;
+    z-index: -1;
+  }
+
+  .messageInput {
+    font-size: 20px;
+    margin-right: 2%;
+    width: 70%;
+  }
+
+  .messageButton {
+    background-color: rgb(2, 100, 2);
+    color: white;
+    font-size: 19px;
+    width: 25%;
+  }
+}
